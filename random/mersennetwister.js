@@ -80,7 +80,7 @@ function MersenneTwister()
     return y;
   };
 
-  this.genrand_real2 = function () {
+  this.real2 = function () {
     return this.int32() * (1.0 / 4294967296.0);
   }
 }
