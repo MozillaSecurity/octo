@@ -1,6 +1,9 @@
 language: node_js
 env:
   - SLIMERJSLAUNCHER=$(which firefox) DISPLAY=:99.0
+branches:
+  only:
+    - master
 node_js:
   - "7"
 addons:
