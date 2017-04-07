@@ -1,0 +1,11 @@
+language: node_js
+env:
+  - SLIMERJSLAUNCHER=$(which firefox) DISPLAY=:99.0
+addons:
+  firefox: latest
+before_script:
+  - sh -e /etc/init.d/xvfb start
+  - npm install -g slimerjs
+script:
+  - qunit tests
+  - slimerjs tests/run-qunit.js tests/index.html

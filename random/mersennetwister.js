@@ -84,3 +84,5 @@ function MersenneTwister()
     return this.int32() * (1.0 / 4294967296.0);
   }
 }
+
+try{ module.exports.MersenneTwister = MersenneTwister; }catch(e){}
