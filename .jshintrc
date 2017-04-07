@@ -12,5 +12,11 @@
   "eqnull": true,
   "node": true,
   "maxerr": 2000,
-  "esversion": 6
+  "esversion": 6,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "Random": true,
+    "make": true
+  }
 }
