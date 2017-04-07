@@ -1,4 +1,4 @@
-var Random = {
+var random = {
   twister: null,
 
   init: function (seed) {
@@ -26,18 +26,18 @@ var Random = {
     // Returns an integer in [start, limit]. Uniform distribution.
     if (isNaN(start) || isNaN(limit)) {
       Utils.traceback();
-      throw new TypeError("Random.range() received a non number type: '" + start + "', '" + limit + "')");
+      throw new TypeError("random.range() received a non number type: '" + start + "', '" + limit + "')");
     }
-    return Random.number(limit - start + 1) + start;
+    return random.number(limit - start + 1) + start;
   },
   ludOneTo: function(limit) {
     // Returns a float in [1, limit]. The logarithm has uniform distribution.
-    return Math.exp(Random.float() * Math.log(limit));
+    return Math.exp(random.float() * Math.log(limit));
   },
   index: function (list) {
     if (!(list instanceof Array || (typeof list != "string" && "length" in list))) {
       Utils.traceback();
-      throw new TypeError("Random.index() received a non array type: '" + list + "'");
+      throw new TypeError("random.index() received a non array type: '" + list + "'");
     }
     return list[this.number(list.length)];
   },
@@ -66,14 +66,14 @@ var Random = {
     }
     if (isNaN(limit)) {
       Utils.traceback();
-      throw new TypeError("Random.chance() received a non number type: '" + limit + "'");
+      throw new TypeError("random.chance() received a non number type: '" + limit + "'");
     }
     return this.number(limit) == 1;
   },
   choose: function (list, flat) {
     if (!(list instanceof Array)) {
       Utils.traceback();
-      throw new TypeError("Random.choose() received a non-array type: '" + list + "'");
+      throw new TypeError("random.choose() received a non-array type: '" + list + "'");
     }
     var total = 0;
     for (var i = 0; i < list.length; i++) {
@@ -96,7 +96,7 @@ var Random = {
     return this.pick([list[0][1]]);
   },
   weighted: function (wa) {
-    // More memory-hungry but hopefully faster than Random.choose$flat
+    // More memory-hungry but hopefully faster than random.choose$flat
     var a = [];
     for (var i = 0; i < wa.length; ++i) {
       for (var j = 0; j < wa[i].w; ++j) {
@@ -106,13 +106,13 @@ var Random = {
     return a;
   },
   use: function (obj) {
-    return Random.bool() ? obj : "";
+    return random.bool() ? obj : "";
   },
   shuffle: function (arr) {
     var len = arr.length;
     var i = len;
     while (i--) {
-      var p = Random.number(i + 1);
+      var p = random.number(i + 1);
       var t = arr[i];
       arr[i] = arr[p];
       arr[p] = t;
@@ -120,13 +120,13 @@ var Random = {
   },
   shuffled: function (arr) {
     var newArray = arr.slice();
-    Random.shuffle(newArray);
+    random.shuffle(newArray);
     return newArray;
   },
   some: function (list, limit) {
     if (!(list instanceof Array)) {
       Utils.traceback();
-      throw new TypeError("Random.some() received a non-array type: '" + list + "'");
+      throw new TypeError("random.some() received a non-array type: '" + list + "'");
     }
     if (typeof limit == 'number') {
       limit = this.range(0, list.length);
