@@ -3,4 +3,4 @@
 
 A fuzzing framework for JavaScript
 
-[![Build Status](https://api.travis-ci.org/mozillasecurity/octo.svg)](https://travis-ci.org/mozillasecurity/octo)
+[![Build Status](https://api.travis-ci.org/mozillasecurity/octo.svg?branch=master)](https://travis-ci.org/mozillasecurity/octo)
