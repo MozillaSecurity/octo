@@ -5,7 +5,7 @@ addons:
   firefox: latest
 before_script:
   - sh -e /etc/init.d/xvfb start
-  - npm install -g slimerjs
+  - npm install -g slimerjs qunitjs
 script:
   - qunit tests
   - slimerjs tests/run-qunit.js tests/index.html
