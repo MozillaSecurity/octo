@@ -123,7 +123,7 @@ var random = {
     random.shuffle(newArray);
     return newArray;
   },
-  some: function (list, limit) {
+  subset: function (list, limit) {
     if (!(list instanceof Array)) {
       Utils.traceback();
       throw new TypeError("random.some() received a non-array type: '" + list + "'");
