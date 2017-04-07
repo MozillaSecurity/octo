@@ -34,7 +34,7 @@ var random = {
     // Returns a float in [1, limit]. The logarithm has uniform distribution.
     return Math.exp(random.float() * Math.log(limit));
   },
-  index: function (list) {
+  item: function (list) {
     if (!(list instanceof Array || (typeof list != "string" && "length" in list))) {
       Utils.traceback();
       throw new TypeError("random.index() received a non array type: '" + list + "'");
