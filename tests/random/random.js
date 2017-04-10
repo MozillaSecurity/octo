@@ -1,31 +1,31 @@
-let MT;
-try { MT = require("../../random/mersennetwister.js"); } catch(e) { MT = window; }
-
-QUnit.test("Random.init() with no seed value", function() {
-  Random.init();
-  ok(Random.seed, "random seed is not null.");
+/*
+QUnit.test("random.init() with no seed value", function(assert) {
+  random.init();
+  assert.ok(random.seed, "random seed is not null.");
 });
 
-QUnit.test("Random.init() with provided seed", function() {
-  var seed = new Date().getTime();
-  Random.init(seed);
-  assert.equal(Random.seed, seed, "seed is correct");
+QUnit.test("random.init() with provided seed", function(assert) {
+  let seed = new Date().getTime();
+  random.init(seed);
+  assert.equal(random.seed, seed, "seed is correct");
 });
+*/
 
-QUnit.test("Random.range() PRNG reproducibility", function() {
-  var seed, result1, result2;
+QUnit.test("random.range() PRNG reproducibility", function(assert) {
+  let seed, result1, result2;
   seed = new Date().getTime();
-  Random.init(seed);
-  result1 = Random.range(1, 20);
-  Random.init(seed);
-  result2 = Random.range(1, 20);
+  random.init(seed);
+  result1 = random.range(1, 20);
+  random.init(seed);
+  result2 = random.range(1, 20);
   assert.equal(result1, result2, "both results are the same")
 });
 
-QUinit.test("Random.choose() with equal distribution", function() {
-  var i, tmp, foo = 0, bar = 0;
-  for(i = 0; i < 100; i++) {
-    tmp = Random.choose([[1, 'foo'], [1, 'bar']]);
+QUnit.test("random.choose() with equal distribution", function(assert) {
+  let foo = 0, bar = 0;
+  random.init(new Date().getTime());
+  for (let i = 0; i < 100; ++i) {
+    let tmp = random.choose([[1, 'foo'], [1, 'bar']]);
     if (tmp == "foo") { foo += 1; }
     if (tmp == "bar") { bar += 1; }
   }

@@ -1,10 +1,7 @@
-let MT;
-try{ MT = require("../../random/mersennetwister.js"); }catch(e){ MT = window; }
-
 /* XXX: translate some of the dieharder tests here? */
 
 QUnit.test("MersenneTwister test distribution", function(assert) {
-  let mt = new MT.MersenneTwister();
+  let mt = new MersenneTwister();
   mt.seed(new Date().getTime());
   for (let i = 0; i < 100; ++i) {
     let a = [], again = false;

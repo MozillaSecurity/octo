@@ -1,0 +1,17 @@
+{
+  "name": "octo",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-karma": "*",
+    "grunt-karma-coveralls": "*",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-coverage": "*",
+    "karma-firefox-launcher": "*",
+    "karma-qunit": "*",
+    "qunitjs": "*"
+  },
+  "scripts": {
+     "test": "grunt test --verbose"
+  }
+}
