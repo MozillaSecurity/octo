@@ -17,8 +17,8 @@ function MersenneTwister()
   const LOWER_MASK = 0x7fffffff;
   const MAG01 = new Int32Array([0, 0x9908b0df]);
 
-  var mt = new Int32Array(N);   /* the array for the state vector */
-  var mti = 625;
+  let mt = new Int32Array(N);   /* the array for the state vector */
+  let mti = 625;
 
   this.seed = function (s) {
     mt[0] = s | 0;
@@ -53,7 +53,7 @@ function MersenneTwister()
   };
 
   this.int32 = function () {
-    var y, kk;
+    let y, kk;
 
     if (mti >= N) { /* generate N words at one time */
       for (kk = 0; kk < N-M; kk++) {

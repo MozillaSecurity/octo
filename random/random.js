@@ -42,8 +42,8 @@ var random = {
     return list[this.number(list.length)];
   },
   key: function (obj) {
-    var list = [];
-    for (var i in obj) {
+    let list = [];
+    for (let i in obj) {
       list.push(i);
     }
     return this.index(list);
@@ -75,12 +75,12 @@ var random = {
       Utils.traceback();
       throw new TypeError("random.choose() received a non-array type: '" + list + "'");
     }
-    var total = 0;
-    for (var i = 0; i < list.length; i++) {
+    let total = 0;
+    for (let i = 0; i < list.length; i++) {
       total += list[i][0];
     }
-    var n = this.number(total);
-    for (var i = 0; i < list.length; i++) {
+    let n = this.number(total);
+    for (let i = 0; i < list.length; i++) {
       if (n < list[i][0]) {
         if (flat == true) {
           return list[i][1];
@@ -97,9 +97,9 @@ var random = {
   },
   weighted: function (wa) {
     // More memory-hungry but hopefully faster than random.choose$flat
-    var a = [];
-    for (var i = 0; i < wa.length; ++i) {
-      for (var j = 0; j < wa[i].w; ++j) {
+    let a = [];
+    for (let i = 0; i < wa.length; ++i) {
+      for (let j = 0; j < wa[i].w; ++j) {
         a.push(wa[i].v);
       }
     }
@@ -109,17 +109,17 @@ var random = {
     return random.bool() ? obj : "";
   },
   shuffle: function (arr) {
-    var len = arr.length;
-    var i = len;
+    let len = arr.length;
+    let i = len;
     while (i--) {
-      var p = random.number(i + 1);
-      var t = arr[i];
+      let p = random.number(i + 1);
+      let t = arr[i];
       arr[i] = arr[p];
       arr[p] = t;
     }
   },
   shuffled: function (arr) {
-    var newArray = arr.slice();
+    let newArray = arr.slice();
     random.shuffle(newArray);
     return newArray;
   },
@@ -131,8 +131,8 @@ var random = {
     if (typeof limit == 'number') {
       limit = this.range(0, list.length);
     }
-    var result = [];
-    for (var i = 0; i < limit; i++) {
+    let result = [];
+    for (let i = 0; i < limit; i++) {
       result.push(this.pick(list));
     }
     return result;
