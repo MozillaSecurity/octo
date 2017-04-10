@@ -37,7 +37,7 @@ var random = {
   item: function (list) {
     if (!(list instanceof Array || (typeof list != "string" && "length" in list))) {
       Utils.traceback();
-      throw new TypeError("random.index() received a non array type: '" + list + "'");
+      throw new TypeError("random.item() received a non array type: '" + list + "'");
     }
     return list[this.number(list.length)];
   },
@@ -46,17 +46,17 @@ var random = {
     for (let i in obj) {
       list.push(i);
     }
-    return this.index(list);
+    return this.item(list);
   },
   bool: function () {
-    return this.index([true, false]);
+    return this.item([true, false]);
   },
   pick: function (obj) {
     if (typeof obj == "function") {
       return obj();
     }
     if (obj instanceof Array) {
-      return this.pick(this.index(obj));
+      return this.pick(this.item(obj));
     }
     return obj;
   },
