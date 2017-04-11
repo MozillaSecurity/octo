@@ -77,10 +77,10 @@ function MersenneTwister()
     y = y ^ ((y << 15) & 0xefc60000);
     y = y ^ (y >>> 18);
 
-    return y;
+    return y >>> 0;
   };
 
   this.real2 = function () {
     return this.int32() * (1.0 / 4294967296.0);
-  }
+  };
 }

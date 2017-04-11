@@ -1,23 +1,29 @@
-/* XXX: translate some of the dieharder tests here? */
-
-QUnit.test("MersenneTwister test distribution", function(assert) {
+QUnit.test("MersenneTwister test uniform distribution", function(assert) {
+  const N = Math.pow(2, 17), expected = N * 1.35;
   let mt = new MersenneTwister();
   mt.seed(new Date().getTime());
-  for (let i = 0; i < 100; ++i) {
-    let a = [], again = false;
-    for (let j = 0; j < 10; ++j) {
-      a[j] = mt.int32();
-    }
-    a.sort();
-    for (let j = 0; j < (a.length - 1); ++j) {
-      if (a[j] === a[j+1]) {
-        again = true;
-      }
-    }
-    if (!again) {
-      assert.ok(true, "no dupes in 10 entries");
-      return;
-    }
+  let data = new Uint32Array(N);
+  for (let i = 0; i < data.length; ++i) {
+    data[i] = mt.int32();
   }
-  assert.ok(false, "could not get unique entries");
+  for (let sh = 0; sh <= 24; ++sh) {
+    let bins = new Uint32Array(256);
+    for (let b of data) {
+      ++bins[(b >>> sh) & 0xFF];
+    }
+    let variance = bins.reduce(function(a, v){ return a + Math.pow(v - N / bins.length, 2); }, 0);
+    assert.ok(variance < expected, "Expecting variance to be under " + expected + ", got " + variance);
+  }
+});
+
+QUnit.test("MersenneTwister test float distribution", function(assert) {
+  const N = Math.pow(2, 17), expected = N * 1.3;
+  let mt = new MersenneTwister();
+  mt.seed(new Date().getTime());
+  let bins = new Uint32Array(512);
+  for (let i = 0; i < N; ++i) {
+    ++bins[(mt.real2() * bins.length) >>> 0];
+  }
+  let variance = bins.reduce(function(a, v){ return a + Math.pow(v - N / bins.length, 2); }, 0);
+  assert.ok(variance < expected, "Expecting variance to be under " + expected + ", got " + variance);
 });

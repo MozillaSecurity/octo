@@ -9,18 +9,23 @@ var random = {
     this.twister.seed(seed);
   },
   number: function (limit) {
-    // Returns an integer in [0, limit]. Uniform distribution.
+    // Returns an integer in [0, limit). Uniform distribution.
     if (limit == 0) {
       return limit;
     }
     if (limit == null || limit === undefined) {
       limit = 0xffffffff;
     }
-    return (this.twister.int32() >>> 0) % limit;
+    let x = (0x100000000 / limit) >>> 0,
+        y = (x * limit) >>> 0, r;
+    do {
+      r = this.twister.int32();
+    } while(y && r >= y);
+    return (r / x) >>> 0;
   },
   float: function () {
-    // Returns a float in [0, 1]. Uniform distribution.
-    return this.twister.real2() >>> 0;
+    // Returns a float in [0, 1). Uniform distribution.
+    return this.twister.real2();
   },
   range: function (start, limit) {
     // Returns an integer in [start, limit]. Uniform distribution.
@@ -28,16 +33,16 @@ var random = {
       Utils.traceback();
       throw new TypeError("random.range() received a non number type: '" + start + "', '" + limit + "')");
     }
-    return random.number(limit - start + 1) + start;
+    return this.number(limit - start + 1) + start;
   },
   ludOneTo: function(limit) {
     // Returns a float in [1, limit]. The logarithm has uniform distribution.
-    return Math.exp(random.float() * Math.log(limit));
+    return Math.exp(this.float() * Math.log(limit));
   },
   item: function (list) {
     if (!(list instanceof Array || (typeof list != "string" && "length" in list))) {
       Utils.traceback();
-      throw new TypeError("random.item() received a non array type: '" + list + "'");
+      throw new TypeError("this.item() received a non array type: '" + list + "'");
     }
     return list[this.number(list.length)];
   },
@@ -106,13 +111,13 @@ var random = {
     return a;
   },
   use: function (obj) {
-    return random.bool() ? obj : "";
+    return this.bool() ? obj : "";
   },
   shuffle: function (arr) {
     let len = arr.length;
     let i = len;
     while (i--) {
-      let p = random.number(i + 1);
+      let p = this.number(i + 1);
       let t = arr[i];
       arr[i] = arr[p];
       arr[p] = t;
@@ -120,7 +125,7 @@ var random = {
   },
   shuffled: function (arr) {
     let newArray = arr.slice();
-    random.shuffle(newArray);
+    this.shuffle(newArray);
     return newArray;
   },
   subset: function (list, limit) {
