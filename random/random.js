@@ -144,9 +144,9 @@ var random = {
   },
   pop: function (arr) {
     // Removes and returns a random item from an array
-    var i, obj;
+    let i, obj;
 
-    obj = Random.item(arr);
+    obj = this.item(arr);
     arr.splice(arr.indexOf(obj), 1);
 
     return obj;
