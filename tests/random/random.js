@@ -117,4 +117,5 @@ shuffle(arr)
 shuffled(arr)
 subset(list, limit)
 choose(list, flat=true)
+pop(arr)
 */

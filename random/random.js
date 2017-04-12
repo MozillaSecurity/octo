@@ -141,5 +141,14 @@ var random = {
       result.push(this.pick(list));
     }
     return result;
+  },
+  pop: function (arr) {
+    // Removes and returns a random item from an array
+    var i, obj;
+
+    obj = Random.item(arr);
+    arr.splice(arr.indexOf(obj), 1);
+
+    return obj;
   }
 };
