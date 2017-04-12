@@ -15,6 +15,11 @@ make.text = {
       '#', ' ', ';', ',', '{', '}', '(', ')', '[', ']', '/', '\\', '/*', '*/'
     ]);
   },
+  charset: function () {
+    return random.pick([
+      "UTF-8", "ISO-8859-1"
+    ]);
+  },
   layoutCharCodes: function() {
     return random.pick([
       0,      // null
