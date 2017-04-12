@@ -40,8 +40,8 @@ var random = {
     return Math.exp(this.float() * Math.log(limit));
   },
   item: function (list) {
-    if (!(list instanceof Array || (typeof list != "string" && "length" in list))) {
-      Utils.traceback();
+    if (!(list instanceof Array || (list !== undefined && typeof list != "string" && list.hasOwnProperty("length")))) {
+      //Utils.traceback();
       throw new TypeError("this.item() received a non array type: '" + list + "'");
     }
     return list[this.number(list.length)];
