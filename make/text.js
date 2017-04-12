@@ -20,6 +20,12 @@ make.text = {
       "UTF-8", "ISO-8859-1"
     ]);
   },
+  language: function () {
+    // https://gist.github.com/tonyhb/635401
+    return random.pick([
+      "en-US", "en", "de"
+    ]);
+  },
   layoutCharCodes: function() {
     return random.pick([
       0,      // null
