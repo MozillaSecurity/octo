@@ -28,4 +28,11 @@ make.strings = {
 
     return s;
   },
+  digitsHex: function (n) {
+    let s = '';
+    while (n-- > 0) {
+      s += (Random.number(16)).toString(16);
+    }
+    return s;
+  },
 }
