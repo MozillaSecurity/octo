@@ -34,11 +34,11 @@ make.numbers = {
     return number % 2 == 1 ? ++number : number;
   },
   number: function () {
-    var value = random.choose([
+    let value = random.choose([
       [10, make.float],
       [10, [make.rangeNumber, make.tinyNumber]],
       [ 1, Make.unsignedNumber]
     ]);
     return random.chance(10) ? -value : value;
   }
-}
+};

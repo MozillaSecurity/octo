@@ -15,7 +15,7 @@ make.network = {
       "a=ptime:20",
       "a=rtpmap:0 PCMU/8000",
       "a=rtpmap:8 PCMA/8000",
-      "a=rtpmap:101 telephone-event/8000"
+      "a=rtpmap:101 telephone-event/8000",
       "a=fmtp:101 0-15",
       "a=sendrecv",
       "a=candidate:0 1 UDP 2113601791 192.168.129.33 52757 typ host",
@@ -25,7 +25,7 @@ make.network = {
       "a=rtpmap:120 VP8/90000",
       "a=sendrecv",
       "a=candidate:0 1 UDP 2113601791 192.168.129.33 63901 typ host",
-      "a=candidate:0 2 UDP 2113601790 192.168.129.33 54165 typ host"
+      "a=candidate:0 2 UDP 2113601790 192.168.129.33 54165 typ host",
       "m=application 65080 SCTP/DTLS 5000",
       "c=IN IP4 192.168.129.33",
       "a=fmtp:5000 protocol=webrtc-datachannel;streams=16",
@@ -38,16 +38,16 @@ make.network = {
     return ["turn", "turns", "stun", "stuns"]
   },
   randomIPv4: function() {
-    return Random.pick([Random.number(255), Make.number]) + "." +
-           Random.pick([Random.number(255), Make.number]) + "." +
-           Random.pick([Random.number(255), Make.number]) + "." +
-           Random.pick([Random.number(255), Make.number]);
+    return random.pick([random.number(255), make.number]) + "." +
+           random.pick([random.number(255), make.number]) + "." +
+           random.pick([random.number(255), make.number]) + "." +
+           random.pick([random.number(255), make.number]);
   },
   randomIPv6: function() {
-    return "[" + Make.stringFromBlocks([":", function() { return Make.digitsHex(Random.range(1, 4)) }]) + "]"
+    return "[" + make.stringFromBlocks([":", function() { return make.digitsHex(random.range(1, 4)) }]) + "]"
   },
   goodHostnames: function() { return [
-    "0.0.0.0"
+    "0.0.0.0",
     "127.0.0.1:8080",
   ]},
   badHostnames: function() { return [
@@ -62,16 +62,16 @@ make.network = {
     "::ffff:192.0.2.128",
     "2001:db8::1:2",
     "2001:db8::1:1:1:1:1"
-  ],
-  randomBitmask: function (list) {
+  ]},
+  randomBitmask: function(list) {
     if (list.length <= 1) {
       return list.join("");
     }
-    var max = random.range(2, list.length);
-    var mask = random.pick(list);
-    for (var i = 1; i < max; i++) {
+    let max = random.range(2, list.length);
+    let mask = random.pick(list);
+    for (let i = 1; i < max; i++) {
       mask += "|" + random.pick(list);
     }
     return mask;
   },
-}
+};

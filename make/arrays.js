@@ -9,4 +9,4 @@ make.arrays = {
 
     return array;
   }
-}
+};

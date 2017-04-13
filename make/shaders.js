@@ -1,9 +1,9 @@
 make.shaders = {
   fragment1: function() {
-    [
+    return [
       [
         "#ifdef GL_ES",
-        "precision mediump float;"
+        "precision mediump float;",
         "#endif",
         "varying vec4 vColor;",
         "void main() {",
@@ -19,10 +19,10 @@ make.shaders = {
           "gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);",
         "}"
       ]
-    ],
+    ]
   },
   vertex1: function () {
-    [
+    return [
       [
         "attribute vec4 aVertex;",
         "attribute vec4 aColor;",
@@ -55,7 +55,7 @@ make.shaders = {
     ]
   },
   fragment2: function() {
-    [
+    return [
       [
         "varying highp vec2 vTextureCoord;",
         "varying highp vec3 vLighting;",
@@ -87,7 +87,7 @@ make.shaders = {
     ]
   },
   vertex2: function() {
-    [
+    return [
       [
         "attribute highp vec3 aVertexNormal;",
         "attribute highp vec3 aVertexPosition;",
@@ -130,13 +130,13 @@ make.shaders = {
           "varyingUV = vertexUV;",
         "}"
        ]
-    ],
+    ]
   },
   shaderPair: function(v, f) {
-    var i = Random.number(v.length);
+    let i = random.number(v.length);
     return {
       vertex: Utils.quote(v[i].join("\n")),
       fragment: Utils.quote(f[i].join("\n"))
     };
   },
-}
+};

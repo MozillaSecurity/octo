@@ -1,6 +1,6 @@
 make.colors = {
   colors: function() {
-    return Random.pick([
+    return random.pick([
       make.colorRGB,
       make.colorHSL,
       make.colorKeywords
@@ -10,51 +10,51 @@ make.colors = {
   colorRGB: function() {
     let values;
     
-    switch (Random.number(4)) {
+    switch (random.number(4)) {
       case 0:
         // Rgb functional notation
-        if (Random.bool()) {
+        if (random.bool()) {
           // Ints
-          values = [Random.number(255), Random.number(255), Random.number(255)];
+          values = [random.number(255), random.number(255), random.number(255)];
         } else {
           // Percents
-          values = ["%" + Random.number(255), "%" + Random.number(255), "%" + Random.number(255)];
+          values = ["%" + random.number(255), "%" + random.number(255), "%" + random.number(255)];
         }
         return "rgba(" + values.join(',') + ")";
       case 1:
         // Rgba functional notation
-        values = [Random.number(255), Random.number(255), Random.number(255), Random.float()];
+        values = [random.number(255), random.number(255), random.number(255), random.float()];
         return "rgba(" + values.join(',') + ")";
       case 2:
         // 4 char hex
-        return "#" + Random.hex(4);
+        return "#" + random.hex(4);
       default:
         // 8 char hex
-        return "#" + Random.hex(8);
+        return "#" + random.hex(8);
     }
   },
 
   colorHSL: function() {
     let values, opt;
-    switch(Random.number(4)) {
+    switch(random.number(4)) {
       case 0:
-        values = [Random.number(255), "%" + Random.number(255), "%" + Random.number(255)];
+        values = [random.number(255), "%" + random.number(255), "%" + random.number(255)];
         return "hsl(" + values.join(',') + ")";
       case 1:
-        values = [Random.number(255), "%" + Random.number(255), "%" + Random.number(255), "%" + Random.number(255)];
+        values = [random.number(255), "%" + random.number(255), "%" + random.number(255), "%" + random.number(255)];
         return "hsl(" + values.join(',') + ")";
       case 2:
-        opt = Random.pick(['deg', 'rad', 'grad', 'turn']);
-        values = [Random.number(255) + opt, "%" + Random.number(255), "%" + Random.number(255), "%" + Random.number(255)];
+        opt = random.pick(['deg', 'rad', 'grad', 'turn']);
+        values = [random.number(255) + opt, "%" + random.number(255), "%" + random.number(255), "%" + random.number(255)];
         return "hsl(" + values.join(',') + ")";
       default:
-        values = [Random.number(255), "%" + Random.number(255), "%" + Random.number(255), Random.float()];
+        values = [random.number(255), "%" + random.number(255), "%" + random.number(255), random.float()];
         return "hsl(" + values.join(',') + ")";
     }
   },
 
   colorKeywords: function() {
-    return Random.pick([
+    return random.pick([
       "lime", "red", "blue", "invert", "currentColor", "ActiveBorder", "ActiveCaption",
       "AppWorkspace", "Background", "ButtonFace", "ButtonHighlight", "ButtonShadow",
       "ButtonText", "CaptionText", "GrayText", "Highlight", "HighlightText",

@@ -45,5 +45,5 @@ make.fonts = {
     s += " ";
     s += Make.fontFamily();
     return "'" + s + "'";
-  };
-}
+  }
+};

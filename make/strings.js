@@ -31,8 +31,8 @@ make.strings = {
   digitsHex: function (n) {
     let s = '';
     while (n-- > 0) {
-      s += (Random.number(16)).toString(16);
+      s += (random.number(16)).toString(16);
     }
     return s;
   },
-}
+};

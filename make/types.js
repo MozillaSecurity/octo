@@ -11,4 +11,4 @@ make.types = {
       "function() {}"
     ]);
   }
-}
+};
