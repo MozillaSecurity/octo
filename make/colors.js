@@ -36,6 +36,7 @@ make.colors = {
 
   colorHSL: function() {
     let values, opt;
+
     switch(random.number(4)) {
       case 0:
         values = [random.number(255), "%" + random.number(255), "%" + random.number(255)];
