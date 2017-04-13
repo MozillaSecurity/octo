@@ -263,11 +263,205 @@ QUnit.test("random.bool() distribution", function(assert) {
   assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
 });
 
-/*
-XXX
-pick(obj)
-chance(limit)
-*/
+QUnit.test("random.pick() cases", function(assert) {
+  random.init(Math.random() * 0x100000000);
+  for (let i = 0; i < 100; ++i) {
+    let tmp = Math.random();
+    assert.equal(tmp, random.pick(tmp));
+  }
+  for (let i = 0; i < 100; ++i) {
+    let tmp = (Math.random() * 100) >>> 0;
+    assert.equal(tmp, random.pick(tmp));
+  }
+  for (let i = 0; i < 100; ++i) {
+    let tmp = Math.random() + "";
+    assert.equal(tmp, random.pick(tmp));
+  }
+  for (let i = 0; i < 100; ++i) {
+    let tmp = Math.random();
+    assert.equal(tmp, random.pick([tmp]));
+  }
+  for (let i = 0; i < 100; ++i) {
+    let tmp = Math.random();
+    assert.equal(tmp, random.pick(function(){ return tmp; }));
+  }
+  for (let i = 0; i < 100; ++i) {
+    let tmp = Math.random();
+    assert.equal(tmp, random.pick(function(){ return [tmp]; }));
+  }
+});
+
+QUnit.test("random.pick() with equal distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.pick([0, [1, 1], function(){ return 2; }]);
+      if (tmp < 0) throw "random.pick() < lower bound";
+      if (tmp >= bins.length) throw "random.pick() > upper bound";
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.pick() with unequal distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.pick([[0, 1], [1], function(){ return [2]; }]);
+      if (tmp < 0) throw "random.pick() < lower bound";
+      if (tmp >= bins.length) throw "random.pick() > upper bound";
+      ++bins[tmp];
+    }
+    let xsq = Math.pow(bins[0] - N / 6, 2) / (N / 6) + Math.pow(bins[1] - N / 2, 2) / (N / 2) + Math.pow(bins[2] - N / 3, 2) / (N / 3);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.chance(2) distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 3.84; // quantile of chi-square dist. k=1, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(2);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.chance(2);
+      if (tmp === true)
+        tmp = 1;
+      else if (tmp === false)
+        tmp = 0;
+      else
+        assert.ok(false, "unexpected random.chance() result: " + tmp);
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 1)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.chance(undefined) distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 3.84; // quantile of chi-square dist. k=1, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(2);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.chance();
+      if (tmp === true)
+        tmp = 1;
+      else if (tmp === false)
+        tmp = 0;
+      else
+        assert.ok(false, "unexpected random.chance() result: " + tmp);
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 1)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.chance(3) distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 3.84; // quantile of chi-square dist. k=1, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(2);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.chance(3);
+      if (tmp === true)
+        tmp = 0;
+      else if (tmp === false)
+        tmp = 1;
+      else
+        assert.ok(false, "unexpected random.chance() result: " + tmp);
+      ++bins[tmp];
+    }
+    let xsq = Math.pow(bins[0] - (N / 3), 2) / (N / 3) + Math.pow(bins[1] - (2 * N / 3), 2) / (2 * N / 3);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 1)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.chance(1000) distribution", function(assert) {
+  const N = 1e6, TRIES = 3, XSQ = 3.84; // quantile of chi-square dist. k=1, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(2);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.chance(1000);
+      if (tmp === true)
+        tmp = 0;
+      else if (tmp === false)
+        tmp = 1;
+      else
+        assert.ok(false, "unexpected random.chance() result: " + tmp);
+      ++bins[tmp];
+    }
+    let xsq = Math.pow(bins[0] - (N / 1000), 2) / (N / 1000) + Math.pow(bins[1] - (999 * N / 1000), 2) / (999 * N / 1000);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 1)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
 
 QUnit.test("random.choose() with equal distribution", function(assert) {
   const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
@@ -319,13 +513,265 @@ QUnit.test("random.choose() with unequal distribution", function(assert) {
   assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
 });
 
+QUnit.test("random.choose() with unequal distribution and pick", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.choose([[1, 0], [2, [1, 2]], [1, function(){ return 2; }]]);
+      if (tmp >= bins.length) throw "random.choose() > upper bound";
+      ++bins[tmp];
+    }
+    let xsq = Math.pow(bins[0] - N / 4, 2) / (N / 4) + Math.pow(bins[1] - N / 4, 2) / (N / 4) + Math.pow(bins[2] - N / 2, 2) / (N / 2);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.choose(flat) with unequal distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.choose([[1, 0], [2, 1], [1, 2]], true);
+      if (tmp >= bins.length) throw "random.choose() > upper bound";
+      ++bins[tmp];
+    }
+    let xsq = Math.pow(bins[0] - N / 4, 2) / (N / 4) + Math.pow(bins[1] - N / 2, 2) / (N / 2) + Math.pow(bins[2] - N / 4, 2) / (N / 4);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.choose(flat) equal distribution with types not picked", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  const v1 = 1, v2 = [12], v3 = function(){};
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.choose([[1, v1], [1, v2], [1, v3]], true);
+      if (tmp === v1)
+        tmp = 0;
+      else if (tmp === v2)
+        tmp = 1;
+      else if (tmp === v3)
+        tmp = 2;
+      else
+        assert.ok(false, "unexpected random.choose() result: " + tmp);
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.weighted() with equal distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.item(random.weighted([{w: 1, v: 0}, {w: 1, v: 1}, {w: 1, v: 2}]));
+      if (tmp >= bins.length) throw "random.weighted() > upper bound";
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.weighted() with unequal distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.item(random.weighted([{w: 1, v: 0}, {w: 2, v: 1}, {w: 1, v: 2}]));
+      if (tmp >= bins.length) throw "random.weighted() > upper bound";
+      ++bins[tmp];
+    }
+    let xsq = Math.pow(bins[0] - N / 4, 2) / (N / 4) + Math.pow(bins[1] - N / 2, 2) / (N / 2) + Math.pow(bins[2] - N / 4, 2) / (N / 4);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.weighted() equal distribution with types not picked", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  const v1 = 1, v2 = [12], v3 = function(){};
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.item(random.weighted([{w: 1, v: v1}, {w: 1, v: v2}, {w: 1, v: v3}]));
+      if (tmp === v1)
+        tmp = 0;
+      else if (tmp === v2)
+        tmp = 1;
+      else if (tmp === v3)
+        tmp = 2;
+      else
+        assert.ok(false, "unexpected random.weighted() result: " + tmp);
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.use() distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 3.84; // quantile of chi-square dist. k=1, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(2);
+    for (let i = 0; i < N; ++i) {
+      let rnd = Math.random(), use = random.use(rnd);
+      if (use === rnd)
+        use = 1;
+      else if (use === "")
+        use = 0;
+      else
+        assert.ok(false, "unexpected random.use() result: " + use);
+      ++bins[use];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 1)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.shuffle() distribution", function(assert) {
+  const N = 1e4, M = 10, TRIES = 3, XSQ = 123.23; // quantile of chi-square dist. k=M*M-1, p=.05
+  // XXX: shouldn't k be M! ?
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(M * M);
+    for (let i = 0; i < N; ++i) {
+      let array = [];
+      for (let j = 0; j < M; ++j)
+        array.push(j);
+      random.shuffle(array);
+      for (let j = 0; j < M; ++j)
+        ++bins[j * M + array[j]];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / M; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 99)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
+QUnit.test("random.shuffled() distribution", function(assert) {
+  const N = 1e4, M = 10, TRIES = 3, XSQ = 123.23; // quantile of chi-square dist. k=M*M-1, p=.05
+  // XXX: shouldn't k be M! ?
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(M * M);
+    let array_ref = [];
+    for (let j = 0; j < M; ++j)
+      array_ref.push(j);
+    for (let i = 0; i < N; ++i) {
+      let array = random.shuffled(array_ref);
+      for (let j = 0; j < M; ++j) {
+        ++bins[j * M + array[j]];
+        if (array_ref[j] !== j)
+          throw "array modified";
+      }
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / M; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 99)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
+
 /*
 XXX
-choose(list, flat=true)
-weighted(wa)
-use(obj)
-shuffle(arr)
-shuffled(arr)
 subset(list, limit)
 pop(arr)
 */
