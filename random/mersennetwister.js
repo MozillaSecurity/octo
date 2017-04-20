@@ -81,6 +81,6 @@ function MersenneTwister()
   };
 
   this.real2 = function () {
-    return this.int32() * (1.0 / 4294967296.0);
+    return ((this.int32() >>> 5) * 67108864.0 + (this.int32() >>> 6)) / 9007199254740992.0;
   };
 }
