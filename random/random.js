@@ -146,8 +146,9 @@ var random = {
     // Removes and returns a random item from an array
     let i, obj;
 
-    obj = this.item(arr);
-    arr.splice(arr.indexOf(obj), 1);
+    i = this.number(arr.length);
+    obj = arr[i];
+    arr.splice(i, 1);
 
     return obj;
   }
