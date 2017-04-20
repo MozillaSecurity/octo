@@ -133,8 +133,8 @@ var random = {
       Utils.traceback();
       throw new TypeError("random.some() received a non-array type: '" + list + "'");
     }
-    if (typeof limit == 'number') {
-      limit = this.range(0, list.length);
+    if (typeof limit !== 'number') {
+      limit = this.number(list.length + 1);
     }
     let result = [];
     for (let i = 0; i < limit; i++) {
