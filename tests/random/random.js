@@ -770,8 +770,119 @@ QUnit.test("random.shuffled() distribution", function(assert) {
   assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
 });
 
-/*
-XXX
-subset(list, limit)
-pop(arr)
-*/
+QUnit.test("random.subset() with equal distribution", function(assert) {
+  /*
+   * this doesn't specify limit, so length distribution should be even, and selections should be even within each length
+   */
+  const N = 1e4, M = 3, TRIES = 3, B0_XSQ = 5.99, B1_XSQ = 15.51, B2_XSQ = 38.89, LEN_XSQ = 7.81; // quantile of chi-square dist. k=[2,8,26,3], p=.05
+  let bin0_xsq, bin1_xsq, bin2_xsq, length_xsq;
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = [new Uint32Array(3), new Uint32Array(9), new Uint32Array(27)], lengths = new Uint32Array(M+1);
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.subset([0, [1, 1], function(){ return 2; }]);
+      if (tmp.length > M) throw "random.subset() result length > input";
+      ++lengths[tmp.length];
+      if (tmp.length)
+        ++bins[tmp.length-1][tmp.reduce(function(a, v){ return a * 3 + v; }, 0)];
+    }
+    bin0_xsq = bins[0].reduce(function(a, v){ let e = N / (M + 1) / Math.pow(M, 1); return a + Math.pow(v - e, 2) / e; }, 0);
+    bin1_xsq = bins[1].reduce(function(a, v){ let e = N / (M + 1) / Math.pow(M, 2); return a + Math.pow(v - e, 2) / e; }, 0);
+    bin2_xsq = bins[2].reduce(function(a, v){ let e = N / (M + 1) / Math.pow(M, 3); return a + Math.pow(v - e, 2) / e; }, 0);
+    length_xsq = lengths.reduce(function(a, v){ let e = N / (M + 1); return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (bin0_xsq < B0_XSQ && bin1_xsq < B1_XSQ && bin2_xsq < B2_XSQ && length_xsq < LEN_XSQ) {
+      assert.ok(true, "Expected lengths x^2 to be < " + LEN_XSQ + ", got " + length_xsq + " on attempt #" + (attempt + 1));
+      assert.ok(true, "Expected length=1 x^2 to be < " + B0_XSQ + ", got " + bin0_xsq + " on attempt #" + (attempt + 1));
+      assert.ok(true, "Expected length=2 x^2 to be < " + B1_XSQ + ", got " + bin1_xsq + " on attempt #" + (attempt + 1));
+      assert.ok(true, "Expected length=3 x^2 to be < " + B2_XSQ + ", got " + bin2_xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+  }
+  console.log("Expected lengths x^2 to be < " + LEN_XSQ + ", got " + length_xsq);
+  console.log("Expected length=1 x^2 to be < " + B0_XSQ + ", got " + bin0_xsq);
+  console.log("Expected length=2 x^2 to be < " + B1_XSQ + ", got " + bin1_xsq);
+  console.log("Expected length=3 x^2 to be < " + B2_XSQ + ", got " + bin2_xsq);
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq low enough");
+});
+
+QUnit.test("random.subset(limit) with equal distribution", function(assert) {
+  /*
+   * limit is specified, so length should always == limit, and selections should be even
+   */
+  const N = 1e4, M = 3, TRIES = 3, B0_XSQ = 5.99, B1_XSQ = 15.51, B2_XSQ = 38.89, B3_XSQ = 101.88; // quantile of chi-square dist. k=[2,8,26,80], p=.05
+  let bin0_xsq, bin1_xsq, bin2_xsq, bin3_xsq;
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < 100; ++attempt) {
+    if (random.subset([1,2,3], 0).length !== 0) throw "random.subset(..., 0) returned non-empty array";
+  }
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = [new Uint32Array(3), new Uint32Array(9), new Uint32Array(27), new Uint32Array(81)];
+    for (let i = 0; i < N; ++i) {
+      let tmp = random.subset([0, 1, 2], 1);
+      if (tmp.length !== 1) throw "random.subset() result length != limit";
+      ++bins[0][tmp.reduce(function(a, v){ return a * 3 + v; }, 0)];
+      tmp = random.subset([0, 1, 2], 2);
+      if (tmp.length !== 2) throw "random.subset() result length != limit";
+      ++bins[1][tmp.reduce(function(a, v){ return a * 3 + v; }, 0)];
+      tmp = random.subset([0, 1, 2], 3);
+      if (tmp.length !== 3) throw "random.subset() result length != limit";
+      ++bins[2][tmp.reduce(function(a, v){ return a * 3 + v; }, 0)];
+      tmp = random.subset([0, 1, 2], 4);
+      if (tmp.length !== 4) throw "random.subset() result length != limit";
+      ++bins[3][tmp.reduce(function(a, v){ return a * 3 + v; }, 0)];
+    }
+    bin0_xsq = bins[0].reduce(function(a, v){ let e = N / Math.pow(M, 1); return a + Math.pow(v - e, 2) / e; }, 0);
+    bin1_xsq = bins[1].reduce(function(a, v){ let e = N / Math.pow(M, 2); return a + Math.pow(v - e, 2) / e; }, 0);
+    bin2_xsq = bins[2].reduce(function(a, v){ let e = N / Math.pow(M, 3); return a + Math.pow(v - e, 2) / e; }, 0);
+    bin3_xsq = bins[3].reduce(function(a, v){ let e = N / Math.pow(M, 4); return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (bin0_xsq < B0_XSQ && bin1_xsq < B1_XSQ && bin2_xsq < B2_XSQ && bin3_xsq < B3_XSQ) {
+      assert.ok(true, "Expected length=1 x^2 to be < " + B0_XSQ + ", got " + bin0_xsq + " on attempt #" + (attempt + 1));
+      assert.ok(true, "Expected length=2 x^2 to be < " + B1_XSQ + ", got " + bin1_xsq);
+      assert.ok(true, "Expected length=3 x^2 to be < " + B2_XSQ + ", got " + bin2_xsq);
+      assert.ok(true, "Expected length=4 x^2 to be < " + B3_XSQ + ", got " + bin3_xsq);
+      return;
+    }
+  }
+  console.log("Expected length=1 x^2 to be < " + B0_XSQ + ", got " + bin0_xsq);
+  console.log("Expected length=2 x^2 to be < " + B1_XSQ + ", got " + bin1_xsq);
+  console.log("Expected length=3 x^2 to be < " + B2_XSQ + ", got " + bin2_xsq);
+  console.log("Expected length=4 x^2 to be < " + B3_XSQ + ", got " + bin3_xsq);
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq low enough");
+});
+
+QUnit.test("random.pop() distribution", function(assert) {
+  const N = 1e4, TRIES = 3, XSQ = 5.99; // quantile of chi-square dist. k=2, p=.05
+  let tries = [];
+  random.init(Math.random() * 0x100000000);
+  for (let attempt = 0; attempt < TRIES; ++attempt) {
+    let bins = new Uint32Array(3);
+    const orig = [99, 100, 101];
+    for (let i = 0; i < N; ++i) {
+      let arr = orig.slice(), tmp = random.pop(arr) - 99;
+      if (tmp < 0) throw "random.pop() < lower bound";
+      if (tmp >= bins.length) throw "random.pop() > upper bound";
+      if (arr.length !== 2) throw "random.pop() did not pop";
+      if (arr.reduce(function(a, v){ return a + v; }, tmp) !== 201) throw "random.pop() sum error";
+      ++bins[tmp];
+    }
+    let xsq = bins.reduce(function(a, v){ let e = N / bins.length; return a + Math.pow(v - e, 2) / e; }, 0);
+    /*
+     * XSQ = scipy.stats.chi2.isf(.05, 2)
+     * if xsq > XSQ, the result is biased at 95% significance
+     */
+    if (xsq < XSQ) {
+      assert.ok(true, "Expected x^2 to be < " + XSQ + ", got " + xsq + " on attempt #" + (attempt + 1));
+      return;
+    }
+    tries.push(xsq);
+  }
+  assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
+});
