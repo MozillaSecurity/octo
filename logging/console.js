@@ -1,9 +1,18 @@
 var Logger = (function () {
-  var color = { red: "\033[1;31m", green: "\033[1;32m", clear: "\033[0m" };
-  if (Platform.isWindows) {
-    color = { red: "", green: "", clear: ""};
+  let color = {
+      red: "\033[1;31m",
+      green: "\033[1;32m",
+      clear: "\033[0m"
+  };
+  if (platform.isWindows) {
+    color = {
+        red: "",
+        green: "",
+        clear: ""
+    };
   }
-  var sep = "\n/* ### NEXT TESTCASE ############################## */";
+
+  let sep = "\n/* ### NEXT TESTCASE ############################## */";
 
   function console(msg) {
     if (websocket) {
@@ -20,19 +29,33 @@ var Logger = (function () {
     }
   }
 
-  function dump(msg) { console(msg); }
+  function dump(msg) {
+      console(msg);
+  }
 
-  function testcase(msg) { dump("/*L*/ " + JSON.stringify(msg) + "\n"); }
+  function testcase(msg) {
+      dump("/*L*/ " + JSON.stringify(msg) + "\n");
+  }
 
-  function dumpln(msg) { dump(msg + "\n"); }
+  function dumpln(msg) {
+      dump(msg + "\n");
+  }
 
-  function error(msg) { dumpln(color.red + msg + color.clear); }
+  function error(msg) {
+      dumpln(color.red + msg + color.clear);
+  }
 
-  function JSError(msg) { error(comment(msg)) }
+  function JSError(msg) {
+      error(comment(msg))
+  }
 
-  function comment(msg) { return "/* " + msg + " */"; }
+  function comment(msg) {
+      return "/* " + msg + " */";
+  }
 
-  function separator() { dumpln(color.green + sep + color.clear); }
+  function separator() {
+      dumpln(color.green + sep + color.clear);
+  }
 
   return {
     console: console,
