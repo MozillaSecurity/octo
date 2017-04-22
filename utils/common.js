@@ -63,14 +63,5 @@ utils.common = {
       }
     }
     return obj1;
-  },
-  traceback: function () {
-    Logger.error("===[ Traceback ]");
-    try {
-      throw new Error();
-    } catch (e) {
-      Logger.dump(e.stack || e.stacktrace || "");
-    }
-    Logger.error("===");
   }
 };

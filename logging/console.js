@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-var Logger = (function () {
+var logger = (function () {
   let color = {
     red: "\033[1;31m",
     green: "\033[1;32m",
@@ -61,6 +61,16 @@ var Logger = (function () {
     dumpln(color.green + sep + color.clear);
   }
 
+  function traceback() {
+    error("===[ Traceback ]");
+    try {
+      throw new Error();
+    } catch (e) {
+      dump(e.stack || e.stacktrace || "");
+    }
+    error("===");
+  }
+
   return {
     console: console,
     dump: dump,
@@ -69,6 +79,7 @@ var Logger = (function () {
     dumpln: dumpln,
     comment: comment,
     testcase: testcase,
-    separator: separator
+    separator: separator,
+    traceback: traceback
   };
 })();

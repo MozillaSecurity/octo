@@ -38,7 +38,7 @@ var random = {
   range: function (start, limit) {
     // Returns an integer in [start, limit]. Uniform distribution.
     if (isNaN(start) || isNaN(limit)) {
-      Utils.traceback();
+      logger.traceback();
       throw new TypeError("random.range() received a non number type: '" + start + "', '" + limit + "')");
     }
     return this.number(limit - start + 1) + start;
@@ -49,7 +49,7 @@ var random = {
   },
   item: function (list) {
     if (!(list instanceof Array || (list !== undefined && typeof list != "string" && list.hasOwnProperty("length")))) {
-      //Utils.traceback();
+      logger.traceback();
       throw new TypeError("this.item() received a non array type: '" + list + "'");
     }
     return list[this.number(list.length)];
@@ -78,14 +78,14 @@ var random = {
       limit = 2;
     }
     if (isNaN(limit)) {
-      Utils.traceback();
+      logger.traceback();
       throw new TypeError("random.chance() received a non number type: '" + limit + "'");
     }
     return this.number(limit) == 1;
   },
   choose: function (list, flat) {
     if (!(list instanceof Array)) {
-      Utils.traceback();
+      logger.traceback();
       throw new TypeError("random.choose() received a non-array type: '" + list + "'");
     }
     let total = 0;
@@ -137,7 +137,7 @@ var random = {
   },
   subset: function (list, limit) {
     if (!(list instanceof Array)) {
-      Utils.traceback();
+      logger.traceback();
       throw new TypeError("random.some() received a non-array type: '" + list + "'");
     }
     if (typeof limit !== 'number') {
