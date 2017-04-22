@@ -122,8 +122,7 @@ var random = {
     return this.bool() ? obj : "";
   },
   shuffle: function (arr) {
-    let len = arr.length;
-    let i = len;
+    let i = arr.length;
     while (i--) {
       let p = this.number(i + 1);
       let t = arr[i];
