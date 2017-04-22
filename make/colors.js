@@ -1,5 +1,5 @@
 make.colors = {
-  colors: function() {
+  colors: function () {
     return random.pick([
       make.colors.colorRGB,
       make.colors.colorHSL,
@@ -7,9 +7,9 @@ make.colors = {
     ]);
   },
 
-  colorRGB: function() {
+  colorRGB: function () {
     let values;
-    
+
     switch (random.number(4)) {
       case 0:
         // Rgb functional notation
@@ -34,10 +34,10 @@ make.colors = {
     }
   },
 
-  colorHSL: function() {
+  colorHSL: function () {
     let values, opt;
 
-    switch(random.number(4)) {
+    switch (random.number(4)) {
       case 0:
         values = [random.number(255), "%" + random.number(255), "%" + random.number(255)];
         return "hsl(" + values.join(',') + ")";
@@ -54,7 +54,7 @@ make.colors = {
     }
   },
 
-  colorKeywords: function() {
+  colorKeywords: function () {
     return random.pick([
       "lime", "red", "blue", "invert", "currentColor", "ActiveBorder", "ActiveCaption",
       "AppWorkspace", "Background", "ButtonFace", "ButtonHighlight", "ButtonShadow",

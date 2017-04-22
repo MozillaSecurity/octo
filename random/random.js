@@ -2,9 +2,9 @@ var random = {
   twister: null,
 
   /**
-    * Must be called before any other methods can be called to initialize MersenneTwister.
-    * @param {number|null|undefined} seed Value to initialize MersenneTwister.
-    */
+   * Must be called before any other methods can be called to initialize MersenneTwister.
+   * @param {number|null|undefined} seed Value to initialize MersenneTwister.
+   */
   init: function (seed) {
     if (seed == null || seed === undefined) {
       seed = new Date().getTime();
@@ -21,10 +21,10 @@ var random = {
       limit = 0xffffffff;
     }
     let x = (0x100000000 / limit) >>> 0,
-        y = (x * limit) >>> 0, r;
+      y = (x * limit) >>> 0, r;
     do {
       r = this.twister.int32();
-    } while(y && r >= y);
+    } while (y && r >= y);
     return (r / x) >>> 0;
   },
   float: function () {
@@ -39,7 +39,7 @@ var random = {
     }
     return this.number(limit - start + 1) + start;
   },
-  ludOneTo: function(limit) {
+  ludOneTo: function (limit) {
     // Returns a float in [1, limit]. The logarithm has uniform distribution.
     return Math.exp(this.float() * Math.log(limit));
   },

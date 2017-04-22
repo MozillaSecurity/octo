@@ -1,5 +1,5 @@
 utils.block = {
-  block: function(list, optional) {
+  block: function (list, optional) {
     if (optional == true) {
       if (random.chance(6)) {
         return '';
@@ -16,7 +16,7 @@ utils.block = {
       if (typeof(item) == "string") {
         return item;
       }
-      if (item instanceof(Array)) {
+      if (item instanceof (Array)) {
         let s = "";
         for (let i = 0; i < item.length; i++) {
           s += go_deeper(item[i]);

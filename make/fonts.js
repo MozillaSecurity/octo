@@ -1,20 +1,20 @@
 make.fonts = {
-  fontStyles: function() {
+  fontStyles: function () {
     return ["italic", "normal", "oblique", "inherit"];
   },
-  fontVariants: function() {
+  fontVariants: function () {
     return ["normal", "small-caps", "inherit"];
   },
-  fontWeights: function() {
+  fontWeights: function () {
     return ["normal", "bold", "bolder", "lighter"];
   },
-  fontSizeAbsolute: function() {
+  fontSizeAbsolute: function () {
     return ["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"];
   },
-  fontFamiliesGeneric: function() {
+  fontFamiliesGeneric: function () {
     return ["serif", "sans-serif", "cursive", "fantasy", "monospace"];
   },
-  fontFamilies: function() {
+  fontFamilies: function () {
     return ["'Times New Roman'", "Arial", "Courier", "Helvetica"];
   },
   fontFamily: function () {

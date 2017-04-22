@@ -1,5 +1,5 @@
 make.types = {
-  random: function() {
+  random: function () {
     return random.item([
       "true",
       "null",

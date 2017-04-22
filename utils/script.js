@@ -11,7 +11,7 @@ utils.script = {
     return "(" + params.join(", ") + ")";
   },
   methodCall: function (objectName, methodHash) {
-    if(!utils.common.getKeysFromHash(methodHash).length || !objectName) {
+    if (!utils.common.getKeysFromHash(methodHash).length || !objectName) {
       return "";
     }
     var methodName = random.key(methodHash);
@@ -22,20 +22,20 @@ utils.script = {
     return objectName + "." + methodName + utils.script..methodHead(methodArgs);
   },
   setAttribute: function (objectName, attributeHash) {
-    if(!utils.common.getKeysFromHash(attributeHash).length || !objectName) {
+    if (!utils.common.getKeysFromHash(attributeHash).length || !objectName) {
       return "";
     }
     var attributeName = random.key(attributeHash);
     var attributeValue = random.pick(attributeHash[attributeName]);
     var operator = " = ";
     /*
-    if (typeof(attributeValue) == "number" && Random.chance(8)) {
-      operator = " " + Make.randomAssignmentOperator() + " ";
-    }
-    if (typeof(attributeValue) == "string") {
+     if (typeof(attributeValue) == "number" && Random.chance(8)) {
+     operator = " " + Make.randomAssignmentOperator() + " ";
+     }
+     if (typeof(attributeValue) == "string") {
      attributeValue = "'" + attributeValue + "'";
-    }
-    */
+     }
+     */
     return objectName + "." + attributeName + operator + attributeValue + ";";
   },
   makeConstraint: function (keys, values) {
@@ -85,15 +85,18 @@ utils.script = {
     return "(document.body || document.documentElement).appendChild" + utils.script..methodHead([name]);
   },
   forceGC: function () {
-    if (platform.isMozilla) {}
-    if (platform.isChrome) {
-        if (window.GCController)
-          return GCController.collect();
+    if (platform.isMozilla) {
     }
-    if (platform.isSafari) {}
-    if (platform.isIE) {}
+    if (platform.isChrome) {
+      if (window.GCController)
+        return GCController.collect();
+    }
+    if (platform.isSafari) {
+    }
+    if (platform.isIE) {
+    }
   },
-  getRandomElement: function() {
-      return "document.getElementsByTagName('*')[" + random.number(document.getElementsByTagName("*").length) + "]";
+  getRandomElement: function () {
+    return "document.getElementsByTagName('*')[" + random.number(document.getElementsByTagName("*").length) + "]";
   }
 };

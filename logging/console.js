@@ -1,14 +1,14 @@
 var Logger = (function () {
   let color = {
-      red: "\033[1;31m",
-      green: "\033[1;32m",
-      clear: "\033[0m"
+    red: "\033[1;31m",
+    green: "\033[1;32m",
+    clear: "\033[0m"
   };
   if (platform.isWindows) {
     color = {
-        red: "",
-        green: "",
-        clear: ""
+      red: "",
+      green: "",
+      clear: ""
     };
   }
 
@@ -30,31 +30,31 @@ var Logger = (function () {
   }
 
   function dump(msg) {
-      console(msg);
+    console(msg);
   }
 
   function testcase(msg) {
-      dump("/*L*/ " + JSON.stringify(msg) + "\n");
+    dump("/*L*/ " + JSON.stringify(msg) + "\n");
   }
 
   function dumpln(msg) {
-      dump(msg + "\n");
+    dump(msg + "\n");
   }
 
   function error(msg) {
-      dumpln(color.red + msg + color.clear);
+    dumpln(color.red + msg + color.clear);
   }
 
   function JSError(msg) {
-      error(comment(msg))
+    error(comment(msg))
   }
 
   function comment(msg) {
-      return "/* " + msg + " */";
+    return "/* " + msg + " */";
   }
 
   function separator() {
-      dumpln(color.green + sep + color.clear);
+    dumpln(color.green + sep + color.clear);
   }
 
   return {

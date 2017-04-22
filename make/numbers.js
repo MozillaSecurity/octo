@@ -5,16 +5,25 @@ make.numbers = {
   float: function () {
     let n;
     if (random.chance(32)) {
-      switch(random.number(4)) {
-        case 0: n = random.range(Number.MAX_VALUE, Number.MIN_VALUE); break;
-        case 1: n = Math.pow(10, 1) / Math.pow(10, random.number(307)); break;
-        case 2: n = Math.pow(2, random.float() * random.float() * 64); break;
-        case 3: n = Math.pow(10, random.range(1, 9)) / Math.pow(10, random.range(1, 9)); break;
+      switch (random.number(4)) {
+        case 0:
+          n = random.range(Number.MAX_VALUE, Number.MIN_VALUE);
+          break;
+        case 1:
+          n = Math.pow(10, 1) / Math.pow(10, random.number(307));
+          break;
+        case 2:
+          n = Math.pow(2, random.float() * random.float() * 64);
+          break;
+        case 3:
+          n = Math.pow(10, random.range(1, 9)) / Math.pow(10, random.range(1, 9));
+          break;
       }
       return n;
     }
     switch (random.number(6)) {
-      default: n = random.float();
+      default:
+        n = random.float();
     }
     return n;
   },
@@ -37,7 +46,7 @@ make.numbers = {
     let value = random.choose([
       [10, make.numbers.float],
       [10, [make.numbers.rangeNumber, make.numbers.tinyNumber]],
-      [ 1, Make.numbers.unsignedNumber]
+      [1, Make.numbers.unsignedNumber]
     ]);
     return random.chance(10) ? -value : value;
   }

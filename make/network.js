@@ -1,5 +1,5 @@
 make.network = {
-  sdp: function() {
+  sdp: function () {
     // session description protocol template
     return [
       "v=0",
@@ -34,36 +34,42 @@ make.network = {
       "a=candidate:0 2 UDP 2113601790 192.168.129.33 62658 typ host",
     ].join("\n");
   },
-  PeerConnectionProtocols: function() {
+  PeerConnectionProtocols: function () {
     return ["turn", "turns", "stun", "stuns"]
   },
-  randomIPv4: function() {
+  randomIPv4: function () {
     return random.pick([random.number(255), make.numbers.number]) + "." +
-           random.pick([random.number(255), make.numbers.number]) + "." +
-           random.pick([random.number(255), make.numbers.number]) + "." +
-           random.pick([random.number(255), make.numbers.number]);
+      random.pick([random.number(255), make.numbers.number]) + "." +
+      random.pick([random.number(255), make.numbers.number]) + "." +
+      random.pick([random.number(255), make.numbers.number]);
   },
-  randomIPv6: function() {
-    return "[" + make.stringFromBlocks([":", function() { return make.strings.digitsHex(random.range(1, 4)) }]) + "]"
+  randomIPv6: function () {
+    return "[" + make.stringFromBlocks([":", function () {
+        return make.strings.digitsHex(random.range(1, 4))
+      }]) + "]"
   },
-  goodHostnames: function() { return [
-    "0.0.0.0",
-    "127.0.0.1:8080",
-  ]},
-  badHostnames: function() { return [
-    "google.org:8080",
-    "::1",
-    "[::192.9.5.5]:42",
-    "2001:db8:85a3::8a2e:370:3478",
-    "2001:db8:85a3:0:0:8a2e:370:3478",
-    "::ffff:192.0.2.1",
-    "0000:0000:0000:0000:0000:0000:0000:0001",
-    "::192.0.2.128",
-    "::ffff:192.0.2.128",
-    "2001:db8::1:2",
-    "2001:db8::1:1:1:1:1"
-  ]},
-  randomBitmask: function(list) {
+  goodHostnames: function () {
+    return [
+      "0.0.0.0",
+      "127.0.0.1:8080",
+    ]
+  },
+  badHostnames: function () {
+    return [
+      "google.org:8080",
+      "::1",
+      "[::192.9.5.5]:42",
+      "2001:db8:85a3::8a2e:370:3478",
+      "2001:db8:85a3:0:0:8a2e:370:3478",
+      "::ffff:192.0.2.1",
+      "0000:0000:0000:0000:0000:0000:0000:0001",
+      "::192.0.2.128",
+      "::ffff:192.0.2.128",
+      "2001:db8::1:2",
+      "2001:db8::1:1:1:1:1"
+    ]
+  },
+  randomBitmask: function (list) {
     if (list.length <= 1) {
       return list.join("");
     }

@@ -9,15 +9,15 @@
  *
  */
 
-function MersenneTwister()
-{
+function MersenneTwister() {
   const N = 624;
   const M = 397;
   const UPPER_MASK = 0x80000000;
   const LOWER_MASK = 0x7fffffff;
   const MAG01 = new Int32Array([0, 0x9908b0df]);
 
-  let mt = new Int32Array(N);   /* the array for the state vector */
+  let mt = new Int32Array(N);
+  /* the array for the state vector */
   let mti = 625;
 
   this.seed = function (s) {
@@ -27,28 +27,28 @@ function MersenneTwister()
     }
   };
 
-  this.export_state = function() {
+  this.export_state = function () {
     return [mt, mti];
   };
 
-  this.import_state = function(s) {
+  this.import_state = function (s) {
     mt = s[0];
     mti = s[1];
   };
 
-  this.export_mta = function() {
+  this.export_mta = function () {
     return mt;
   };
 
-  this.import_mta = function(_mta) {
+  this.import_mta = function (_mta) {
     mt = _mta;
   };
 
-  this.export_mti = function() {
+  this.export_mti = function () {
     return mti;
   };
 
-  this.import_mti = function(_mti) {
+  this.import_mti = function (_mti) {
     mti = _mti;
   };
 
@@ -56,16 +56,16 @@ function MersenneTwister()
     let y, kk;
 
     if (mti >= N) { /* generate N words at one time */
-      for (kk = 0; kk < N-M; kk++) {
-        y = ((mt[kk] & UPPER_MASK) | (mt[kk+1] & LOWER_MASK));
-        mt[kk] = (mt[kk+M] ^ (y >>> 1) ^ MAG01[y & 0x1]);
+      for (kk = 0; kk < N - M; kk++) {
+        y = ((mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK));
+        mt[kk] = (mt[kk + M] ^ (y >>> 1) ^ MAG01[y & 0x1]);
       }
-      for (; kk < N-1; kk++) {
-        y = ((mt[kk] & UPPER_MASK) | (mt[kk+1] & LOWER_MASK));
-        mt[kk] = (mt[kk+(M-N)] ^ (y >>> 1) ^ MAG01[y & 0x1]);
+      for (; kk < N - 1; kk++) {
+        y = ((mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK));
+        mt[kk] = (mt[kk + (M - N)] ^ (y >>> 1) ^ MAG01[y & 0x1]);
       }
-      y = ((mt[N-1] & UPPER_MASK) | (mt[0] & LOWER_MASK));
-      mt[N-1] = (mt[M-1] ^ (y >>> 1) ^ MAG01[y & 0x1]);
+      y = ((mt[N - 1] & UPPER_MASK) | (mt[0] & LOWER_MASK));
+      mt[N - 1] = (mt[M - 1] ^ (y >>> 1) ^ MAG01[y & 0x1]);
       mti = 0;
     }
 

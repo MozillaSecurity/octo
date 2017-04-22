@@ -26,7 +26,7 @@ make.text = {
       "en-US", "en", "de"
     ]);
   },
-  layoutCharCodes: function() {
+  layoutCharCodes: function () {
     return random.pick([
       0,      // null
       160,    // non-breaking space
@@ -96,73 +96,91 @@ make.text = {
   },
 
   // http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt
-  unicodeCombiningCharacters: function() { return random.item([
-    [0x0300, 0x036F], // Combining Diacritical Marks
-    [0x0483, 0x0489],
-    [0x07EB, 0x07F3],
-    [0x135D, 0x135F],
-    [0x1A7F, 0x1A7F],
-    [0x1B6B, 0x1B73],
-    [0x1DC0, 0x1DFF], // Combining Diacritical Marks Supplement
-    [0x20D0, 0x2DFF],
-    [0x3099, 0x309A],
-    [0xA66F, 0xA6F1],
-    [0xA8E0, 0xA8F1],
-    [0xFE20, 0xFE26], // Combining Half Marks
-    [0x101FD, 0x101FD],
-    [0x1D165, 0x1D169],
-    [0x1D16D, 0x1D172],
-    [0x1D17B, 0x1D18B],
-    [0x1D1AA, 0x1D1AD],
-    [0x1D242, 0x1D244]
-  ])},
-  unicodeBMP: function() { return random.item([
-    // BMP = Basic Multilingual Plane
-    [0x0000, 0xFFFF]
-  ])},
-  unicodeSMP: function() { return random.item([
-    // SMP = Supplementary Multilingual Plane
-    [0x10000, 0x13FFF],
-    [0x16000, 0x16FFF],
-    [0x1B000, 0x1BFFF],
-    [0x1D000, 0x1DFFF],
-    [0x1F000, 0x1FFFF]
-  ])},
-  unicodeSIP: function() { return random.item([
-    // SIP = Supplementary Ideographic Plane
-    [0x20000, 0x2BFFF],
-    [0x2F000, 0x2FFFF]
-  ])},
-  unicodeSSP: function() { return random.item([
-    // SSP = Supplementary Special-purpose Plane
-    [0xE0000, 0xE0FFF]
-  ])},
-  registeredFontFeatures: function() { return random.pick([
-    'aalt', 'abvf', 'abvm', 'abvs', 'afrc', 'akhn', 'blwf', 'blwm', 'blws',
-    'calt', 'case', 'ccmp', 'cfar', 'cjct', 'clig', 'cpct', 'cpsp', 'cswh',
-    'curs', 'cv01-cv99', 'c2pc', 'c2sc', 'dist', 'dlig', 'dnom', 'expt',
-    'falt', 'fin2', 'fin3', 'fina', 'frac', 'fwid', 'half', 'haln', 'halt',
-    'hist', 'hkna', 'hlig', 'hngl', 'hojo', 'hwid', 'init', 'isol', 'ital',
-    'jalt', 'jp78', 'jp83', 'jp90', 'jp04', 'kern', 'lfbd', 'liga', 'ljmo',
-    'lnum', 'locl', 'ltra', 'ltrm', 'mark', 'med2', 'medi', 'mgrk', 'mkmk',
-    'mset', 'nalt', 'nlck', 'nukt', 'numr', 'onum', 'opbd', 'ordn', 'ornm',
-    'palt', 'pcap', 'pkna', 'pnum', 'pref', 'pres', 'pstf', 'psts', 'pwid',
-    'qwid', 'rand', 'rkrf', 'rlig', 'rphf', 'rtbd', 'rtla', 'rtlm', 'ruby',
-    'salt', 'sinf', 'size', 'smcp', 'smpl', 'ss01', 'ss02', 'ss03', 'ss04',
-    'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'ss10', 'ss11', 'ss12', 'ss13',
-    'ss14', 'ss15', 'ss16', 'ss17', 'ss18', 'ss19', 'ss20', 'subs', 'sups',
-    'swsh', 'titl', 'tjmo', 'tnam', 'tnum', 'trad', 'twid', 'unic', 'valt',
-    'vatu', 'vert', 'vhal', 'vjmo', 'vkna', 'vkrn', 'vpal', 'vrt2', 'zero'
-  ])},
-  assignmentOperator: function() { return random.pick([
-    "=", "-=", "+=", "*=", "/="
-  ])},
-  arithmeticOperator: function() { return random.pick([
-    "%", "-", "+", "*", "/"
-  ])},
-  currency: function() { return random.pick([
-    // https://en.wikipedia.org/wiki/ISO_4217
-    "USD", "USS", "USN", "EUR", "CHF", "GBP", "XAG", "XBA", "XBB", "XBC",
-    "XBD", "XSU", "XTS", "XXX",
-  ])},
+  unicodeCombiningCharacters: function () {
+    return random.item([
+      [0x0300, 0x036F], // Combining Diacritical Marks
+      [0x0483, 0x0489],
+      [0x07EB, 0x07F3],
+      [0x135D, 0x135F],
+      [0x1A7F, 0x1A7F],
+      [0x1B6B, 0x1B73],
+      [0x1DC0, 0x1DFF], // Combining Diacritical Marks Supplement
+      [0x20D0, 0x2DFF],
+      [0x3099, 0x309A],
+      [0xA66F, 0xA6F1],
+      [0xA8E0, 0xA8F1],
+      [0xFE20, 0xFE26], // Combining Half Marks
+      [0x101FD, 0x101FD],
+      [0x1D165, 0x1D169],
+      [0x1D16D, 0x1D172],
+      [0x1D17B, 0x1D18B],
+      [0x1D1AA, 0x1D1AD],
+      [0x1D242, 0x1D244]
+    ])
+  },
+  unicodeBMP: function () {
+    return random.item([
+      // BMP = Basic Multilingual Plane
+      [0x0000, 0xFFFF]
+    ])
+  },
+  unicodeSMP: function () {
+    return random.item([
+      // SMP = Supplementary Multilingual Plane
+      [0x10000, 0x13FFF],
+      [0x16000, 0x16FFF],
+      [0x1B000, 0x1BFFF],
+      [0x1D000, 0x1DFFF],
+      [0x1F000, 0x1FFFF]
+    ])
+  },
+  unicodeSIP: function () {
+    return random.item([
+      // SIP = Supplementary Ideographic Plane
+      [0x20000, 0x2BFFF],
+      [0x2F000, 0x2FFFF]
+    ])
+  },
+  unicodeSSP: function () {
+    return random.item([
+      // SSP = Supplementary Special-purpose Plane
+      [0xE0000, 0xE0FFF]
+    ])
+  },
+  registeredFontFeatures: function () {
+    return random.pick([
+      'aalt', 'abvf', 'abvm', 'abvs', 'afrc', 'akhn', 'blwf', 'blwm', 'blws',
+      'calt', 'case', 'ccmp', 'cfar', 'cjct', 'clig', 'cpct', 'cpsp', 'cswh',
+      'curs', 'cv01-cv99', 'c2pc', 'c2sc', 'dist', 'dlig', 'dnom', 'expt',
+      'falt', 'fin2', 'fin3', 'fina', 'frac', 'fwid', 'half', 'haln', 'halt',
+      'hist', 'hkna', 'hlig', 'hngl', 'hojo', 'hwid', 'init', 'isol', 'ital',
+      'jalt', 'jp78', 'jp83', 'jp90', 'jp04', 'kern', 'lfbd', 'liga', 'ljmo',
+      'lnum', 'locl', 'ltra', 'ltrm', 'mark', 'med2', 'medi', 'mgrk', 'mkmk',
+      'mset', 'nalt', 'nlck', 'nukt', 'numr', 'onum', 'opbd', 'ordn', 'ornm',
+      'palt', 'pcap', 'pkna', 'pnum', 'pref', 'pres', 'pstf', 'psts', 'pwid',
+      'qwid', 'rand', 'rkrf', 'rlig', 'rphf', 'rtbd', 'rtla', 'rtlm', 'ruby',
+      'salt', 'sinf', 'size', 'smcp', 'smpl', 'ss01', 'ss02', 'ss03', 'ss04',
+      'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'ss10', 'ss11', 'ss12', 'ss13',
+      'ss14', 'ss15', 'ss16', 'ss17', 'ss18', 'ss19', 'ss20', 'subs', 'sups',
+      'swsh', 'titl', 'tjmo', 'tnam', 'tnum', 'trad', 'twid', 'unic', 'valt',
+      'vatu', 'vert', 'vhal', 'vjmo', 'vkna', 'vkrn', 'vpal', 'vrt2', 'zero'
+    ])
+  },
+  assignmentOperator: function () {
+    return random.pick([
+      "=", "-=", "+=", "*=", "/="
+    ])
+  },
+  arithmeticOperator: function () {
+    return random.pick([
+      "%", "-", "+", "*", "/"
+    ])
+  },
+  currency: function () {
+    return random.pick([
+      // https://en.wikipedia.org/wiki/ISO_4217
+      "USD", "USS", "USN", "EUR", "CHF", "GBP", "XAG", "XBA", "XBB", "XBC",
+      "XBD", "XSU", "XTS", "XXX",
+    ])
+  },
 };
