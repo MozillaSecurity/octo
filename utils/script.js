@@ -23,7 +23,7 @@ utils.script = {
     if (typeof(methodArgs) == "function") { // Todo: Hmmmm..
       return methodArgs();
     }
-    return objectName + "." + methodName + utils.script..methodHead(methodArgs);
+    return objectName + "." + methodName + utils.script.methodHead(methodArgs);
   },
   setAttribute: function (objectName, attributeHash) {
     if (!utils.common.getKeysFromHash(attributeHash).length || !objectName) {
@@ -86,7 +86,7 @@ utils.script = {
     return random.number() + ' % ' + o.pick(objName) + '.length';
   },
   addElementToBody: function (name) {
-    return "(document.body || document.documentElement).appendChild" + utils.script..methodHead([name]);
+    return "(document.body || document.documentElement).appendChild" + utils.script.methodHead([name]);
   },
   forceGC: function () {
     if (platform.isMozilla) {
