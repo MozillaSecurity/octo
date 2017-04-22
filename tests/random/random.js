@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 QUnit.test("random.init() is required", function(assert) {
   assert.throws(random.number, /undefined/, "twister should be uninitialized before random.init()");
   random.init(1);

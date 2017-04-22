@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 QUnit.test("MersenneTwister test uniform distribution", function(assert) {
   const N = Math.pow(2, 17), TRIES = 10, XSQ = 293.25; // quantile of chi-square dist. k=255, p=.05
   let mt = new MersenneTwister();
