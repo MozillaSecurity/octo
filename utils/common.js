@@ -16,7 +16,7 @@ utils.common = {
   },
   getKeysFromHash: function (obj) {
     let list = [];
-    for (var p in obj) {
+    for (let p in obj) {
       list.push(p);
     }
     return list;
@@ -50,7 +50,7 @@ utils.common = {
     for (let p in obj2) {
       try {
         if (obj2[p].constructor == Object) {
-          obj1[p] = Utils.mergeHash(obj1[p], obj2[p]);
+          obj1[p] = utils.common.mergeHash(obj1[p], obj2[p]);
         } else {
           obj1[p] = obj2[p];
         }

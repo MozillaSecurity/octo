@@ -135,8 +135,8 @@ make.shaders = {
   shaderPair: function(v, f) {
     let i = random.number(v.length);
     return {
-      vertex: Utils.quote(v[i].join("\n")),
-      fragment: Utils.quote(f[i].join("\n"))
+      vertex: utils.common.quote(v[i].join("\n")),
+      fragment: utils.common.quote(f[i].join("\n"))
     };
   },
 };

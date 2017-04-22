@@ -33,9 +33,9 @@ make.files = {
   },
   file: function () {
     return random.pick([
-      make.image,
-      make.video,
-      make.audio
+      make.files.image,
+      make.files.video,
+      make.files.audio
     ]);
   },
 };

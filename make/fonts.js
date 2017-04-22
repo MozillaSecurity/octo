@@ -15,35 +15,35 @@ make.fonts = {
     return ["serif", "sans-serif", "cursive", "fantasy", "monospace"];
   },
   fontFamilies: function() {
-    return ['"' + "Times New Roman" + '"', "Arial", "Courier", "Helvetica"];
+    return ["'Times New Roman'", "Arial", "Courier", "Helvetica"];
   },
   fontFamily: function () {
-    let s = random.pick(make.fontFamilies);
+    let s = random.pick(make.fonts.fontFamilies);
     if (random.chance(8)) {
-      s += ", " + random.pick(make.fontFamiliesGeneric);
+      s += ", " + random.pick(make.fonts.fontFamiliesGeneric);
     }
     return s;
   },
   fontSize: function () {
-    return make.unsignedNumber() + make.lengthUnit();
+    return make.numbers.unsignedNumber() + make.fonts.lengthUnit();
   },
   font: function () {
     let s = "";
     if (random.chance(4)) {
-      s += random.pick(make.fontStyles) + " ";
+      s += random.pick(make.fonts.fontStyles) + " ";
     }
     if (random.chance(4)) {
-      s += random.pick(make.fontVariants) + " ";
+      s += random.pick(make.fonts.fontVariants) + " ";
     }
     if (random.chance(4)) {
-      s += random.pick(make.fontWeights) + " ";
+      s += random.pick(make.fonts.fontWeights) + " ";
     }
     if (random.chance(4)) {
-      s += make.number() + "/";
+      s += make.numbers.number() + "/";
     }
-    s += make.fontSize();
+    s += make.fonts.fontSize();
     s += " ";
-    s += Make.fontFamily();
+    s += Make.fonts.fontFamily();
     return "'" + s + "'";
   }
 };

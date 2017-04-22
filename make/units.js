@@ -5,9 +5,9 @@ make.units = {
     ]);
   },
   length: function () {
-    return make.number() + make.lengthUnit();
+    return make.numbers.number() + make.units.lengthUnit();
   },
   percent: function () {
-    return make.number() + "%";
+    return make.numbers.number() + "%";
   },
 };

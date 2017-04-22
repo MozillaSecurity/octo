@@ -1,9 +1,9 @@
 make.colors = {
   colors: function() {
     return random.pick([
-      make.colorRGB,
-      make.colorHSL,
-      make.colorKeywords
+      make.colors.colorRGB,
+      make.colors.colorHSL,
+      make.colors.colorKeywords
     ]);
   },
 

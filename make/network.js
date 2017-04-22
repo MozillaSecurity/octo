@@ -38,13 +38,13 @@ make.network = {
     return ["turn", "turns", "stun", "stuns"]
   },
   randomIPv4: function() {
-    return random.pick([random.number(255), make.number]) + "." +
-           random.pick([random.number(255), make.number]) + "." +
-           random.pick([random.number(255), make.number]) + "." +
-           random.pick([random.number(255), make.number]);
+    return random.pick([random.number(255), make.numbers.number]) + "." +
+           random.pick([random.number(255), make.numbers.number]) + "." +
+           random.pick([random.number(255), make.numbers.number]) + "." +
+           random.pick([random.number(255), make.numbers.number]);
   },
   randomIPv6: function() {
-    return "[" + make.stringFromBlocks([":", function() { return make.digitsHex(random.range(1, 4)) }]) + "]"
+    return "[" + make.stringFromBlocks([":", function() { return make.strings.digitsHex(random.range(1, 4)) }]) + "]"
   },
   goodHostnames: function() { return [
     "0.0.0.0",

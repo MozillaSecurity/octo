@@ -17,8 +17,8 @@ utils.block = {
         return item;
       }
       if (item instanceof(Array)) {
-        var s = "";
-        for (var i = 0; i < item.length; i++) {
+        let s = "";
+        for (let i = 0; i < item.length; i++) {
           s += go_deeper(item[i]);
         }
         return s;
@@ -26,8 +26,8 @@ utils.block = {
       return item;
     }
 
-    var asString = "";
-    for (var i = 0; i < list.length; i++) {
+    let asString = "";
+    for (let i = 0; i < list.length; i++) {
       asString += go_deeper(list[i]);
     }
 

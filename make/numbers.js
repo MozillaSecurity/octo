@@ -19,14 +19,14 @@ make.numbers = {
     return n;
   },
   rangeNumber: function () {
-    return random.pick([1, 2, 3, 4, 6, 8, 16, 32, 64, make.tinyNumber]);
+    return random.pick([1, 2, 3, 4, 6, 8, 16, 32, 64, make.numbers.tinyNumber]);
   },
   tinyNumber: function () {
     return Math.pow(2, random.number(12));
   },
   unsignedNumber: function () {
     if (random.chance(2)) {
-      return Math.abs(make.number());
+      return Math.abs(make.numbers.number());
     }
     return Math.pow(2, random.number(65)) + random.number(3) - 1;
   },
@@ -35,9 +35,9 @@ make.numbers = {
   },
   number: function () {
     let value = random.choose([
-      [10, make.float],
-      [10, [make.rangeNumber, make.tinyNumber]],
-      [ 1, Make.unsignedNumber]
+      [10, make.numbers.float],
+      [10, [make.numbers.rangeNumber, make.numbers.tinyNumber]],
+      [ 1, Make.numbers.unsignedNumber]
     ]);
     return random.chance(10) ? -value : value;
   }

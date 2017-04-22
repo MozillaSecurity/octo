@@ -3,30 +3,30 @@ utils.script = {
     if (isNaN(numOptional)) {
       numOptional = 0;
     }
-    var arity = list.length - Random.number(numOptional);
+    var arity = list.length - random.number(numOptional);
     var params = [];
     for (var i = 0; i < arity; i++) {
-      params.push(Random.pick([list[i]]));
+      params.push(random.pick([list[i]]));
     }
     return "(" + params.join(", ") + ")";
   },
   methodCall: function (objectName, methodHash) {
-    if(!Utils.getKeysFromHash(methodHash).length || !objectName) {
+    if(!utils.common.getKeysFromHash(methodHash).length || !objectName) {
       return "";
     }
-    var methodName = Random.key(methodHash);
+    var methodName = random.key(methodHash);
     var methodArgs = methodHash[methodName];
     if (typeof(methodArgs) == "function") { // Todo: Hmmmm..
       return methodArgs();
     }
-    return objectName + "." + methodName + JS.methodHead(methodArgs);
+    return objectName + "." + methodName + utils.script..methodHead(methodArgs);
   },
   setAttribute: function (objectName, attributeHash) {
-    if(!Utils.getKeysFromHash(attributeHash).length || !objectName) {
+    if(!utils.common.getKeysFromHash(attributeHash).length || !objectName) {
       return "";
     }
-    var attributeName = Random.key(attributeHash);
-    var attributeValue = Random.pick(attributeHash[attributeName]);
+    var attributeName = random.key(attributeHash);
+    var attributeValue = random.pick(attributeHash[attributeName]);
     var operator = " = ";
     /*
     if (typeof(attributeValue) == "number" && Random.chance(8)) {
@@ -40,16 +40,16 @@ utils.script = {
   },
   makeConstraint: function (keys, values) {
     var o = {};
-    var n = Random.range(0, keys.length);
+    var n = random.range(0, keys.length);
     while (n--) {
-      o[Random.pick(keys)] = Random.pick(values);
+      o[random.pick(keys)] = random.pick(values);
     }
     return o;
   },
   makeRandomOptions: function (base_o) {
-    var o = {}, unique = Random.some(Object.keys(base_o));
+    var o = {}, unique = random.some(Object.keys(base_o));
     for (var i = 0; i < unique.length; i++) {
-      o[unique[i]] = Random.pick(base_o[unique[i]]);
+      o[unique[i]] = random.pick(base_o[unique[i]]);
     }
     return JSON.stringify(o);
   },
@@ -60,40 +60,40 @@ utils.script = {
     return "try { " + s + " } catch(e) { }";
   },
   makeLoop: function (s, max) {
-    return "for (var i = 0; i < " + (max || Make.rangeNumber()) + "; i++) {" + s + "}";
+    return "for (var i = 0; i < " + (max || make.numbers.rangeNumber()) + "; i++) {" + s + "}";
   },
   makeArray: function (type, arrayLength, cb) {
     if (type == null || type === undefined) {
-      type = Random.index(["Uint8", "Float32"]);
+      type = random.index(["Uint8", "Float32"]);
     }
-    switch (Random.number(8)) {
+    switch (random.number(8)) {
       case 0:
         var src = "function() { var buffer = new " + type + "Array(" + arrayLength + ");";
-        src += JS.makeLoop("buffer[i] = " + cb() + ";", arrayLength);
+        src += utils.script.makeLoop("buffer[i] = " + cb() + ";", arrayLength);
         src += "return buffer;}()";
         return src;
       case 1:
-        return "new " + type + "Array([" + Make.filledArray(cb, arrayLength) + "])";
+        return "new " + type + "Array([" + make.arrays.filledArray(cb, arrayLength) + "])";
       default:
         return "new " + type + "Array(" + arrayLength + ")";
     }
   },
   randListIndex: function (objName) {
-    return Random.number() + ' % ' + o.pick(objName) + '.length';
+    return random.number() + ' % ' + o.pick(objName) + '.length';
   },
   addElementToBody: function (name) {
-    return "(document.body || document.documentElement).appendChild" + JS.methodHead([name]);
+    return "(document.body || document.documentElement).appendChild" + utils.script..methodHead([name]);
   },
   forceGC: function () {
-    if (Platform.isMozilla) {}
-    if (Platform.isChrome) {
+    if (platform.isMozilla) {}
+    if (platform.isChrome) {
         if (window.GCController)
           return GCController.collect();
     }
-    if (Platform.isSafari) {}
-    if (Platform.isIE) {}
+    if (platform.isSafari) {}
+    if (platform.isIE) {}
   },
   getRandomElement: function() {
-      return "document.getElementsByTagName('*')[" + Random.number(document.getElementsByTagName("*").length) + "]";
+      return "document.getElementsByTagName('*')[" + random.number(document.getElementsByTagName("*").length) + "]";
   }
 };

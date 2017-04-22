@@ -6,18 +6,18 @@ make.strings = {
     let s = "";
 
     if (maxlen == null || maxlen === undefined) {
-      maxlen = make.rangeNumber();
+      maxlen = make.numbers.rangeNumber();
     }
 
     for (let i = 0; i < maxlen; i++) {
-      //s += String.fromCodePoint(Random.pick(Make.layoutCharCodes));
+      //s += String.fromCodePoint(Random.pick(make.fonts.layoutCharCodes));
       s += "A"
     }
 
     return s;
   },
   quotedString: function (maxlen) {
-    return utils.quote(make.string(maxlen));
+    return utils.common.quote(make.strings.string(maxlen));
   },
   stringFromBlocks: function (set, maxlen) {
     let s = "";
