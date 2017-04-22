@@ -1,6 +1,10 @@
 var random = {
   twister: null,
 
+  /**
+    * Must be called before any other methods can be called to initialize MersenneTwister.
+    * @param {number|null|undefined} seed Value to initialize MersenneTwister.
+    */
   init: function (seed) {
     if (seed == null || seed === undefined) {
       seed = new Date().getTime();
