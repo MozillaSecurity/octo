@@ -59,7 +59,7 @@ utils.script = {
   },
   safely: function (s) {
     if (window.debug) {
-      return "try { " + s + " } catch(e) { Logger.JSError(e); }";
+      return "try { " + s + " } catch(e) { logger.JSError(e); }";
     }
     return "try { " + s + " } catch(e) { }";
   },
