@@ -6,6 +6,12 @@ A fuzzing framework for JavaScript
 
 This is WIP.
 
+
+## Build
+
+    ./build.py -f lib -d .
+
+
 ## Testing
 
 Tests live in the `tests/` subdirectory, and are written for [QUnit](https://qunitjs.com/).
