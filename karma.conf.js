@@ -5,7 +5,7 @@ module.exports = function(config) {
         frameworks: ['qunit'],
 
         files: [
-          '../random/*.js',
+          '../lib/random/*.js',
           '**/*.js'
         ],
 
