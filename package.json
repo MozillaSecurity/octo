@@ -13,6 +13,6 @@
     "standard": "*"
   },
   "scripts": {
-    "test": "standard && grunt test --verbose"
+    "test": "standard lib/**/*.js && grunt test --verbose"
   }
 }
