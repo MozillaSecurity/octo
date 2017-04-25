@@ -14,5 +14,5 @@
   },
   "scripts": {
     "test": "standard && grunt test --verbose"
-  },
+  }
 }
