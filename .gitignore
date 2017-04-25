@@ -381,3 +381,6 @@ typings/
 
 # Notepad++ backups #
 *.bak
+
+# WebBrains project files
+.idea/
