@@ -5,6 +5,11 @@ module.exports = function(config) {
         frameworks: ['qunit'],
 
         files: [
+          '../lib/utils/init.js',
+          '../lib/utils/*.js',
+          '../lib/logging/*.js',
+          '../lib/make/init.js',
+          '../lib/make/*.js',
           '../lib/random/*.js',
           '**/*.js'
         ],
@@ -13,7 +18,7 @@ module.exports = function(config) {
         ],
 
         preprocessors: {
-          '../!(tests)/*.js': ['coverage']
+          '../lib/**/*.js': ['coverage']
         },
 
         reporters: ['progress', 'coverage'],
