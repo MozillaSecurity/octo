@@ -9,9 +9,10 @@
     "karma-coverage": "*",
     "karma-firefox-launcher": "*",
     "karma-qunit": "*",
-    "qunitjs": "*"
+    "qunitjs": "*",
+    "standard": "*"
   },
   "scripts": {
-    "test": "grunt test --verbose"
+    "test": "standard && grunt test --verbose"
   },
 }
