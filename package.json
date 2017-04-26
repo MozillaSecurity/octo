@@ -14,5 +14,8 @@
   },
   "scripts": {
     "test": "standard lib/**/*.js && grunt test --verbose"
+  },
+  "standard": {
+    "globals": ["random", "make", "utils", "logger"]
   }
 }
