@@ -4,6 +4,7 @@
     "grunt": "*",
     "grunt-karma": "*",
     "grunt-karma-coveralls": "*",
+    "grunt-standard": "*",
     "karma": "*",
     "karma-chrome-launcher": "*",
     "karma-coverage": "*",
@@ -13,9 +14,10 @@
     "standard": "*"
   },
   "scripts": {
-    "test": "standard -v lib/**/*.js && grunt test --verbose"
+    "test": "grunt test --verbose"
   },
   "standard": {
-    "globals": ["random", "make", "utils", "logger"]
+    "globals": ["random", "make", "utils", "logger", "MersenneTwister", "o"],
+    "envs": ["browser"]
   }
 }

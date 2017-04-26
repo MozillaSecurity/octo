@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
+  let pkg = grunt.file.readJSON('package.json')
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkg,
 
     karma: {
       unit: {
@@ -13,12 +14,18 @@ module.exports = function(grunt) {
         coverageDir: 'tests/coverage/',
         force: true
       }
+    },
+    standard: {
+      options: pkg.standard,
+      lib: {
+        src: ['lib/**/*.js']
+      }
     }
-  });
+  })
 
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-karma-coveralls');
+  grunt.loadNpmTasks('grunt-karma')
+  grunt.loadNpmTasks('grunt-karma-coveralls')
+  grunt.loadNpmTasks('grunt-standard')
 
-  grunt.registerTask('test', ['karma', 'coveralls']);
-
-};
+  grunt.registerTask('test', ['standard', 'karma', 'coveralls'])
+}
