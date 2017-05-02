@@ -9,7 +9,7 @@ This is WIP.
 
 ## Build
 
-    ./build.py -f lib -d .
+    ./build.py -l lib -d deploy
 
 
 ## Testing
