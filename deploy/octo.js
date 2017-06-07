@@ -382,7 +382,7 @@ var logger = (function () { // eslint-disable-line no-unused-vars
       websocket.send(msg)
     }
     if (typeof window === 'undefined') {
-      print(msg)
+      print(msg)  // eslint-disable-line no-undef
     } else if (window.dump) {
       window.dump(msg)
     } else if (window.console && window.console.log) {
@@ -445,6 +445,478 @@ var logger = (function () { // eslint-disable-line no-unused-vars
 
 
 var make = {} // eslint-disable-line no-unused-vars
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.arrays = {
+  filledArray: function (fn, limit) {
+    let array = []
+    let size = limit || random.number(make.number.tinyNumber)
+
+    for (let i = 0; i < size; i++) {
+      array.push(random.pick(fn))
+    }
+
+    return array
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.colors = {
+  any: function () {
+    return random.pick([
+      make.colors.rgb,
+      make.colors.hsl,
+      make.colors.keyword
+    ])
+  },
+
+  rgb: function () {
+    let values
+
+    switch (random.number(4)) {
+      case 0:
+        // Rgb functional notation
+        if (random.bool()) {
+          // Ints
+          values = [random.number(255), random.number(255), random.number(255)]
+        } else {
+          // Percents
+          values = ['%' + random.number(255), '%' + random.number(255), '%' + random.number(255)]
+        }
+        return 'rgba(' + values.join(',') + ')'
+      case 1:
+        // Rgba functional notation
+        values = [random.number(255), random.number(255), random.number(255), random.float()]
+        return 'rgba(' + values.join(',') + ')'
+      case 2:
+        // 4 char hex
+        return '#' + random.hex(4)
+      default:
+        // 8 char hex
+        return '#' + random.hex(8)
+    }
+  },
+
+  hsl: function () {
+    let values, opt
+
+    switch (random.number(4)) {
+      case 0:
+        values = [random.number(255), '%' + random.number(255), '%' + random.number(255)]
+        return 'hsl(' + values.join(',') + ')'
+      case 1:
+        values = [random.number(255), '%' + random.number(255), '%' + random.number(255), '%' + random.number(255)]
+        return 'hsl(' + values.join(',') + ')'
+      case 2:
+        opt = random.pick(['deg', 'rad', 'grad', 'turn'])
+        values = [random.number(255) + opt, '%' + random.number(255), '%' + random.number(255), '%' + random.number(255)]
+        return 'hsl(' + values.join(',') + ')'
+      default:
+        values = [random.number(255), '%' + random.number(255), '%' + random.number(255), random.float()]
+        return 'hsl(' + values.join(',') + ')'
+    }
+  },
+
+  keyword: function () {
+    return random.pick([
+      'lime', 'red', 'blue', 'invert', 'currentColor', 'ActiveBorder', 'ActiveCaption',
+      'AppWorkspace', 'Background', 'ButtonFace', 'ButtonHighlight', 'ButtonShadow',
+      'ButtonText', 'CaptionText', 'GrayText', 'Highlight', 'HighlightText',
+      'InactiveBorder', 'InactiveCaption', 'InactiveCaptionText', 'InfoBackground',
+      'InfoText', 'Menu', 'MenuText', 'Scrollbar', 'ThreeDDarkShadow', 'ThreeDFace',
+      'ThreeDHighlight', 'ThreeDLightShadow', 'ThreeDShadow', 'Window', 'WindowFrame',
+      'WindowText', '-moz-ButtonDefault', '-moz-ButtonHoverFace', '-moz-ButtonHoverText',
+      '-moz-CellHighlight', '-moz-CellHighlightText', '-moz-Combobox', '-moz-ComboboxText',
+      '-moz-Dialog', '-moz-DialogText', '-moz-dragtargetzone', '-moz-EvenTreeRow',
+      '-moz-Field', '-moz-FieldText', '-moz-html-CellHighlight',
+      '-moz-html-CellHighlightText', '-moz-mac-accentdarkestshadow',
+      '-moz-mac-accentdarkshadow', '-moz-mac-accentface',
+      '-moz-mac-accentlightesthighlight', '-moz-mac-accentlightshadow',
+      '-moz-mac-accentregularhighlight', '-moz-mac-accentregularshadow',
+      '-moz-mac-chrome-active', '-moz-mac-chrome-inactive', '-moz-mac-focusring',
+      '-moz-mac-menuselect', '-moz-mac-menushadow', '-moz-mac-menutextselect',
+      '-moz-MenuHover', '-moz-MenuHoverText', '-moz-MenuBarText', '-moz-MenuBarHoverText',
+      '-moz-nativehyperlinktext', '-moz-OddTreeRow', '-moz-win-communicationstext',
+      '-moz-win-mediatext', '-moz-activehyperlinktext', '-moz-default-background-color',
+      '-moz-default-color', '-moz-hyperlinktext', '-moz-visitedhyperlinktext'
+    ])
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.files = {
+  image: function () {
+    return utils.common.quote(random.pick([
+      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+      'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=',
+      'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVQYV2P4DwABAQEAWk1v8QAAAABJRU5ErkJggg==',
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII='
+      // Todo: load from filesystem randomly: 'media/images/*.{bmp|jpg|gif|png|webp}'
+    ]))
+  },
+  video: function () {
+    return utils.common.quote(random.pick([
+      'data:video/webm;base64,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',
+      'data:video/ogg;base64,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qiCkUlIpFYRUSiolo5RSailVEFIpqZQKQiollVIAANiBAwDYgYVQaMhKACAPAIAwRinGGHNOIqQUY845JxFSijHnnJNKMeacc85JKRlzzDnnpJTOOeecc1JK5pxzzjkppXPOOeeclFJK55xzTkopJYTOQSellNI555wTAABU4AAAEGCjyOYEI0GFhqwEAFIBAAyOY1ma5nmiaJqWJGma53meKJqmJkma5nmeJ4qqyfM8TxRF0TRVled5niiKommqKtcVRdM0TVVVXbIsiqZpmqrqujBN01RV13VdmKZpqqrrui5sW1VV1XVlGbatqqrqurIMXNd1ZdmWgSy7ruzasgAA8AQHAKACG1ZHOCkaCyw0ZCUAkAEAQBiDkEIIIWUQQgohhJRSCAkAABhwAAAIMKEMFBqyEgBIBQAAjLHWWmuttdZAZ6211lprrYDMWmuttdZaa6211lprrbXWUmuttdZaa6211lprrbXWWmuttdZaa6211lprrbXWWmuttdZaa6211lprrbXWWmuttdZaay2llFJKKaWUUkoppZRSSimllFJKBQD6VTgA+D/YsDrCSdFYYKEhKwGAcAAAwBilGHMMQimlVAgx5px0VFqLsUKIMeckpNRabMVzzkEoIZXWYiyecw5CKSnFVmNRKYRSUkottliLSqGjklJKrdVYjDGppNZai63GYoxJKbTUWosxFiNsTam12GqrsRhjayottBhjjMUIX2RsLabaag3GCCNbLC3VWmswxhjdW4ultpqLMT742lIsMdZcAAB3gwMARIKNM6wknRWOBhcashIACAkAIBBSijHGGHPOOeekUow55pxzDkIIoVSKMcaccw5CCCGUjDHmnHMQQgghhFJKxpxzEEIIIYSQUuqccxBCCCGEEEopnXMOQgghhBBCKaWDEEIIIYQQSiilpBRCCCGEEEIIqaSUQgghhFJCKCGVlFIIIYQQQiklpJRSCiGEUkIIoYSUUkophRBCCKWUklJKKaUSSgklhBJSKSmlFEoIIZRSSkoppVRKCaGEEkopJaWUUkohhBBKKQUAABw4AAAEGEEnGVUWYaMJFx6AQkNWAgBkAACQopRSKS1FgiKlGKQYS0YVc1BaiqhyDFLNqVLOIOYklogxhJSTVDLmFEIMQuocdUwpBi2VGELGGKTYckuhcw4AAABBAICAkAAAAwQFMwDA4ADhcxB0AgRHGwCAIERmiETDQnB4UAkQEVMBQGKCQi4AVFhcpF1cQJcBLujirgMhBCEIQSwOoIAEHJxwwxNveMINTtApKnUgAAAAAAAMAPAAAJBcABER0cxhZGhscHR4fICEiIyQCAAAAAAAFwB8AAAkJUBERDRzGBkaGxwdHh8gISIjJAEAgAACAAAAACCAAAQEBAAAAAAAAgAAAAQET2dnUwAAQAAAAAAAAAAjaKehAgAAAEhTii0BRjLV6A+997733vvfe+997733vvfG+8fePvH3j7x94+8fePvH3j7x94+8fePvH3j7x94+8fePvH3gAAAAAAAAAAXm5PqUgABPZ2dTAABLAAAAAAAAACNop6EDAAAAIOuvQAsAAAAAAAAAAAAAAE9nZ1MAAEADAAAAAAAAI2inoQQAAAB/G0m4ATg/8A+997733vvfe+997733vvfK+8B94D7wAB94AAAAD8Kl94D7wH3gAD7wAAAAH4VABem0+pSAAE9nZ1MAAEsDAAAAAAAAI2inoQUAAABc3zKaCwAAAAAAAAAAAAAAT2dnUwAEQAYAAAAAAAAjaKehBgAAAOytEQUBOD/wD733vvfe+997733vvfe+98r7wH3gPvAAH3gAAAAPwqX3gPvAfeAAPvAAAAAfhUAF6bT6lIAAT2dnUwAAQL4AAAAAAACWSy/CAgAAAHsqKaIxAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAKDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg5PZ2dTAAQAxAAAAAAAAJZLL8IDAAAABLWpWwIBAQ4O=',
+      'data:video/mp4;base64,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',
+      'media/video/video1.webm'
+      // Todo: load from filesystem randomly: 'media/videos/*.{webm|ogv|mp4}'
+    ]))
+  },
+  audio: function () {
+    return utils.common.quote(random.pick([
+      'media/audio/mono-uncompressed-8bit-8000hz.wav',
+      'media/audio/mono-uncompressed-8bit-44100hz.wav',
+      'media/audio/mono-uncompressed-32bit-8000hz.wav',
+      'media/audio/mono-uncompressed-32bit-44100hz.wav'
+      // Todo: load from filesystem randomly: 'media/videos/*.{wav|ogg|mp3}'
+    ]))
+  },
+  webvtt: function () {
+    return utils.common.quote(random.pick([
+      // 'data:text/vtt,' + encodeURIComponent('WEBVTT\n\n00:00:00.000 --> 00:00:00.001\ntest');,
+      'media/video/sample.vtt'
+      // Todo: load from filesystem randomly: 'media/videos/*.{vtt}'
+    ]))
+  },
+  any: function () {
+    return random.pick([
+      make.files.image,
+      make.files.video,
+      make.files.audio
+    ])
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.font = {
+  globalValue: function () {
+    return random.pick(['inherit', 'initial', 'unset'])
+  },
+  style: function () {
+    return random.pick(['italic', 'normal', 'oblique', 'inherit'])
+  },
+  variant: function () {
+    return random.pick(['normal', 'small-caps', 'inherit'])
+  },
+  weight: function () {
+    return random.pick([
+      /* standard */
+      ['normal', 'bold'],
+      /* Relative to the parent */
+      ['bolder', 'lighter'],
+      /* numeric values */
+      [100, 200, 300, 400, 500, 600, 700, 800, 900]
+    ])
+  },
+  size: function () {
+    return random.pick([
+      /* <absolute-size> values */
+      ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'],
+      /* <relative-size> values */
+      ['larger', 'smaller'],
+      /* <length> values */
+      make.number.unsignedNumber() + make.unit.unit(),
+      /* <percentage> values */
+      make.unit.percent()
+    ])
+  },
+  genericFamily: function () {
+    return random.pick(['serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'])
+  },
+  familyName: function () {
+    return random.pick(['Times New Roman', 'Arial', 'Courier', 'Helvetica'])
+  },
+  family: function () {
+    let s = random.pick(make.font.familyName)
+    if (random.chance(8)) {
+      s += ', ' + random.pick(make.font.genericFamily)
+    }
+    return s
+  },
+  registeredFontFeatures: function () {
+    return random.pick([
+      'aalt', 'abvf', 'abvm', 'abvs', 'afrc', 'akhn', 'blwf', 'blwm', 'blws',
+      'calt', 'case', 'ccmp', 'cfar', 'cjct', 'clig', 'cpct', 'cpsp', 'cswh',
+      'curs', 'cv01-cv99', 'c2pc', 'c2sc', 'dist', 'dlig', 'dnom', 'expt',
+      'falt', 'fin2', 'fin3', 'fina', 'frac', 'fwid', 'half', 'haln', 'halt',
+      'hist', 'hkna', 'hlig', 'hngl', 'hojo', 'hwid', 'init', 'isol', 'ital',
+      'jalt', 'jp78', 'jp83', 'jp90', 'jp04', 'kern', 'lfbd', 'liga', 'ljmo',
+      'lnum', 'locl', 'ltra', 'ltrm', 'mark', 'med2', 'medi', 'mgrk', 'mkmk',
+      'mset', 'nalt', 'nlck', 'nukt', 'numr', 'onum', 'opbd', 'ordn', 'ornm',
+      'palt', 'pcap', 'pkna', 'pnum', 'pref', 'pres', 'pstf', 'psts', 'pwid',
+      'qwid', 'rand', 'rkrf', 'rlig', 'rphf', 'rtbd', 'rtla', 'rtlm', 'ruby',
+      'salt', 'sinf', 'size', 'smcp', 'smpl', 'ss01', 'ss02', 'ss03', 'ss04',
+      'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'ss10', 'ss11', 'ss12', 'ss13',
+      'ss14', 'ss15', 'ss16', 'ss17', 'ss18', 'ss19', 'ss20', 'subs', 'sups',
+      'swsh', 'titl', 'tjmo', 'tnam', 'tnum', 'trad', 'twid', 'unic', 'valt',
+      'vatu', 'vert', 'vhal', 'vjmo', 'vkna', 'vkrn', 'vpal', 'vrt2', 'zero'
+    ])
+  },
+  font: function () {
+    let s = ''
+    if (random.chance(4)) {
+      s += random.pick(make.font.style) + ' '
+    }
+    if (random.chance(4)) {
+      s += random.pick(make.font.variant) + ' '
+    }
+    if (random.chance(4)) {
+      s += random.pick(make.font.weight) + ' '
+    }
+    if (random.chance(4)) {
+      s += make.number.any() + '/'
+    }
+    s += make.font.size()
+    s += ' '
+    s += make.font.family()
+    return '\'' + s + '\''
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.mime = {
+  any: function () {
+    return random.pick([
+      make.mime.standard,
+      make.mime.xml,
+      make.mime.image,
+      make.mime.media,
+      make.mime.form
+    ])
+  },
+
+  standard: function () {
+    return random.pick([
+      'text/html',
+      'text/html; charset=utf-8',
+      'text/plain',
+      'text/css',
+      'text/javascript',
+      'foo/bar',
+      'application/octet-stream',
+      'application/x-shockwave-flash',
+      'application/x-test'
+    ])
+  },
+
+  xml: function () {
+    return random.pick([
+      'application/xml',
+      'text/xml',
+      'application/xhtml+xml',
+      'image/svg+xml',
+      'application/vnd.mozilla.xul+xml',
+      'application/rss+xml',
+      'application/rdf+xml',
+      'application/xslt+xml'
+    ])
+  },
+
+  image: function () {
+    return random.pick([
+      'image/jpeg',
+      'image/gif',
+      'image/png',
+      'image/mng',
+      'image/*'
+    ])
+  },
+
+  media: function () {
+    return random.pick([
+      'audio/mpeg',
+      'audio/ogg',
+      'audio/ogg; codecs=vorbis',
+      'video/ogg',
+      'video/ogg; codecs="theora, vorbis"',
+      'video/mp4',
+      'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+    ])
+  },
+
+  form: function () {
+    return random.pick([
+      'application/x-www-form-urlencoded',
+      'multipart/form-data',
+      'text/plain'
+    ])
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.network = {
+  sdp: function () {
+    // session description protocol template
+    return [
+      'v=0',
+      'o=Mozilla-SIPUA 23597 0 IN IP4 0.0.0.0',
+      's=SIP Call',
+      't=0 0',
+      'a=ice-ufrag:f5fda439',
+      'a=ice-pwd:d0df8e2904bdbd29587966e797655970',
+      'a=fingerprint:sha-256 DF:69:78:20:8D:2E:08:CE:49:82:A3:11:79:1D:BF:B5:49:49:2D:32:82:2F:0D:88:84:A7:C6:63:23:63:A9:0F',
+      'm=audio 52757 RTP/SAVPF 109 0 8 101',
+      'c=IN IP4 192.168.129.33',
+      'a=rtpmap:109 opus/48000/2',
+      'a=ptime:20',
+      'a=rtpmap:0 PCMU/8000',
+      'a=rtpmap:8 PCMA/8000',
+      'a=rtpmap:101 telephone-event/8000',
+      'a=fmtp:101 0-15',
+      'a=sendrecv',
+      'a=candidate:0 1 UDP 2113601791 192.168.129.33 52757 typ host',
+      'a=candidate:0 2 UDP 2113601790 192.168.129.33 59738 typ host',
+      'm=video 63901 RTP/SAVPF 120',
+      'c=IN IP4 192.168.129.33',
+      'a=rtpmap:120 VP8/90000',
+      'a=sendrecv',
+      'a=candidate:0 1 UDP 2113601791 192.168.129.33 63901 typ host',
+      'a=candidate:0 2 UDP 2113601790 192.168.129.33 54165 typ host',
+      'm=application 65080 SCTP/DTLS 5000',
+      'c=IN IP4 192.168.129.33',
+      'a=fmtp:5000 protocol=webrtc-datachannel;streams=16',
+      'a=sendrecv',
+      'a=candidate:0 1 UDP 2113601791 192.168.129.33 65080 typ host',
+      'a=candidate:0 2 UDP 2113601790 192.168.129.33 62658 typ host'
+    ].join('\n')
+  },
+  PeerConnectionProtocols: function () {
+    return ['turn', 'turns', 'stun', 'stuns']
+  },
+  randomIPv4: function () {
+    return random.pick([random.number(255), make.number.any]) + '.' +
+      random.pick([random.number(255), make.number.any]) + '.' +
+      random.pick([random.number(255), make.number.any]) + '.' +
+      random.pick([random.number(255), make.number.any])
+  },
+  randomIPv6: function () {
+    let parts = []
+
+    for (let i = 0; i < 8; i++) {
+      parts.push(random.hex(4))
+    }
+
+    return parts.join(':')
+  },
+  goodHostnames: function () {
+    return [
+      '0.0.0.0',
+      '127.0.0.1:8080'
+    ]
+  },
+  badHostnames: function () {
+    return [
+      'google.org:8080',
+      '::1',
+      '[::192.9.5.5]:42',
+      '2001:db8:85a3::8a2e:370:3478',
+      '2001:db8:85a3:0:0:8a2e:370:3478',
+      '::ffff:192.0.2.1',
+      '0000:0000:0000:0000:0000:0000:0000:0001',
+      '::192.0.2.128',
+      '::ffff:192.0.2.128',
+      '2001:db8::1:2',
+      '2001:db8::1:1:1:1:1'
+    ]
+  },
+  randomBitmask: function (list) {
+    if (list.length <= 1) {
+      return list.join('')
+    }
+    let max = random.range(2, list.length)
+    let mask = random.pick(list)
+    for (let i = 1; i < max; i++) {
+      mask += '|' + random.pick(list)
+    }
+    return mask
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.number = {
+  bool: function () {
+    return random.bool()
+  },
+  float: function () {
+    let n
+    if (random.chance(32)) {
+      switch (random.number(4)) {
+        case 0:
+          n = random.range(Number.MAX_VALUE, Number.MIN_VALUE)
+          break
+        case 1:
+          n = Math.pow(10, 1) / Math.pow(10, random.number(307))
+          break
+        case 2:
+          n = Math.pow(2, random.float() * random.float() * 64)
+          break
+        case 3:
+          n = Math.pow(10, random.range(1, 9)) / Math.pow(10, random.range(1, 9))
+          break
+      }
+      return n
+    }
+    switch (random.number(6)) {
+      default:
+        n = random.float()
+    }
+    return n
+  },
+  rangeNumber: function () {
+    return random.pick([1, 2, 3, 4, 6, 8, 16, 32, 64, make.number.tinyNumber])
+  },
+  tinyNumber: function () {
+    return Math.pow(2, random.number(12))
+  },
+  unsignedNumber: function () {
+    if (random.chance(2)) {
+      return Math.abs(make.number.any())
+    }
+    return Math.pow(2, random.number(65)) + random.number(3) - 1
+  },
+  evenNumber: function (number) {
+    return number % 2 === 1 ? ++number : number
+  },
+  anyNumber: function () {
+    let value = random.choose([
+      [10, make.number.float],
+      [10, [make.number.rangeNumber, make.number.tinyNumber]],
+      [1, make.number.unsignedNumber]
+    ])
+    return random.chance(10) ? -value : value
+  }
+}
 
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
@@ -599,319 +1071,6 @@ make.shaders = {
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-make.colors = {
-  any: function () {
-    return random.pick([
-      make.colors.rgb,
-      make.colors.hsl,
-      make.colors.keyword
-    ])
-  },
-
-  rgb: function () {
-    let values
-
-    switch (random.number(4)) {
-      case 0:
-        // Rgb functional notation
-        if (random.bool()) {
-          // Ints
-          values = [random.number(255), random.number(255), random.number(255)]
-        } else {
-          // Percents
-          values = ['%' + random.number(255), '%' + random.number(255), '%' + random.number(255)]
-        }
-        return 'rgba(' + values.join(',') + ')'
-      case 1:
-        // Rgba functional notation
-        values = [random.number(255), random.number(255), random.number(255), random.float()]
-        return 'rgba(' + values.join(',') + ')'
-      case 2:
-        // 4 char hex
-        return '#' + random.hex(4)
-      default:
-        // 8 char hex
-        return '#' + random.hex(8)
-    }
-  },
-
-  hsl: function () {
-    let values, opt
-
-    switch (random.number(4)) {
-      case 0:
-        values = [random.number(255), '%' + random.number(255), '%' + random.number(255)]
-        return 'hsl(' + values.join(',') + ')'
-      case 1:
-        values = [random.number(255), '%' + random.number(255), '%' + random.number(255), '%' + random.number(255)]
-        return 'hsl(' + values.join(',') + ')'
-      case 2:
-        opt = random.pick(['deg', 'rad', 'grad', 'turn'])
-        values = [random.number(255) + opt, '%' + random.number(255), '%' + random.number(255), '%' + random.number(255)]
-        return 'hsl(' + values.join(',') + ')'
-      default:
-        values = [random.number(255), '%' + random.number(255), '%' + random.number(255), random.float()]
-        return 'hsl(' + values.join(',') + ')'
-    }
-  },
-
-  keyword: function () {
-    return random.pick([
-      'lime', 'red', 'blue', 'invert', 'currentColor', 'ActiveBorder', 'ActiveCaption',
-      'AppWorkspace', 'Background', 'ButtonFace', 'ButtonHighlight', 'ButtonShadow',
-      'ButtonText', 'CaptionText', 'GrayText', 'Highlight', 'HighlightText',
-      'InactiveBorder', 'InactiveCaption', 'InactiveCaptionText', 'InfoBackground',
-      'InfoText', 'Menu', 'MenuText', 'Scrollbar', 'ThreeDDarkShadow', 'ThreeDFace',
-      'ThreeDHighlight', 'ThreeDLightShadow', 'ThreeDShadow', 'Window', 'WindowFrame',
-      'WindowText', '-moz-ButtonDefault', '-moz-ButtonHoverFace', '-moz-ButtonHoverText',
-      '-moz-CellHighlight', '-moz-CellHighlightText', '-moz-Combobox', '-moz-ComboboxText',
-      '-moz-Dialog', '-moz-DialogText', '-moz-dragtargetzone', '-moz-EvenTreeRow',
-      '-moz-Field', '-moz-FieldText', '-moz-html-CellHighlight',
-      '-moz-html-CellHighlightText', '-moz-mac-accentdarkestshadow',
-      '-moz-mac-accentdarkshadow', '-moz-mac-accentface',
-      '-moz-mac-accentlightesthighlight', '-moz-mac-accentlightshadow',
-      '-moz-mac-accentregularhighlight', '-moz-mac-accentregularshadow',
-      '-moz-mac-chrome-active', '-moz-mac-chrome-inactive', '-moz-mac-focusring',
-      '-moz-mac-menuselect', '-moz-mac-menushadow', '-moz-mac-menutextselect',
-      '-moz-MenuHover', '-moz-MenuHoverText', '-moz-MenuBarText', '-moz-MenuBarHoverText',
-      '-moz-nativehyperlinktext', '-moz-OddTreeRow', '-moz-win-communicationstext',
-      '-moz-win-mediatext', '-moz-activehyperlinktext', '-moz-default-background-color',
-      '-moz-default-color', '-moz-hyperlinktext', '-moz-visitedhyperlinktext'
-    ])
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.mime = {
-  any: function () {
-    return random.pick([
-      make.mime.standard,
-      make.mime.xml,
-      make.mime.image,
-      make.mime.media,
-      make.mime.form
-    ])
-  },
-
-  standard: function () {
-    return random.pick([
-      'text/html',
-      'text/html; charset=utf-8',
-      'text/plain',
-      'text/css',
-      'text/javascript',
-      'foo/bar',
-      'application/octet-stream',
-      'application/x-shockwave-flash',
-      'application/x-test'
-    ])
-  },
-
-  xml: function () {
-    return random.pick([
-      'application/xml',
-      'text/xml',
-      'application/xhtml+xml',
-      'image/svg+xml',
-      'application/vnd.mozilla.xul+xml',
-      'application/rss+xml',
-      'application/rdf+xml',
-      'application/xslt+xml'
-    ])
-  },
-
-  image: function () {
-    return random.pick([
-      'image/jpeg',
-      'image/gif',
-      'image/png',
-      'image/mng',
-      'image/*'
-    ])
-  },
-
-  media: function () {
-    return random.pick([
-      'audio/mpeg',
-      'audio/ogg',
-      'audio/ogg; codecs=vorbis',
-      'video/ogg',
-      'video/ogg; codecs="theora, vorbis"',
-      'video/mp4',
-      'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-    ])
-  },
-
-  form: function () {
-    return random.pick([
-      'application/x-www-form-urlencoded',
-      'multipart/form-data',
-      'text/plain'
-    ])
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.strings = {
-  toString: function (object) {
-    return object ? object.toSource() : '' + object
-  },
-  string: function (maxlen) {
-    let s = ''
-
-    if (maxlen === null || maxlen === undefined) {
-      maxlen = make.number.rangeNumber()
-    }
-
-    for (let i = 0; i < maxlen; i++) {
-      // Todo: s += String.fromCodePoint(Random.pick(make.fonts.layoutCharCodes));
-      s += 'A'
-    }
-
-    return s
-  },
-  quotedString: function (maxlen) {
-    return utils.common.quote(make.strings.string(maxlen))
-  },
-  stringFromBlocks: function (set, maxlen) {
-    let s = ''
-
-    for (let i = 0; i < random.number(maxlen || 255); i++) {
-      s += random.pick(set)
-    }
-
-    return s
-  },
-  digitsHex: function (n) {
-    let s = ''
-    while (n-- > 0) {
-      s += (random.number(16)).toString(16)
-    }
-    return s
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.arrays = {
-  filledArray: function (fn, limit) {
-    let array = []
-    let size = limit || random.number(make.number.tinyNumber)
-
-    for (let i = 0; i < size; i++) {
-      array.push(fn())
-    }
-
-    return array
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.font = {
-  globalValue: function () {
-    return random.pick(['inherit', 'initial', 'unset'])
-  },
-  style: function () {
-    return random.pick(['italic', 'normal', 'oblique', 'inherit'])
-  },
-  variant: function () {
-    return random.pick(['normal', 'small-caps', 'inherit'])
-  },
-  weight: function () {
-    return random.pick([
-      /* standard */
-      ['normal', 'bold'],
-      /* Relative to the parent */
-      ['bolder', 'lighter'],
-      /* numeric values */
-      [100, 200, 300, 400, 500, 600, 700, 800, 900]
-    ])
-  },
-  size: function () {
-    return random.pick([
-      /* <absolute-size> values */
-      ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'],
-      /* <relative-size> values */
-      ['larger', 'smaller'],
-      /* <length> values */
-      make.number.unsignedNumber() + make.unit.unit(),
-      /* <percentage> values */
-      make.unit.percent()
-    ])
-  },
-  genericFamily: function () {
-    return random.pick(['serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'])
-  },
-  familyName: function () {
-    return random.pick(['Times New Roman', 'Arial', 'Courier', 'Helvetica'])
-  },
-  family: function () {
-    let s = random.pick(make.font.familyName)
-    if (random.chance(8)) {
-      s += ', ' + random.pick(make.font.genericFamily)
-    }
-    return s
-  },
-  font: function () {
-    let s = ''
-    if (random.chance(4)) {
-      s += random.pick(make.font.style) + ' '
-    }
-    if (random.chance(4)) {
-      s += random.pick(make.font.variant) + ' '
-    }
-    if (random.chance(4)) {
-      s += random.pick(make.font.weight) + ' '
-    }
-    if (random.chance(4)) {
-      s += make.number.any() + '/'
-    }
-    s += make.font.size()
-    s += ' '
-    s += make.font.family()
-    return '\'' + s + '\''
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.unit = {
-  unit: function () {
-    return random.pick([
-      'px', 'em', 'ex', 'ch', 'rem', 'mm', 'cm', 'in', 'pt', 'pc', '%'
-    ])
-  },
-  length: function () {
-    return make.number.any() + make.unit.unit()
-  },
-  percent: function () {
-    return make.number.any() + '%'
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 make.text = {
   lineEnd: function () {
     return random.pick([
@@ -1008,7 +1167,18 @@ make.text = {
       0x2044  // fraction slash character
     ])
   },
-
+  bidiCharCodes: function () {
+    return random.pick([
+      0x0660, // START_HINDI_DIGITS
+      0x0669, // END_HINDI_DIGITS
+      0x066A, // START_ARABIC_SEPARATOR
+      0x066B, // END_ARABIC_SEPARATOR
+      0x0030, // START_ARABIC_DIGITS
+      0x0039, // END_ARABIC_DIGITS
+      0x06f0, // START_FARSI_DIGITS
+      0x06f9 // END_FARSI_DIGITS
+    ])
+  },
   // http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt
   unicodeCombiningCharacters: function () {
     return random.item([
@@ -1061,25 +1231,6 @@ make.text = {
       [0xE0000, 0xE0FFF]
     ])
   },
-  registeredFontFeatures: function () {
-    return random.pick([
-      'aalt', 'abvf', 'abvm', 'abvs', 'afrc', 'akhn', 'blwf', 'blwm', 'blws',
-      'calt', 'case', 'ccmp', 'cfar', 'cjct', 'clig', 'cpct', 'cpsp', 'cswh',
-      'curs', 'cv01-cv99', 'c2pc', 'c2sc', 'dist', 'dlig', 'dnom', 'expt',
-      'falt', 'fin2', 'fin3', 'fina', 'frac', 'fwid', 'half', 'haln', 'halt',
-      'hist', 'hkna', 'hlig', 'hngl', 'hojo', 'hwid', 'init', 'isol', 'ital',
-      'jalt', 'jp78', 'jp83', 'jp90', 'jp04', 'kern', 'lfbd', 'liga', 'ljmo',
-      'lnum', 'locl', 'ltra', 'ltrm', 'mark', 'med2', 'medi', 'mgrk', 'mkmk',
-      'mset', 'nalt', 'nlck', 'nukt', 'numr', 'onum', 'opbd', 'ordn', 'ornm',
-      'palt', 'pcap', 'pkna', 'pnum', 'pref', 'pres', 'pstf', 'psts', 'pwid',
-      'qwid', 'rand', 'rkrf', 'rlig', 'rphf', 'rtbd', 'rtla', 'rtlm', 'ruby',
-      'salt', 'sinf', 'size', 'smcp', 'smpl', 'ss01', 'ss02', 'ss03', 'ss04',
-      'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'ss10', 'ss11', 'ss12', 'ss13',
-      'ss14', 'ss15', 'ss16', 'ss17', 'ss18', 'ss19', 'ss20', 'subs', 'sups',
-      'swsh', 'titl', 'tjmo', 'tnam', 'tnum', 'trad', 'twid', 'unic', 'valt',
-      'vatu', 'vert', 'vhal', 'vjmo', 'vkna', 'vkrn', 'vpal', 'vrt2', 'zero'
-    ])
-  },
   assignmentOperator: function () {
     return random.pick([
       '=', '-=', '+=', '*=', '/='
@@ -1096,201 +1247,39 @@ make.text = {
       'USD', 'USS', 'USN', 'EUR', 'CHF', 'GBP', 'XAG', 'XBA', 'XBB', 'XBC',
       'XBD', 'XSU', 'XTS', 'XXX'
     ])
-  }
-}
+  },
+  fromBlocks: function (set, maxlen) {
+    let s = ''
 
+    for (let i = 0; i < random.number(maxlen || 255); i++) {
+      s += random.pick(set)
+    }
 
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.files = {
-  image: function () {
-    return utils.quote(random.pick([
-      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
-      'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=',
-      'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVQYV2P4DwABAQEAWk1v8QAAAABJRU5ErkJggg==',
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=',
-      'media/images/image1.jpg',
-      'media/images/image3.jpg'
-    ]))
+    return s
   },
-  video: function () {
-    return utils.quote(random.pick([
-      'media/video/video1.webm',
-      'media/video/video2.webm'
-    ]))
+  quotedString: function () {
+    return utils.common.quote(make.text.any())
   },
-  audio: function () {
-    return utils.quote(random.pick([
-      'media/audio/mono-uncompressed-8bit-8000hz.wav',
-      'media/audio/mono-uncompressed-8bit-44100hz.wav',
-      'media/audio/mono-uncompressed-32bit-8000hz.wav',
-      'media/audio/mono-uncompressed-32bit-44100hz.wav'
-    ]))
-  },
-  webvtt: function () {
-    return utils.quote(random.pick([
-      // 'data:text/vtt,' + encodeURIComponent('WEBVTT\n\n00:00:00.000 --> 00:00:00.001\ntest');,
-      'media/video/sample.vtt'
-    ]))
-  },
-  file: function () {
+  chars: function () {
     return random.pick([
-      make.files.image,
-      make.files.video,
-      make.files.audio
+      make.text.controlChar,
+      make.text.token,
+      make.text.assignmentOperator,
+      make.text.arithmeticOperator,
+      String.fromCharCode(make.text.layoutCharCodes),
+      String.fromCharCode(make.text.bidiCharCodes)
     ])
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.network = {
-  sdp: function () {
-    // session description protocol template
-    return [
-      'v=0',
-      'o=Mozilla-SIPUA 23597 0 IN IP4 0.0.0.0',
-      's=SIP Call',
-      't=0 0',
-      'a=ice-ufrag:f5fda439',
-      'a=ice-pwd:d0df8e2904bdbd29587966e797655970',
-      'a=fingerprint:sha-256 DF:69:78:20:8D:2E:08:CE:49:82:A3:11:79:1D:BF:B5:49:49:2D:32:82:2F:0D:88:84:A7:C6:63:23:63:A9:0F',
-      'm=audio 52757 RTP/SAVPF 109 0 8 101',
-      'c=IN IP4 192.168.129.33',
-      'a=rtpmap:109 opus/48000/2',
-      'a=ptime:20',
-      'a=rtpmap:0 PCMU/8000',
-      'a=rtpmap:8 PCMA/8000',
-      'a=rtpmap:101 telephone-event/8000',
-      'a=fmtp:101 0-15',
-      'a=sendrecv',
-      'a=candidate:0 1 UDP 2113601791 192.168.129.33 52757 typ host',
-      'a=candidate:0 2 UDP 2113601790 192.168.129.33 59738 typ host',
-      'm=video 63901 RTP/SAVPF 120',
-      'c=IN IP4 192.168.129.33',
-      'a=rtpmap:120 VP8/90000',
-      'a=sendrecv',
-      'a=candidate:0 1 UDP 2113601791 192.168.129.33 63901 typ host',
-      'a=candidate:0 2 UDP 2113601790 192.168.129.33 54165 typ host',
-      'm=application 65080 SCTP/DTLS 5000',
-      'c=IN IP4 192.168.129.33',
-      'a=fmtp:5000 protocol=webrtc-datachannel;streams=16',
-      'a=sendrecv',
-      'a=candidate:0 1 UDP 2113601791 192.168.129.33 65080 typ host',
-      'a=candidate:0 2 UDP 2113601790 192.168.129.33 62658 typ host'
-    ].join('\n')
   },
-  PeerConnectionProtocols: function () {
-    return ['turn', 'turns', 'stun', 'stuns']
-  },
-  randomIPv4: function () {
-    return random.pick([random.number(255), make.number.any]) + '.' +
-      random.pick([random.number(255), make.number.any]) + '.' +
-      random.pick([random.number(255), make.number.any]) + '.' +
-      random.pick([random.number(255), make.number.any])
-  },
-  randomIPv6: function () {
-    return '[' + make.strings.stringFromBlocks([':', function () {
-      return make.strings.digitsHex(random.range(1, 4))
-    }]) + ']'
-  },
-  goodHostnames: function () {
-    return [
-      '0.0.0.0',
-      '127.0.0.1:8080'
-    ]
-  },
-  badHostnames: function () {
-    return [
-      'google.org:8080',
-      '::1',
-      '[::192.9.5.5]:42',
-      '2001:db8:85a3::8a2e:370:3478',
-      '2001:db8:85a3:0:0:8a2e:370:3478',
-      '::ffff:192.0.2.1',
-      '0000:0000:0000:0000:0000:0000:0000:0001',
-      '::192.0.2.128',
-      '::ffff:192.0.2.128',
-      '2001:db8::1:2',
-      '2001:db8::1:1:1:1:1'
-    ]
-  },
-  randomBitmask: function (list) {
-    if (list.length <= 1) {
-      return list.join('')
+  any: function () {
+    // Generate a string compromised of random individual characters
+    // This might be too slow to used for all 'texts' uses
+    let s = ''
+    // TODO: Len calculation take from DOMFuzz - maybe we should revise this?
+    let len = random.number(1000) * random.number(10) + random.number(10)
+    for (let i = 0; i < len; i++) {
+      s += make.text.chars()
     }
-    let max = random.range(2, list.length)
-    let mask = random.pick(list)
-    for (let i = 1; i < max; i++) {
-      mask += '|' + random.pick(list)
-    }
-    return mask
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-make.number = {
-  bool: function () {
-    return random.bool()
-  },
-  float: function () {
-    let n
-    if (random.chance(32)) {
-      switch (random.number(4)) {
-        case 0:
-          n = random.range(Number.MAX_VALUE, Number.MIN_VALUE)
-          break
-        case 1:
-          n = Math.pow(10, 1) / Math.pow(10, random.number(307))
-          break
-        case 2:
-          n = Math.pow(2, random.float() * random.float() * 64)
-          break
-        case 3:
-          n = Math.pow(10, random.range(1, 9)) / Math.pow(10, random.range(1, 9))
-          break
-      }
-      return n
-    }
-    switch (random.number(6)) {
-      default:
-        n = random.float()
-    }
-    return n
-  },
-  rangeNumber: function () {
-    return random.pick([1, 2, 3, 4, 6, 8, 16, 32, 64, make.number.tinyNumber])
-  },
-  tinyNumber: function () {
-    return Math.pow(2, random.number(12))
-  },
-  unsignedNumber: function () {
-    if (random.chance(2)) {
-      return Math.abs(make.number.any())
-    }
-    return Math.pow(2, random.number(65)) + random.number(3) - 1
-  },
-  evenNumber: function (number) {
-    return number % 2 === 1 ? ++number : number
-  },
-  anynumber: function () {
-    let value = random.choose([
-      [10, make.number.float],
-      [10, [make.number.rangeNumber, make.number.tinyNumber]],
-      [1, make.number.unsignedNumber]
-    ])
-    return random.chance(10) ? -value : value
+    return s
   }
 }
 
@@ -1313,6 +1302,304 @@ make.types = {
     ])
   }
 }
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+make.unit = {
+  unit: function () {
+    return random.pick([
+      'px', 'em', 'ex', 'ch', 'rem', 'mm', 'cm', 'in', 'pt', 'pc', '%'
+    ])
+  },
+  length: function () {
+    return make.number.any() + make.unit.unit()
+  },
+  percent: function () {
+    return make.number.any() + '%'
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+utils.block = {
+  block: function (list, optional) {
+    if (optional === true) {
+      if (random.chance(6)) {
+        return ''
+      }
+    }
+
+    function deeper (item) {
+      if (item === null || item === undefined) {
+        return ''
+      }
+      if (typeof (item) === 'function') {
+        return item()
+      }
+      if (typeof (item) === 'string') {
+        return item
+      }
+      if (item instanceof (Array)) {
+        let s = ''
+        for (let i = 0; i < item.length; i++) {
+          s += deeper(item[i])
+        }
+        return s
+      }
+      return item
+    }
+
+    let asString = ''
+    for (let i = 0; i < list.length; i++) {
+      asString += deeper(list[i])
+    }
+
+    return asString
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+utils.common = {
+  objToString: function (obj) {
+    try {
+      return '' + obj
+    } catch (e) {
+      return '[' + e + ']'
+    }
+  },
+  getAllProperties: function (obj) {
+    let list = []
+    while (obj) {
+      list = list.concat(Object.getOwnPropertyNames(obj))
+      obj = Object.getPrototypeOf(obj)
+    }
+    return list
+  },
+  getKeysFromHash: function (obj) {
+    let list = []
+    for (let p in obj) {
+      list.push(p)
+    }
+    return list
+  },
+  quote: function (obj) {
+    return JSON.stringify(obj)
+  },
+  shuffle: function (list) {
+    let newArray = list.slice()
+    let len = newArray.length
+    let i = len
+    while (i--) {
+      let p = parseInt(Math.random() * len)
+      let t = newArray[i]
+      newArray[i] = newArray[p]
+      newArray[p] = t
+    }
+    return newArray
+  },
+  uniqueList: function (list) {
+    let tmp = {}
+    let r = []
+    for (let i = 0; i < list.length; i++) {
+      tmp[list[i]] = list[i]
+    }
+    for (let i in tmp) {
+      r.push(tmp[i])
+    }
+    return r
+  },
+  mergeHash: function (obj1, obj2) {
+    for (let p in obj2) {
+      try {
+        if (obj2[p].constructor === Object) {
+          obj1[p] = utils.common.mergeHash(obj1[p], obj2[p])
+        } else {
+          obj1[p] = obj2[p]
+        }
+      } catch (e) {
+        obj1[p] = obj2[p]
+      }
+    }
+    return obj1
+  }
+}
+
+
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+var o = null // eslint-disable-line no-unused-vars
+
+function Objects () {
+  this.counter = 0
+  this.container = {}
+}
+
+Objects.prototype.add = function (category, member) {
+  if (!member) {
+    member = 'o' + this.counter
+  }
+  if (!this.has(category)) {
+    this.container[category] = []
+  }
+  this.container[category].push({type: category, name: member})
+  ++this.counter
+  return this.container[category].slice(-1)[0].name
+}
+
+Objects.prototype.get = function (category, last) {
+  if (!(category in this.container)) {
+    // return {type:null, name:null};
+    logger.traceback()
+    throw new Error(category + ' is not available.')
+  }
+  if (last) {
+    return this.container[category].slice(-1)[0]
+  }
+  return random.pick(this.container[category])
+}
+
+Objects.prototype.pick = function (category, last) {
+  try {
+    return this.get(category, last).name
+  } catch (e) {
+    logger.traceback()
+    throw logger.JSError('Error: pick(' + category + ') ' + category + ' is undefined.')
+  }
+}
+
+Objects.prototype.pop = function (objectName) {
+  let self = this
+  utils.common.getKeysFromHash(this.container).forEach(function (category) {
+    self.container[category].forEach(function (obj) {
+      if (obj.name === objectName) {
+        self.container[category].splice(self.container[category].indexOf(obj), 1)
+      }
+    })
+  })
+}
+
+Objects.prototype.contains = function (categoryNames) {
+  let categories = []
+  let self = this
+  categoryNames.forEach(function (name) {
+    if (self.has(name)) {
+      categories.push(name)
+    }
+  })
+  return (categories.length === 0) ? null : categories
+}
+
+Objects.prototype.show = function (category) {
+  return (category in this.container) ? this.container[category] : this.container
+}
+
+Objects.prototype.count = function (category) {
+  return (category in this.container) ? this.container[category].length : 0
+}
+
+Objects.prototype.has = function (category) {
+  if (category in this.container) {
+    this.check(category)
+    return this.container[category].length > 0
+  }
+  return false
+}
+
+Objects.prototype.valid = function () {
+  let items = []
+  let self = this
+  utils.common.getKeysFromHash(self.container).forEach(function (category) {
+    self.check(category)
+  })
+  utils.common.getKeysFromHash(self.container).forEach(function (category) {
+    for (let i = 0; i < self.container[category].length; i++) {
+      items.push(self.container[category][i].name)
+    }
+  })
+  return items
+}
+
+Objects.prototype.check = function (category) {
+  let self = this
+  self.container[category].forEach(function (object) {
+    try {
+      let x = /* frame.contentWindow. */ eval(object.name) // eslint-disable-line no-eval
+      if (x === undefined || x === null) {
+        self.pop(object.name)
+      }
+    } catch (e) {
+      self.pop(object.name)
+    }
+  })
+}
+
+
+/* eslint no-extend-native: ["error", { "exceptions": ["String", "Array"] }] */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+Object.defineProperty(String.prototype, 'fromCodePoint', function () {
+  let chars = []
+  let point, offset, units, i
+  for (i = 0; i < arguments.length; ++i) {
+    point = arguments[i]
+    offset = point - 0x10000
+    units = point > 0xFFFF
+      ? [
+        0xD800 + (offset >> 10),
+        0xDC00 + (offset & 0x3FF)]
+      : [point]
+    chars.push(String.fromCharCode.apply(null, units))
+  }
+  return chars.join('')
+})
+
+Object.defineProperty(String.prototype, 'endsWith', function (str) {
+  return this.match(str + '$') === str
+})
+
+Object.defineProperty(String.prototype, 'startsWith', function (str) {
+  return this.match('^' + str) === str
+})
+
+Object.defineProperty(String.prototype, 'trim', function () {
+  return this.replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
+})
+
+Object.defineProperty(String.prototype, 'insert', function (data, idx) {
+  return this.slice(0, idx) + data + this.slice(idx, this.length)
+})
+
+Object.defineProperty(Array.prototype, 'has', function (v) {
+  return this.indexOf(v) !== -1
+})
+
+Object.defineProperty(Array.prototype, 'forEach', function (array, fn) {
+  for (let i = 0; i < array.length; i++) {
+    fn(array[i])
+  }
+})
+
+Object.defineProperty(Array.prototype, 'map', function (fn, array) {
+  let result = []
+  Array.forEach(array, function (element) {
+    result.push(fn(element))
+  })
+  return result
+})
 
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
@@ -1422,283 +1709,4 @@ utils.script = {
   getRandomElement: function () {
     return 'document.getElementsByTagName(\'*\')[' + random.number(document.getElementsByTagName('*').length) + ']'
   }
-}
-
-
-/* eslint no-extend-native: ["error", { "exceptions": ["String", "Array"] }] */
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-Object.defineProperty(String.prototype, 'fromCodePoint', function () {
-  let chars = []
-  let point, offset, units, i
-  for (i = 0; i < arguments.length; ++i) {
-    point = arguments[i]
-    offset = point - 0x10000
-    units = point > 0xFFFF
-      ? [
-        0xD800 + (offset >> 10),
-        0xDC00 + (offset & 0x3FF)]
-      : [point]
-    chars.push(String.fromCharCode.apply(null, units))
-  }
-  return chars.join('')
-})
-
-Object.defineProperty(String.prototype, 'endsWith', function (str) {
-  return this.match(str + '$') === str
-})
-
-Object.defineProperty(String.prototype, 'startsWith', function (str) {
-  return this.match('^' + str) === str
-})
-
-Object.defineProperty(String.prototype, 'trim', function () {
-  return this.replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '')
-})
-
-Object.defineProperty(String.prototype, 'insert', function (data, idx) {
-  return this.slice(0, idx) + data + this.slice(idx, this.length)
-})
-
-Object.defineProperty(Array.prototype, 'has', function (v) {
-  return this.indexOf(v) !== -1
-})
-
-Object.defineProperty(Array.prototype, 'forEach', function (array, fn) {
-  for (let i = 0; i < array.length; i++) {
-    fn(array[i])
-  }
-})
-
-Object.defineProperty(Array.prototype, 'map', function (fn, array) {
-  let result = []
-  Array.forEach(array, function (element) {
-    result.push(fn(element))
-  })
-  return result
-})
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-utils.common = {
-  objToString: function (obj) {
-    try {
-      return '' + obj
-    } catch (e) {
-      return '[' + e + ']'
-    }
-  },
-  getAllProperties: function (obj) {
-    let list = []
-    while (obj) {
-      list = list.concat(Object.getOwnPropertyNames(obj))
-      obj = Object.getPrototypeOf(obj)
-    }
-    return list
-  },
-  getKeysFromHash: function (obj) {
-    let list = []
-    for (let p in obj) {
-      list.push(p)
-    }
-    return list
-  },
-  quote: function (obj) {
-    return JSON.stringify(obj)
-  },
-  shuffle: function (list) {
-    let newArray = list.slice()
-    let len = newArray.length
-    let i = len
-    while (i--) {
-      let p = parseInt(Math.random() * len)
-      let t = newArray[i]
-      newArray[i] = newArray[p]
-      newArray[p] = t
-    }
-    return newArray
-  },
-  uniqueList: function (list) {
-    let tmp = {}
-    let r = []
-    for (let i = 0; i < list.length; i++) {
-      tmp[list[i]] = list[i]
-    }
-    for (let i in tmp) {
-      r.push(tmp[i])
-    }
-    return r
-  },
-  mergeHash: function (obj1, obj2) {
-    for (let p in obj2) {
-      try {
-        if (obj2[p].constructor === Object) {
-          obj1[p] = utils.common.mergeHash(obj1[p], obj2[p])
-        } else {
-          obj1[p] = obj2[p]
-        }
-      } catch (e) {
-        obj1[p] = obj2[p]
-      }
-    }
-    return obj1
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-utils.block = {
-  block: function (list, optional) {
-    if (optional === true) {
-      if (random.chance(6)) {
-        return ''
-      }
-    }
-
-    function deeper (item) {
-      if (item === null || item === undefined) {
-        return ''
-      }
-      if (typeof (item) === 'function') {
-        return item()
-      }
-      if (typeof (item) === 'string') {
-        return item
-      }
-      if (item instanceof (Array)) {
-        let s = ''
-        for (let i = 0; i < item.length; i++) {
-          s += deeper(item[i])
-        }
-        return s
-      }
-      return item
-    }
-
-    let asString = ''
-    for (let i = 0; i < list.length; i++) {
-      asString += deeper(list[i])
-    }
-
-    return asString
-  }
-}
-
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-var o = null // eslint-disable-line no-unused-vars
-
-function Objects () {
-  this.counter = 0
-  this.container = {}
-}
-
-Objects.prototype.add = function (category, member) {
-  if (!member) {
-    member = 'o' + this.counter
-  }
-  if (!this.has(category)) {
-    this.container[category] = []
-  }
-  this.container[category].push({type: category, name: member})
-  ++this.counter
-  return this.container[category].slice(-1)[0].name
-}
-
-Objects.prototype.get = function (category, last) {
-  if (!(category in this.container)) {
-    // return {type:null, name:null};
-    logger.traceback()
-    throw new Error(category + ' is not available.')
-  }
-  if (last) {
-    return this.container[category].slice(-1)[0]
-  }
-  return random.index(this.container[category])
-}
-
-Objects.prototype.pick = function (category, last) {
-  try {
-    return this.get(category, last).name
-  } catch (e) {
-    logger.traceback()
-    throw logger.JSError('Error: pick(' + category + ') ' + category + ' is undefined.')
-  }
-}
-
-Objects.prototype.pop = function (objectName) {
-  let self = this
-  utils.getKeysFromHash(this.container).forEach(function (category) {
-    self.container[category].forEach(function (obj) {
-      if (obj.name === objectName) {
-        self.container[category].splice(self.container[category].indexOf(obj), 1)
-      }
-    })
-  })
-}
-
-Objects.prototype.contains = function (categoryNames) {
-  let categories = []
-  let self = this
-  categoryNames.forEach(function (name) {
-    if (self.has(name)) {
-      categories.push(name)
-    }
-  })
-  return (categories.length === 0) ? null : categories
-}
-
-Objects.prototype.show = function (category) {
-  return (category in this.container) ? this.container[category] : this.container
-}
-
-Objects.prototype.count = function (category) {
-  return (category in this.container) ? this.container[category].length : 0
-}
-
-Objects.prototype.has = function (category) {
-  if (category in this.container) {
-    this.check(category)
-    return this.container[category].length > 0
-  }
-  return false
-}
-
-Objects.prototype.valid = function () {
-  let items = []
-  let self = this
-  utils.common.getKeysFromHash(self.container).forEach(function (category) {
-    self.check(category)
-  })
-  utils.common.getKeysFromHash(self.container).forEach(function (category) {
-    for (let i = 0; i < self.container[category].length; i++) {
-      items.push(self.container[category][i].name)
-    }
-  })
-  return items
-}
-
-Objects.prototype.check = function (category) {
-  let self = this
-  self.container[category].forEach(function (object) {
-    try {
-      let x = /* frame.contentWindow. */ eval(object.name) // eslint-disable-line no-eval
-      if (x === undefined || x === null) {
-        self.pop(object.name)
-      }
-    } catch (e) {
-      self.pop(object.name)
-    }
-  })
 }
