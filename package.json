@@ -17,7 +17,7 @@
     "test": "grunt test --verbose"
   },
   "standard": {
-    "globals": ["random", "make", "utils", "logger", "MersenneTwister", "o"],
+    "globals": ["random", "make", "utils", "logger", "MersenneTwister", "o", "btoa", "atob"],
     "envs": ["browser"]
   }
 }
