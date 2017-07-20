@@ -179,10 +179,10 @@ QUnit.test("random.ludOneTo() distribution", function(assert) {
 });
 
 QUnit.test("random.item() exception cases", function(assert) {
-  assert.throws(random.item, /non array type/);
-  assert.throws(function(){ return random.item(1); }, /non array type/);
-  assert.throws(function(){ return random.item("1"); }, /non array type/);
-  assert.throws(function(){ return random.item({}); }, /non array type/);
+  assert.throws(random.item, /received an invalid object/);
+  assert.throws(function(){ return random.item(1); }, /received an invalid object/);
+  assert.throws(function(){ return random.item("1"); }, /received an invalid object/);
+  assert.throws(function(){ return random.item({}); }, /received an invalid object/);
 });
 
 QUnit.test("random.item() distribution with list", function(assert) {
