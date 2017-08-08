@@ -1,4 +1,4 @@
-![](http://people.mozilla.com/~cdiehl/img/octo.png)
+![Logo](https://github.com/posidron/posidron.github.io/raw/master/static/images/octo.png)
 
 [![Build Status](https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=master)](https://travis-ci.org/MozillaSecurity/octo) [![Coverage Status](https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=master)](https://coveralls.io/github/MozillaSecurity/octo?branch=master) [![JavaScript Style
 Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
