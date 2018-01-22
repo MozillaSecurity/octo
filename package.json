@@ -17,7 +17,8 @@
   "license": "MPL-2.0",
   "scripts": {
     "test": "grunt test --verbose",
-    "test:lint": "cross-env NODE_ENV=test standard --verbose"
+    "test:lint": "cross-env NODE_ENV=test standard --verbose",
+    "precommit": "npm run test:lint"
   },
   "standard": {
     "ignore": [
