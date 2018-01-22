@@ -1,10 +1,49 @@
 {
   "name": "octo",
+  "description": "",
+  "keywords": [
+    "fuzzing", "browsers"
+  ],
+  "homepage": "https://github.com/mozillasecurity/octo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozillasecurity/octo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mozillasecurity/octo/issues",
+    "email": "cdiehl@mozilla.com"
+  },
+  "author": "Christoph Diehl <cdiehl@mozilla.com>",
+  "license": "MPL-2.0",
+  "scripts": {
+    "test": "grunt test --verbose",
+    "test:lint": "cross-env NODE_ENV=test standard --verbose"
+  },
+  "standard": {
+    "ignore": [
+      "tests/**"
+    ],
+    "globals": [
+      "random",
+      "make",
+      "utils",
+      "logger",
+      "MersenneTwister",
+      "o",
+      "btoa",
+      "atob"
+    ],
+    "envs": [
+      "browser"
+    ]
+  },
   "devDependencies": {
+    "cross-env": "^5.1.3",
     "grunt": "*",
     "grunt-karma": "*",
     "grunt-karma-coveralls": "*",
     "grunt-standard": "*",
+    "husky": "^0.14.3",
     "karma": "*",
     "karma-chrome-launcher": "*",
     "karma-coverage": "*",
@@ -12,12 +51,5 @@
     "karma-qunit": "*",
     "qunitjs": "*",
     "standard": "*"
-  },
-  "scripts": {
-    "test": "grunt test --verbose"
-  },
-  "standard": {
-    "globals": ["random", "make", "utils", "logger", "MersenneTwister", "o", "btoa", "atob"],
-    "envs": ["browser"]
   }
 }
