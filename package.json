@@ -18,11 +18,14 @@
   "scripts": {
     "test": "grunt test --verbose",
     "test:lint": "cross-env NODE_ENV=test standard --verbose",
+    "test:lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
+    "build": "./build.py -l lib/ -d deploy/",
     "precommit": "npm run test:lint"
   },
   "standard": {
     "ignore": [
-      "tests/**"
+      "tests/**",
+      "deploy/"
     ],
     "globals": [
       "random",
