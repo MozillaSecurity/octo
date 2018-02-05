@@ -22,6 +22,7 @@
     "test:lint": "cross-env NODE_ENV=test standard --verbose",
     "test:lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
     "build": "./build.py -l lib/ -d deploy/",
+    "postinstall": "npm build",
     "precommit": "npm run test:lint"
   },
   "standard": {
