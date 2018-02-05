@@ -1,8 +1,10 @@
 {
   "name": "octo",
+  "version": "0.0.3",
   "description": "",
   "keywords": [
-    "fuzzing", "browsers"
+    "fuzzing",
+    "browsers"
   ],
   "homepage": "https://github.com/mozillasecurity/octo",
   "repository": {
