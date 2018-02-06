@@ -1,17 +1,22 @@
-![Logo](https://github.com/posidron/posidron.github.io/raw/master/static/images/octo.png)
+<p align="center">
+  <img src="https://github.com/posidron/posidron.github.io/raw/master/static/images/octo.png" alt="Logo" />
+</p>
 
-[![Build Status](https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=master)](https://travis-ci.org/MozillaSecurity/octo) [![Coverage Status](https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=master)](https://coveralls.io/github/MozillaSecurity/octo?branch=master) [![JavaScript Style
-Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![IRC](https://img.shields.io/badge/IRC-%23fuzzing-1e72ff.svg?style=flat)](https://www.irccloud.com/invite?channel=%23fuzzing&amp;hostname=irc.mozilla.org&amp;port=6697&amp;ssl=1)
-[![Current Release](https://img.shields.io/github/release/mozillasecurity/octo.svg)](https://img.shields.io/github/release/mozillasecurity/octo.svg)
-[![Downloads](https://img.shields.io/github/downloads/mozillasecurity/octo/total.svg)](https://img.shields.io/github/downloads/mozillasecurity/octo/total.svg)
+<p align="center">
+A unified shared library which aids in building fuzzers for browsers or as complement for an already existing fuzzing framework.
+</p>
 
+<p align="center">
+<a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a>
+<a href="https://travis-ci.org/MozillaSecurity/octo"><img src="https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=master" alt="Build Status"></a>
+<a href="https://img.shields.io/github/release/mozillasecurity/octo.svg"><img src="https://img.shields.io/github/release/mozillasecurity/octo.svg" alt="Current Release"></a>
+<a href="https://coveralls.io/github/MozillaSecurity/octo?branch=master"><img src="https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://www.irccloud.com/invite?channel=%23fuzzing&amp;hostname=irc.mozilla.org&amp;port=6697&amp;ssl=1"><img src="https://img.shields.io/badge/IRC-%23fuzzing-1e72ff.svg?style=flat" alt="IRC"></a>
+</p>
 
-Octo.js is a unified shared library which aids in building fuzzers for browsers or as complement for an already existing fuzzing framework. 
+Octo.js bundles core functions and generic boilerplate code commonly used in most frameworks for fuzzing browsers. It is designed for the sharing of improvements between our individual fuzzers, and with the purpose of reducing the maintainability of those core features with minimal effort.
 
-It bundles core functions and generic boilerplate code commonly used in most frameworks for fuzzing browsers. It is designed for the sharing of improvements between our individual fuzzers, and with the purpose of reducing the maintainability of those core features with minimal effort.
-
-Octo's future is a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
+Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
 
 ## Usage
@@ -24,13 +29,19 @@ https://mozillasecurity.github.io/octo/octo.js
 
 ```html
 <!-- Release -->
-https://github.com/mozillasecurity/octo/releases/download/0.1/octo.js
+https://github.com/mozillasecurity/octo/releases/download/0.0.3/octo.js
+```
+
+```html
+<!-- Release -->
+https://cdn.jsdelivr.net/gh/MozillaSecurity/octo@0.0.3/deploy/octo.js
 ```
 
 ## Development
 
 ```bash
-./build.py -l lib -d deploy
+npm install
+npm run build
 ```
 
 ## Testing
