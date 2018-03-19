@@ -1,10 +1,13 @@
 {
   "name": "octo",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "",
   "keywords": [
     "fuzzing",
-    "browsers"
+    "browsers",
+    "javascript",
+    "node",
+    "library"
   ],
   "homepage": "https://github.com/mozillasecurity/octo",
   "repository": {
@@ -21,7 +24,8 @@
     "test": "grunt test --verbose",
     "test:lint": "cross-env NODE_ENV=test standard --verbose",
     "test:lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
-    "build": "./build.py -l lib/ -d deploy/",
+    "build": "webpack -p",
+    "watch": "webpack --watch",
     "postinstall": "npm run build",
     "precommit": "npm run test:lint"
   },
@@ -51,12 +55,16 @@
     "grunt-karma-coveralls": "*",
     "grunt-standard": "*",
     "husky": "^0.14.3",
+    "jshint": "^2.9.5",
+    "jshint-loader": "^0.8.4",
     "karma": "*",
     "karma-chrome-launcher": "*",
     "karma-coverage": "*",
     "karma-firefox-launcher": "*",
     "karma-qunit": "*",
     "qunitjs": "*",
-    "standard": "*"
+    "standard": "*",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   }
 }
