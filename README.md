@@ -19,7 +19,23 @@ Octo.js bundles core functions and generic boilerplate code commonly used in mos
 Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
 
-## Usage
+## Node
+
+```
+npm i @mozillasecurity/octo --save-dev
+```
+
+```
+const {random} = require('@mozillasecurity/octo')
+```
+
+
+## Browser
+
+```
+npm run build
+```
+
 
 ```html
 <!-- Latest -->
