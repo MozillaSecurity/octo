@@ -2,13 +2,7 @@
   "name": "octo",
   "version": "1.0.0",
   "description": "",
-  "keywords": [
-    "fuzzing",
-    "browsers",
-    "javascript",
-    "node",
-    "library"
-  ],
+  "keywords": ["fuzzing", "browser", "javascript", "node", "library"],
   "homepage": "https://github.com/mozillasecurity/octo",
   "repository": {
     "type": "git",
@@ -32,17 +26,7 @@
   "standard": {
     "ignore": [
       "tests/**",
-      "deploy/"
-    ],
-    "globals": [
-      "random",
-      "make",
-      "utils",
-      "logger",
-      "MersenneTwister",
-      "o",
-      "btoa",
-      "atob"
+      "dist/"
     ],
     "envs": [
       "browser"
