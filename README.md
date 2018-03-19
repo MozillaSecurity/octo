@@ -58,6 +58,8 @@ https://cdn.jsdelivr.net/gh/MozillaSecurity/octo@0.0.3/deploy/octo.js
 ```bash
 npm install
 npm run build
+npm run watch
+npm run test:lint
 ```
 
 ## Testing

@@ -9,7 +9,7 @@
     "node",
     "library"
   ],
-  "homepage": "https://github.com/mozillasecurity/octo",
+  "homepage": "https://github.com/mozillasecurity/octo/tree/es6",
   "repository": {
     "type": "git",
     "url": "https://github.com/mozillasecurity/octo.git"
