@@ -1,5 +1,5 @@
 {
-  "name": "octo",
+  "name": "@mozillasecurity/octo",
   "version": "1.0.0",
   "description": "",
   "keywords": ["fuzzing", "browser", "javascript", "node", "library"],
