@@ -1,6 +1,6 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "keywords": ["fuzzing", "browser", "javascript", "node", "library"],
   "homepage": "https://github.com/mozillasecurity/octo",
