@@ -19,6 +19,11 @@ Octo.js bundles core functions and generic boilerplate code commonly used in mos
 Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
 
+# NOTE
+The <a href="https://github.com/MozillaSecurity/octo/tree/es6">ES6</a> branch is under active development while we are incorporating it into our existing fuzzers.
+This branch is current not maintained.
+
+
 ## Usage
 
 ```html
