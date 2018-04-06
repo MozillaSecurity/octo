@@ -54,7 +54,7 @@
     "karma-qunit": "^2.0.1",
     "qunit": "^2.5.1",
     "qunitjs": "^2.4.1",
-    "standard": "^11.0.1",
+    "standard": "^11.0.1"
   },
   "dependencies": {
     "jsesc": "^2.5.1",
