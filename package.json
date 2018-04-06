@@ -55,10 +55,10 @@
     "qunit": "^2.5.1",
     "qunitjs": "^2.4.1",
     "standard": "^11.0.1",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
   },
   "dependencies": {
-    "jsesc": "^2.5.1"
+    "jsesc": "^2.5.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   }
 }
