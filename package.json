@@ -1,6 +1,6 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "keywords": [
     "fuzzing",
@@ -26,7 +26,8 @@
     "test:lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
     "build": "webpack -p",
     "watch": "webpack --watch",
-    "precommit": "npm run test:lint"
+    "precommit": "npm run test:lint",
+    "postinstall": "npm run build"
   },
   "standard": {
     "ignore": [
