@@ -8,9 +8,9 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 
 <p align="center">
 <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a>
-<a href="https://travis-ci.org/MozillaSecurity/octo"><img src="https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=master" alt="Build Status"></a>
-<a href="https://img.shields.io/github/release/mozillasecurity/octo.svg"><img src="https://img.shields.io/github/release/mozillasecurity/octo.svg" alt="Current Release"></a>
-<a href="https://coveralls.io/github/MozillaSecurity/octo?branch=master"><img src="https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=master" alt="Coverage Status"></a>
+<!--<a href="https://travis-ci.org/MozillaSecurity/octo"><img src="https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=es6" alt="Build Status"></a>-->
+<!--<a href="https://img.shields.io/github/release/mozillasecurity/octo.svg"><img src="https://img.shields.io/github/release/mozillasecurity/octo.svg" alt="Current Release"></a>-->
+<!--<a href="https://coveralls.io/github/MozillaSecurity/octo?branch=es6"><img src="https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=es6" alt="Coverage Status"></a>-->
 <a href="https://www.irccloud.com/invite?channel=%23fuzzing&amp;hostname=irc.mozilla.org&amp;port=6697&amp;ssl=1"><img src="https://img.shields.io/badge/IRC-%23fuzzing-1e72ff.svg?style=flat" alt="IRC"></a>
 </p>
 
@@ -18,35 +18,44 @@ Octo.js bundles core functions and generic boilerplate code commonly used in mos
 
 Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
-
-# NOTE
-The <a href="https://github.com/MozillaSecurity/octo/tree/es6">ES6</a> branch is under active development while we are incorporating it into our existing fuzzers.
-This branch is current not maintained.
+## Note
+The ES6 branch is under active development while we are incorporating it with our existing fuzzers.
 
 
-## Usage
+## Playbook
 
-```html
-<!-- Latest -->
-https://mozillasecurity.github.io/octo/octo.js
+https://runkit.com/posidron/octo-js-playbook
+
+
+## Node
 
 ```
-
-```html
-<!-- Release -->
-https://github.com/mozillasecurity/octo/releases/download/0.0.3/octo.js
+npm i @mozillasecurity/octo
 ```
 
-```html
-<!-- Release -->
-https://cdn.jsdelivr.net/gh/MozillaSecurity/octo@0.0.3/deploy/octo.js
 ```
+const {random} = require('@mozillasecurity/octo')
+random.init()
+```
+
+
+## Browser
+
+We have not yet merged ES6 to master, hence the browser version which was released on master is not up-to-date.
+Use the `dist/octo.js` version of this branch by running the following command.
+
+```
+npm run build
+```
+
 
 ## Development
 
 ```bash
 npm install
 npm run build
+npm run watch
+npm run test:lint
 ```
 
 ## Testing
@@ -57,7 +66,5 @@ The automated tests are run in Firefox or Chrome using [Karma](https://karma-run
 To run the automated tests:
 
 ```bash
-npm install
-CHROME_BIN=chromium npm test
+npm test
 ```
-When adding new files, add them in `index.html` and `karma.conf.js` so they can be tested and included in coverage reports.
