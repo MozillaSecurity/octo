@@ -27,7 +27,8 @@
     "build": "webpack -p",
     "watch": "webpack --watch",
     "precommit": "npm run test:lint",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "release": "np"
   },
   "standard": {
     "ignore": [
@@ -52,6 +53,7 @@
     "karma-coverage": "*",
     "karma-firefox-launcher": "^1.1.0",
     "karma-qunit": "^2.0.1",
+    "np": "^3.0.4",
     "qunit": "^2.5.1",
     "qunitjs": "^2.4.1",
     "standard": "^11.0.1"
