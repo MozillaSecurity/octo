@@ -18,10 +18,6 @@ Octo.js bundles core functions and generic boilerplate code commonly used in mos
 
 Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
-## Note
-The ES6 branch is under active development while we are incorporating it with our existing fuzzers.
-
-
 ## Playbook
 
 https://runkit.com/posidron/octo-js-playbook
