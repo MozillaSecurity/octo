@@ -1,6 +1,6 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "",
   "keywords": [
     "fuzzing",
@@ -24,6 +24,7 @@
     "test": "grunt test --verbose",
     "test:lint": "cross-env NODE_ENV=test standard --verbose",
     "test:lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
+    "docs": "esdoc -c esdoc.json",
     "build": "webpack -p",
     "watch": "webpack --watch",
     "precommit": "npm run test:lint",
@@ -43,6 +44,9 @@
   },
   "devDependencies": {
     "cross-env": "^5.1.4",
+    "esdoc": "^1.1.0",
+    "esdoc-node": "^1.0.3",
+    "esdoc-standard-plugin": "^1.0.0",
     "grunt": "*",
     "grunt-karma": "*",
     "grunt-karma-coveralls": "*",
