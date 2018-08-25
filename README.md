@@ -18,15 +18,24 @@ Octo.js bundles core functions and generic boilerplate code commonly used in mos
 
 Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
-## Playbook
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+  - [Playbook](#playbook)
+  - [Usage in Node](#usage-in-node)
+  - [Usage in Browser](#usage-in-browser)
+  - [Develop](#develop)
+  - [Testing](#testing)
+  - [API Documentation](#api-documentation)
+
+### Playbook
 
 https://runkit.com/posidron/octo-js-playbook
 
 
-## Node
+### Usage in Node
 
 ```
-npm i @mozillasecurity/octo
+yarn add @mozillasecurity/octo
 ```
 
 ```
@@ -34,33 +43,35 @@ const {random} = require('@mozillasecurity/octo')
 random.init()
 ```
 
-
-## Browser
-
-We have not yet merged ES6 to master, hence the browser version which was released on master is not up-to-date.
-Use the `dist/octo.js` version of this branch by running the following command.
+### Usage in Browser
 
 ```
-npm run build
+yarn build
 ```
 
-
-## Development
+### Develop
 
 ```bash
-npm install
-npm run build
-npm run watch
-npm run test:lint
+yarn install
+yarn lint
+yarn test
+yarn build
 ```
 
-## Testing
+### Testing
 
-Tests live in the `tests/` subdirectory, and are written for [QUnit](https://qunitjs.com/).
-To run tests locally, open `tests/index.html` in a browser.
-The automated tests are run in Firefox or Chrome using [Karma](https://karma-runner.github.io/).
-To run the automated tests:
+Octo.js uses Jest for testing. Each directory should contain a `__tests__` folder containing the tests.
 
 ```bash
-npm test
+yarn test
+```
+
+### API Documentation
+
+* https://
+
+or
+
+```
+yarn docs
 ```
