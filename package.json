@@ -22,6 +22,8 @@
   "license": "MPL-2.0",
   "scripts": {
     "test": "jest --silent",
+    "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.js",
+    "coveralls": "yarn coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "cross-env NODE_ENV=test standard --verbose",
     "lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
     "docs": "esdoc",
@@ -65,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "cross-env": "^5.1.4",
     "esdoc": "^1.1.0",
     "esdoc-node": "^1.0.3",
