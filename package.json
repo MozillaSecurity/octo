@@ -1,7 +1,7 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "1.0.14",
-  "description": "",
+  "version": "1.0.15",
+  "description": "A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework.",
   "keywords": [
     "fuzzing",
     "browser",
@@ -9,7 +9,7 @@
     "node",
     "library"
   ],
-  "homepage": "https://github.com/mozillasecurity/octo/tree/es6",
+  "homepage": "https://github.com/mozillasecurity/octo",
   "repository": {
     "type": "git",
     "url": "https://github.com/mozillasecurity/octo.git"
@@ -21,18 +21,20 @@
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
   "license": "MPL-2.0",
   "scripts": {
-    "test": "grunt test --verbose",
-    "test:lint": "cross-env NODE_ENV=test standard --verbose",
-    "test:lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
+    "test": "jest --silent",
+    "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.js",
+    "coveralls": "yarn coverage && cat ./coverage/lcov.info | coveralls",
+    "lint": "cross-env NODE_ENV=test standard --verbose",
+    "lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
+    "docs": "esdoc",
     "build": "webpack -p",
     "watch": "webpack --watch",
-    "precommit": "npm run test:lint",
-    "postinstall": "npm run build",
+    "precommit": "yarn lint",
+    "postinstall": "yarn build",
     "release": "np"
   },
   "standard": {
     "ignore": [
-      "tests/**",
       "dist/"
     ],
     "envs": {
@@ -41,26 +43,43 @@
       "es6": true
     }
   },
+  "jest": {
+    "verbose": true
+  },
+  "esdoc": {
+    "source": "./lib",
+    "destination": "./docs",
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "lint": {
+            "enable": true
+          },
+          "coverage": {
+            "enable": true
+          }
+        }
+      },
+      {
+        "name": "esdoc-node"
+      }
+    ]
+  },
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "cross-env": "^5.1.4",
-    "grunt": "*",
-    "grunt-karma": "*",
-    "grunt-karma-coveralls": "*",
-    "grunt-standard": "*",
+    "esdoc": "^1.1.0",
+    "esdoc-node": "^1.0.3",
+    "esdoc-standard-plugin": "^1.0.0",
     "husky": "^0.14.3",
-    "karma": "*",
-    "karma-chrome-launcher": "*",
-    "karma-coverage": "*",
-    "karma-firefox-launcher": "^1.1.0",
-    "karma-qunit": "^2.0.1",
+    "jest": "^23.5.0",
     "np": "^3.0.4",
-    "qunit": "^2.5.1",
-    "qunitjs": "^2.4.1",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "jsesc": "^2.5.1",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "jsesc": "^2.5.1"
   }
 }
