@@ -29,7 +29,7 @@
     "docs": "esdoc",
     "build": "webpack -p",
     "watch": "webpack --watch",
-    "precommit": "yarn lint",
+    "prepush": "yarn lint",
     "release": "np"
   },
   "standard": {
