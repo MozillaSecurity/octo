@@ -30,7 +30,6 @@
     "build": "webpack -p",
     "watch": "webpack --watch",
     "precommit": "yarn lint",
-    "postinstall": "yarn build",
     "release": "np"
   },
   "standard": {
