@@ -79,6 +79,7 @@
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
+    "htmlentities": "^1.0.0",
     "jsesc": "^2.5.1"
   }
 }
