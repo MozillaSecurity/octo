@@ -29,8 +29,7 @@
     "docs": "esdoc",
     "build": "webpack -p",
     "watch": "webpack --watch",
-    "precommit": "yarn lint",
-    "postinstall": "yarn build",
+    "prepush": "yarn lint",
     "release": "np"
   },
   "standard": {
@@ -80,6 +79,7 @@
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
+    "html-entities": "^1.2.1",
     "jsesc": "^2.5.1"
   }
 }
