@@ -1,6 +1,6 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "2.0.0",
+  "version": "1.0.17",
   "description": "A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework.",
   "keywords": [
     "fuzzing",
