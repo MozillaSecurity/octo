@@ -97,9 +97,20 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 </ul>
 <h3 id="playbook">Playbook</h3><p><a href="https://npm.runkit.com/@mozillasecurity/octo">https://npm.runkit.com/@mozillasecurity/octo</a></p>
 <h3 id="usage-in-node">Usage in Node</h3><pre><code><code class="source-code prettyprint">yarn add @mozillasecurity/octo</code>
-</code></pre><pre><code><code class="source-code prettyprint">const {random} = require(&apos;@mozillasecurity/octo&apos;)
-random.init()</code>
-</code></pre><h3 id="usage-in-the-browser">Usage in the Browser</h3><pre><code><code class="source-code prettyprint">yarn install
+</code></pre><pre><code><code class="source-code prettyprint">const {random, make} = require(&apos;@mozillasecurity/octo&apos;)
+random.init()
+
+# Basic operations
+make.number.any()
+make.text.any()
+
+# WebCrypto
+make.crypto.randomAlgorithm()
+
+# WebGL
+make.webgl.randomSamplerParameter()</code>
+</code></pre><p>Take a look into the API documentation for further use cases.</p>
+<h3 id="usage-in-the-browser">Usage in the Browser</h3><pre><code><code class="source-code prettyprint">yarn install
 yarn build</code>
 </code></pre><p>A bundled production build (<code>octo.js</code>) is placed into the local <code>dist</code> directory.</p>
 <h3 id="development">Development</h3><pre><code class="lang-bash"><code class="source-code prettyprint">yarn lint
