@@ -26,6 +26,7 @@ Octo's future aims to be a stable, well-tested and well-documented standard libr
   - [Development](#development)
   - [Testing](#testing)
   - [API Documentation](#api-documentation)
+  - [What do the developers say?](#what-do-the-developers-say)
 
 ### Playbook
 
@@ -38,18 +39,18 @@ yarn add @mozillasecurity/octo
 ```
 
 ```js
-const {random, make} = require('@mozillasecurity/octo')
-random.init()
+const { random, make } = require("@mozillasecurity/octo");
+random.init();
 
 // Common Operations
-make.number.any()
-make.text.any()
+make.number.any();
+make.text.any();
 
 // WebCrypto
-make.crypto.randomAlgorithm()
+make.crypto.randomAlgorithm();
 
 // WebGL
-make.webgl.randomSamplerParameter()
+make.webgl.randomSamplerParameter();
 ```
 
 Take a look into the API documentation for further use cases.
@@ -88,3 +89,9 @@ or
 ```
 yarn docs
 ```
+
+### What do the developers say?
+
+- [Divide-by-zero in [@webrtc::I420Buffer::CropAndScaleFrom]](https://bugzilla.mozilla.org/show_bug.cgi?id=1490700#c1)
+
+  > Impressive that the fuzzer found such a high multiple of 65536. I'd expect it to start with common edge cases like -1, 0, 1, etc.
