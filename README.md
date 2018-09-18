@@ -41,14 +41,14 @@ yarn add @mozillasecurity/octo
 const {random, make} = require('@mozillasecurity/octo')
 random.init()
 
-# Common Operations
+// Common Operations
 make.number.any()
 make.text.any()
 
-# WebCrypto
+// WebCrypto
 make.crypto.randomAlgorithm()
 
-# WebGL
+// WebGL
 make.webgl.randomSamplerParameter()
 ```
 
