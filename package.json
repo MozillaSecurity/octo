@@ -1,6 +1,6 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "1.0.15",
+  "version": "2.0.0",
   "description": "A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework.",
   "keywords": [
     "fuzzing",
@@ -27,8 +27,7 @@
     "lint": "cross-env NODE_ENV=test standard --verbose",
     "lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
     "docs": "esdoc",
-    "build": "webpack -p",
-    "watch": "webpack --watch",
+    "build": "parcel build index.js --out-file=octo.js --no-source-maps",
     "prepush": "yarn lint",
     "release": "np"
   },
@@ -67,16 +66,15 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
-    "cross-env": "^5.1.4",
+    "cross-env": "^5.2.0",
     "esdoc": "^1.1.0",
     "esdoc-node": "^1.0.3",
     "esdoc-standard-plugin": "^1.0.0",
     "husky": "^0.14.3",
-    "jest": "^23.5.0",
+    "jest": "^23.6.0",
     "np": "^3.0.4",
-    "standard": "^11.0.1",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^3.1.0"
+    "parcel-bundler": "^1.9.7",
+    "standard": "^12.0.1"
   },
   "dependencies": {
     "html-entities": "^1.2.1",
