@@ -38,9 +38,21 @@ yarn add @mozillasecurity/octo
 ```
 
 ```
-const {random} = require('@mozillasecurity/octo')
+const {random, make} = require('@mozillasecurity/octo')
 random.init()
+
+# Basic operations
+make.number.any()
+make.text.any()
+
+# WebCrypto
+make.crypto.randomAlgorithm()
+
+# WebGL
+make.webgl.randomSamplerParameter()
 ```
+
+Take a look into the API documentation for further use cases.
 
 ### Usage in the Browser
 
