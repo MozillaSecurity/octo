@@ -37,7 +37,7 @@ https://npm.runkit.com/@mozillasecurity/octo
 yarn add @mozillasecurity/octo
 ```
 
-```
+```js
 const {random, make} = require('@mozillasecurity/octo')
 random.init()
 
@@ -65,7 +65,7 @@ A bundled production build (`octo.js`) is placed into the local `dist` directory
 
 ### Development
 
-```bash
+```
 yarn lint
 yarn test
 yarn build
@@ -75,7 +75,7 @@ yarn build
 
 Octo.js uses Jest for testing. Each directory should contain a `__tests__` folder containing the tests.
 
-```bash
+```
 yarn test
 ```
 
