@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">lib/make/network.js | @mozillasecurity/octo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@mozillasecurity/octo"><meta property="twitter:description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/mozillasecurity/octo.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#logging">logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/logging/index.js~logger.html">logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#make">make</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/alignment.js~alignment.html">alignment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/arrays.js~arrays.html">arrays</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/colors.js~colors.html">colors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/command.js~command.html">command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/crypto.js~crypto.html">crypto</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/files.js~files.html">files</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/fonts.js~font.html">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/html.js~html.html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/index.js~make.html">make</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/mime.js~mime.html">mime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/network.js~network.html">network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/numbers.js~number.html">number</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/shaders.js~shaders.html">shaders</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/style.js~style.html">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/text.js~text.html">text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/time.js~time.html">time</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/typed.js~typed.html">typed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/types.js~types.html">types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/units.js~unit.html">unit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/uri.js~uri.html">uri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/webgl.js~webgl.html">webgl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#random">random</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/mersennetwister.js~MersenneTwister.html">MersenneTwister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/random.js~random.html">random</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/block.js~block.html">block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/common.js~common.html">common</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/index.js~utils.html">utils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/mutate.js~mutate.html">mutate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/platform.js~platform.html">platform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/prototypes.js~prototypes.html">prototypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/script.js~script.html">script</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/make/network.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+const make = require(&apos;../make&apos;)
+const random = require(&apos;../random&apos;)
+const utils = require(&apos;../utils&apos;)
+
+class network extends make {
+  static sdp () {
+    // session description protocol template
+    return [
+      &apos;v=0&apos;,
+      &apos;o=Mozilla-SIPUA 23597 0 IN IP4 0.0.0.0&apos;,
+      &apos;s=SIP Call&apos;,
+      &apos;t=0 0&apos;,
+      &apos;a=ice-ufrag:f5fda439&apos;,
+      &apos;a=ice-pwd:d0df8e2904bdbd29587966e797655970&apos;,
+      &apos;a=fingerprint:sha-256 DF:69:78:20:8D:2E:08:CE:49:82:A3:11:79:1D:BF:B5:49:49:2D:32:82:2F:0D:88:84:A7:C6:63:23:63:A9:0F&apos;,
+      &apos;m=audio 52757 RTP/SAVPF 109 0 8 101&apos;,
+      &apos;c=IN IP4 192.168.129.33&apos;,
+      &apos;a=rtpmap:109 opus/48000/2&apos;,
+      &apos;a=ptime:20&apos;,
+      &apos;a=rtpmap:0 PCMU/8000&apos;,
+      &apos;a=rtpmap:8 PCMA/8000&apos;,
+      &apos;a=rtpmap:101 telephone-event/8000&apos;,
+      &apos;a=fmtp:101 0-15&apos;,
+      &apos;a=sendrecv&apos;,
+      &apos;a=candidate:0 1 UDP 2113601791 192.168.129.33 52757 typ host&apos;,
+      &apos;a=candidate:0 2 UDP 2113601790 192.168.129.33 59738 typ host&apos;,
+      &apos;m=video 63901 RTP/SAVPF 120&apos;,
+      &apos;c=IN IP4 192.168.129.33&apos;,
+      &apos;a=rtpmap:120 VP8/90000&apos;,
+      &apos;a=sendrecv&apos;,
+      &apos;a=candidate:0 1 UDP 2113601791 192.168.129.33 63901 typ host&apos;,
+      &apos;a=candidate:0 2 UDP 2113601790 192.168.129.33 54165 typ host&apos;,
+      &apos;m=application 65080 SCTP/DTLS 5000&apos;,
+      &apos;c=IN IP4 192.168.129.33&apos;,
+      &apos;a=fmtp:5000 protocol=webrtc-datachannel;streams=16&apos;,
+      &apos;a=sendrecv&apos;,
+      &apos;a=candidate:0 1 UDP 2113601791 192.168.129.33 65080 typ host&apos;,
+      &apos;a=candidate:0 2 UDP 2113601790 192.168.129.33 62658 typ host&apos;
+    ].join(&apos;\n&apos;)
+  }
+
+  static IceCandidate () {
+    // https://tools.ietf.org/html/rfc5245#section-15
+    // candidate=
+    return utils.block.block([
+      random.pick([0, 1, make.number.any]),
+      &apos; &apos;,
+      random.pick([0, 1, make.number.any]),
+      &apos; &apos;,
+      random.pick([&apos;UDP&apos;, &apos;TCP&apos;, &apos;SCTP&apos;]),
+      random.pick([&apos;&apos;, `/${random.pick([&apos;DTLS&apos;, &apos;DTLS-SRTP&apos;])}`]),
+      &apos; &apos;,
+      random.pick([make.number.any]),
+      &apos; &apos;,
+      random.pick([network.goodHostnames]),
+      &apos; &apos;,
+      random.pick([56187, make.number.any]),
+      &apos; &apos;,
+      &apos;type&apos;,
+      &apos; &apos;,
+      random.pick([
+        &apos;host&apos;,
+        utils.block.block([
+          random.pick([&apos;srflx&apos;, &apos;prflx&apos;, &apos;relay&apos;]),
+          &apos; &apos;,
+          random.pick([&apos;raddr&apos;]),
+          &apos; &apos;,
+          random.pick([network.goodHostnames]),
+          &apos; &apos;,
+          random.pick([&apos;rport&apos;]),
+          random.use([utils.block.block([&apos; &apos;, make.number.any])])
+        ])
+      ])
+    ])
+  }
+
+  static SdpMid () {
+    // m=
+    return utils.block.block([
+      random.pick([&apos;application&apos;, &apos;video&apos;, &apos;audio&apos;]),
+      &apos; &apos;,
+      make.number.any,
+      &apos; &apos;,
+      random.pick([&apos;RTP/AVP&apos;, &apos;RTP/SAVPF&apos;, &apos;RTP/SAVP&apos;, &apos;SCTP/DTLS&apos;]),
+      &apos; &apos;,
+      make.number.any
+    ])
+  }
+
+  static Turn () {
+    // https://tools.ietf.org/html/rfc7065#section-3.1
+    return utils.block.block([
+      // scheme
+      random.pick(network.PeerConnectionProtocols),
+      &apos;:&apos;,
+      // turn-host
+      random.pick([
+        network.any,
+        network.hostname
+      ]),
+      // turn-port
+      random.use([utils.block.block([&apos;:&apos;, make.number.any])]),
+      random.use([utils.block.block([&apos;/&apos;, make.text.any])]),
+      &apos;?&apos;,
+      random.pick([&apos;transport&apos;]),
+      &apos;=&apos;,
+      random.pick([&apos;udp&apos;, &apos;tcp&apos;, make.text.any])
+    ])
+  }
+
+  static PeerConnectionProtocols () {
+    return [&apos;turn&apos;, &apos;turns&apos;, &apos;stun&apos;, &apos;stuns&apos;]
+  }
+
+  static randomIPv4 () {
+    function octet () {
+      return random.pick([random.number(255), make.number.any])
+    }
+
+    return `${octet()}.${octet()}.${octet()}.${octet()}.`
+  }
+
+  static randomIPv6 () {
+    let parts = []
+
+    for (let i = 0; i &lt; 8; i++) {
+      parts.push(random.hex(4))
+    }
+
+    return parts.join(&apos;:&apos;)
+  }
+
+  static iceServer () {
+    return random.pick([
+      &apos;stun:23.21.150.121&apos;
+    ])
+  }
+
+  static dtmf () {
+    let count = make.number.tiny()
+    const values = []
+    while (count--) {
+      values.push(random.item([&apos;*&apos;, &apos;#&apos;, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;7&apos;, &apos;8&apos;, &apos;9&apos;]))
+    }
+
+    return values.join(&apos;&apos;)
+  }
+
+  static goodHostnames () {
+    return [
+      &apos;0.0.0.0&apos;,
+      &apos;127.0.0.1:8080&apos;
+    ]
+  }
+
+  static badHostnames () {
+    return [
+      &apos;google.org:8080&apos;,
+      &apos;::1&apos;,
+      &apos;[::192.9.5.5]:42&apos;,
+      &apos;2001:db8:85a3::8a2e:370:3478&apos;,
+      &apos;2001:db8:85a3:0:0:8a2e:370:3478&apos;,
+      &apos;::ffff:192.0.2.1&apos;,
+      &apos;0000:0000:0000:0000:0000:0000:0000:0001&apos;,
+      &apos;::192.0.2.128&apos;,
+      &apos;::ffff:192.0.2.128&apos;,
+      &apos;2001:db8::1:2&apos;,
+      &apos;2001:db8::1:1:1:1:1&apos;
+    ]
+  }
+
+  static hostname () {
+    return random.pick([
+      network.randomIPv4,
+      network.randomIPv6,
+      network.goodHostnames,
+      network.badHostnames
+    ])
+  }
+
+  static port () {
+    return random.pick([80, 443, 21, 23, 9310])
+  }
+
+  static hash () {
+    return random.pick([
+      &apos;&apos;,
+      &apos;#&apos;,
+      &apos;#main-content&apos;,
+      () =&gt; `#${make.text.any()}`
+    ])
+  }
+
+  static path () {
+    return random.pick([
+      &apos;&apos;,
+      &apos;/&apos;,
+      &apos;/index.html&apos;,
+      () =&gt; `/${make.text.any()}`
+    ])
+  }
+
+  static protocol () {
+    return `${random.pick([
+      &apos;http&apos;,
+      &apos;https&apos;,
+      &apos;ftp&apos;,
+      &apos;telnet&apos;,
+      &apos;chrome&apos;,
+      &apos;resource&apos;
+    ])}:`
+  }
+
+  static search () {
+    return random.pick([
+      &apos;&apos;,
+      &apos;?&apos;,
+      &apos;?foo=bar&apos;,
+      () =&gt; `?${make.text.any()}`
+    ])
+  }
+
+  static randomBitmask (list) {
+    if (list.length &lt;= 1) {
+      return list.join(&apos;&apos;)
+    }
+    let max = random.range(2, list.length)
+    let mask = random.pick(list)
+    for (let i = 1; i &lt; max; i++) {
+      mask += `|${random.pick(list)}`
+    }
+    return mask
+  }
+}
+
+module.exports = network
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

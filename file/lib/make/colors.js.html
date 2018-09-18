@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">lib/make/colors.js | @mozillasecurity/octo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@mozillasecurity/octo"><meta property="twitter:description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/mozillasecurity/octo.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#logging">logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/logging/index.js~logger.html">logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#make">make</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/alignment.js~alignment.html">alignment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/arrays.js~arrays.html">arrays</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/colors.js~colors.html">colors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/command.js~command.html">command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/crypto.js~crypto.html">crypto</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/files.js~files.html">files</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/fonts.js~font.html">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/html.js~html.html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/index.js~make.html">make</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/mime.js~mime.html">mime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/network.js~network.html">network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/numbers.js~number.html">number</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/shaders.js~shaders.html">shaders</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/style.js~style.html">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/text.js~text.html">text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/time.js~time.html">time</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/typed.js~typed.html">typed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/types.js~types.html">types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/units.js~unit.html">unit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/uri.js~uri.html">uri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/webgl.js~webgl.html">webgl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#random">random</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/mersennetwister.js~MersenneTwister.html">MersenneTwister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/random.js~random.html">random</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/block.js~block.html">block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/common.js~common.html">common</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/index.js~utils.html">utils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/mutate.js~mutate.html">mutate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/platform.js~platform.html">platform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/prototypes.js~prototypes.html">prototypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/script.js~script.html">script</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/make/colors.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+const make = require(&apos;../make&apos;)
+const random = require(&apos;../random&apos;)
+
+class colors extends make {
+  static any () {
+    return random.pick([
+      colors.rgb,
+      colors.hsl,
+      colors.keyword
+    ])
+  }
+
+  static rgb () {
+    let values
+
+    switch (random.number(4)) {
+      case 0:
+        // Rgb functional notation
+        if (random.bool()) {
+          // Ints
+          values = [random.number(255), random.number(255), random.number(255)]
+        } else {
+          // Percents
+          values = [`%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
+        }
+        return `rgba(${values.join(&apos;,&apos;)})`
+      case 1:
+        // Rgba functional notation
+        values = [random.number(255), random.number(255), random.number(255), random.float()]
+        return `rgba(${values.join(&apos;,&apos;)})`
+      case 2:
+        // 4 char hex
+        return `#${random.hex(4)}`
+      default:
+        // 8 char hex
+        return `#${random.hex(8)}`
+    }
+  }
+
+  static hsl () {
+    let values, opt
+
+    switch (random.number(4)) {
+      case 0:
+        values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`]
+        return `hsl(${values.join(&apos;,&apos;)})`
+      case 1:
+        values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
+        return `hsl(${values.join(&apos;,&apos;)})`
+      case 2:
+        opt = random.pick([&apos;deg&apos;, &apos;rad&apos;, &apos;grad&apos;, &apos;turn&apos;])
+        values = [random.number(255) + opt, `%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
+        return `hsl(${values.join(&apos;,&apos;)})`
+      default:
+        values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`, random.float()]
+        return `hsl(${values.join(&apos;,&apos;)})`
+    }
+  }
+
+  static keyword () {
+    return random.pick([
+      &apos;lime&apos;, &apos;red&apos;, &apos;blue&apos;, &apos;invert&apos;, &apos;currentColor&apos;, &apos;ActiveBorder&apos;, &apos;ActiveCaption&apos;,
+      &apos;AppWorkspace&apos;, &apos;Background&apos;, &apos;ButtonFace&apos;, &apos;ButtonHighlight&apos;, &apos;ButtonShadow&apos;,
+      &apos;ButtonText&apos;, &apos;CaptionText&apos;, &apos;GrayText&apos;, &apos;Highlight&apos;, &apos;HighlightText&apos;,
+      &apos;InactiveBorder&apos;, &apos;InactiveCaption&apos;, &apos;InactiveCaptionText&apos;, &apos;InfoBackground&apos;,
+      &apos;InfoText&apos;, &apos;Menu&apos;, &apos;MenuText&apos;, &apos;Scrollbar&apos;, &apos;ThreeDDarkShadow&apos;, &apos;ThreeDFace&apos;,
+      &apos;ThreeDHighlight&apos;, &apos;ThreeDLightShadow&apos;, &apos;ThreeDShadow&apos;, &apos;Window&apos;, &apos;WindowFrame&apos;,
+      &apos;WindowText&apos;, &apos;-moz-ButtonDefault&apos;, &apos;-moz-ButtonHoverFace&apos;, &apos;-moz-ButtonHoverText&apos;,
+      &apos;-moz-CellHighlight&apos;, &apos;-moz-CellHighlightText&apos;, &apos;-moz-Combobox&apos;, &apos;-moz-ComboboxText&apos;,
+      &apos;-moz-Dialog&apos;, &apos;-moz-DialogText&apos;, &apos;-moz-dragtargetzone&apos;, &apos;-moz-EvenTreeRow&apos;,
+      &apos;-moz-Field&apos;, &apos;-moz-FieldText&apos;, &apos;-moz-html-CellHighlight&apos;,
+      &apos;-moz-html-CellHighlightText&apos;, &apos;-moz-mac-accentdarkestshadow&apos;,
+      &apos;-moz-mac-accentdarkshadow&apos;, &apos;-moz-mac-accentface&apos;,
+      &apos;-moz-mac-accentlightesthighlight&apos;, &apos;-moz-mac-accentlightshadow&apos;,
+      &apos;-moz-mac-accentregularhighlight&apos;, &apos;-moz-mac-accentregularshadow&apos;,
+      &apos;-moz-mac-chrome-active&apos;, &apos;-moz-mac-chrome-inactive&apos;, &apos;-moz-mac-focusring&apos;,
+      &apos;-moz-mac-menuselect&apos;, &apos;-moz-mac-menushadow&apos;, &apos;-moz-mac-menutextselect&apos;,
+      &apos;-moz-MenuHover&apos;, &apos;-moz-MenuHoverText&apos;, &apos;-moz-MenuBarText&apos;, &apos;-moz-MenuBarHoverText&apos;,
+      &apos;-moz-nativehyperlinktext&apos;, &apos;-moz-OddTreeRow&apos;, &apos;-moz-win-communicationstext&apos;,
+      &apos;-moz-win-mediatext&apos;, &apos;-moz-activehyperlinktext&apos;, &apos;-moz-default-background-color&apos;,
+      &apos;-moz-default-color&apos;, &apos;-moz-hyperlinktext&apos;, &apos;-moz-visitedhyperlinktext&apos;
+    ])
+  }
+}
+
+module.exports = colors
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

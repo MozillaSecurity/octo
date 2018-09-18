@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">lib/make/text.js | @mozillasecurity/octo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@mozillasecurity/octo"><meta property="twitter:description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/mozillasecurity/octo.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#logging">logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/logging/index.js~logger.html">logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#make">make</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/alignment.js~alignment.html">alignment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/arrays.js~arrays.html">arrays</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/colors.js~colors.html">colors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/command.js~command.html">command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/crypto.js~crypto.html">crypto</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/files.js~files.html">files</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/fonts.js~font.html">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/html.js~html.html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/index.js~make.html">make</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/mime.js~mime.html">mime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/network.js~network.html">network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/numbers.js~number.html">number</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/shaders.js~shaders.html">shaders</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/style.js~style.html">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/text.js~text.html">text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/time.js~time.html">time</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/typed.js~typed.html">typed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/types.js~types.html">types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/units.js~unit.html">unit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/uri.js~uri.html">uri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/webgl.js~webgl.html">webgl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#random">random</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/mersennetwister.js~MersenneTwister.html">MersenneTwister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/random.js~random.html">random</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/block.js~block.html">block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/common.js~common.html">common</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/index.js~utils.html">utils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/mutate.js~mutate.html">mutate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/platform.js~platform.html">platform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/prototypes.js~prototypes.html">prototypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/script.js~script.html">script</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/make/text.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+const random = require(&apos;../random&apos;)
+const make = require(&apos;../make&apos;)
+const utils = require(&apos;../utils&apos;)
+
+class text extends make {
+  /**
+   * Generate a random alphabetic character
+   */
+  static alpha () {
+    return String.fromCharCode(random.range(&apos;A&apos;.charCodeAt(0), &apos;z&apos;.charCodeAt(0)))
+  }
+
+  /**
+   * Generate a random alphanumeric character
+   */
+  static alphanum () {
+    return String.fromCharCode(random.range(&apos;0&apos;.charCodeAt(0), &apos;z&apos;.charCodeAt(0)))
+  }
+
+  /**
+   * Generate a random assignment operator
+   */
+  static assignmentOperator () {
+    return random.pick([
+      &apos;=&apos;, &apos;+=&apos;, &apos;-=&apos;, &apos;*=&apos;, &apos;/=&apos;, &apos;%=&apos;, &apos;**=&apos;, &apos;&lt;&lt;=&apos;, &apos;&gt;&gt;=&apos;, &apos;&gt;&gt;&gt;=&apos;, &apos;&amp;=&apos;, &apos;^=&apos;, &apos;|=&apos;
+    ])
+  }
+
+  /**
+   * Generate a random arithmetic operator
+   */
+  static arithmeticOperator () {
+    return random.pick([
+      &apos;%&apos;, &apos;-&apos;, &apos;+&apos;, &apos;*&apos;, &apos;/&apos;
+    ])
+  }
+
+  /**
+   * Generate a random control character
+   */
+  static controlChar () {
+    return random.pick([
+      &apos;\b&apos;, &apos;\t&apos;, &apos;\n&apos;, &apos;\v&apos;, &apos;\f&apos;, &apos;\r&apos;, &apos;\0&apos;, &apos;\c&apos;, &apos;\a&apos;, &apos;\e&apos; // eslint-disable-line no-useless-escape
+    ])
+  }
+
+  /**
+   * Generate a random digit
+   */
+  static digit () {
+    return String.fromCharCode(random.range(&apos;0&apos;.charCodeAt(0), &apos;9&apos;.charCodeAt(0)))
+  }
+
+  /**
+   * Generate a random line ending
+   */
+  static lineEnd () {
+    return random.pick([
+      &apos;\n&apos;, &apos;\r&apos;, &apos;\r\n&apos;, &apos;\n\r&apos;
+    ])
+  }
+
+  /**
+   * Generate a random token
+   */
+  static token () {
+    return random.pick([
+      &apos;*&apos;, &apos;+&apos;, &apos;%&apos;, &apos;-&apos;, &apos;!&apos;, &apos;^&apos;, &apos;:&apos;, &apos;|&apos;, &apos;&amp;&apos;, &apos;&lt;&apos;, &apos;&gt;&apos;, &apos;.&apos;, &apos;&quot;&apos;,
+      &apos;#&apos;, &apos; &apos;, &apos;;&apos;, &apos;,&apos;, &apos;{&apos;, &apos;}&apos;, &apos;(&apos;, &apos;)&apos;, &apos;[&apos;, &apos;]&apos;, &apos;/&apos;, &apos;\\&apos;, &apos;/*&apos;, &apos;*/&apos;
+    ])
+  }
+
+  static charset () {
+    return random.pick([
+      &apos;UTF-8&apos;, &apos;ISO-8859-1&apos;
+    ])
+  }
+
+  static language () {
+    return random.pick([
+      // special casing for i, I, dotted/dotless variants
+      [&apos;tr&apos;, &apos;az&apos;, &apos;crh&apos;, &apos;tt&apos;, &apos;ba&apos;],
+      // special casing rules: https://developer.mozilla.org/en/CSS/text-transform
+      [&apos;nl&apos;, &apos;el&apos;, &apos;ga&apos;],
+      // special justification rules
+      [&apos;ja&apos;, &apos;zh&apos;],
+      // tend to be RTL
+      [&apos;ar&apos;, &apos;he&apos;],
+      // http://mxr.mozilla.org/mozilla-central/source/gfx/thebes/gfxAtomList.h
+      [&apos;en&apos;, &apos;x-unicode&apos;, &apos;x-western&apos;, &apos;ja&apos;, &apos;ko&apos;, &apos;zh-cn&apos;, &apos;zh-hk&apos;, &apos;zh-tw&apos;, &apos;x-cyrillic&apos;, &apos;el&apos;, &apos;tr&apos;, &apos;he&apos;, &apos;ar&apos;, &apos;x-baltic&apos;, &apos;th&apos;, &apos;x-devanagari&apos;, &apos;x-tamil&apos;, &apos;x-armn&apos;, &apos;x-beng&apos;, &apos;x-cans&apos;, &apos;x-ethi&apos;, &apos;x-geor&apos;, &apos;x-gujr&apos;, &apos;x-guru&apos;, &apos;x-khmr&apos;, &apos;x-knda&apos;, &apos;x-mlym&apos;, &apos;x-orya&apos;, &apos;x-sinh&apos;, &apos;x-telu&apos;, &apos;x-tibt&apos;, &apos;ko-xxx&apos;, &apos;x-central-euro&apos;, &apos;x-symbol&apos;, &apos;x-user-def&apos;, &apos;az&apos;, &apos;ba&apos;, &apos;crh&apos;, &apos;tt&apos;],
+      // Seen in mxr
+      [&apos;en-US&apos;, &apos;fr&apos;, &apos;fra&apos;, &apos;de&apos;, &apos;ru&apos;, &apos;en-us&apos;, &apos;is-IS&apos;, &apos;xyzzy&apos;]
+    ])
+  }
+
+  /**
+   * Generate a random character that may affect layout
+   */
+  static layoutCharCodes () {
+    return String.fromCodePoint(
+      random.pick([
+        0, // null
+        160, // non-breaking space
+        0x005C, // backslash, but in some countries, represents local currency symbol (e.g. yen)
+        0x00AD, // soft hyphen
+        0x0BCC, // a Tamil character that is displayed as three glyphs
+        // http://unicode.org/charts/PDF/U2000.pdf
+        0x200B, // zero-width space
+        0x200C, // zero-width non-joiner
+        0x200D, // zero-width joiner
+        0x200E, // left-to-right mark
+        0x200F, // right-to-left mark
+        0x2011, // non-breaking hyphen
+        0x2027, // hyphenation point
+        0x2028, // line separator
+        0x2029, // paragraph separator
+        0x202A, // left-to-right embedding
+        0x202B, // right-to-left embedding
+        0x202C, // pop directional formatting
+        0x202D, // left-to-right override
+        0x202E, // right-to-left override
+        0x202F, // narrow no-break space
+        0x2060, // word joiner
+        0x2061, // function application (one of several invisible mathematical operators)
+        // http://unicode.org/charts/PDF/U3000.pdf
+        0x3000, // ideographic space (CJK)
+        // http://unicode.org/charts/PDF/U0300.pdf
+        0x0301, // combining acute accent (if it appears after &quot;a&quot;, it turns into &quot;a&quot; with an accent)
+        // Arabic has the interesting property that most letters connect to the next letter.
+        // Some code calls this &quot;shaping&quot;.
+        0x0643, // arabic letter kaf
+        0x0645, // arabic letter meem
+        0x06CD, // arabic letter yeh with tail
+        0xFDDE, // invalid unicode? but somehow associated with arabic.
+        // http://unicode.org/reports/tr36/tr36-7.html#Buffer_Overflows
+        // Characters with especially high expansion factors when they go through various unicode &quot;normalizations&quot;
+        0x1F82,
+        0xFDFA,
+        0xFB2C,
+        0x0390,
+        // 0x1D160, // hmm, need surrogates
+        // Characters with especially high expansion factors when lowercased or uppercased
+        0x023A,
+        0x0041,
+        0xDC1D, // a low surrogate
+        0xDB00, // a high surrogate
+        // UFFF0.pdf
+        0xFFF9, // interlinear annotation anchor
+        0xFFFA, // interlinear annotation seperator
+        0xFFFB, // interlinear annotation terminator
+        0xFFFC, // object replacement character
+        0xFFFD, // replacement character
+        0xFEFF, // zero width no-break space
+        0xFFFF, // not a character
+        0x00A0, // no-break space
+        0x2426,
+        0x003F,
+        0x00BF,
+        0xDC80,
+        0xDCFF,
+        // http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters
+        0x205F, // mathematical space
+        0x2061, // mathematical function application
+        0x2064, // mathematical invisible separator
+        0x2044 // fraction slash character
+      ])
+    )
+  }
+
+  /**
+   * Generate a random character that affects bidi layout
+   */
+  static bidiCharCodes () {
+    return String.fromCodePoint(
+      random.pick([
+        0x0660, // START_HINDI_DIGITS
+        0x0669, // END_HINDI_DIGITS
+        0x066A, // START_ARABIC_SEPARATOR
+        0x066B, // END_ARABIC_SEPARATOR
+        0x0030, // START_ARABIC_DIGITS
+        0x0039, // END_ARABIC_DIGITS
+        0x06f0, // START_FARSI_DIGITS
+        0x06f9 // END_FARSI_DIGITS
+      ])
+    )
+  }
+
+  /**
+   * Generate a random unicode combining character
+   * http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt
+   */
+  static unicodeCombiningCharacter () {
+    return String.fromCodePoint(
+      random.range(
+        ...random.item([
+          [0x0300, 0x036F], // Combining Diacritical Marks
+          [0x0483, 0x0489],
+          [0x07EB, 0x07F3],
+          [0x135D, 0x135F],
+          [0x1A7F, 0x1A7F],
+          [0x1B6B, 0x1B73],
+          [0x1DC0, 0x1DFF], // Combining Diacritical Marks Supplement
+          [0x20D0, 0x2DFF],
+          [0x3099, 0x309A],
+          [0xA66F, 0xA6F1],
+          [0xA8E0, 0xA8F1],
+          [0xFE20, 0xFE26], // Combining Half Marks
+          [0x101FD, 0x101FD],
+          [0x1D165, 0x1D169],
+          [0x1D16D, 0x1D172],
+          [0x1D17B, 0x1D18B],
+          [0x1D1AA, 0x1D1AD],
+          [0x1D242, 0x1D244]
+        ])
+      )
+    )
+  }
+
+  /**
+   * Generate a random basic multilingual plane character
+   */
+  static unicodeBMP () {
+    return String.fromCodePoint(
+      random.range(0x0000, 0xFFFF)
+    )
+  }
+
+  /**
+   * Generate a random supplementary multilingual plane character
+   */
+  static unicodeSMP () {
+    return String.fromCodePoint(
+      random.range(
+        ...random.item([
+          [0x10000, 0x13FFF],
+          [0x16000, 0x16FFF],
+          [0x1B000, 0x1BFFF],
+          [0x1D000, 0x1DFFF],
+          [0x1F000, 0x1FFFF]
+        ])
+      )
+    )
+  }
+
+  /**
+   * Generate a random supplementary ideographic plane character
+   */
+  static unicodeSIP () {
+    return String.fromCodePoint(
+      random.range(
+        ...random.item([
+          [0x20000, 0x2BFFF],
+          [0x2F000, 0x2FFFF]
+        ])
+      )
+    )
+  }
+
+  /**
+   * Generate a random supplementary special-purpose plane character
+   */
+  static unicodeSSP () {
+    return String.fromCodePoint(
+      random.range(0xE0000, 0xE0FFF)
+    )
+  }
+
+  static currency () {
+    return random.pick([
+      // https://en.wikipedia.org/wiki/ISO_4217
+      &apos;USD&apos;, &apos;USS&apos;, &apos;USN&apos;, &apos;EUR&apos;, &apos;CHF&apos;, &apos;GBP&apos;, &apos;XAG&apos;, &apos;XBA&apos;, &apos;XBB&apos;, &apos;XBC&apos;,
+      &apos;XBD&apos;, &apos;XSU&apos;, &apos;XTS&apos;, &apos;XXX&apos;
+    ])
+  }
+
+  static fromBlocks (set, maxlen) {
+    let s = &apos;&apos;
+
+    for (let i = 0; i &lt; random.number(maxlen || 255); i++) {
+      s += random.pick(set)
+    }
+
+    return s
+  }
+
+  static quotedString () {
+    return utils.common.quote(text.any())
+  }
+
+  /**
+   * Wrapper for all text generators
+   * @returns {string}
+   */
+  static random () {
+    return random.choose([
+      [1, text.alpha],
+      [1, text.alphanum],
+      [1, text.arithmeticOperator],
+      [1, text.assignmentOperator],
+      [1, text.controlChar],
+      [1, text.digit],
+      [1, text.lineEnd],
+      [1, text.token],
+      [3, text.layoutCharCodes],
+      [3, text.bidiCharCodes],
+      [3, text.unicodeCombiningCharacter],
+      [3, text.unicodeBMP],
+      [3, text.unicodeSMP],
+      [3, text.unicodeSIP],
+      [3, text.unicodeSSP]
+    ])
+  }
+
+  /**
+   * Generate a single character
+   */
+  static character () {
+    return text.random().charAt(0)
+  }
+
+  /**
+   * Generate string comprised of random generators
+   */
+  static any () {
+    let s = &apos;&apos;
+    let len = random.range(1, 126)
+
+    while (len--) {
+      s += make.text.random()
+    }
+
+    return s
+  }
+}
+
+module.exports = text
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

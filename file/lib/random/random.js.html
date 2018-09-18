@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">lib/random/random.js | @mozillasecurity/octo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@mozillasecurity/octo"><meta property="twitter:description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/mozillasecurity/octo.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#logging">logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/logging/index.js~logger.html">logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#make">make</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/alignment.js~alignment.html">alignment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/arrays.js~arrays.html">arrays</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/colors.js~colors.html">colors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/command.js~command.html">command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/crypto.js~crypto.html">crypto</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/files.js~files.html">files</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/fonts.js~font.html">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/html.js~html.html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/index.js~make.html">make</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/mime.js~mime.html">mime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/network.js~network.html">network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/numbers.js~number.html">number</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/shaders.js~shaders.html">shaders</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/style.js~style.html">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/text.js~text.html">text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/time.js~time.html">time</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/typed.js~typed.html">typed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/types.js~types.html">types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/units.js~unit.html">unit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/uri.js~uri.html">uri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/webgl.js~webgl.html">webgl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#random">random</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/mersennetwister.js~MersenneTwister.html">MersenneTwister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/random.js~random.html">random</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/block.js~block.html">block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/common.js~common.html">common</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/index.js~utils.html">utils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/mutate.js~mutate.html">mutate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/platform.js~platform.html">platform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/prototypes.js~prototypes.html">prototypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/script.js~script.html">script</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/random/random.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+const MersenneTwister = require(&apos;./mersennetwister&apos;)
+const logger = require(&apos;../logging&apos;)
+
+class random {
+  /**
+   * Must be called before any other methods can be called to initialize MersenneTwister
+   * @param {?number} seed - Value to initialize MersenneTwister
+   */
+  static init (seed = null) {
+    if (seed === null) {
+      seed = new Date().getTime()
+    }
+    random.twister = new MersenneTwister()
+    random.twister.seed(seed)
+  }
+
+  /**
+   * Returns an integer in [0, limit) (uniform distribution)
+   * @param {number} limit
+   */
+  static number (limit = 0xffffffff) {
+    if (!random.twister) {
+      throw new Error(&apos;random.init must be called first.&apos;)
+    }
+
+    let x = (0x100000000 / limit) &gt;&gt;&gt; 0
+    let y = (x * limit) &gt;&gt;&gt; 0
+    let r
+    do {
+      r = random.twister.int32()
+    } while (y &amp;&amp; r &gt;= y) // eslint-disable-line no-unmodified-loop-condition
+    return (r / x) &gt;&gt;&gt; 0
+  }
+
+  /**
+   * Returns a float in [0, 1) (uniform distribution)
+   */
+  static float () {
+    if (!random.twister) {
+      throw new Error(&apos;random.init must be called first.&apos;)
+    }
+
+    return random.twister.real2()
+  }
+
+  /**
+   * Returns an integer in [start, limit) (uniform distribution)
+   * @param {number} start
+   * @param {number} limit
+   */
+  static range (start, limit) {
+    if (!random.twister) {
+      throw new Error(&apos;random.init must be called first.&apos;)
+    }
+
+    if (isNaN(start) || isNaN(limit)) {
+      logger.traceback()
+      throw new TypeError(`random.range() received non-number type: (${start}, ${limit})`)
+    }
+
+    return random.number(limit - start + 1) + start
+  }
+
+  /**
+   * Returns a float in [1, limit). The logarithm has uniform distribution.
+   * @param {number} limit
+   */
+  static ludOneTo (limit) {
+    return Math.exp(random.float() * Math.log(limit))
+  }
+
+  /**
+   * Returns a random index from a list
+   * @param {Array} list
+   * @returns {*}
+   */
+  static item (list) {
+    if (!Array.isArray(list)) {
+      logger.traceback()
+      throw new TypeError(`random.item() received invalid object: (${list})`)
+    }
+
+    return list[random.number(list.length)]
+  }
+
+  /**
+   * Returns a random key of a provided object
+   * @param {Object} obj
+   */
+  static key (obj) {
+    return random.item(Object.keys(obj))
+  }
+
+  /**
+   * Return a random Boolean value
+   */
+  static bool () {
+    return random.item([true, false])
+  }
+
+  /**
+   * Recursively iterate over array until non-array item identified
+   * If item is a function, evaluate it with no args
+   * @param {*} obj
+   * @returns {*}
+   */
+  static pick (obj) {
+    if (typeof obj === &apos;function&apos;) {
+      return obj()
+    } else if (Array.isArray(obj)) {
+      return random.pick(random.item(obj))
+    }
+
+    return obj
+  }
+
+  /**
+   * Returns a boolean result based on limit
+   * @param limit
+   * @returns {boolean}
+   */
+  static chance (limit = 2) {
+    if (isNaN(limit)) {
+      logger.traceback()
+      throw new TypeError(`random.chance() received non-number type: (${limit})`)
+    }
+
+    return random.number(limit) === 1
+  }
+
+  /**
+   * Return an item from an array of arrays where the first index in each sub-array denotes the weight
+   * @param {Array} list - Array of arrays
+   * @param {Boolean} flat - Indicates whether we should iterate over the arrays recursively
+   * @returns {*}
+   */
+  static choose (list, flat = false) {
+    if (!(Array.isArray(list))) {
+      logger.traceback()
+      throw new TypeError(`random.choose() received non-array type: (${list})`)
+    }
+
+    const expanded = []
+    list.forEach(([weight, value]) =&gt; {
+      while (weight--) {
+        expanded.push(value)
+      }
+    })
+
+    if (flat) {
+      return random.item(expanded)
+    }
+
+    return random.pick(expanded)
+  }
+
+  /**
+   * Return a flattened list of weighted values
+   * [{w: 1, v: &apos;foo&apos;}, {w: 1, v: &apos;bar&apos;}]
+   * @param {Array} list
+   * @param {Array}
+   */
+  static weighted (list) {
+    const expanded = []
+    list.forEach((item) =&gt; {
+      while (item.w--) {
+        expanded.push(item.v)
+      }
+    })
+
+    return expanded
+  }
+
+  static use (obj) {
+    return random.bool() ? obj : &apos;&apos;
+  }
+
+  /**
+   * Returns arr shuffled
+   * @param arr
+   */
+  static shuffle (arr) {
+    let i = arr.length
+    while (i--) {
+      let p = random.number(i + 1)
+      let t = arr[i]
+      arr[i] = arr[p]
+      arr[p] = t
+    }
+  }
+
+  /**
+   * Returns a shuffled copy of arr
+   * @param arr
+   * @returns {*}
+   */
+  static shuffled (arr) {
+    let newArray = arr.slice()
+    random.shuffle(newArray)
+    return newArray
+  }
+
+  /**
+   * Select an array containing a subset of &apos;list&apos;
+   * @param list
+   * @param limit
+   * @returns {Array}
+   */
+  static subset (list, limit) {
+    if (!(Array.isArray(list))) {
+      logger.traceback()
+      throw new TypeError(`random.subset() received non-array type: (${list})`)
+    }
+
+    if (typeof limit !== &apos;number&apos;) {
+      limit = random.number(list.length + 1)
+    }
+
+    // Deepclone list
+    const temp = JSON.parse(JSON.stringify(list))
+    const result = []
+    while (limit--) {
+      result.push(random.pop(temp))
+    }
+
+    return result
+  }
+
+  /**
+   * Removes and returns a random item from an array.
+   * @param {*} arr
+   */
+  static pop (arr) {
+    let i, obj
+
+    i = random.number(arr.length)
+    obj = arr[i]
+    arr.splice(i, 1)
+
+    return obj
+  }
+
+  static hex (len) {
+    return random.number(Math.pow(2, len * 4)).toString(16)
+  }
+}
+
+module.exports = random
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

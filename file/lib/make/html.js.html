@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">lib/make/html.js | @mozillasecurity/octo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@mozillasecurity/octo"><meta property="twitter:description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/mozillasecurity/octo.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#logging">logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/logging/index.js~logger.html">logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#make">make</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/alignment.js~alignment.html">alignment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/arrays.js~arrays.html">arrays</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/colors.js~colors.html">colors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/command.js~command.html">command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/crypto.js~crypto.html">crypto</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/files.js~files.html">files</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/fonts.js~font.html">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/html.js~html.html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/index.js~make.html">make</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/mime.js~mime.html">mime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/network.js~network.html">network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/numbers.js~number.html">number</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/shaders.js~shaders.html">shaders</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/style.js~style.html">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/text.js~text.html">text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/time.js~time.html">time</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/typed.js~typed.html">typed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/types.js~types.html">types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/units.js~unit.html">unit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/uri.js~uri.html">uri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/webgl.js~webgl.html">webgl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#random">random</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/mersennetwister.js~MersenneTwister.html">MersenneTwister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/random.js~random.html">random</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/block.js~block.html">block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/common.js~common.html">common</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/index.js~utils.html">utils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/mutate.js~mutate.html">mutate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/platform.js~platform.html">platform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/prototypes.js~prototypes.html">prototypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/script.js~script.html">script</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/make/html.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+const make = require(&apos;../make&apos;)
+const random = require(&apos;../random&apos;)
+
+class html extends make {
+  static tag () {
+    return random.item([&apos;a&apos;, &apos;abbr&apos;, &apos;acronym&apos;, &apos;address&apos;, &apos;applet&apos;, &apos;area&apos;, &apos;article&apos;, &apos;aside&apos;, &apos;audio&apos;, &apos;b&apos;, &apos;base&apos;, &apos;basefont&apos;, &apos;bdi&apos;, &apos;bdo&apos;, &apos;bgsound&apos;, &apos;big&apos;, &apos;blink&apos;, &apos;blockquote&apos;, &apos;body&apos;, &apos;br&apos;, &apos;button&apos;, &apos;canvas&apos;, &apos;caption&apos;, &apos;center&apos;, &apos;cite&apos;, &apos;code&apos;, &apos;col&apos;, &apos;colgroup&apos;, &apos;command&apos;, &apos;content&apos;, &apos;data&apos;, &apos;datalist&apos;, &apos;dd&apos;, &apos;del&apos;, &apos;details&apos;, &apos;dfn&apos;, &apos;dialog&apos;, &apos;dir&apos;, &apos;div&apos;, &apos;dl&apos;, &apos;dt&apos;, &apos;element&apos;, &apos;em&apos;, &apos;embed&apos;, &apos;fieldset&apos;, &apos;figcaption&apos;, &apos;figure&apos;, &apos;font&apos;, &apos;foo&apos;, &apos;footer&apos;, &apos;form&apos;, &apos;frame&apos;, &apos;frameset&apos;, &apos;h1&apos;, &apos;h2&apos;, &apos;h3&apos;, &apos;h4&apos;, &apos;h5&apos;, &apos;h6&apos;, &apos;head&apos;, &apos;header&apos;, &apos;hgroup&apos;, &apos;hr&apos;, &apos;html&apos;, &apos;i&apos;, &apos;iframe&apos;, &apos;image&apos;, &apos;img&apos;, &apos;input&apos;, &apos;ins&apos;, &apos;isindex&apos;, &apos;kbd&apos;, &apos;keygen&apos;, &apos;label&apos;, &apos;legend&apos;, &apos;li&apos;, &apos;link&apos;, &apos;listing&apos;, &apos;main&apos;, &apos;map&apos;, &apos;mark&apos;, &apos;marquee&apos;, &apos;menu&apos;, &apos;menuitem&apos;, &apos;meta&apos;, &apos;meter&apos;, &apos;multicol&apos;, &apos;nav&apos;, &apos;nobr&apos;, &apos;noembed&apos;, &apos;noframes&apos;, &apos;noscript&apos;, &apos;object&apos;, &apos;ol&apos;, &apos;optgroup&apos;, &apos;option&apos;, &apos;output&apos;, &apos;p&apos;, &apos;param&apos;, &apos;picture&apos;, &apos;plaintext&apos;, &apos;pre&apos;, &apos;progress&apos;, &apos;q&apos;, &apos;rb&apos;, &apos;rp&apos;, &apos;rt&apos;, &apos;rtc&apos;, &apos;ruby&apos;, &apos;s&apos;, &apos;samp&apos;, &apos;script&apos;, &apos;section&apos;, &apos;select&apos;, &apos;shadow&apos;, &apos;slot&apos;, &apos;small&apos;, &apos;source&apos;, &apos;spacer&apos;, &apos;span&apos;, &apos;strike&apos;, &apos;strong&apos;, &apos;style&apos;, &apos;sub&apos;, &apos;summary&apos;, &apos;sup&apos;, &apos;table&apos;, &apos;tbody&apos;, &apos;td&apos;, &apos;template&apos;, &apos;textarea&apos;, &apos;tfoot&apos;, &apos;th&apos;, &apos;thead&apos;, &apos;time&apos;, &apos;title&apos;, &apos;tr&apos;, &apos;track&apos;, &apos;tt&apos;, &apos;u&apos;, &apos;ul&apos;, &apos;var&apos;, &apos;video&apos;, &apos;wbr&apos;, &apos;xmp&apos;])
+  }
+
+  static attribute () {
+    return random.item([&apos;accept&apos;, &apos;accept-charset&apos;, &apos;accesskey&apos;, &apos;action&apos;, &apos;align&apos;, &apos;alt&apos;, &apos;async&apos;, &apos;autocomplete&apos;, &apos;autofocus&apos;, &apos;autoplay&apos;, &apos;autosave&apos;, &apos;bgcolor&apos;, &apos;border&apos;, &apos;buffered&apos;, &apos;challenge&apos;, &apos;charset&apos;, &apos;checked&apos;, &apos;cite&apos;, &apos;class&apos;, &apos;code&apos;, &apos;codebase&apos;, &apos;color&apos;, &apos;cols&apos;, &apos;colspan&apos;, &apos;content&apos;, &apos;contenteditable&apos;, &apos;contextmenu&apos;, &apos;controls&apos;, &apos;coords&apos;, &apos;crossorigin&apos;, &apos;data&apos;, &apos;data-*&apos;, &apos;datetime&apos;, &apos;default&apos;, &apos;defer&apos;, &apos;dir&apos;, &apos;dirname&apos;, &apos;disabled&apos;, &apos;download&apos;, &apos;draggable&apos;, &apos;dropzone&apos;, &apos;enctype&apos;, &apos;for&apos;, &apos;form&apos;, &apos;formaction&apos;, &apos;headers&apos;, &apos;height&apos;, &apos;hidden&apos;, &apos;high&apos;, &apos;href&apos;, &apos;hreflang&apos;, &apos;http-equiv&apos;, &apos;icon&apos;, &apos;id&apos;, &apos;integrity&apos;, &apos;ismap&apos;, &apos;itemprop&apos;, &apos;keytype&apos;, &apos;kind&apos;, &apos;label&apos;, &apos;lang&apos;, &apos;language&apos;, &apos;list&apos;, &apos;loop&apos;, &apos;low&apos;, &apos;manifest&apos;, &apos;max&apos;, &apos;maxlength&apos;, &apos;minlength&apos;, &apos;media&apos;, &apos;method&apos;, &apos;min&apos;, &apos;multiple&apos;, &apos;muted&apos;, &apos;name&apos;, &apos;novalidate&apos;, &apos;open&apos;, &apos;optimum&apos;, &apos;pattern&apos;, &apos;ping&apos;, &apos;placeholder&apos;, &apos;poster&apos;, &apos;preload&apos;, &apos;radiogroup&apos;, &apos;readonly&apos;, &apos;rel&apos;, &apos;required&apos;, &apos;reversed&apos;, &apos;rows&apos;, &apos;rowspan&apos;, &apos;sandbox&apos;, &apos;scope&apos;, &apos;scoped&apos;, &apos;seamless&apos;, &apos;selected&apos;, &apos;shape&apos;, &apos;size&apos;, &apos;sizes&apos;, &apos;slot&apos;, &apos;span&apos;, &apos;spellcheck&apos;, &apos;src&apos;, &apos;srcdoc&apos;, &apos;srclang&apos;, &apos;srcset&apos;, &apos;start&apos;, &apos;step&apos;, &apos;style&apos;, &apos;summary&apos;, &apos;tabindex&apos;, &apos;target&apos;, &apos;title&apos;, &apos;type&apos;, &apos;usemap&apos;, &apos;value&apos;, &apos;width&apos;])
+  }
+
+  static interfaceName () {
+    return random.pick([&apos;HTMLBRElement&apos;, &apos;HTMLTableSectionElement&apos;, &apos;HTMLDataListElement&apos;, &apos;HTMLTableElement&apos;, &apos;HTMLOListElement&apos;, &apos;HTMLFontElement&apos;, &apos;HTMLMapElement&apos;, &apos;HTMLButtonElement&apos;, &apos;HTMLFrameSetElement&apos;, &apos;HTMLDataElement&apos;, &apos;HTMLOptGroupElement&apos;, &apos;HTMLAnchorElement&apos;, &apos;HTMLLinkElement&apos;, &apos;HTMLObjectElement&apos;, &apos;HTMLHeadElement&apos;, &apos;HTMLProgressElement&apos;, &apos;HTMLFrameElement&apos;, &apos;HTMLTimeElement&apos;, &apos;HTMLTableCaptionElement&apos;, &apos;HTMLDivElement&apos;, &apos;HTMLDListElement&apos;, &apos;HTMLBodyElement&apos;, &apos;HTMLImageElement&apos;, &apos;HTMLTableRowElement&apos;, &apos;HTMLScriptElement&apos;, &apos;HTMLInputElement&apos;, &apos;HTMLMeterElement&apos;, &apos;HTMLFieldSetElement&apos;, &apos;HTMLHtmlElement&apos;, &apos;HTMLStyleElement&apos;, &apos;HTMLDetailsElement&apos;, &apos;HTMLTrackElement&apos;, &apos;HTMLBaseElement&apos;, &apos;HTMLTableColElement&apos;, &apos;HTMLSourceElement&apos;, &apos;HTMLPictureElement&apos;, &apos;HTMLSelectElement&apos;, &apos;HTMLLegendElement&apos;, &apos;HTMLHRElement&apos;, &apos;HTMLModElement&apos;, &apos;HTMLTemplateElement&apos;, &apos;HTMLAreaElement&apos;, &apos;HTMLFormElement&apos;, &apos;HTMLEmbedElement&apos;, &apos;HTMLSpanElement&apos;, &apos;HTMLParagraphElement&apos;, &apos;HTMLIFrameElement&apos;, &apos;HTMLTableCellElement&apos;, &apos;HTMLElement&apos;, &apos;HTMLMenuElement&apos;, &apos;HTMLTextAreaElement&apos;, &apos;HTMLHeadingElement&apos;, &apos;HTMLCanvasElement&apos;, &apos;HTMLOutputElement&apos;, &apos;HTMLQuoteElement&apos;, &apos;HTMLOptionElement&apos;, &apos;HTMLLIElement&apos;, &apos;HTMLAudioElement&apos;, &apos;HTMLMenuItemElement&apos;, &apos;HTMLParamElement&apos;, &apos;HTMLUListElement&apos;, &apos;HTMLLabelElement&apos;, &apos;HTMLDirectoryElement&apos;, &apos;HTMLTitleElement&apos;, &apos;HTMLPreElement&apos;, &apos;HTMLMetaElement&apos;, &apos;HTMLVideoElement&apos;])
+  }
+
+  static className () {
+    return random.item([&apos;class_1&apos;, &apos;class_2&apos;, &apos;class_3&apos;, &apos;class_4&apos;])
+  }
+}
+
+module.exports = html
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

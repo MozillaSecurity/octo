@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">lib/make/webgl.js | @mozillasecurity/octo</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@mozillasecurity/octo"><meta property="twitter:description" content="A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/mozillasecurity/octo.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#logging">logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/logging/index.js~logger.html">logger</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#make">make</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/alignment.js~alignment.html">alignment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/arrays.js~arrays.html">arrays</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/colors.js~colors.html">colors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/command.js~command.html">command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/crypto.js~crypto.html">crypto</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/files.js~files.html">files</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/fonts.js~font.html">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/html.js~html.html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/index.js~make.html">make</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/mime.js~mime.html">mime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/network.js~network.html">network</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/numbers.js~number.html">number</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/shaders.js~shaders.html">shaders</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/style.js~style.html">style</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/text.js~text.html">text</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/time.js~time.html">time</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/typed.js~typed.html">typed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/types.js~types.html">types</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/units.js~unit.html">unit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/uri.js~uri.html">uri</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/make/webgl.js~webgl.html">webgl</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#random">random</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/mersennetwister.js~MersenneTwister.html">MersenneTwister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/random/random.js~random.html">random</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/block.js~block.html">block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/common.js~common.html">common</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/index.js~utils.html">utils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/mutate.js~mutate.html">mutate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/platform.js~platform.html">platform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/prototypes.js~prototypes.html">prototypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/utils/script.js~script.html">script</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/make/webgl.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+const make = require(&apos;../make&apos;)
+const random = require(&apos;../random&apos;)
+
+class webgl extends make {
+  static get internalFormat () {
+    return {
+      &apos;RGB&apos;: { format: &apos;RGB&apos;, type: [&apos;UNSIGNED_BYTE&apos;, &apos;UNSIGNED_SHORT_5_6_5&apos;] },
+      &apos;RGBA&apos;: { format: &apos;RGBA&apos;, type: [&apos;UNSIGNED_BYTE&apos;, &apos;UNSIGNED_SHORT_4_4_4_4&apos;, &apos;UNSIGNED_SHORT_5_5_5_1&apos;] },
+      &apos;LUMINANCE_ALPHA&apos;: { format: &apos;LUMINANCE_ALPHA&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;LUMINANCE&apos;: { format: &apos;LUMINANCE&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;ALPHA&apos;: { format: &apos;ALPHA&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;R8&apos;: { format: &apos;RED&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;R16F&apos;: { format: &apos;RED&apos;, type: [&apos;HALF_FLOAT&apos;, &apos;FLOAT&apos;] },
+      &apos;R32F&apos;: { format: &apos;RED&apos;, type: [&apos;FLOAT&apos;] },
+      &apos;R8UI&apos;: { format: &apos;RED_INTEGER&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;RG8&apos;: { format: &apos;RG&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;RG16F&apos;: { format: &apos;RG&apos;, type: [&apos;HALF_FLOAT&apos;, &apos;FLOAT&apos;] },
+      &apos;RG32F&apos;: { format: &apos;RG&apos;, type: [&apos;FLOAT&apos;] },
+      &apos;RG8UI&apos;: { format: &apos;RG_INTEGER&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;RGB8&apos;: { format: &apos;RGB&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;SRGB8&apos;: { format: &apos;RGB&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;RGB565&apos;: { format: &apos;RGB&apos;, type: [&apos;RGB&apos;, &apos;UNSIGNED_BYTE&apos;, &apos;UNSIGNED_SHORT_5_6_5&apos;] },
+      &apos;R11F_G11F_B10F&apos;: { format: &apos;RGB&apos;, type: [&apos;UNSIGNED_INT_10F_11F_11F_REV&apos;, &apos;HALF_FLOAT&apos;, &apos;FLOAT&apos;] },
+      &apos;RGB9_E5&apos;: { format: &apos;RGB&apos;, type: [&apos;HALF_FLOAT&apos;, &apos;FLOAT&apos;] },
+      &apos;RGB16F&apos;: { format: &apos;RGB&apos;, type: [&apos;HALF_FLOAT&apos;, &apos;FLOAT&apos;] },
+      &apos;RGB32F&apos;: { format: &apos;RGB&apos;, type: [&apos;FLOAT&apos;] },
+      &apos;RGB8UI&apos;: { format: &apos;RGB_INTEGER&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;RGBA8&apos;: { format: &apos;RGBA&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;SRGB8_ALPHA8&apos;: { format: &apos;RGBA&apos;, type: [&apos;UNSIGNED_BYTE&apos;] },
+      &apos;RGB5_A1&apos;: { format: &apos;RGBA&apos;, type: [&apos;UNSIGNED_BYTE&apos;, &apos;UNSIGNED_SHORT_5_5_5_1&apos;] },
+      &apos;RGB10_A2&apos;: { format: &apos;RGBA&apos;, type: [&apos;UNSIGNED_INT_2_10_10_10_REV&apos;] },
+      &apos;RGBA4&apos;: { format: &apos;RGBA&apos;, type: [&apos;UNSIGNED_BYTE&apos;, &apos;UNSIGNED_SHORT_4_4_4_4&apos;] },
+      &apos;RGBA16F&apos;: { format: &apos;RGBA&apos;, type: [&apos;HALF_FLOAT&apos;, &apos;FLOAT&apos;] },
+      &apos;RGBA32F&apos;: { format: &apos;RGBA&apos;, type: [&apos;FLOAT&apos;] },
+      &apos;RGBA8UI&apos;: { format: &apos;RGBA_INTEGER&apos;, type: [&apos;UNSIGNED_BYTE&apos;] }
+    }
+  }
+
+  static WebGLFormat () {
+    let internalformat = random.item(Object.keys(webgl.internalFormat))
+    let format = webgl.internalFormat[internalformat].format
+    let type = random.item(webgl.internalFormat[internalformat].type)
+    return [internalformat, format, type]
+  }
+
+  static textureSources () {
+    let sources = [
+      &apos;HTMLCanvasElement&apos;,
+      &apos;HTMLImageElement&apos;,
+      &apos;HTMLVideoElement&apos;,
+      &apos;ImageData&apos;
+    ]
+    return random.item(sources)
+  }
+
+  static match (shader, regex, group = 1) {
+    let matches = []
+    while (true) {
+      let match = regex.exec(shader)
+      if (match) {
+        matches.push(match[group])
+      } else {
+        break
+      }
+    }
+    return matches
+  }
+
+  static parseUniforms (shader, group = 1) {
+    /* Todo: Parse their individual data types into categories. */
+    return webgl.match(shader, /uniform .+? (\w+)(?=[\[;])/gm, group) // eslint-disable-line no-useless-escape
+  }
+
+  static parseAttributes (shader, group = 1) {
+    return webgl.match(shader, /attribute .+? (\w+)(?=;)/gm, group)
+  }
+
+  static parseVaryings (shader, group = 1) {
+    return webgl.match(shader, /varying .+? (\w+)(?=;)/gm, group)
+  }
+
+  static parseFragDatav2 (shader, group = 1) {
+    // #version 200
+    return webgl.match(shader, /(gl_Frag[^[ =]+)/gm, group)
+  }
+
+  static parseFragDatav3 (shader, group = 1) {
+    // #version 300
+    return webgl.match(shader, /out .+? (\w+)(?=[\[;])/gm, group) // eslint-disable-line no-useless-escape
+  }
+
+  static parseFrag (shader, group = 1) {
+    let matches = webgl.parseFragDatav2(shader)
+    if (matches.length) {
+      return matches
+    }
+    return webgl.parseFragDatav3(shader)
+  }
+
+  static randomBitmask () {
+    const values = []
+    for (let i = 0; i &lt; 8; i++) {
+      values.push(random.item([1, 0]))
+    }
+
+    return parseInt(values.join(&apos;&apos;))
+  }
+
+  static randomBufferTarget (isWebGL2) {
+    let target = [
+      &apos;ARRAY_BUFFER&apos;,
+      &apos;ELEMENT_ARRAY_BUFFER&apos;
+    ]
+    if (isWebGL2) {
+      target.extend([
+        &apos;COPY_READ_BUFFER&apos;,
+        &apos;COPY_WRITE_BUFFER&apos;,
+        &apos;TRANSFORM_FEEDBACK_BUFFER&apos;,
+        &apos;UNIFORM_BUFFER&apos;,
+        &apos;PIXEL_PACK_BUFFER&apos;,
+        &apos;PIXEL_UNPACK_BUFFER&apos;
+      ])
+    }
+    return random.item(target)
+  }
+
+  static randomTexParameter (isWebGL2) {
+    let pname = [
+      &apos;TEXTURE_MAG_FILTER&apos;,
+      &apos;TEXTURE_MIN_FILTER&apos;,
+      &apos;TEXTURE_WRAP_S&apos;,
+      &apos;TEXTURE_WRAP_T&apos;
+    ]
+    if (isWebGL2) {
+      pname.extend([
+        &apos;TEXTURE_BASE_LEVEL&apos;,
+        &apos;TEXTURE_COMPARE_FUNC&apos;,
+        &apos;TEXTURE_COMPARE_MODE&apos;,
+        &apos;TEXTURE_MAX_LEVEL&apos;,
+        &apos;TEXTURE_MAX_LOD&apos;,
+        &apos;TEXTURE_MIN_LOD&apos;,
+        &apos;TEXTURE_WRAP_R&apos;
+      ])
+    }
+    return random.item(pname)
+  }
+
+  static randomTexParameterValue (isWebGL2) {
+    let pnameparam = {
+      &apos;TEXTURE_MAG_FILTER&apos;: [
+        &apos;LINEAR&apos;,
+        &apos;NEAREST&apos;
+      ],
+      &apos;TEXTURE_MIN_FILTER&apos;: [
+        &apos;LINEAR&apos;,
+        &apos;NEAREST&apos;,
+        &apos;NEAREST_MIPMAP_NEAREST&apos;,
+        &apos;LINEAR_MIPMAP_NEAREST&apos;,
+        &apos;NEAREST_MIPMAP_LINEA&apos;,
+        &apos;LINEAR_MIPMAP_LINEAR&apos;
+      ],
+      &apos;TEXTURE_WRAP_S&apos;: [
+        &apos;REPEAT&apos;,
+        &apos;CLAMP_TO_EDGE&apos;,
+        &apos;MIRRORED_REPEAT&apos;
+      ],
+      &apos;TEXTURE_WRAP_T&apos;: [
+        &apos;REPEAT&apos;,
+        &apos;CLAMP_TO_EDGE&apos;,
+        &apos;MIRRORED_REPEAT&apos;
+      ]
+    }
+    if (isWebGL2) {
+      pnameparam = Object.assign(
+        pnameparam,
+        {
+          &apos;TEXTURE_BASE_LEVEL&apos;: [
+            make.number.any()
+          ],
+          &apos;TEXTURE_COMPARE_FUNC&apos;: [
+            &apos;LEQUAL&apos;,
+            &apos;GEQUAL&apos;,
+            &apos;LESS&apos;,
+            &apos;GREATER&apos;,
+            &apos;EQUAL&apos;,
+            &apos;NOTEQUAL&apos;,
+            &apos;ALWAYS&apos;,
+            &apos;NEVER&apos;
+          ],
+          &apos;TEXTURE_COMPARE_MODE&apos;: [
+            &apos;NONE&apos;,
+            &apos;COMPARE_REF_TO_TEXTURE&apos;
+          ],
+          &apos;TEXTURE_MAX_LEVEL&apos;: [
+            make.number.any()
+          ],
+          &apos;TEXTURE_MAX_LOD&apos;: [
+            make.number.float()
+          ],
+          &apos;TEXTURE_MIN_LOD&apos;: [
+            make.number.float()
+          ],
+          &apos;TEXTURE_WRAP_R&apos;: [
+            &apos;REPEAT&apos;,
+            &apos;CLAMP_TO_EDGE&apos;,
+            &apos;MIRRORED_REPEAT&apos;
+          ]
+        }
+      )
+    }
+    let pname = random.item(Object.keys(pnameparam))
+    let param = random.item(pnameparam[pname])
+    return [pname, param]
+  }
+
+  static randomBlendMode (isWebGL2) {
+    let mode = [
+      &apos;FUNC_ADD&apos;,
+      &apos;FUNC_SUBTRACT&apos;,
+      &apos;FUNC_REVERSE_SUBTRACT&apos;
+    ]
+    if (isWebGL2) {
+      mode.extend([
+        &apos;MIN&apos;,
+        &apos;MAX&apos;
+      ])
+    }
+    return random.item(mode)
+  }
+
+  static randomBlendFactor (isWebGL2) {
+    let factor = [
+      &apos;ZERO&apos;,
+      &apos;ONE&apos;,
+      &apos;SRC_COLOR&apos;,
+      &apos;ONE_MINUS_SRC_COLOR&apos;,
+      &apos;DST_COLOR&apos;,
+      &apos;ONE_MINUS_DST_COLOR&apos;,
+      &apos;SRC_ALPHA&apos;,
+      &apos;ONE_MINUS_SRC_ALPHA&apos;,
+      &apos;DST_ALPHA&apos;,
+      &apos;ONE_MINUS_DST_ALPHA&apos;,
+      &apos;CONSTANT_COLOR&apos;,
+      &apos;ONE_MINUS_CONSTANT_COLOR&apos;,
+      &apos;CONSTANT_ALPHA&apos;,
+      &apos;ONE_MINUS_CONSTANT_ALPHA&apos;,
+      &apos;SRC_ALPHA_SATURATE&apos;
+    ]
+    return random.item(factor)
+  }
+
+  static randomFace (isWebGL2) {
+    let mode = [
+      &apos;FRONT&apos;,
+      &apos;BACK&apos;,
+      &apos;FRONT_AND_BACK&apos;
+    ]
+    return random.item(mode)
+  }
+
+  static randomTexImage2DTarget (isWebGL2) {
+    let target = [
+      &apos;TEXTURE_2D&apos;,
+      &apos;TEXTURE_CUBE_MAP_POSITIVE_X&apos;,
+      &apos;TEXTURE_CUBE_MAP_NEGATIVE_X&apos;,
+      &apos;TEXTURE_CUBE_MAP_POSITIVE_Y&apos;,
+      &apos;TEXTURE_CUBE_MAP_NEGATIVE_Y&apos;,
+      &apos;TEXTURE_CUBE_MAP_POSITIVE_Z&apos;,
+      &apos;TEXTURE_CUBE_MAP_NEGATIVE_Z&apos;
+    ]
+    return random.item(target)
+  }
+
+  static randomTextureTarget (isWebGL2) {
+    let target = [
+      &apos;TEXTURE_2D&apos;,
+      &apos;TEXTURE_CUBE_MAP&apos;
+    ]
+    if (isWebGL2) {
+      target.extend([
+        &apos;TEXTURE_3D&apos;,
+        &apos;TEXTURE_2D_ARRAY&apos;
+      ])
+    }
+    return random.item(target)
+  }
+
+  static randomFunc (isWebGL2) {
+    let func = [
+      &apos;NEVER&apos;,
+      &apos;LESS&apos;,
+      &apos;EQUAL&apos;,
+      &apos;LEQUAL&apos;,
+      &apos;GREATER&apos;,
+      &apos;NOTEQUAL&apos;,
+      &apos;GEQUAL&apos;,
+      &apos;ALWAYS&apos;
+    ]
+    return random.item(func)
+  }
+
+  static randomCap (isWebGL2) {
+    let cap = [
+      &apos;BLEND&apos;,
+      &apos;CULL_FACE&apos;,
+      &apos;DEPTH_TEST&apos;,
+      &apos;DITHER&apos;,
+      &apos;POLYGON_OFFSET_FILL&apos;,
+      &apos;SAMPLE_ALPHA_TO_COVERAGE&apos;,
+      &apos;SAMPLE_COVERAGE&apos;,
+      &apos;SCISSOR_TEST&apos;,
+      &apos;STENCIL_TEST&apos;
+    ]
+    if (isWebGL2) {
+      cap.extend([
+        &apos;RASTERIZER_DISCARD&apos;
+      ])
+    }
+    return random.item(cap)
+  }
+
+  static randomPrimitive (isWebGL2) {
+    let mode = [
+      &apos;POINTS&apos;,
+      &apos;LINE_STRIP&apos;,
+      &apos;LINE_LOOP&apos;,
+      &apos;LINES&apos;,
+      &apos;TRIANGLE_STRIP&apos;,
+      &apos;TRIANGLE_FAN&apos;,
+      &apos;TRIANGLES&apos;
+    ]
+    return random.item(mode)
+  }
+
+  static randomTextureAttachment (isWebGL2) {
+    let attachment = [
+      &apos;COLOR_ATTACHMENT0&apos;,
+      &apos;DEPTH_ATTACHMENT&apos;,
+      &apos;STENCIL_ATTACHMENT&apos;,
+      &apos;DEPTH_STENCIL_ATTACHMENT&apos;
+    ]
+    if (isWebGL2) {
+      attachment.extend([
+        `COLOR_ATTACHMENT${random.range(0, 15)}`
+      ])
+    }
+    return random.item(attachment)
+  }
+
+  static randomAttachmentQuery (isWebGL2) {
+    let pname = [
+      &apos;FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE&apos;,
+      &apos;FRAMEBUFFER_ATTACHMENT_OBJECT_NAME&apos;,
+      &apos;FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL&apos;,
+      &apos;FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE&apos;
+    ]
+    if (isWebGL2) {
+      pname.extend([
+        &apos;FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_BLUE_SIZE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_GREEN_SIZE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_RED_SIZE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE&apos;,
+        &apos;FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER&apos;
+      ])
+    }
+    return random.item(pname)
+  }
+
+  static randomShaderPrecision (isWebGL2) {
+    let precisiontype = [
+      &apos;LOW_FLOAT&apos;,
+      &apos;MEDIUM_FLOAT&apos;,
+      &apos;HIGH_FLOAT&apos;,
+      &apos;LOW_INT&apos;,
+      &apos;MEDIUM_INT&apos;,
+      &apos;HIGH_INT&apos;
+    ]
+    return random.item(precisiontype)
+  }
+
+  static randomStencilRefParameter (isWebGL2) {
+    let param = [
+      &apos;STENCIL_FUNC&apos;,
+      &apos;STENCIL_VALUE_MASK&apos;,
+      &apos;STENCIL_REF&apos;,
+      &apos;STENCIL_BACK_FUNC&apos;,
+      &apos;STENCIL_BACK_VALUE_MASK&apos;,
+      &apos;STENCIL_BACK_REF&apos;,
+      &apos;STENCIL_BITS&apos;
+    ]
+    return random.item(param)
+  }
+
+  static randomStencilMaskParameter (isWebGL2) {
+    let param = [
+      &apos;STENCIL_WRITEMASK&apos;,
+      &apos;STENCIL_BACK_WRITEMASK&apos;,
+      &apos;STENCIL_BITS&apos;
+    ]
+    return random.item(param)
+  }
+
+  static randomVertexAttribParameter (isWebGL2) {
+    let pname = [
+      &apos;VERTEX_ATTRIB_ARRAY_BUFFER_BINDING&apos;,
+      &apos;VERTEX_ATTRIB_ARRAY_ENABLED&apos;,
+      &apos;VERTEX_ATTRIB_ARRAY_SIZE&apos;,
+      &apos;VERTEX_ATTRIB_ARRAY_STRIDE&apos;,
+      &apos;VERTEX_ATTRIB_ARRAY_TYPE&apos;,
+      &apos;VERTEX_ATTRIB_ARRAY_NORMALIZED&apos;,
+      &apos;CURRENT_VERTEX_ATTRIB&apos;
+    ]
+    if (isWebGL2) {
+      pname.extend([
+        &apos;VERTEX_ATTRIB_ARRAY_INTEGER&apos;,
+        &apos;VERTEX_ATTRIB_ARRAY_DIVISOR&apos;,
+        &apos;VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE&apos;
+      ])
+    }
+    return random.item(pname)
+  }
+
+  static randomHint (isWebGL2) {
+    let target = [
+      &apos;GENERATE_MIPMAP_HINT&apos;
+    ]
+    if (isWebGL2) {
+      target.extend([
+        &apos;FRAGMENT_SHADER_DERIVATIVE_HINT&apos;
+      ])
+    }
+    return random.item(target)
+  }
+
+  static randomHintMode (isWebGL2) {
+    let mode = [
+      &apos;FASTEST&apos;,
+      &apos;NICEST&apos;,
+      &apos;DONT_CARE&apos;
+    ]
+    return random.item(mode)
+  }
+
+  static randomPixelStorage (isWebGL2) {
+    let pname = {
+      &apos;PACK_ALIGNMENT&apos;: random.item([1, 2, 4, 8]),
+      &apos;UNPACK_ALIGNMENT&apos;: random.item([1, 2, 4, 8]),
+      &apos;UNPACK_FLIP_Y_WEBGL&apos;: random.bool(),
+      &apos;UNPACK_PREMULTIPLY_ALPHA_WEBGL&apos;: random.bool(),
+      &apos;UNPACK_COLORSPACE_CONVERSION_WEBGL&apos;: random.item([0, 0x9244])
+    }
+    if (isWebGL2) {
+      Object.assign(
+        pname,
+        {
+          &apos;PACK_ROW_LENGTH&apos;: make.number.any(),
+          &apos;PACK_SKIP_PIXELS&apos;: make.number.any(),
+          &apos;PACK_SKIP_ROWS&apos;: make.number.any(),
+          &apos;UNPACK_ROW_LENGTH&apos;: make.number.any(),
+          &apos;UNPACK_IMAGE_HEIGHT&apos;: make.number.any(),
+          &apos;UNPACK_SKIP_PIXELS&apos;: make.number.any(),
+          &apos;UNPACK_SKIP_ROWS&apos;: make.number.any(),
+          &apos;UNPACK_SKIP_IMAGES&apos;: make.number.any()
+        }
+      )
+    }
+    let name = random.item(Object.keys(pname))
+    return [name, pname[name]]
+  }
+
+  static randomStencilAction (isWebGL2) {
+    let action = [
+      &apos;KEEP&apos;,
+      &apos;ZERO&apos;,
+      &apos;REPLACE&apos;,
+      &apos;INCR&apos;,
+      &apos;INCR_WRAP&apos;,
+      &apos;DECR&apos;,
+      &apos;DECR_WRAP&apos;,
+      &apos;INVERT&apos;
+    ]
+    return random.item(action)
+  }
+
+  static randomQueryTarget (isWebGL2) {
+    let target = [
+      &apos;ANY_SAMPLES_PASSED&apos;,
+      &apos;ANY_SAMPLES_PASSED_CONSERVATIVE&apos;,
+      &apos;TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN&apos;
+    ]
+    return random.item(target)
+  }
+
+  static randomQueryPname (isWebGL2) {
+    let pname = [
+      &apos;CURRENT_QUERY&apos;,
+      &apos;QUERY_RESULT&apos;,
+      &apos;QUERY_RESULT_AVAILABLE&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomSamplerParameter (isWebGL2) {
+    let pname = [
+      &apos;TEXTURE_MAG_FILTER&apos;,
+      &apos;TEXTURE_MIN_FILTER&apos;,
+      &apos;TEXTURE_WRAP_S&apos;,
+      &apos;TEXTURE_WRAP_T&apos;,
+      &apos;TEXTURE_BASE_LEVEL&apos;,
+      &apos;TEXTURE_COMPARE_FUNC&apos;,
+      &apos;TEXTURE_COMPARE_MODE&apos;,
+      &apos;TEXTURE_MAX_LEVEL&apos;,
+      &apos;TEXTURE_WRAP_R&apos;,
+      &apos;TEXTURE_MAX_LOD&apos;,
+      &apos;TEXTURE_MIN_LOD&apos;,
+      &apos;TEXTURE_MAX_ANISOTROPY_EXT&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomSyncParameter (isWebGL2) {
+    let pname = [
+      &apos;OBJECT_TYPE&apos;,
+      &apos;SYNC_STATUS&apos;,
+      &apos;SYNC_CONDITION&apos;,
+      &apos;SYNC_FLAGS&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomClearBuffer (isWebGL2) {
+    let buffer = [
+      &apos;COLOR&apos;,
+      &apos;DEPTH&apos;,
+      &apos;STENCIL&apos;,
+      &apos;DEPTH_STENCIL&apos;
+    ]
+    return random.item(buffer)
+  }
+
+  static randomBindBufferTarget (isWebGL2) {
+    let target = [
+      &apos;TRANSFORM_FEEDBACK_BUFFER&apos;,
+      &apos;UNIFORM_BUFFER&apos;
+    ]
+    return random.item(target)
+  }
+
+  static randomIndexedParameterTarget (isWebGL2) {
+    let target = [
+      &apos;TRANSFORM_FEEDBACK_BUFFER_BINDING&apos;,
+      &apos;TRANSFORM_FEEDBACK_BUFFER_SIZE&apos;,
+      &apos;TRANSFORM_FEEDBACK_BUFFER_START&apos;,
+      &apos;UNIFORM_BUFFER_BINDING&apos;,
+      &apos;UNIFORM_BUFFER_SIZE&apos;,
+      &apos;UNIFORM_BUFFER_START&apos;
+    ]
+    return random.item(target)
+  }
+
+  static randomUniformParameter (isWebGL2) {
+    let pname = [
+      &apos;UNIFORM_TYPE&apos;,
+      &apos;UNIFORM_SIZE&apos;,
+      &apos;UNIFORM_BLOCK_INDEX&apos;,
+      &apos;UNIFORM_OFFSET&apos;,
+      &apos;UNIFORM_ARRAY_STRIDE&apos;,
+      &apos;UNIFORM_MATRIX_STRIDE&apos;,
+      &apos;UNIFORM_IS_ROW_MAJOR&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomUniformBlockParameter (isWebGL2) {
+    let pname = [
+      &apos;UNIFORM_BLOCK_BINDING&apos;,
+      &apos;UNIFORM_BLOCK_DATA_SIZE&apos;,
+      &apos;UNIFORM_BLOCK_ACTIVE_UNIFORMS&apos;,
+      &apos;UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES&apos;,
+      &apos;UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER&apos;,
+      &apos;UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomPixelDatatype (isWebGL2) {
+    let type = [
+      &apos;UNSIGNED_BYTE&apos;,
+      &apos;UNSIGNED_SHORT&apos;,
+      &apos;UNSIGNED_SHORT_5_6_5&apos;,
+      &apos;UNSIGNED_SHORT_4_4_4_4&apos;,
+      &apos;UNSIGNED_SHORT_5_5_5_1&apos;,
+      &apos;UNSIGNED_INT&apos;,
+      &apos;FLOAT&apos;
+    ]
+    return random.item(type)
+  }
+
+  static randomBufferUsage (isWebGL2) {
+    let usage = [
+      &apos;STATIC_DRAW&apos;,
+      &apos;DYNAMIC_DRAW&apos;,
+      &apos;STREAM_DRAW&apos;
+    ]
+    if (isWebGL2) {
+      usage.extend([
+        &apos;STATIC_READ&apos;,
+        &apos;DYNAMIC_READ&apos;,
+        &apos;STREAM_READ&apos;,
+        &apos;STATIC_COPY&apos;,
+        &apos;DYNAMIC_COPY&apos;,
+        &apos;STREAM_COPY&apos;
+      ])
+    }
+    return random.item(usage)
+  }
+
+  static randomParameter (isWebGL2) {
+    let pname = [
+      &apos;ACTIVE_TEXTURE&apos;,
+      &apos;ALIASED_LINE_WIDTH_RANGE&apos;,
+      &apos;ALIASED_POINT_SIZE_RANGE&apos;,
+      &apos;ALPHA_BITS&apos;,
+      &apos;ARRAY_BUFFER_BINDING&apos;,
+      &apos;BLEND&apos;,
+      &apos;BLEND_COLOR&apos;,
+      &apos;BLEND_DST_ALPHA&apos;,
+      &apos;BLEND_DST_RGB&apos;,
+      &apos;BLEND_EQUATION_ALPHA&apos;,
+      &apos;BLEND_EQUATION_RGB&apos;,
+      &apos;BLEND_SRC_ALPHA&apos;,
+      &apos;BLEND_SRC_RGB&apos;,
+      &apos;BLUE_BITS&apos;,
+      &apos;COLOR_CLEAR_VALUE&apos;,
+      &apos;COLOR_WRITEMASK&apos;,
+      &apos;COMPRESSED_TEXTURE_FORMATS&apos;,
+      &apos;CULL_FACE&apos;,
+      &apos;CULL_FACE_MODE&apos;,
+      &apos;CURRENT_PROGRAM&apos;,
+      &apos;DEPTH_BITS&apos;,
+      &apos;DEPTH_CLEAR_VALUE&apos;,
+      &apos;DEPTH_FUNC&apos;,
+      &apos;DEPTH_RANGE&apos;,
+      &apos;DEPTH_TEST&apos;,
+      &apos;DEPTH_WRITEMASK&apos;,
+      &apos;DITHER&apos;,
+      &apos;ELEMENT_ARRAY_BUFFER_BINDING&apos;,
+      &apos;FRAMEBUFFER_BINDING&apos;,
+      &apos;FRONT_FACE&apos;,
+      &apos;GENERATE_MIPMAP_HINT&apos;,
+      &apos;GREEN_BITS&apos;,
+      &apos;IMPLEMENTATION_COLOR_READ_FORMAT&apos;,
+      &apos;IMPLEMENTATION_COLOR_READ_TYPE&apos;,
+      &apos;LINE_WIDTH&apos;,
+      &apos;MAX_COMBINED_TEXTURE_IMAGE_UNITS&apos;,
+      &apos;MAX_CUBE_MAP_TEXTURE_SIZE&apos;,
+      &apos;MAX_FRAGMENT_UNIFORM_VECTORS&apos;,
+      &apos;MAX_RENDERBUFFER_SIZE&apos;,
+      &apos;MAX_TEXTURE_IMAGE_UNITS&apos;,
+      &apos;MAX_TEXTURE_SIZE&apos;,
+      &apos;MAX_VARYING_VECTORS&apos;,
+      &apos;MAX_VERTEX_ATTRIBS&apos;,
+      &apos;MAX_VERTEX_TEXTURE_IMAGE_UNITS&apos;,
+      &apos;MAX_VERTEX_UNIFORM_VECTORS&apos;,
+      &apos;MAX_VIEWPORT_DIMS&apos;,
+      &apos;PACK_ALIGNMENT&apos;,
+      &apos;POLYGON_OFFSET_FACTOR&apos;,
+      &apos;POLYGON_OFFSET_FILL&apos;,
+      &apos;POLYGON_OFFSET_UNITS&apos;,
+      &apos;RED_BITS&apos;,
+      &apos;RENDERBUFFER_BINDING&apos;,
+      &apos;RENDERER&apos;,
+      &apos;SAMPLE_ALPHA_TO_COVERAGE&apos;,
+      &apos;SAMPLE_BUFFERS&apos;,
+      &apos;SAMPLE_COVERAGE&apos;,
+      &apos;SAMPLE_COVERAGE_INVERT&apos;,
+      &apos;SAMPLE_COVERAGE_VALUE&apos;,
+      &apos;SAMPLES&apos;,
+      &apos;SCISSOR_BOX&apos;,
+      &apos;SCISSOR_TEST&apos;,
+      &apos;SHADING_LANGUAGE_VERSION&apos;,
+      &apos;STENCIL_BACK_FAIL&apos;,
+      &apos;STENCIL_BACK_FUNC&apos;,
+      &apos;STENCIL_BACK_PASS_DEPTH_FAIL&apos;,
+      &apos;STENCIL_BACK_PASS_DEPTH_PASS&apos;,
+      &apos;STENCIL_BACK_REF&apos;,
+      &apos;STENCIL_BACK_VALUE_MASK&apos;,
+      &apos;STENCIL_BACK_WRITEMASK&apos;,
+      &apos;STENCIL_BITS&apos;,
+      &apos;STENCIL_CLEAR_VALUE&apos;,
+      &apos;STENCIL_FAIL&apos;,
+      &apos;STENCIL_FUNC&apos;,
+      &apos;STENCIL_PASS_DEPTH_FAIL&apos;,
+      &apos;STENCIL_PASS_DEPTH_PASS&apos;,
+      &apos;STENCIL_REF&apos;,
+      &apos;STENCIL_TEST&apos;,
+      &apos;STENCIL_VALUE_MASK&apos;,
+      &apos;STENCIL_WRITEMASK&apos;,
+      &apos;SUBPIXEL_BITS&apos;,
+      &apos;TEXTURE_BINDING_2D&apos;,
+      &apos;TEXTURE_BINDING_CUBE_MAP&apos;,
+      &apos;UNPACK_ALIGNMENT&apos;,
+      &apos;UNPACK_COLORSPACE_CONVERSION_WEBGL&apos;,
+      &apos;UNPACK_FLIP_Y_WEBGL&apos;,
+      &apos;UNPACK_PREMULTIPLY_ALPHA_WEBGL&apos;,
+      &apos;VENDOR&apos;,
+      &apos;VERSION&apos;,
+      &apos;VIEWPORT&apos;,
+      &apos;VERSION&apos;,
+      &apos;SHADING_LANGUAGE_VERSION&apos;,
+      &apos;VENDOR&apos;,
+      &apos;RENDERER&apos;
+    ]
+
+    if (isWebGL2) {
+      pname.extend([
+        &apos;COPY_READ_BUFFER_BINDING&apos;,
+        &apos;COPY_WRITE_BUFFER_BINDING&apos;,
+        &apos;DRAW_BUFFERi&apos;,
+        &apos;DRAW_FRAMEBUFFER_BINDING&apos;,
+        &apos;FRAGMENT_SHADER_DERIVATIVE_HINT&apos;,
+        &apos;MAX_3D_TEXTURE_SIZE&apos;,
+        &apos;MAX_ARRAY_TEXTURE_LAYERS&apos;,
+        &apos;MAX_CLIENT_WAIT_TIMEOUT_WEBGL&apos;,
+        &apos;MAX_COLOR_ATTACHMENTS&apos;,
+        &apos;MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS&apos;,
+        &apos;MAX_COMBINED_UNIFORM_BLOCKS&apos;,
+        &apos;MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS&apos;,
+        &apos;MAX_DRAW_BUFFERS&apos;,
+        &apos;MAX_ELEMENT_INDEX&apos;,
+        &apos;MAX_ELEMENTS_INDICE&apos;,
+        &apos;MAX_ELEMENTS_VERTICES&apos;,
+        &apos;MAX_FRAGMENT_INPUT_COMPONENTS&apos;,
+        &apos;MAX_FRAGMENT_UNIFORM_BLOCKS&apos;,
+        &apos;MAX_FRAGMENT_UNIFORM_COMPONENTS&apos;,
+        &apos;MAX_PROGRAM_TEXEL_OFFSET&apos;,
+        &apos;MAX_SAMPLES&apos;,
+        &apos;MAX_SERVER_WAIT_TIMEOUT&apos;,
+        &apos;MAX_TEXTURE_LOD_BIAS&apos;,
+        &apos;MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS&apos;,
+        &apos;MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS&apos;,
+        &apos;MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS&apos;,
+        &apos;MAX_UNIFORM_BLOCK_SIZE&apos;,
+        &apos;MAX_UNIFORM_BUFFER_BINDINGS&apos;,
+        &apos;MAX_VARYING_COMPONENTS&apos;,
+        &apos;MAX_VERTEX_OUTPUT_COMPONENTS&apos;,
+        &apos;MAX_VERTEX_UNIFORM_BLOCKS&apos;,
+        &apos;MAX_VERTEX_UNIFORM_COMPONENTS&apos;,
+        &apos;MIN_PROGRAM_TEXEL_OFFSET&apos;,
+        &apos;PACK_ROW_LENGTH&apos;,
+        &apos;PACK_SKIP_PIXELS&apos;,
+        &apos;PACK_SKIP_ROWS&apos;,
+        &apos;PIXEL_PACK_BUFFER_BINDING&apos;,
+        &apos;PIXEL_UNPACK_BUFFER_BINDING&apos;,
+        &apos;RASTERIZER_DISCARD&apos;,
+        &apos;READ_BUFFER&apos;,
+        &apos;READ_FRAMEBUFFER_BINDING&apos;,
+        &apos;SAMPLER_BINDING&apos;,
+        &apos;TEXTURE_BINDING_2D_ARRAY&apos;,
+        &apos;TEXTURE_BINDING_3D&apos;,
+        &apos;TRANSFORM_FEEDBACK_ACTIVE&apos;,
+        &apos;TRANSFORM_FEEDBACK_BINDING&apos;,
+        &apos;TRANSFORM_FEEDBACK_BUFFER_BINDING&apos;,
+        &apos;TRANSFORM_FEEDBACK_PAUSED&apos;,
+        &apos;UNIFORM_BUFFER_BINDING&apos;,
+        &apos;UNIFORM_BUFFER_OFFSET_ALIGNMENT&apos;,
+        &apos;UNPACK_IMAGE_HEIGHT&apos;,
+        &apos;UNPACK_ROW_LENGTH&apos;,
+        &apos;UNPACK_SKIP_IMAGES&apos;,
+        &apos;UNPACK_SKIP_PIXELS&apos;,
+        &apos;UNPACK_SKIP_ROWS&apos;,
+        &apos;VERTEX_ARRAY_BINDING&apos;
+      ])
+    }
+    return random.item(pname)
+  }
+
+  static randomProgramParameter () {
+    let pname = [
+      &apos;DELETE_STATUS&apos;,
+      &apos;LINK_STATUS&apos;,
+      &apos;VALIDATE_STATUS&apos;,
+      &apos;ATTACHED_SHADERS&apos;,
+      &apos;ACTIVE_ATTRIBUTES&apos;,
+      &apos;ACTIVE_UNIFORMS&apos;,
+      &apos;TRANSFORM_FEEDBACK_BUFFER_MODE&apos;,
+      &apos;TRANSFORM_FEEDBACK_VARYINGS&apos;,
+      &apos;ACTIVE_UNIFORM_BLOCKS&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomRenderBufferParameter () {
+    let pname = [
+      &apos;RENDERBUFFER_WIDTH&apos;,
+      &apos;RENDERBUFFER_HEIGHT&apos;,
+      &apos;RENDERBUFFER_INTERNAL_FORMAT&apos;,
+      &apos;RENDERBUFFER_RED_SIZE&apos;,
+      &apos;RENDERBUFFER_GREEN_SIZE&apos;,
+      &apos;RENDERBUFFER_BLUE_SIZE&apos;,
+      &apos;RENDERBUFFER_ALPHA_SIZE&apos;,
+      &apos;RENDERBUFFER_DEPTH_SIZE&apos;,
+      &apos;RENDERBUFFER_STENCIL_SIZE&apos;
+    ]
+    return random.item(pname)
+  }
+
+  static randomExtension (pattern) {
+    let extensions = [
+      &apos;ANGLE_instanced_arrays&apos;,
+      &apos;EXT_blend_minmax&apos;,
+      &apos;EXT_color_buffer_half_float&apos;,
+      &apos;EXT_frag_depth&apos;,
+      &apos;EXT_sRGB&apos;,
+      &apos;EXT_shader_texture_lod&apos;,
+      &apos;EXT_texture_filter_anisotropic&apos;,
+      &apos;EXT_disjoint_timer_query&apos;,
+      &apos;OES_element_index_uint&apos;,
+      &apos;OES_standard_derivatives&apos;,
+      &apos;OES_texture_float&apos;,
+      &apos;OES_texture_float_linear&apos;,
+      &apos;OES_texture_half_float&apos;,
+      &apos;OES_texture_half_float_linear&apos;,
+      &apos;OES_vertex_array_object&apos;,
+      &apos;WEBGL_color_buffer_float&apos;,
+      &apos;WEBGL_compressed_texture_s3tc&apos;,
+      &apos;WEBGL_compressed_texture_s3tc_srgb&apos;,
+      &apos;WEBGL_debug_renderer_info&apos;,
+      &apos;WEBGL_debug_shaders&apos;,
+      &apos;WEBGL_depth_texture&apos;,
+      &apos;WEBGL_draw_buffers&apos;,
+      &apos;WEBGL_lose_context&apos;
+    ]
+
+    if (pattern) {
+      let candidates = []
+      extensions.forEach((ext) =&gt; ext.includes(pattern) ? candidates.push(ext) : &apos;&apos;)
+      if (candidates.length &gt;= 0) {
+        return random.item(candidates)
+      }
+    }
+
+    return random.item(extensions)
+  }
+}
+
+module.exports = webgl
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

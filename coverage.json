@@ -1,0 +1,484 @@
+{
+  "coverage": "17.63%",
+  "expectCount": 346,
+  "actualCount": 61,
+  "files": {
+    "lib/logging/index.js": {
+      "expectCount": 15,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        9,
+        10,
+        21,
+        22,
+        41,
+        45,
+        49,
+        53,
+        57,
+        61,
+        65,
+        69,
+        73,
+        77
+      ]
+    },
+    "lib/make/alignment.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        13,
+        17
+      ]
+    },
+    "lib/make/arrays.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "lib/make/colors.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        17,
+        44,
+        64
+      ]
+    },
+    "lib/make/command.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        60,
+        64
+      ]
+    },
+    "lib/make/crypto.js": {
+      "expectCount": 20,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        10,
+        18,
+        22,
+        29,
+        33,
+        46,
+        50,
+        58,
+        62,
+        69,
+        73,
+        81,
+        85,
+        183,
+        187,
+        191,
+        901,
+        905,
+        909
+      ]
+    },
+    "lib/make/files.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        20,
+        28,
+        36,
+        44
+      ]
+    },
+    "lib/make/fonts.js": {
+      "expectCount": 12,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        13,
+        17,
+        21,
+        32,
+        45,
+        50,
+        54,
+        58,
+        66,
+        86
+      ]
+    },
+    "lib/make/html.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        13,
+        17,
+        21
+      ]
+    },
+    "lib/make/index.js": {
+      "expectCount": 21,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        6,
+        10,
+        14,
+        18,
+        22,
+        26,
+        30,
+        34,
+        38,
+        42,
+        46,
+        50,
+        54,
+        58,
+        62,
+        66,
+        70,
+        74,
+        78,
+        82
+      ]
+    },
+    "lib/make/mime.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        19,
+        33,
+        46,
+        56,
+        68
+      ]
+    },
+    "lib/make/network.js": {
+      "expectCount": 19,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        10,
+        46,
+        81,
+        94,
+        115,
+        119,
+        127,
+        137,
+        143,
+        153,
+        160,
+        176,
+        185,
+        189,
+        198,
+        207,
+        218,
+        227
+      ]
+    },
+    "lib/make/numbers.js": {
+      "expectCount": 16,
+      "actualCount": 15,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "lib/make/shaders.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        10,
+        33,
+        67,
+        100,
+        147
+      ]
+    },
+    "lib/make/style.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9
+      ]
+    },
+    "lib/make/text.js": {
+      "expectCount": 24,
+      "actualCount": 18,
+      "undocumentLines": [
+        9,
+        77,
+        83,
+        272,
+        280,
+        290
+      ]
+    },
+    "lib/make/time.js": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        15,
+        24,
+        28,
+        32,
+        36,
+        40
+      ]
+    },
+    "lib/make/typed.js": {
+      "expectCount": 16,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        16,
+        22,
+        29,
+        35,
+        42,
+        48,
+        54,
+        63,
+        69,
+        79,
+        89,
+        94,
+        99,
+        118
+      ]
+    },
+    "lib/make/types.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9
+      ]
+    },
+    "lib/make/units.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        15,
+        19
+      ]
+    },
+    "lib/make/uri.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        18,
+        37,
+        45
+      ]
+    },
+    "lib/make/webgl.js": {
+      "expectCount": 48,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        43,
+        50,
+        60,
+        73,
+        78,
+        82,
+        86,
+        91,
+        96,
+        104,
+        113,
+        131,
+        152,
+        220,
+        235,
+        256,
+        265,
+        278,
+        292,
+        306,
+        326,
+        339,
+        354,
+        377,
+        389,
+        402,
+        411,
+        431,
+        443,
+        452,
+        479,
+        493,
+        502,
+        511,
+        529,
+        539,
+        549,
+        557,
+        569,
+        582,
+        594,
+        607,
+        626,
+        786,
+        801,
+        816
+      ]
+    },
+    "lib/random/mersennetwister.js": {
+      "expectCount": 18,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        24,
+        31,
+        35,
+        40,
+        44,
+        48,
+        52,
+        56,
+        84
+      ]
+    },
+    "lib/random/random.js": {
+      "expectCount": 19,
+      "actualCount": 16,
+      "undocumentLines": [
+        8,
+        178,
+        247
+      ]
+    },
+    "lib/utils/block.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9
+      ]
+    },
+    "lib/utils/common.js": {
+      "expectCount": 11,
+      "actualCount": 9,
+      "undocumentLines": [
+        4,
+        8
+      ]
+    },
+    "lib/utils/index.js": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        2,
+        6,
+        10,
+        14,
+        18,
+        22,
+        26
+      ]
+    },
+    "lib/utils/mutate.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        10,
+        17,
+        24,
+        35,
+        50
+      ]
+    },
+    "lib/utils/objects.js": {
+      "expectCount": 15,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        10,
+        11,
+        12,
+        13,
+        16,
+        28,
+        40,
+        49,
+        60,
+        71,
+        75,
+        79,
+        87,
+        101
+      ]
+    },
+    "lib/utils/platform.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        8
+      ]
+    },
+    "lib/utils/prototypes.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9
+      ]
+    },
+    "lib/utils/script.js": {
+      "expectCount": 12,
+      "actualCount": 2,
+      "undocumentLines": [
+        9,
+        19,
+        36,
+        45,
+        49,
+        58,
+        70,
+        82,
+        109,
+        117
+      ]
+    }
+  }
+}
