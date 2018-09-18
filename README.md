@@ -41,7 +41,7 @@ yarn add @mozillasecurity/octo
 const {random, make} = require('@mozillasecurity/octo')
 random.init()
 
-# Basic operations
+# Common Operations
 make.number.any()
 make.text.any()
 
