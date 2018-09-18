@@ -92,23 +92,24 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 <li><a href="#development">Development</a></li>
 <li><a href="#testing">Testing</a></li>
 <li><a href="#api-documentation">API Documentation</a></li>
+<li><a href="#what-do-the-developers-say">What do the developers say?</a></li>
 </ul>
 </li>
 </ul>
 <h3 id="playbook">Playbook</h3><p><a href="https://npm.runkit.com/@mozillasecurity/octo">https://npm.runkit.com/@mozillasecurity/octo</a></p>
 <h3 id="usage-in-node">Usage in Node</h3><pre><code><code class="source-code prettyprint">yarn add @mozillasecurity/octo</code>
-</code></pre><pre><code class="lang-js"><code class="source-code prettyprint">const {random, make} = require(&apos;@mozillasecurity/octo&apos;)
-random.init()
+</code></pre><pre><code class="lang-js"><code class="source-code prettyprint">const { random, make } = require(&quot;@mozillasecurity/octo&quot;);
+random.init();
 
 // Common Operations
-make.number.any()
-make.text.any()
+make.number.any();
+make.text.any();
 
 // WebCrypto
-make.crypto.randomAlgorithm()
+make.crypto.randomAlgorithm();
 
 // WebGL
-make.webgl.randomSamplerParameter()</code>
+make.webgl.randomSamplerParameter();</code>
 </code></pre>
 <p>Take a look into the API documentation for further use cases.</p>
 <h3 id="usage-in-the-browser">Usage in the Browser</h3><pre><code><code class="source-code prettyprint">yarn install
@@ -124,7 +125,14 @@ yarn build</code>
 </ul>
 <p>or</p>
 <pre><code><code class="source-code prettyprint">yarn docs</code>
-</code></pre></div>
+</code></pre><h3 id="what-do-the-developers-say-">What do the developers say?</h3><ul>
+<li><p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1490700#c1">Divide-by-zero in [@webrtc::I420Buffer::CropAndScaleFrom]</a></p>
+<blockquote>
+<p>Impressive that the fuzzer found such a high multiple of 65536. I&apos;d expect it to start with common edge cases like -1, 0, 1, etc.</p>
+</blockquote>
+</li>
+</ul>
+</div>
 </div>
 
 <footer class="footer">
