@@ -19,7 +19,7 @@ deploy:
       secure: XnNnfgiLx07D6SuAXtxzyt1aqdmDq3BkQVvOSgkFEF5RL+wJGqCAtVgy3eCK+kHRM8tzXHV00jG3FEQ0VoKg9iBX94VUdVS73cxGNgh7Vq1mZLVK+rDVxuPxzDrWmxihtX0BtHd/hi6zcETSWgdyfcSpJYZtChwByWC05BzXuiAow39/GfC4ZtIWZb3UmbWWCZLm+O7LTLeAO4Q2Ws+c6cLipnSS9DMgIoaFOouzXIgn34bCjLtBqfbEhwcxPEvTbwmDpIDFM/wpCu3rrpFlVxnmwcwmT/U2ktQi58OXiGIl3xyeAU4PWu9SMxNtt+QnPqgeTcwwRxzeoCVgfHbeALoYdQd+dgJVYZs2O8qQrb+6mKrkn8ntP25slbEUFnjtekUpwNxG6KLexbhDkWwyPTmpcpyxNf5TKXepAGUjwyU5fBbLt1Z3FFnBgwoxH+zkoIeujt4w+eikjodaQlU22SdYfe6fVOEtHp8RhWZCuZRNAxxvkCoE+0z3exEtzxIONM7rrpZOfuZrfwrI4ycZnRJmJ5EJOPhCmcQ4tXV9ZtVFBc3LqkHLE4UWXgQGLsAFJ8DUgyz72IyCOUOURFrWom57KDfJxC7cnQ4e/qtasUai1XFnrUxe3e9Ht4qefCMMRCOqH+fiAIWHcJbmQTG8DQUQJhrsow53IyeOkpvGbH8=
     file: dist/octo.js
     on:
-      repo: MozillaSecurity/octo
+      tags: true
   - provider: pages
     keep-history: true
     skip_cleanup: true
