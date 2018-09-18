@@ -5,6 +5,8 @@
   "keywords": [
     "fuzzing",
     "browser",
+    "firefox",
+    "random",
     "javascript",
     "node",
     "library"
@@ -21,15 +23,21 @@
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
   "license": "MPL-2.0",
   "scripts": {
+    "build": "parcel build index.js --out-file=octo.js --no-source-maps",
     "test": "jest --silent",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.js",
     "coveralls": "yarn coverage && cat ./coverage/lcov.info | coveralls",
-    "lint": "cross-env NODE_ENV=test standard --verbose",
-    "lint:fix": "cross-env NODE_ENV=test standard --fix --verbose",
+    "lint": "standard --verbose",
+    "lint:fix": "standard --fix --verbose",
     "docs": "esdoc",
-    "build": "parcel build index.js --out-file=octo.js --no-source-maps",
-    "prepush": "yarn lint",
+    "pre-commit": "lint-staged",
     "release": "np"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn lint:fix",
+      "git add"
+    ]
   },
   "standard": {
     "ignore": [
@@ -70,8 +78,9 @@
     "esdoc": "^1.1.0",
     "esdoc-node": "^1.0.3",
     "esdoc-standard-plugin": "^1.0.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.14",
     "jest": "^23.6.0",
+    "lint-staged": "^7.2.2",
     "np": "^3.0.4",
     "parcel-bundler": "^1.9.7",
     "standard": "^12.0.1"
