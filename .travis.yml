@@ -1,33 +1,31 @@
 language: node_js
-dist: trusty
-env:
-- DISPLAY=:99.0 CHROME_BIN=chromium-browser
 node_js:
-- "7"
-addons:
-- firefox: latest
+  - node
 before_script:
-- sh -e /etc/init.d/xvfb start
+  - yarn install
 script:
-- yarn run build
+  - yarn lint
+  - yarn test
+  - yarn build
 after_success:
-- yarn run docs
+  - yarn coverage
+  - yarn docs
 notifications:
   slack:
     secure: Kwe1KBh4SMzgXaj6GQg3ZmopRYcDR3Vnd4C/gyiEOJsXzKRlU5dA7WwM/mbyOe9+ZvWDyp+g2CoQYYyvLR0SHEy1m0gn6M8fBzgSZQlWxOxAJxkwVsyxUNwAy2FylMpS+ugpw/fBMSbnSFqfZSa/tGB3KhBc0yA7V9wVS0hnwBfICqKKlFdLPcp+Us4zpXRUmcL1e0BVwm2klJi0CoKlOmTa4lI3tUa/YiuuMpgk89/PioMEr6/PP+5OfWV624djw2gznoualvcwdfZniC/oxkdTUbcu4nbTf+bFk5uwwW+XBpUhm9rMUoftngYCrWdtYHS6qenyzmflO5bgCDg5W8onv3qgMcDTEHDjlO8JMoEQLC2o27Hsyukrh2Iu0Hn2k4S10ZIDWLUZXf8ERKdU7v8o5xaiCrP7NO8fJlyGbWwYxwpFi9dpacb8qWuWw53k8+ld9orl2Zu5t1Y1QJCvT0DP0iGYSxbbICfex7im0fgh3A+MHTfhxxiGQtFJRUxqO5wGCIsT4dJJkYwRJ1HoCPyLT1x1WT8iy4lr8ivRhanEwQ5g2OmuRKz522yCrm2DPaRR/LDhqK9xghJqqh4RNx9Be5xNaxSxKs4Hcya4ZXrGaU9tzGTehRkNQksKUHq9PpdY85Mbk84wEq7zKLhtLPTn17DQePFm2DbdX4392o4=
 deploy:
-- provider: releases
-  api_key:
-    secure: HszUovTqcRxuXTmH3/rStEe1ZeZbrZweQah8Bq0POs89P3/GjyEat11WbH9S7tfIT1yVcF736TmsDNRtl34Rmr71P7rczwFlX1yJOIamH4jT9vG8ocpZH4Orc6XA2s7UclD1HwJwStM1k2J4CV34eTTlX36ngjYrp09HertXAQWSK6TZk9RK6ql2HlNzchImz2EY1aQnfqkrFByOtM4o/SJJryJJBJUMD69gWrYu6cv51w/jMEoUtzvV6Nr2o9YOuo97B0scJmbxgfx67FaCQwEOxKtr8xT5nttJ2q6EeaAiErAieG8/o8yRsJRFrHyVm42v9PEfoe8O8Y4g/1VrtbjY3vH8LPpCotMxhshjUCBaLDc8TCC/osik6dxhv/fqjbdPwrGRW2qzsmXIZug7+YCEW+qUFRPwwX+Cr0ENnaPFMSDFxANeLF7KfF7oaVnr8JTlZnu9G+Uliqe6RNCoWfQtpTRM759cDLQp4b5eBQF2G61x2XOdRqcNZepRaRVnsaCo0lNPW9o5HCQnJnMbEB9Gdowt18PwgVucIdIPJeAPodMs40s7sUOP5Xik58b4YBG9lsgLBcfCgTy+n8JPS2LJsclG82pBACtSV+ucc6rVeD+5fbSUxn4ItaK4e0MonCv4Jnp7zGn6hErcpexBmXSdYQSrdsemKDTGHibOF6U=
-  file: deploy/octo.js
-  skip_cleanup: true
-  on:
-    tags: true
-- provider: pages
-  keep-history: true
-  skip_cleanup: true
-  github_token:
-    secure: PvCrB9ckDfWedl1rdo/3mUvCy/Vg4ksZR2mj4KT3AdEyukbpMiVVDkocMFohuIq+mnRdeyhpvM2KluLHhQrEhWjvqVobiZ9/c0gWWxZHV8doDdqNUPm693MpGojMOxHT4qRih6x9KyjanmWAwy/Bc972dpD5vtaTx1gKOzRUjUI=
-  on:
-    branch: master
-  local_dir: docs/
+  - provider: releases
+    api_key:
+      secure: HszUovTqcRxuXTmH3/rStEe1ZeZbrZweQah8Bq0POs89P3/GjyEat11WbH9S7tfIT1yVcF736TmsDNRtl34Rmr71P7rczwFlX1yJOIamH4jT9vG8ocpZH4Orc6XA2s7UclD1HwJwStM1k2J4CV34eTTlX36ngjYrp09HertXAQWSK6TZk9RK6ql2HlNzchImz2EY1aQnfqkrFByOtM4o/SJJryJJBJUMD69gWrYu6cv51w/jMEoUtzvV6Nr2o9YOuo97B0scJmbxgfx67FaCQwEOxKtr8xT5nttJ2q6EeaAiErAieG8/o8yRsJRFrHyVm42v9PEfoe8O8Y4g/1VrtbjY3vH8LPpCotMxhshjUCBaLDc8TCC/osik6dxhv/fqjbdPwrGRW2qzsmXIZug7+YCEW+qUFRPwwX+Cr0ENnaPFMSDFxANeLF7KfF7oaVnr8JTlZnu9G+Uliqe6RNCoWfQtpTRM759cDLQp4b5eBQF2G61x2XOdRqcNZepRaRVnsaCo0lNPW9o5HCQnJnMbEB9Gdowt18PwgVucIdIPJeAPodMs40s7sUOP5Xik58b4YBG9lsgLBcfCgTy+n8JPS2LJsclG82pBACtSV+ucc6rVeD+5fbSUxn4ItaK4e0MonCv4Jnp7zGn6hErcpexBmXSdYQSrdsemKDTGHibOF6U=
+    file: dist/octo.js
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: pages
+    keep-history: true
+    skip_cleanup: true
+    github_token:
+      secure: PvCrB9ckDfWedl1rdo/3mUvCy/Vg4ksZR2mj4KT3AdEyukbpMiVVDkocMFohuIq+mnRdeyhpvM2KluLHhQrEhWjvqVobiZ9/c0gWWxZHV8doDdqNUPm693MpGojMOxHT4qRih6x9KyjanmWAwy/Bc972dpD5vtaTx1gKOzRUjUI=
+    on:
+      branch: master
+    local_dir: docs/

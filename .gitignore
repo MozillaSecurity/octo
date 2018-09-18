@@ -2,6 +2,5 @@
 .vscode
 .cache
 node_modules
+coverage
 package-lock.json
-yarn.lock
-tests/coverage
