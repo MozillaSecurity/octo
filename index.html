@@ -100,14 +100,14 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 </code></pre><pre><code class="lang-js"><code class="source-code prettyprint">const {random, make} = require(&apos;@mozillasecurity/octo&apos;)
 random.init()
 
-# Common Operations
+// Common Operations
 make.number.any()
 make.text.any()
 
-# WebCrypto
+// WebCrypto
 make.crypto.randomAlgorithm()
 
-# WebGL
+// WebGL
 make.webgl.randomSamplerParameter()</code>
 </code></pre>
 <p>Take a look into the API documentation for further use cases.</p>
