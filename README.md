@@ -29,7 +29,7 @@ Octo's future aims to be a stable, well-tested and well-documented standard libr
 
 ### Playbook
 
-https://runkit.com/posidron/octo-js-playbook
+https://npm.runkit.com/@mozillasecurity/octo
 
 ### Usage in Node
 
