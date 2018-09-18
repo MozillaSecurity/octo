@@ -97,7 +97,7 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 </ul>
 <h3 id="playbook">Playbook</h3><p><a href="https://npm.runkit.com/@mozillasecurity/octo">https://npm.runkit.com/@mozillasecurity/octo</a></p>
 <h3 id="usage-in-node">Usage in Node</h3><pre><code><code class="source-code prettyprint">yarn add @mozillasecurity/octo</code>
-</code></pre><pre><code><code class="source-code prettyprint">const {random, make} = require(&apos;@mozillasecurity/octo&apos;)
+</code></pre><pre><code class="lang-js"><code class="source-code prettyprint">const {random, make} = require(&apos;@mozillasecurity/octo&apos;)
 random.init()
 
 # Basic operations
@@ -109,18 +109,17 @@ make.crypto.randomAlgorithm()
 
 # WebGL
 make.webgl.randomSamplerParameter()</code>
-</code></pre><p>Take a look into the API documentation for further use cases.</p>
+</code></pre>
+<p>Take a look into the API documentation for further use cases.</p>
 <h3 id="usage-in-the-browser">Usage in the Browser</h3><pre><code><code class="source-code prettyprint">yarn install
 yarn build</code>
 </code></pre><p>A bundled production build (<code>octo.js</code>) is placed into the local <code>dist</code> directory.</p>
-<h3 id="development">Development</h3><pre><code class="lang-bash"><code class="source-code prettyprint">yarn lint
+<h3 id="development">Development</h3><pre><code><code class="source-code prettyprint">yarn lint
 yarn test
 yarn build</code>
-</code></pre>
-<h3 id="testing">Testing</h3><p>Octo.js uses Jest for testing. Each directory should contain a <code>__tests__</code> folder containing the tests.</p>
-<pre><code class="lang-bash"><code class="source-code prettyprint">yarn test</code>
-</code></pre>
-<h3 id="api-documentation">API Documentation</h3><ul>
+</code></pre><h3 id="testing">Testing</h3><p>Octo.js uses Jest for testing. Each directory should contain a <code>__tests__</code> folder containing the tests.</p>
+<pre><code><code class="source-code prettyprint">yarn test</code>
+</code></pre><h3 id="api-documentation">API Documentation</h3><ul>
 <li><a href="https://mozillasecurity.github.io/octo">https://mozillasecurity.github.io/octo</a></li>
 </ul>
 <p>or</p>
