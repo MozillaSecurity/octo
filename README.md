@@ -8,9 +8,9 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 
 <p align="center">
 <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a>
-<!--<a href="https://travis-ci.org/MozillaSecurity/octo"><img src="https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=es6" alt="Build Status"></a>-->
-<!--<a href="https://img.shields.io/github/release/mozillasecurity/octo.svg"><img src="https://img.shields.io/github/release/mozillasecurity/octo.svg" alt="Current Release"></a>-->
-<!--<a href="https://coveralls.io/github/MozillaSecurity/octo?branch=es6"><img src="https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=es6" alt="Coverage Status"></a>-->
+<a href="https://travis-ci.org/MozillaSecurity/octo"><img src="https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=master" alt="Build Status"></a>
+<a href="https://img.shields.io/github/release/mozillasecurity/octo.svg"><img src="https://img.shields.io/github/release/mozillasecurity/octo.svg" alt="Current Release"></a>
+<a href="https://coveralls.io/github/MozillaSecurity/octo?branch=master"><img src="https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=master" alt="Coverage Status"></a>
 <a href="https://www.irccloud.com/invite?channel=%23fuzzing&amp;hostname=irc.mozilla.org&amp;port=6697&amp;ssl=1"><img src="https://img.shields.io/badge/IRC-%23fuzzing-1e72ff.svg?style=flat" alt="IRC"></a>
 </p>
 
@@ -19,18 +19,18 @@ Octo.js bundles core functions and generic boilerplate code commonly used in mos
 Octo's future aims to be a stable, well-tested and well-documented standard library for fuzzing in a JavaScript environment.
 
 ## Table of Contents
+
 - [Table of Contents](#table-of-contents)
   - [Playbook](#playbook)
   - [Usage in Node](#usage-in-node)
   - [Usage in Browser](#usage-in-browser)
-  - [Develop](#develop)
+  - [Development](#development)
   - [Testing](#testing)
   - [API Documentation](#api-documentation)
 
 ### Playbook
 
 https://runkit.com/posidron/octo-js-playbook
-
 
 ### Usage in Node
 
@@ -43,16 +43,18 @@ const {random} = require('@mozillasecurity/octo')
 random.init()
 ```
 
-### Usage in Browser
+### Usage in the Browser
 
 ```
+yarn install
 yarn build
 ```
 
-### Develop
+A bundled production build (`octo.js`) is placed into the local `dist` directory.
+
+### Development
 
 ```bash
-yarn install
 yarn lint
 yarn test
 yarn build
@@ -68,7 +70,7 @@ yarn test
 
 ### API Documentation
 
-* https://
+- https://
 
 or
 
