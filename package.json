@@ -87,6 +87,7 @@
   },
   "dependencies": {
     "html-entities": "^1.2.1",
+    "js-base64": "^2.5.1",
     "jsesc": "^2.5.2"
   }
 }
