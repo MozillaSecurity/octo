@@ -12,45 +12,64 @@
     "library"
   ],
   "homepage": "https://github.com/mozillasecurity/octo",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mozillasecurity/octo.git"
-  },
   "bugs": {
     "url": "https://github.com/mozillasecurity/octo/issues",
     "email": "cdiehl@mozilla.com"
   },
-  "author": "Christoph Diehl <cdiehl@mozilla.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozillasecurity/octo.git"
+  },
   "license": "MPL-2.0",
+  "author": "Christoph Diehl <cdiehl@mozilla.com>",
+  "main": "dist/octo.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "parcel build index.js --out-file=octo.js --no-source-maps",
-    "test": "jest --silent",
-    "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.js",
-    "coveralls": "yarn coverage && cat ./coverage/lcov.info | coveralls",
-    "lint": "standard --verbose",
-    "lint:fix": "standard --fix --verbose",
+    "build": "webpack -p",
+    "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "docs": "esdoc",
-    "pre-commit": "lint-staged",
-    "release": "np"
+    "lint": "cross-env NODE_ENV=test eslint ./lib --ext ts",
+    "lint:fix": "cross-env NODE_ENV=test eslint ./lib --ext ts --fix",
+    "prepare": "npm run build",
+    "prepush": "npm run lint && npm test",
+    "release": "np",
+    "test": "jest --silent",
+    "watch": "webpack --watch"
   },
-  "lint-staged": {
-    "*.js": [
-      "yarn lint:fix",
-      "git add"
-    ]
+  "dependencies": {
+    "@types/html-entities": "^1.2.16",
+    "@types/jsesc": "^2.5.0",
+    "@types/mersenne-twister": "^1.1.2",
+    "html-entities": "^1.2.1",
+    "jsesc": "^2.5.1",
+    "mersenne-twister": "^1.1.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.1.0"
   },
-  "standard": {
-    "ignore": [
-      "dist/"
-    ],
-    "envs": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    }
-  },
-  "jest": {
-    "verbose": true
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.1.4",
+    "esdoc": "^1.1.0",
+    "esdoc-node": "^1.0.3",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsdoc": "^20.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^0.14.3",
+    "jest": "^24.9.0",
+    "np": "^3.0.4",
+    "ts-jest": "^24.2.0"
   },
   "esdoc": {
     "source": "./lib",
@@ -71,23 +90,5 @@
         "name": "esdoc-node"
       }
     ]
-  },
-  "devDependencies": {
-    "coveralls": "^3.0.2",
-    "cross-env": "^5.2.0",
-    "esdoc": "^1.1.0",
-    "esdoc-node": "^1.0.3",
-    "esdoc-standard-plugin": "^1.0.0",
-    "husky": "^1.0.0-rc.14",
-    "jest": "^23.6.0",
-    "lint-staged": "^7.2.2",
-    "np": "^3.0.4",
-    "parcel": "^1.12.4",
-    "standard": "^12.0.1"
-  },
-  "dependencies": {
-    "html-entities": "^1.2.1",
-    "js-base64": "^2.5.1",
-    "jsesc": "^2.5.2"
   }
 }

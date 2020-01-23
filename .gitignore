@@ -1,6 +1,13 @@
+# IDE configs
+.idea
 .DS_Store
 .vscode
-.cache
+
+# Package dependencies
 node_modules
-coverage
-package-lock.json
+
+# Test coverage
+tests/coverage
+
+# Build dir
+dist/
