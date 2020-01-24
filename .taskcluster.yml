@@ -50,11 +50,11 @@ tasks:
             - '-c'
             - >-
               apt-get update -qq &&
-              apt-get install -y -qq --no-install-recommends --no-install-suggests build-essential curl git openssh-client python &&
+              apt-get install -y -qq --no-install-recommends --no-install-suggests curl git jshon openssh-client &&
               cd ~ &&
               mkdir .ssh &&
               ssh-keyscan github.com > .ssh/known_hosts &&
-              curl -L ${secret_url} | python -c 'import json, sys; a = json.load(sys.stdin); open(".ssh/id_rsa", "w").write(a["secret"]["key"])' &&
+              curl -L ${secret_url} | jshon -e secret -e key -u > .ssh/id_rsa &&
               chmod 0400 .ssh/id_rsa &&
               git clone --quiet ${ssh_repo} repo &&
               cd repo &&
