@@ -1,0 +1,69 @@
+version: 1
+policy:
+  pullRequests: collaborators
+tasks:
+  $let:
+    user: ${event.sender.login}
+
+    head_rev:
+      $if: 'tasks_for == "github-pull-request"'
+      then: ${event.pull_request.head.sha}
+      else:
+        $if: 'tasks_for == "github-push"'
+        then: ${event.after}
+        else: ${event.release.tag_name}
+
+    http_repo:
+      $if: 'tasks_for == "github-pull-request"'
+      then: ${event.pull_request.head.repo.html_url}
+      else: ${event.repository.html_url}
+
+    ssh_repo:
+      $if: 'tasks_for == "github-pull-request"'
+      then: ${event.pull_request.head.repo.ssh_url}
+      else: ${event.repository.ssh_url}
+
+    secret_url:
+      http://taskcluster/secrets/v1/secret/project/fuzzing/deploy-octo-private
+
+  in:
+    $if: 'tasks_for in ["github-pull-request", "github-push"]'
+    then:
+      $map:
+        - 10
+        - 12
+      each(nodever):
+        provisionerId: proj-fuzzing
+        workerType: ci
+        created: {$fromNow: ''}
+        deadline: {$fromNow: '1 hour'}
+        scopes: [secrets:get:project/fuzzing/deploy-octo-private]
+        payload:
+          maxRunTime: 3600
+          image: node:${nodever}-slim
+          features:
+            taskclusterProxy: true
+          command:
+            - /bin/bash
+            - '--login'
+            - '-x'
+            - '-c'
+            - >-
+              apt-get update -qq &&
+              apt-get install -y -qq --no-install-recommends --no-install-suggests build-essential curl git openssh-client python &&
+              cd ~ &&
+              mkdir .ssh &&
+              ssh-keyscan github.com > .ssh/known_hosts &&
+              curl -L ${secret_url} | python -c 'import json, sys; a = json.load(sys.stdin); open(".ssh/id_rsa", "w").write(a["secret"]["key"])' &&
+              chmod 0400 .ssh/id_rsa &&
+              git clone --quiet ${ssh_repo} repo &&
+              cd repo &&
+              git -c advice.detachedHead=false checkout ${head_rev} &&
+              npm i &&
+              npm test
+        metadata:
+          name: octo-private tests nodejs ${nodever}
+          description: octo-private tests nodejs ${nodever}
+          owner: '${event.sender.login}@users.noreply.github.com'
+          source: ${http_repo}/raw/${head_rev}/.taskcluster.yml
+
