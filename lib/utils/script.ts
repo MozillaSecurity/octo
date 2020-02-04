@@ -86,17 +86,18 @@ export class script {
    * @param {string|string[]} cmds - Command(s) to be executed
    * @returns {Array}
    */
-  static runner (cmds: (string | undefined)[]): string[] {
+  static runner (cmds: (string | undefined)[], async = false): string[] {
     cmds = (Array.isArray(cmds)) ? cmds : [cmds]
     const cleaned = cmds.filter(<T> (t: T | undefined): t is T => t !== undefined)
+    const safe = script.safely(cleaned)
     // Wrap each command in try/catch for use in setInterval, setTimeout, repeater
     switch (random.number(50)) {
       case 0:
-        return [`setInterval(function () { ${script.safely(cleaned)} }, ${random.range(100, 400)} )`]
+        return [`setInterval(${(async) ? 'async' : ''} () => { ${safe} }, ${random.range(100, 400)} )`]
       case 1:
-        return [`setTimeout(function () { ${script.safely(cleaned)} }, ${random.range(100, 400)} )`]
+        return [`setTimeout(${(async) ? 'async ' : ''} () => { ${safe} }, ${random.range(100, 400)} )`]
       case 2:
-        return [`for (let i = 0; i < ${random.range(1, random.range(1, 30))}; i++) { ${script.safely(cleaned)} }`]
+        return [`for (let i = 0; i < ${random.range(1, random.range(1, 30))}; i++) { ${safe} }`]
       default:
         return cleaned
     }
