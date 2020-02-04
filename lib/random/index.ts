@@ -209,7 +209,7 @@ export class random {
    * @param {Array} arr - Source Array to shuffle
    * @returns {*}
    */
-  static shuffled (arr: any[]) {
+  static shuffled <T> (arr: T[]): T[] {
     const newArray = arr.slice()
     random.shuffle(newArray)
     return newArray
@@ -222,7 +222,7 @@ export class random {
    * @param {?number} limit - Number of elements to be returned
    * @returns {Array}
    */
-  static subset (list: any[], limit?: number) {
+  static subset <T> (list: T[], limit?: number): any[] {
     if (!(Array.isArray(list))) {
       logger.traceback()
       throw new TypeError(`random.subset() received non-array type: (${list})`)
