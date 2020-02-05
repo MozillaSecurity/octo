@@ -84,6 +84,7 @@ export class script {
    * Wrap command(s) in setInterval, setTimeout, loop or run directly
    *
    * @param {string|string[]} cmds - Command(s) to be executed
+   * @param {boolean} async - Use async functions
    * @returns {Array}
    */
   static runner (cmds: (string | undefined)[], async = false): string[] {
