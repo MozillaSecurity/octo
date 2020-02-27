@@ -12,6 +12,13 @@ tasks:
         $if: 'tasks_for == "github-push"'
         then: ${event.after}
         else: ${event.release.tag_name}
+    fetch_ref:
+      $if: 'tasks_for == "github-pull-request"'
+      then: "pull/${event.number}/head"
+      else:
+        $if: 'tasks_for == "github-push"'
+        then: ${event.ref}
+        else: "tags/${event.release.tag_name}"
 
     http_repo:
       $if: 'tasks_for == "github-pull-request"'
@@ -20,7 +27,7 @@ tasks:
 
     ssh_repo:
       $if: 'tasks_for == "github-pull-request"'
-      then: ${event.pull_request.head.repo.ssh_url}
+      then: ${event.pull_request.base.repo.ssh_url}
       else: ${event.repository.ssh_url}
 
     secret_url:
@@ -40,7 +47,7 @@ tasks:
         scopes: [secrets:get:project/fuzzing/deploy-octo-private]
         payload:
           maxRunTime: 3600
-          image: node:${nodever}-slim
+          image: mozillasecurity/ci-node-${nodever}
           features:
             taskclusterProxy: true
           command:
@@ -49,15 +56,12 @@ tasks:
             - '-x'
             - '-c'
             - >-
-              apt-get update -qq &&
-              apt-get install -y -qq --no-install-recommends --no-install-suggests curl git jshon openssh-client &&
-              cd ~ &&
-              mkdir .ssh &&
-              ssh-keyscan github.com > .ssh/known_hosts &&
               curl -L ${secret_url} | jshon -e secret -e key -u > .ssh/id_rsa &&
               chmod 0400 .ssh/id_rsa &&
-              git clone --quiet ${ssh_repo} repo &&
+              git init repo &&
               cd repo &&
+              git remote add origin ${ssh_repo} &&
+              git fetch -q --depth=10 origin "${fetch_ref}" &&
               git -c advice.detachedHead=false checkout ${head_rev} &&
               npm i &&
               npm test
