@@ -6,7 +6,7 @@ import { logger } from '../logging'
 import MersenneTwister from 'mersenne-twister'
 
 export class random {
-  private static twister: MersenneTwister
+  static twister: MersenneTwister
   /**
    * Must be called before any other methods can be called to initialize MersenneTwister
    *
