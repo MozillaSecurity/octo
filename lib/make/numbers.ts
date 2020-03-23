@@ -127,20 +127,22 @@ export class numbers {
    * @returns {number}
    */
   static float () {
-    /* if (random.chance(32)) {
-      switch (random.number(4)) {
-        case 0:
-          return random.range(Number.MIN_VALUE, Number.MAX_VALUE)
-        case 1:
-          return Math.pow(10, 1) / Math.pow(10, random.number(307))
-        case 2:
-          return Math.pow(2, random.float() * random.float() * 64)
-        case 3:
-          return Math.pow(10, random.range(1, 9)) / Math.pow(10, random.range(1, 9))
-      }
-    } */
+    const min = 1.2 * 10 ^ -38
+    const max = 3.4 * 10 ^ 38
 
-    return random.float()
+    return numbers.frange(min, max)
+  }
+
+  /**
+   * Returns a random double
+   *
+   * @returns {number}
+   */
+  static double () {
+    const min = 5.0 * 10 ^ -324
+    const max = 1.8 * 10 ^ 308
+
+    return numbers.frange(min, max)
   }
 
   /**
