@@ -152,7 +152,7 @@ export class numbers {
    * @returns {number}
    */
   static frange (min: number, max: number, precision?: number) {
-    let x = Math.random() * (min - max) + max
+    let x = random.float() * (min - max) + max
     if (precision !== undefined) {
       const power = Math.pow(10, precision)
       x = Math.round(x * power) / power
