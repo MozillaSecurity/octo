@@ -124,11 +124,19 @@ export class numbers {
   /**
    * Returns a random floating point number
    *
+   * @param {boolean} bypass - Determines if the range should be exceeded
    * @returns {number}
    */
-  static float () {
-    const min = 1.2 * 10 ^ -38
-    const max = 3.4 * 10 ^ 38
+  static float (bypass = false) {
+    const min = 1.2 * 10 ** -38
+    const max = 3.4 * 10 ** 38
+
+    if (bypass || random.chance(50)) {
+      return numbers._exceed(random.choose([
+        [1, min],
+        [10, max]
+      ]))
+    }
 
     return numbers.frange(min, max)
   }
@@ -136,11 +144,18 @@ export class numbers {
   /**
    * Returns a random double
    *
+   * @param {boolean} bypass - Determines if the range should be exceeded
    * @returns {number}
    */
-  static double () {
-    const min = 5.0 * 10 ^ -324
-    const max = 1.8 * 10 ^ 308
+  static double (bypass = false) {
+    const min = Number.MIN_SAFE_INTEGER
+    const max = Number.MAX_SAFE_INTEGER
+    if (bypass || random.chance(50)) {
+      return numbers._exceed(random.choose([
+        [1, min],
+        [10, max]
+      ]))
+    }
 
     return numbers.frange(min, max)
   }
@@ -154,7 +169,7 @@ export class numbers {
    * @returns {number}
    */
   static frange (min: number, max: number, precision?: number) {
-    let x = random.float() * (min - max) + max
+    let x = random.float() * (max - min) + min
     if (precision !== undefined) {
       const power = Math.pow(10, precision)
       x = Math.round(x * power) / power
