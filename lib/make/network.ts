@@ -319,4 +319,68 @@ export class network {
     }
     return mask
   }
+
+  /**
+   * Generate a random header
+   *
+   * @returns {string}
+   */
+  static header () {
+    return random.item([
+      'Accept', 'Accept-Additions', 'Accept-Charset', 'Accept-Datetime', 'Accept-Encoding', 'Accept-Features',
+      'Accept-Language', 'Accept-Patch', 'Accept-Post', 'Accept-Ranges', 'Age', 'A-IM', 'Allow', 'ALPN', 'Also-Control',
+      'Alternate-Recipient', 'Alternates', 'Alt-Svc', 'Alt-Used', 'Apply-To-Redirect-Ref', 'Approved',
+      'ARC-Authentication-Results', 'Archive', 'Archived-At', 'ARC-Message-Signature', 'ARC-Seal', 'Article-Names',
+      'Article-Updates', 'Authentication-Control', 'Authentication-Info', 'Authentication-Results', 'Authorization',
+      'Autoforwarded', 'Autosubmitted', 'Auto-Submitted', 'Base', 'Bcc', 'Body', 'Cache-Control', 'CalDAV-Timezones',
+      'Cal-Managed-ID', 'Cancel-Key', 'Cancel-Lock', 'Cc', 'CDN-Loop', 'Cert-Not-After', 'Cert-Not-Before', 'C-Ext',
+      'Close', 'C-Man', 'Comments', 'Connection', 'Content-Alternative', 'Content-Base', 'Content-Description',
+      'Content-Disposition', 'Content-Duration', 'Content-Encoding', 'Content-features', 'Content-ID',
+      'Content-Identifier', 'Content-Language', 'Content-Length', 'Content-Location', 'Content-MD5', 'Content-Range',
+      'Content-Return', 'Content-Script-Type', 'Content-Style-Type', 'Content-Transfer-Encoding',
+      'Content-Translation-Type', 'Content-Type', 'Content-Version', 'Control', 'Conversion', 'Conversion-With-Loss',
+      'Cookie', 'Cookie2', 'C-Opt', 'C-PEP', 'C-PEP-Info', 'DASL', 'Date', 'Date-Received', 'DAV', 'Default-Style',
+      'Deferred-Delivery', 'Delivery-Date', 'Delta-Base', 'Depth', 'Derived-From', 'Destination', 'Differential-ID',
+      'Digest', 'Discarded-X400-IPMS-Extensions', 'Discarded-X400-MTS-Extensions', 'Disclose-Recipients',
+      'Disposition-Notification-Options', 'Disposition-Notification-To', 'Distribution', 'DKIM-Signature',
+      'DL-Expansion-History', 'Downgraded-Bcc', 'Downgraded-Cc', 'Downgraded-Disposition-Notification-To',
+      'Downgraded-Final-Recipient', 'Downgraded-From', 'Downgraded-In-Reply-To', 'Downgraded-Mail-From',
+      'Downgraded-Message-Id', 'Downgraded-Original-Recipient', 'Downgraded-Rcpt-To', 'Downgraded-References',
+      'Downgraded-Reply-To', 'Downgraded-Resent-Bcc', 'Downgraded-Resent-Cc', 'Downgraded-Resent-From',
+      'Downgraded-Resent-Reply-To', 'Downgraded-Resent-Sender', 'Downgraded-Resent-To', 'Downgraded-Return-Path',
+      'Downgraded-Sender', 'Downgraded-To', 'Early-Data', 'Encoding', 'Encrypted', 'ETag', 'Expect', 'Expect-CT',
+      'Expires', 'Expiry-Date', 'Ext', 'Followup-To', 'Forwarded', 'From', 'Generate-Delivery-Report', 'GetProfile',
+      'Hobareg', 'Host', 'HTTP2-Settings', 'If', 'If-Match', 'If-Modified-Since', 'If-None-Match', 'If-Range',
+      'If-Schedule-Tag-Match', 'If-Unmodified-Since', 'IM', 'Importance', 'Include-Referred-Token-Binding-ID',
+      'Incomplete-Copy', 'Injection-Date', 'Injection-Info', 'In-Reply-To', 'Keep-Alive', 'Keywords', 'Label',
+      'Language', 'Last-Modified', 'Latest-Delivery-Time', 'Lines', 'Link', 'List-Archive', 'List-Help', 'List-ID',
+      'List-Owner', 'List-Post', 'List-Subscribe', 'List-Unsubscribe', 'List-Unsubscribe-Post', 'Location',
+      'Lock-Token', 'Man', 'Max-Forwards', 'Memento-Datetime', 'Message-Context', 'Message-ID', 'Message-Type',
+      'Meter', 'MIME-Version', 'MMHS-Acp127-Message-Identifier', 'MMHS-Codress-Message-Indicator',
+      'MMHS-Copy-Precedence', 'MMHS-Exempted-Address', 'MMHS-Extended-Authorisation-Info', 'MMHS-Handling-Instructions',
+      'MMHS-Message-Instructions', 'MMHS-Message-Type', 'MMHS-Originator-PLAD', 'MMHS-Originator-Reference',
+      'MMHS-Other-Recipients-Indicator-CC', 'MMHS-Other-Recipients-Indicator-To', 'MMHS-Primary-Precedence',
+      'MMHS-Subject-Indicator-Codes', 'MT-Priority', 'Negotiate', 'Newsgroups', 'NNTP-Posting-Date',
+      'NNTP-Posting-Host', 'Obsoletes', 'OData-EntityId', 'OData-Isolation', 'OData-MaxVersion', 'OData-Version', 'Opt',
+      'Optional-WWW-Authenticate', 'Ordering-Type', 'Organization', 'Origin', 'Original-Encoded-Information-Types',
+      'Original-From', 'Original-Message-ID', 'Original-Recipient', 'Original-Sender', 'Original-Subject',
+      'Originator-Return-Address', 'OSCORE', 'Overwrite', 'P3P', 'Path', 'PEP', 'Pep-Info', 'PICS-Label', 'Position',
+      'Posting-Version', 'Pragma', 'Prefer', 'Preference-Applied', 'Prevent-NonDelivery-Report', 'Priority',
+      'ProfileObject', 'Protocol', 'Protocol-Info', 'Protocol-Query', 'Protocol-Request', 'Proxy-Authenticate',
+      'Proxy-Authentication-Info', 'Proxy-Authorization', 'Proxy-Features', 'Proxy-Instruction', 'Public',
+      'Public-Key-Pins', 'Public-Key-Pins-Report-Only', 'Range', 'Received', 'Received-SPF', 'Redirect-Ref',
+      'References', 'Referer', 'Relay-Version', 'Replay-Nonce', 'Reply-By', 'Reply-To', 'Require-Recipient-Valid-Since',
+      'Resent-Bcc', 'Resent-Cc', 'Resent-Date', 'Resent-From', 'Resent-Message-ID', 'Resent-Reply-To', 'Resent-Sender',
+      'Resent-To', 'Retry-After', 'Return-Path', 'Safe', 'Schedule-Reply', 'Schedule-Tag', 'Sec-Token-Binding',
+      'Security-Scheme', 'Sec-WebSocket-Accept', 'Sec-WebSocket-Extensions', 'Sec-WebSocket-Key',
+      'Sec-WebSocket-Protocol', 'Sec-WebSocket-Version', 'See-Also', 'Sender', 'Sensitivity', 'Server', 'Set-Cookie',
+      'Set-Cookie2', 'SetProfile', 'SLUG', 'SoapAction', 'Solicitation', 'Status-URI', 'Strict-Transport-Security',
+      'Subject', 'Summary', 'Sunset', 'Supersedes', 'Surrogate-Capability', 'Surrogate-Control', 'TCN', 'TE', 'Timeout',
+      'TLS-Report-Domain', 'TLS-Report-Submitter', 'TLS-Required', 'To', 'Topic', 'Trailer', 'Transfer-Encoding', 'TTL',
+      'Upgrade', 'Urgency', 'URI', 'User-Agent', 'Variant-Vary', 'Vary', 'VBR-Info', 'Via', 'Want-Digest', 'Warning',
+      'WWW-Authenticate', 'X400-Content-Identifier', 'X400-Content-Return', 'X400-Content-Type', 'X400-MTS-Identifier',
+      'X400-Originator', 'X400-Received', 'X400-Recipients', 'X400-Trace', 'X-Content-Type-Options', 'X-Frame-Options',
+      'Xref'
+    ])
+  }
 }
