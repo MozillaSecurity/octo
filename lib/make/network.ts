@@ -383,4 +383,13 @@ export class network {
       'Xref'
     ])
   }
+
+  /**
+   * Generate a random request method
+   *
+   * @returns {string}
+   */
+  static requestMethod () {
+    return random.item(['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE'])
+  }
 }
