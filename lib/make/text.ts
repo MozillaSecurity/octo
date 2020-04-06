@@ -14,6 +14,20 @@ export class text {
   }
 
   /**
+   * Generate a random bytestring
+   */
+  static bytestring () {
+    let s = ''
+    let len = random.range(1, 126)
+
+    while (len--) {
+      s += String.fromCharCode(random.range(0, 255))
+    }
+
+    return s
+  }
+
+  /**
    * Generate a random alphanumeric character
    */
   static alphanum () {
