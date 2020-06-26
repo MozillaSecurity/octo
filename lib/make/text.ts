@@ -14,6 +14,13 @@ export class text {
   }
 
   /**
+   * Generate a random ASCII printable character
+   */
+  static asciiPrintable () {
+    return String.fromCharCode(random.range(0x20, 0x7E))
+  }
+
+  /**
    * Generate a random bytestring
    */
   static bytestring () {
