@@ -73,11 +73,19 @@ export class uri {
         return uri.standard()
       }
 
-      const base = (random.chance(4)) ? `${make.network.protocol()}://${make.network.hostname()}$` : ''
-      const path = make.network.path()
-      const hash = make.network.hash()
-      const search = make.network.search()
-      return `${base}${path}${hash}${search}`
+      // Base URL requires a minimum of protocol and hostname
+      let url = `${make.network.protocol()}://${make.network.hostname()}$`
+      const extensions = [
+        make.network.path(),
+        make.network.hash(),
+        make.network.search()
+      ]
+
+      for (let i = 0; i < random.number(extensions.length); i++) {
+        url += extensions[i]()
+      }
+
+      return url
     }
   }
 }
