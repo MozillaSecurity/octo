@@ -76,9 +76,9 @@ export class uri {
       // Base URL requires a minimum of protocol and hostname
       let url = `${make.network.protocol()}://${make.network.hostname()}$`
       const extensions = [
-        make.network.path(),
-        make.network.hash(),
-        make.network.search()
+        make.network.path,
+        make.network.hash,
+        make.network.search
       ]
 
       for (let i = 0; i < random.number(extensions.length); i++) {
