@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   entry: './lib/index.ts',
-  mode: 'production',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -17,9 +17,9 @@ module.exports = {
     globalObject: 'this',
     library: 'octo',
     libraryTarget: 'umd',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
-  }
+  },
 }
