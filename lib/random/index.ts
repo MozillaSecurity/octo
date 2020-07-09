@@ -13,11 +13,7 @@ export class random {
    * @param {?number} seed - Value to initialize MersenneTwister
    */
   static init (seed?: number) {
-    if (seed === undefined) {
-      seed = new Date().getTime()
-    }
-    random.twister = new MersenneTwister()
-    random.twister.init_seed(seed)
+    random.twister = new MersenneTwister(seed)
   }
 
   /**
