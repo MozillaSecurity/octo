@@ -54,13 +54,11 @@ export class mime {
 
   static media () {
     return random.pick([
-      'audio/mpeg',
       'audio/ogg',
-      'audio/ogg; codecs=vorbis',
-      'video/ogg',
-      'video/ogg; codecs="theora, vorbis"',
-      'video/mp4',
-      'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+      'audio/webm',
+      'video/webm',
+      'video/webm; codecs=vp8',
+      'video/webm; codecs=vp8.0'
     ])
   }
 
