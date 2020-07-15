@@ -166,15 +166,19 @@ export class datatypes {
    * @returns {string}
    */
   // @ts-ignore
-  static length (min: number | null = null, max: number | null = null) {
-    if (min !== null && max !== null) {
-      const unit = random.item(['em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin', 'vmax'])
+  static length (min?: number, max?: number, allowRelative? = true) {
+    const units = ['cm', 'mm', 'Q', 'in', 'pc', 'pt', 'px']
+    if (allowRelative) {
+      units.push('em', 'ex', 'cap', 'ch', 'ic', 'rem', 'lh', 'rlh', 'vw', 'vh', 'vi', 'vb', 'vmin', 'vmax')
+    }
+
+    const unit = random.item(units)
+    if (min !== undefined && max !== undefined) {
       return `${make.numbers.frange(min, max)}${unit}`
     } else if (random.chance(75)) {
       return calc(datatypes.length)
     }
 
-    const unit = random.item(['em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin', 'vmax'])
     return `${make.numbers.any()}${unit}`
   }
 
