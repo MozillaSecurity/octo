@@ -38,11 +38,11 @@ export class datatypes {
   /**
    * Generator for CSS <angle> data type
    *
-   * @param {?number} min - Minimum angle
-   * @param {?number} max  - Maximum angle
+   * @param {number?} min - Minimum angle
+   * @param {number?} max  - Maximum angle
    * @returns {string}
    */
-  static angle (min: number | null = null, max: number | null = null) {
+  static angle (min: number, max: number) {
     let [suffix, limit] = random.item([
       ['deg', 360],
       ['grad', 400],
@@ -50,7 +50,7 @@ export class datatypes {
       ['turn', 1]
     ])
 
-    if (min !== null && max !== null) {
+    if (min !== undefined && max !== undefined) {
       return `${make.numbers.frange(min, max)}${suffix}`
     } else if (random.chance(75)) {
       return calc(datatypes.angle)
@@ -76,11 +76,11 @@ export class datatypes {
   /**
    * Generator for CSS <dimension> data type
    *
-   * @param {?number} min - Minimum dimension
-   * @param {?number} max  - Maximum dimension
+   * @param {number?} min - Minimum dimension
+   * @param {number?} max  - Maximum dimension
    * @returns {string}
    */
-  static dimension (min: number | null = null, max: number | null = null) {
+  static dimension (min?: number, max?: number) {
     switch (random.number(4)) {
       case 0:
         return datatypes.frequency(min, max)
@@ -115,12 +115,12 @@ export class datatypes {
   /**
    * Generator for CSS <frequency> data type
    *
-   * @param {?number} min - Minimum frequency
-   * @param {?number} max  - Maximum frequency
+   * @param {number?} min - Minimum frequency
+   * @param {number?} max  - Maximum frequency
    * @returns {string}
    */
-  static frequency (min: number | null = null, max: number | null = null) {
-    if (min !== null && max !== null) {
+  static frequency (min?: number, max?: number) {
+    if (min !== undefined && max !== undefined) {
       const unit = random.item(['Hz', 'kHz'])
       return `${make.numbers.frange(min, max)}${unit}`
     } else if (random.chance(75)) {
@@ -144,12 +144,12 @@ export class datatypes {
   /**
    * Generator for CSS <integer> data type
    *
-   * @param {?number} min - Minimum integer
-   * @param {?number} max  - Maximum integer
+   * @param {number?} min - Minimum integer
+   * @param {number?} max  - Maximum integer
    * @returns {string}
    */
-  static integer (min: number | null = null, max: number | null = null) {
-    if (min !== null && max !== null) {
+  static integer (min?: number, max?: number) {
+    if (min !== undefined && max !== undefined) {
       return String(random.range(min, max))
     } else if (random.chance(75)) {
       return calc(datatypes.integer)
@@ -161,8 +161,9 @@ export class datatypes {
   /**
    * Generator for CSS <length> data type
    *
-   * @param {?number} min - Minimum length
-   * @param {?number} max  - Maximum length
+   * @param {number?} min - Minimum length
+   * @param {number?} max  - Maximum length
+   * @param {boolean} allowRelative - Allow relative units
    * @returns {string}
    */
   // @ts-ignore
@@ -185,12 +186,12 @@ export class datatypes {
   /**
    * Generator for CSS <number> data type
    *
-   * @param {?number} min - Minimum number
-   * @param {?number} max  - Maximum number
+   * @param {number?} min - Minimum number
+   * @param {number?} max  - Maximum number
    * @returns {string}
    */
-  static number (min: number | null = null, max: number | null = null) {
-    if (min !== null && max !== null) {
+  static number (min?: number, max?: number) {
+    if (min !== undefined && max !== undefined) {
       return String(make.numbers.frange(min, max))
     } else if (random.chance(75)) {
       return calc(datatypes.number)
@@ -220,12 +221,12 @@ export class datatypes {
   /**
    * Generator for CSS <percentage> data type
    *
-   * @param {?number} min - Minimum percentage
-   * @param {?number} max  - Maximum percentage
+   * @param {number?} min - Minimum percentage
+   * @param {number?} max  - Maximum percentage
    * @returns {string}
    */
-  static percentage (min: number | null = null, max: number | null = null) {
-    if (min !== null && max !== null) {
+  static percentage (min?: number, max?: number) {
+    if (min !== undefined && max !== undefined) {
       return `${random.range(min, max)}%`
     } else if (random.chance(75)) {
       return calc(datatypes.percentage)
@@ -276,13 +277,13 @@ export class datatypes {
   /**
    * Generator for CSS <resolution> data type
    *
-   * @param {?number} min - Minimum resolution
-   * @param {?number} max  - Maximum resolution
+   * @param {number?} min - Minimum resolution
+   * @param {number?} max  - Maximum resolution
    * @returns {string}
    */
-  static resolution (min: number | null = null, max: number | null = null) {
+  static resolution (min?: number, max?: number) {
     const unit = random.item(['dpi', 'dpcm', 'dppx'])
-    if (min !== null && max !== null) {
+    if (min !== undefined && max !== undefined) {
       return `${make.numbers.frange(min, max)}${unit}`
     } else {
       return `${make.numbers.any()}${unit}`
@@ -310,12 +311,12 @@ export class datatypes {
   /**
    * Generator for CSS <time> data type
    *
-   * @param {?number} min - Minimum time
-   * @param {?number} max  - Maximum time
+   * @param {number?} min - Minimum time
+   * @param {number?} max  - Maximum time
    * @returns {string}
    */
-  static time (min: number | null = null, max: number | null = null) {
-    if (min !== null && max !== null) {
+  static time (min?: number, max?: number) {
+    if (min !== undefined && max !== undefined) {
       const unit = random.item(['s', 'ms'])
       return `${random.range(min, max)}${unit}`
     } else if (random.chance(75)) {
