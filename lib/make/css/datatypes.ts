@@ -42,7 +42,7 @@ export class datatypes {
    * @param {number?} max  - Maximum angle
    * @returns {string}
    */
-  static angle (min: number, max: number) {
+  static angle (min?: number, max?: number) {
     let [suffix, limit] = random.item([
       ['deg', 360],
       ['grad', 400],
