@@ -94,7 +94,7 @@ export class script {
     // Wrap each command in try/catch for use in setInterval, setTimeout, repeater
     switch (random.number(50)) {
       case 0:
-        return [`setInterval(${(async) ? 'async' : ''} () => { ${safe} }, ${random.range(100, 400)} )`]
+        return [`setInterval(${(async) ? 'async' : ''} () => { ${safe} }, ${random.range(1000, 2000)} )`]
       case 1:
         return [`setTimeout(${(async) ? 'async ' : ''} () => { ${safe} }, ${random.range(100, 400)} )`]
       case 2:
