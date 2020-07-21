@@ -129,4 +129,24 @@ export class script {
      */
     return `${objectName}.${attributeName}${operator}${attributeValue};`
   }
+
+  /**
+   * Generate function used for timing out promises that never reject or resolve
+   *
+   * @param {number} time - Time limit
+   * @returns {string}
+   */
+  static promiseTimeout (time: number) {
+    return [
+      `async function (cmd) {`,
+      `  const timer = new Promise((resolve, reject) => {`,
+      `    const id = setTimeout(() => {`,
+      `      clearTimeout(id)`,
+      `      reject(new Error('Promise timed out!'))`,
+      `  }, ${time})`,
+      `  })`,
+      `  return Promise.race([cmd, timer])`,
+      `}`
+    ].join('\n')
+  }
 }
