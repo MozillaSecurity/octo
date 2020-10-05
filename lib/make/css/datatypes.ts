@@ -170,7 +170,7 @@ export class datatypes {
   static length (min?: number, max?: number, allowRelative? = true) {
     const units = ['cm', 'mm', 'Q', 'in', 'pc', 'pt', 'px']
     if (allowRelative) {
-      units.push('em', 'ex', 'cap', 'ch', 'ic', 'rem', 'lh', 'rlh', 'vw', 'vh', 'vi', 'vb', 'vmin', 'vmax')
+      units.push('em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin', 'vmax')
     }
 
     const unit = random.item(units)
