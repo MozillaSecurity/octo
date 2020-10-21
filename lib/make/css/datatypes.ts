@@ -285,7 +285,7 @@ export class datatypes {
    * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static resolution (opts: RangedTypeOptions) {
+  static resolution (opts: RangedTypeOptions = {}) {
     const unit = random.item(['dpi', 'dpcm', 'dppx'])
     if (opts.min !== undefined && opts.max !== undefined) {
       return `${make.numbers.frange(opts.min, opts.max)}${unit}`
