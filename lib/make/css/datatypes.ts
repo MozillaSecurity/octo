@@ -6,6 +6,19 @@ import { make } from '../index'
 import { random } from '../../random'
 import { utils } from '../../utils'
 
+/* Interface representing options for ranged datatypes */
+interface RangedTypeOptions {
+  min?: number;
+  max?: number;
+  noCalc?: boolean;
+  noExceed?: boolean;
+}
+
+/* Interface representing options for <length> datatype */
+interface RangedLengthOptions extends RangedTypeOptions {
+  noRelative?: boolean;
+}
+
 /**
  * Generate a calc value
  *
@@ -38,11 +51,10 @@ export class datatypes {
   /**
    * Generator for CSS <angle> data type
    *
-   * @param {number?} min - Minimum angle
-   * @param {number?} max  - Maximum angle
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static angle (min?: number, max?: number) {
+  static angle (opts: RangedTypeOptions = {}) {
     let [suffix, limit] = random.item([
       ['deg', 360],
       ['grad', 400],
@@ -50,14 +62,14 @@ export class datatypes {
       ['turn', 1]
     ])
 
-    if (min !== undefined && max !== undefined) {
-      return `${make.numbers.frange(min, max)}${suffix}`
-    } else if (random.chance(75)) {
+    if (opts.min !== undefined && opts.max !== undefined) {
+      return `${make.numbers.frange(opts.min, opts.max)}${suffix}`
+    } else if (!opts.noCalc && random.chance(75)) {
       return calc(datatypes.angle)
     }
 
     // Occasionally, exceed the limit
-    if (random.chance(100)) {
+    if (!opts.noExceed && random.chance(100)) {
       limit = limit * make.numbers.any()
     }
 
@@ -76,20 +88,19 @@ export class datatypes {
   /**
    * Generator for CSS <dimension> data type
    *
-   * @param {number?} min - Minimum dimension
-   * @param {number?} max  - Maximum dimension
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static dimension (min?: number, max?: number) {
+  static dimension (opts: RangedTypeOptions = {}) {
     switch (random.number(4)) {
       case 0:
-        return datatypes.frequency(min, max)
+        return datatypes.frequency(opts)
       case 1:
-        return datatypes.time(min, max)
+        return datatypes.time(opts)
       case 2:
-        return datatypes.resolution(min, max)
+        return datatypes.resolution(opts)
       default:
-        return datatypes.length(min, max)
+        return datatypes.length(opts)
     }
   }
 
@@ -115,15 +126,14 @@ export class datatypes {
   /**
    * Generator for CSS <frequency> data type
    *
-   * @param {number?} min - Minimum frequency
-   * @param {number?} max  - Maximum frequency
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static frequency (min?: number, max?: number) {
-    if (min !== undefined && max !== undefined) {
+  static frequency (opts: RangedTypeOptions = {}) {
+    if (opts.min !== undefined && opts.max !== undefined) {
       const unit = random.item(['Hz', 'kHz'])
-      return `${make.numbers.frange(min, max)}${unit}`
-    } else if (random.chance(75)) {
+      return `${make.numbers.frange(opts.min, opts.max)}${unit}`
+    } else if (!opts.noCalc && random.chance(75)) {
       return calc(datatypes.frequency)
     }
 
@@ -144,14 +154,13 @@ export class datatypes {
   /**
    * Generator for CSS <integer> data type
    *
-   * @param {number?} min - Minimum integer
-   * @param {number?} max  - Maximum integer
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static integer (min?: number, max?: number) {
-    if (min !== undefined && max !== undefined) {
-      return String(random.range(min, max))
-    } else if (random.chance(75)) {
+  static integer (opts: RangedTypeOptions = {}) {
+    if (opts.min !== undefined && opts.max !== undefined) {
+      return String(random.range(opts.min, opts.max))
+    } else if (!opts.noCalc && random.chance(75)) {
       return calc(datatypes.integer)
     }
 
@@ -161,22 +170,20 @@ export class datatypes {
   /**
    * Generator for CSS <length> data type
    *
-   * @param {number?} min - Minimum length
-   * @param {number?} max  - Maximum length
-   * @param {boolean} allowRelative - Allow relative units
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
   // @ts-ignore
-  static length (min?: number, max?: number, allowRelative? = true) {
+  static length (opts: RangedLengthOptions = {}) {
     const units = ['cm', 'mm', 'Q', 'in', 'pc', 'pt', 'px']
-    if (allowRelative) {
+    if (!opts.noRelative) {
       units.push('em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin', 'vmax')
     }
 
     const unit = random.item(units)
-    if (min !== undefined && max !== undefined) {
-      return `${make.numbers.frange(min, max)}${unit}`
-    } else if (random.chance(75)) {
+    if (opts.min !== undefined && opts.max !== undefined) {
+      return `${make.numbers.frange(opts.min, opts.max)}${unit}`
+    } else if (!opts.noCalc && random.chance(75)) {
       return calc(datatypes.length)
     }
 
@@ -186,14 +193,13 @@ export class datatypes {
   /**
    * Generator for CSS <number> data type
    *
-   * @param {number?} min - Minimum number
-   * @param {number?} max  - Maximum number
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static number (min?: number, max?: number) {
-    if (min !== undefined && max !== undefined) {
-      return String(make.numbers.frange(min, max))
-    } else if (random.chance(75)) {
+  static number (opts: RangedTypeOptions = {}) {
+    if (opts.min !== undefined && opts.max !== undefined) {
+      return String(make.numbers.frange(opts.min, opts.max))
+    } else if (!opts.noCalc && random.chance(75)) {
       return calc(datatypes.number)
     }
 
@@ -221,13 +227,12 @@ export class datatypes {
   /**
    * Generator for CSS <percentage> data type
    *
-   * @param {number?} min - Minimum percentage
-   * @param {number?} max  - Maximum percentage
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static percentage (min?: number, max?: number) {
-    if (min !== undefined && max !== undefined) {
-      return `${random.range(min, max)}%`
+  static percentage (opts: RangedTypeOptions = {}) {
+    if (opts.min !== undefined && opts.max !== undefined) {
+      return `${random.range(opts.min, opts.max)}%`
     } else if (random.chance(75)) {
       return calc(datatypes.percentage)
     }
@@ -277,14 +282,13 @@ export class datatypes {
   /**
    * Generator for CSS <resolution> data type
    *
-   * @param {number?} min - Minimum resolution
-   * @param {number?} max  - Maximum resolution
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static resolution (min?: number, max?: number) {
+  static resolution (opts: RangedTypeOptions) {
     const unit = random.item(['dpi', 'dpcm', 'dppx'])
-    if (min !== undefined && max !== undefined) {
-      return `${make.numbers.frange(min, max)}${unit}`
+    if (opts.min !== undefined && opts.max !== undefined) {
+      return `${make.numbers.frange(opts.min, opts.max)}${unit}`
     } else {
       return `${make.numbers.any()}${unit}`
     }
@@ -311,14 +315,13 @@ export class datatypes {
   /**
    * Generator for CSS <time> data type
    *
-   * @param {number?} min - Minimum time
-   * @param {number?} max  - Maximum time
+   * @param {RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static time (min?: number, max?: number) {
-    if (min !== undefined && max !== undefined) {
+  static time (opts: RangedTypeOptions = {}) {
+    if (opts.min !== undefined && opts.max !== undefined) {
       const unit = random.item(['s', 'ms'])
-      return `${random.range(min, max)}${unit}`
+      return `${random.range(opts.min, opts.max)}${unit}`
     } else if (random.chance(75)) {
       return calc(datatypes.time)
     }
