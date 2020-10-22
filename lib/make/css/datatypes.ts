@@ -9,7 +9,7 @@ import { utils } from '../../utils'
 /* Interface representing options for ranged datatypes */
 interface RangedTypeOptions {
   min?: number;
-  max?: number;
+  max?: number | null;
 }
 
 /* Interface representing options for <length> datatype */
