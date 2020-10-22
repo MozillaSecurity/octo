@@ -10,8 +10,6 @@ import { utils } from '../../utils'
 interface RangedTypeOptions {
   min?: number;
   max?: number;
-  noCalc?: boolean;
-  noExceed?: boolean;
 }
 
 /* Interface representing options for <length> datatype */
@@ -63,14 +61,11 @@ export class datatypes {
     ])
 
     if (opts.min !== undefined && opts.max !== undefined) {
-      return `${make.numbers.frange(opts.min, opts.max)}${suffix}`
-    } else if (!opts.noCalc && random.chance(75)) {
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
+      return `${make.numbers.frange(opts.min, max)}${suffix}`
+    } else if (random.chance(75)) {
       return calc(datatypes.angle)
-    }
-
-    // Occasionally, exceed the limit
-    if (!opts.noExceed && random.chance(100)) {
-      limit = limit * make.numbers.any()
     }
 
     return `${make.numbers.frange(0, limit)}${suffix}`
@@ -131,9 +126,11 @@ export class datatypes {
    */
   static frequency (opts: RangedTypeOptions = {}) {
     if (opts.min !== undefined && opts.max !== undefined) {
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
       const unit = random.item(['Hz', 'kHz'])
-      return `${make.numbers.frange(opts.min, opts.max)}${unit}`
-    } else if (!opts.noCalc && random.chance(75)) {
+      return `${make.numbers.frange(opts.min, max)}${unit}`
+    } else if (random.chance(75)) {
       return calc(datatypes.frequency)
     }
 
@@ -159,8 +156,10 @@ export class datatypes {
    */
   static integer (opts: RangedTypeOptions = {}) {
     if (opts.min !== undefined && opts.max !== undefined) {
-      return String(random.range(opts.min, opts.max))
-    } else if (!opts.noCalc && random.chance(75)) {
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
+      return String(random.range(opts.min, max))
+    } else if (random.chance(75)) {
       return calc(datatypes.integer)
     }
 
@@ -182,8 +181,10 @@ export class datatypes {
 
     const unit = random.item(units)
     if (opts.min !== undefined && opts.max !== undefined) {
-      return `${make.numbers.frange(opts.min, opts.max)}${unit}`
-    } else if (!opts.noCalc && random.chance(75)) {
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
+      return `${make.numbers.frange(opts.min, max)}${unit}`
+    } else if (random.chance(75)) {
       return calc(datatypes.length)
     }
 
@@ -198,8 +199,10 @@ export class datatypes {
    */
   static number (opts: RangedTypeOptions = {}) {
     if (opts.min !== undefined && opts.max !== undefined) {
-      return String(make.numbers.frange(opts.min, opts.max))
-    } else if (!opts.noCalc && random.chance(75)) {
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
+      return String(make.numbers.frange(opts.min, max))
+    } else if (random.chance(75)) {
       return calc(datatypes.number)
     }
 
@@ -232,7 +235,9 @@ export class datatypes {
    */
   static percentage (opts: RangedTypeOptions = {}) {
     if (opts.min !== undefined && opts.max !== undefined) {
-      return `${random.range(opts.min, opts.max)}%`
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
+      return `${random.range(opts.min, max)}%`
     } else if (random.chance(75)) {
       return calc(datatypes.percentage)
     }
@@ -288,7 +293,9 @@ export class datatypes {
   static resolution (opts: RangedTypeOptions = {}) {
     const unit = random.item(['dpi', 'dpcm', 'dppx'])
     if (opts.min !== undefined && opts.max !== undefined) {
-      return `${make.numbers.frange(opts.min, opts.max)}${unit}`
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
+      return `${make.numbers.frange(opts.min, max)}${unit}`
     } else {
       return `${make.numbers.any()}${unit}`
     }
@@ -320,8 +327,10 @@ export class datatypes {
    */
   static time (opts: RangedTypeOptions = {}) {
     if (opts.min !== undefined && opts.max !== undefined) {
+      // A max of null represents infinity
+      const max = opts.max || 0xffffffff
       const unit = random.item(['s', 'ms'])
-      return `${random.range(opts.min, opts.max)}${unit}`
+      return `${random.range(opts.min, max)}${unit}`
     } else if (random.chance(75)) {
       return calc(datatypes.time)
     }
