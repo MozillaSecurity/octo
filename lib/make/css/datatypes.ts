@@ -53,7 +53,7 @@ export class datatypes {
    * @returns {string}
    */
   static angle (opts: RangedTypeOptions = {}) {
-    let [suffix, limit] = random.item([
+    const [suffix, limit] = random.item([
       ['deg', 360],
       ['grad', 400],
       ['rad', Math.PI * 2],
