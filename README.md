@@ -8,7 +8,7 @@ A unified shared library which aids in building fuzzers for browsers or as compl
 
 <p align="center">
 <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a>
-<a href="https://travis-ci.org/MozillaSecurity/octo"><img src="https://api.travis-ci.org/MozillaSecurity/octo.svg?branch=master" alt="Build Status"></a>
+<a href="https://travis-ci.com/MozillaSecurity/octo"><img src="https://api.travis-ci.com/MozillaSecurity/octo.svg?branch=master" alt="Build Status"></a>
 <a href="https://img.shields.io/github/release/mozillasecurity/octo.svg"><img src="https://img.shields.io/github/release/mozillasecurity/octo.svg" alt="Current Release"></a>
 <a href="https://coveralls.io/github/MozillaSecurity/octo?branch=master"><img src="https://coveralls.io/repos/github/MozillaSecurity/octo/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://david-dm.org/mozillasecurity/octo"><img src="https://img.shields.io/david/mozillasecurity/electron-genesis.svg?style=flat-square" alt="Dependencies Status"></a> <a href="https://david-dm.org/mozillasecurity/octo.svg?style=flat-square?type=dev"><img src="https://img.shields.io/david/dev/mozillasecurity/octo.svg?style=flat-square.svg?style=flat-square" alt="Dev Dependencies Status"></a> <a href="https://www.irccloud.com/invite?channel=%23fuzzing&amp;hostname=irc.mozilla.org&amp;port=6697&amp;ssl=1"><img src="https://img.shields.io/badge/IRC-%23fuzzing-1e72ff.svg?style=flat" alt="IRC"></a>
 </p>
