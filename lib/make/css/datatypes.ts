@@ -23,26 +23,28 @@ interface RangedLengthOptions extends RangedTypeOptions {
  * @param {Function} generator - The value generation function
  * @returns {string}
  */
-function calc (generator: Function) {
+function calc (generator: () => string) {
+  /* eslint-disable @typescript-eslint/no-use-before-define */
   const values: string[] = []
 
-  const len = random.range(1, 5)
-  for (let i = 0; i < len; i++) {
-    // Occasionally, just use a plain number
-    // We only do so on even numbers to ensure that we have atleast one value that is direct from the generator
-    if (i % 2 === 0 && random.chance(10)) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      values.push(datatypes.number())
-    } else {
-      values.push(generator())
-    }
-
-    if (i < len - 1) {
-      values.push(random.item(['+', '-', '*', '/']))
-    }
+  const op = random.item(['+', '-', '*', '/'])
+  switch (op) {
+    case '*':
+      // at least one of the arguments must be a <number>
+      values.push(...random.shuffled([datatypes.number(), generator()]))
+      break
+    case '/':
+      // right-hand side must be a <number>
+      values.push(...[generator(), datatypes.number()])
+      break
+    default:
+      for (let i = 0; i < 2; i++) {
+        values.push(random.pick([datatypes.number(), generator()]))
+      }
+      break
   }
 
-  return `calc(${values.join(' ')})`
+  return `calc(${values.join(` ${op} `)})`
 }
 
 export class datatypes {
