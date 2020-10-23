@@ -4,11 +4,15 @@
 
 /* eslint-env jest */
 
-import { datatypes } from '../datatypes'
+import { calc, datatypes } from '../datatypes'
 import { random } from '../../../random'
 
 beforeAll(() => {
   random.init()
+})
+
+afterEach(() => {
+  jest.restoreAllMocks()
 })
 
 describe('ranged datatypes', () => {
@@ -36,5 +40,34 @@ describe('ranged datatypes', () => {
       expect(num).toBeGreaterThanOrEqual(min)
       expect(num).toBeLessThanOrEqual(max)
     }
+  })
+})
+
+describe('calc()', () => {
+  test('multiplication', () => {
+    const mockGenerator = jest.fn(() => '')
+    jest.spyOn(random, 'item').mockReturnValueOnce('*')
+    jest.spyOn(random, 'shuffled').mockReturnValueOnce(['1px', '1'])
+    const value = calc(mockGenerator)
+    expect(value).toEqual('calc(1px * 1)')
+  })
+
+  test('division', () => {
+    const mockGenerator = jest.fn(() => '1px')
+    jest.spyOn(random, 'item').mockReturnValueOnce('/')
+    jest.spyOn(datatypes, 'number').mockReturnValueOnce('1')
+    const value = calc(mockGenerator)
+    expect(value).toEqual('calc(1px / 1)')
+  })
+
+  test.each([
+    ['addition', '+'],
+    ['subtraction', '-']
+  ])('%s', (type, op) => {
+    const mockGenerator = jest.fn(() => '1')
+    jest.spyOn(random, 'item').mockReturnValueOnce(op)
+    jest.spyOn(datatypes, 'number').mockReturnValue('1')
+    const value = calc(mockGenerator)
+    expect(value).toEqual(`calc(1 ${op} 1)`)
   })
 })

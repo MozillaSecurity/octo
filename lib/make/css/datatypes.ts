@@ -23,7 +23,7 @@ interface RangedLengthOptions extends RangedTypeOptions {
  * @param {Function} generator - The value generation function
  * @returns {string}
  */
-function calc (generator: () => string) {
+export function calc (generator: () => string) {
   /* eslint-disable @typescript-eslint/no-use-before-define */
   const values: string[] = []
 
