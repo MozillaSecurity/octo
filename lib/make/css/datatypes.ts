@@ -51,7 +51,7 @@ export function calc (generator: () => string) {
 export function expandRange (min: number | null, max: number | null) {
   const _min = (min !== null) ? min : -2147483648
   const _max = (max !== null)
-    ? max : (_min == null)
+    ? max : (min == null)
       ? 0x7fffffff : 0xffffffff
 
   return [_min, _max]
