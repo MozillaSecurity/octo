@@ -4,7 +4,7 @@
 
 /* eslint-env jest */
 
-import { calc, datatypes } from '../datatypes'
+import { calc, datatypes, expandRange } from '../datatypes'
 import { random } from '../../../random'
 
 beforeAll(() => {
@@ -41,6 +41,18 @@ describe('calc()', () => {
     jest.spyOn(datatypes, 'number').mockReturnValue('1')
     const value = calc(mockGenerator)
     expect(value).toEqual(`calc(1 ${op} 1)`)
+  })
+})
+
+describe('expandRange()', () => {
+  test.each([
+    ['infinity', [null, null], [-2147483648, 0x7fffffff]],
+    ['positive-infinity', [0, null], [0, 0xffffffff]],
+    ['negative-infinity', [null, 0], [-2147483648, 0]],
+    ['clamped', [0, 1], [0, 1]]
+  ])('%s', (_, opts, expected) => {
+    const value = expandRange(opts[0], opts[1])
+    expect(value).toEqual(expected)
   })
 })
 
