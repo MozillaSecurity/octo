@@ -16,7 +16,7 @@ afterEach(() => {
 })
 
 describe('ranged datatypes', () => {
-  const tests = [
+  const keys = [
     'angle',
     'dimension',
     'frequency',
@@ -26,20 +26,26 @@ describe('ranged datatypes', () => {
     'percentage',
     'resolution',
     'time'
-  ]
+  ] as const
+  describe.each(keys)('%s', (name) => {
+    test('using predefined ranges', () => {
+      const min = 1
+      const max = 100
+      const value = datatypes[name]({ min, max })
+      const match = value.match('^\\d+')
+      expect(match).not.toBe(null)
+      if (match !== null) {
+        const num = parseInt(match[0])
+        expect(num).toBeGreaterThanOrEqual(min)
+        expect(num).toBeLessThanOrEqual(max)
+      }
+    })
 
-  test.each(tests)('datatypes.%s(min, max)', (name) => {
-    const min = 1
-    const max = 100
-    // @ts-ignore
-    const value = datatypes[name]({ min, max })
-    const match = value.match('^\\d+')
-    expect(match).not.toBe(null)
-    if (match !== null) {
-      const num = parseInt(match[0])
-      expect(num).toBeGreaterThanOrEqual(min)
-      expect(num).toBeLessThanOrEqual(max)
-    }
+    test('using calc values', () => {
+      jest.spyOn(random, 'chance').mockReturnValueOnce(true)
+      const value = datatypes[name]()
+      expect(value).toMatch(/calc\(.*?\)/)
+    })
   })
 })
 
