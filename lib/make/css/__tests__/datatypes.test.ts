@@ -32,7 +32,7 @@ describe('ranged datatypes', () => {
     const min = 1
     const max = 100
     // @ts-ignore
-    const value = datatypes[name]({ min, max, noExceed: true })
+    const value = datatypes[name]({ min, max })
     const match = value.match('^\\d+')
     expect(match).not.toBe(null)
     if (match !== null) {
