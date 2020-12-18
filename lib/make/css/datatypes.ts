@@ -13,21 +13,6 @@ interface RangedTypeOptions {
 }
 
 /**
- * Simple helper function for extrapolating ranged types
- *
- * @param {number?} min - Minimum value
- * @param {number?} max - Maximum value
- */
-function expandRange (min: number | null, max: number | null) {
-  const _min = (min !== null) ? min : -2147483648
-  const _max = (max !== null)
-    ? max : (_min == null)
-      ? 0x7fffffff : 0xffffffff
-
-  return [_min, _max]
-}
-
-/**
  * Generate a calc value
  *
  * @param {Function} generator - The value generation function
@@ -55,6 +40,21 @@ export function calc (generator: () => string) {
   }
 
   return `calc(${values.join(` ${op} `)})`
+}
+
+/**
+ * Simple helper function for extrapolating ranged types
+ *
+ * @param {number?} min - Minimum value
+ * @param {number?} max - Maximum value
+ */
+function expandRange (min: number | null, max: number | null) {
+  const _min = (min !== null) ? min : -2147483648
+  const _max = (max !== null)
+    ? max : (_min == null)
+      ? 0x7fffffff : 0xffffffff
+
+  return [_min, _max]
 }
 
 export class datatypes {
