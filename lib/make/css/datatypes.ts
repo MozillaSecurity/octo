@@ -302,9 +302,11 @@ export class datatypes {
     if (opts) {
       const [max, min] = expandRange(opts.min, opts.max)
       return `${make.numbers.frange(min, max)}${unit}`
-    } else {
-      return `${make.numbers.any()}${unit}`
+    } else if (random.chance(75)) {
+      return calc(() => datatypes.resolution(opts))
     }
+
+    return `${make.numbers.any()}${unit}`
   }
 
   /**
