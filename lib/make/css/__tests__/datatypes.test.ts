@@ -57,7 +57,7 @@ describe('expandRange()', () => {
 })
 
 describe('ranged datatypes', () => {
-  const keys = [
+  describe.each([
     'angle',
     'dimension',
     'frequency',
@@ -67,18 +67,20 @@ describe('ranged datatypes', () => {
     'percentage',
     'resolution',
     'time'
-  ] as const
-  describe.each(keys)('%s', (name) => {
-    test('using predefined ranges', () => {
-      const min = 1
-      const max = 100
-      const value = datatypes[name]({ min, max })
-      const match = value.match('^\\d+')
-      expect(match).not.toBe(null)
-      if (match !== null) {
-        const num = parseInt(match[0])
-        expect(num).toBeGreaterThanOrEqual(min)
-        expect(num).toBeLessThanOrEqual(max)
+  ] as const)('%s', (name) => {
+    test.each([
+      ['positive', 0, null],
+      ['negative', null, 0]
+    ])('ranges (%s)', (type, min, max) => {
+      const raw = datatypes[name]({
+        min,
+        max
+      })
+      const value = parseInt(raw)
+      if (type === 'positive') {
+        expect(value).toBeGreaterThanOrEqual(0)
+      } else {
+        expect(value).toBeLessThanOrEqual(0)
       }
     })
 
