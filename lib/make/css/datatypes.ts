@@ -73,7 +73,7 @@ export class datatypes {
     ])
 
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       return `${make.numbers.frange(min, max)}${suffix}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.angle(opts))
@@ -137,7 +137,7 @@ export class datatypes {
    */
   static frequency (opts?: RangedTypeOptions | null): string {
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       const unit = random.item(['Hz', 'kHz'])
       return `${make.numbers.frange(min, max)}${unit}`
     } else if (random.chance(75)) {
@@ -166,7 +166,7 @@ export class datatypes {
    */
   static integer (opts?: RangedTypeOptions | null) {
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       return String(random.range(min, max))
     } else if (random.chance(75)) {
       return calc(datatypes.integer)
@@ -191,7 +191,7 @@ export class datatypes {
 
     const unit = random.item(units)
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       return `${make.numbers.frange(min, max)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.length(opts))
@@ -208,7 +208,7 @@ export class datatypes {
    */
   static number (opts?: RangedTypeOptions | null): string {
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       return String(make.numbers.frange(min, max))
     } else if (random.chance(75)) {
       return calc(() => datatypes.number(opts))
@@ -243,7 +243,7 @@ export class datatypes {
    */
   static percentage (opts?: RangedTypeOptions | null) {
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       return `${random.range(min, max)}%`
     } else if (random.chance(75)) {
       return calc(datatypes.percentage)
@@ -300,7 +300,7 @@ export class datatypes {
   static resolution (opts?: RangedTypeOptions | null): string {
     const unit = random.item(['dpi', 'dpcm', 'dppx'])
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       return `${make.numbers.frange(min, max)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.resolution(opts))
@@ -335,7 +335,7 @@ export class datatypes {
    */
   static time (opts?: RangedTypeOptions | null): string {
     if (opts) {
-      const [max, min] = expandRange(opts.min, opts.max)
+      const [min, max] = expandRange(opts.min, opts.max)
       const unit = random.item(['s', 'ms'])
       return `${random.range(min, max)}${unit}`
     } else if (random.chance(75)) {
