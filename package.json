@@ -25,7 +25,7 @@
   "main": "dist/octo.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "webpack -p",
+    "build": "webpack --mode=production",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "docs": "esdoc",
