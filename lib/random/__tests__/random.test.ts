@@ -4,10 +4,10 @@
 
 /* eslint-disable camelcase */
 /* eslint-env jest */
-import { random } from '../'
+import { random } from "../"
 
-describe('Random', () => {
-  test('init', () => {
+describe("Random", () => {
+  test("init", () => {
     expect(() => {
       random.number()
     }).toThrow()
@@ -15,7 +15,7 @@ describe('Random', () => {
     random.number()
   })
 
-  test('number() corner cases', () => {
+  test("number() corner cases", () => {
     random.init(Math.random() * 0x100000000)
     let sum = 0
 
@@ -43,7 +43,7 @@ describe('Random', () => {
     expect(sum >>> 0).toEqual(0xffffffff)
   })
 
-  test('number() uniform distriution', () => {
+  test("number() uniform distriution", () => {
     const N = Math.pow(2, 17)
     const TRIES = 3
     const XSQ = 564.7 // quantile of chi-square dist. k=511, p=.05
@@ -80,7 +80,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('float() uniform distribution', () => {
+  test("float() uniform distribution", () => {
     const N = Math.pow(2, 17)
     const TRIES = 3
     const XSQ = 564.7 // quantile of chi-square dist. k=511, p=.05
@@ -117,7 +117,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('range() uniform distribution', () => {
+  test("range() uniform distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 66.34 // quantile of chi-square dist. k=49, p=.05
@@ -154,7 +154,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('range() uniform distribution with offset', () => {
+  test("range() uniform distribution with offset", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 66.34 // quantile of chi-square dist. k=49, p=.05
@@ -192,7 +192,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('range() PRNG reproducibility', () => {
+  test("range() PRNG reproducibility", () => {
     let seed, result1, result2
     seed = Math.random() * 0x100000000
     for (let t = 0; t < 50; ++t) {
@@ -207,7 +207,7 @@ describe('Random', () => {
     }
   })
 
-  test('item() distribution with list', () => {
+  test("item() distribution with list", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -229,9 +229,9 @@ describe('Random', () => {
           return a + Math.pow(v - e, 2) / e
         }, 0)
         /*
-       * XSQ = scipy.stats.chi2.isf(.05, 2)
-       * if xsq > XSQ, the result is biased at 95% significance
-       */
+         * XSQ = scipy.stats.chi2.isf(.05, 2)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (xsq < XSQ) {
           console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
           return true
@@ -246,7 +246,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('key() distribution', () => {
+  test("key() distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -268,9 +268,9 @@ describe('Random', () => {
           return a + Math.pow(v - e, 2) / e
         }, 0)
         /*
-       * XSQ = scipy.stats.chi2.isf(.05, 2)
-       * if xsq > XSQ, the result is biased at 95% significance
-       */
+         * XSQ = scipy.stats.chi2.isf(.05, 2)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (xsq < XSQ) {
           console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
           return true
@@ -283,7 +283,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('bool() distribution', () => {
+  test("bool() distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
@@ -295,7 +295,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(2)
         for (let i = 0; i < N; ++i) {
-          const tmp = (random.bool()) ? 1 : 0
+          const tmp = random.bool() ? 1 : 0
           ++bins[tmp]
         }
         const xsq = bins.reduce((a, v) => {
@@ -303,9 +303,9 @@ describe('Random', () => {
           return a + Math.pow(v - e, 2) / e
         }, 0)
         /*
-        * XSQ = scipy.stats.chi2.isf(.05, 1)
-        * if xsq > XSQ, the result is biased at 95% significance
-        */
+         * XSQ = scipy.stats.chi2.isf(.05, 1)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (xsq < XSQ) {
           console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
           return true
@@ -318,7 +318,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('pick() cases', () => {
+  test("pick() cases", () => {
     random.init(Math.random() * 0x100000000)
 
     for (let i = 0; i < 100; ++i) {
@@ -332,7 +332,7 @@ describe('Random', () => {
     }
 
     for (let i = 0; i < 100; ++i) {
-      const tmp = Math.random() + ''
+      const tmp = Math.random() + ""
       expect(random.pick(tmp)).toEqual(tmp)
     }
 
@@ -352,7 +352,7 @@ describe('Random', () => {
     }
   })
 
-  test('pick() with equal distribution', () => {
+  test("pick() with equal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -364,11 +364,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.pick([
-            0,
-            [1, 1],
-            () => 2
-          ])
+          const tmp = random.pick([0, [1, 1], () => 2])
           expect(tmp).toBeGreaterThanOrEqual(0)
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
@@ -394,7 +390,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('pick() with unequal distribution', () => {
+  test("pick() with unequal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -406,11 +402,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.pick([
-            [0, 1],
-            [1],
-            () => 2
-          ])
+          const tmp = random.pick([[0, 1], [1], () => 2])
           expect(tmp).toBeGreaterThanOrEqual(0)
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
@@ -436,7 +428,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('chance(undefined) distribution', () => {
+  test("chance(undefined) distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
@@ -448,7 +440,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(2)
         for (let i = 0; i < N; ++i) {
-          const tmp = (random.chance()) ? 1 : 0
+          const tmp = random.chance() ? 1 : 0
           ++bins[tmp]
         }
         const xsq = bins.reduce((a, v) => {
@@ -472,7 +464,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('chance(2) distribution', () => {
+  test("chance(2) distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
@@ -484,7 +476,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(2)
         for (let i = 0; i < N; ++i) {
-          const tmp = (random.chance(2)) ? 1 : 0
+          const tmp = random.chance(2) ? 1 : 0
           ++bins[tmp]
         }
         const xsq = bins.reduce((a, v) => {
@@ -508,7 +500,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('chance(3) distribution', () => {
+  test("chance(3) distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
@@ -520,7 +512,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(2)
         for (let i = 0; i < N; ++i) {
-          const tmp = (random.chance(3)) ? 0 : 1
+          const tmp = random.chance(3) ? 0 : 1
           ++bins[tmp]
         }
         const xsq =
@@ -543,7 +535,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('chance(1000) distribution', () => {
+  test("chance(1000) distribution", () => {
     const N = 1e6
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
@@ -555,7 +547,7 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(2)
         for (let i = 0; i < N; ++i) {
-          const tmp = (random.chance(1000)) ? 0 : 1
+          const tmp = random.chance(1000) ? 0 : 1
           ++bins[tmp]
         }
         const xsq =
@@ -578,7 +570,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('choose() with equal distribution', () => {
+  test("choose() with equal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -590,7 +582,11 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.choose([[1, 0], [1, 1], [1, 2]])
+          const tmp = random.choose([
+            [1, 0],
+            [1, 1],
+            [1, 2],
+          ])
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
         }
@@ -627,7 +623,11 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.choose([[1, 0], [2, 1], [1, 2]])
+          const tmp = random.choose([
+            [1, 0],
+            [2, 1],
+            [1, 2],
+          ])
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
         }
@@ -652,7 +652,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('choose(flat) equal distribution with types not picked', () => {
+  test("choose(flat) equal distribution with types not picked", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -668,7 +668,14 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          let tmp = random.choose([[1, v1], [1, v2], [1, v3]], true)
+          let tmp = random.choose(
+            [
+              [1, v1],
+              [1, v2],
+              [1, v3],
+            ],
+            true
+          )
           if (tmp === v1) {
             tmp = 0
           } else if (tmp === v2) {
@@ -701,7 +708,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('weighted() with equal distribution', () => {
+  test("weighted() with equal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -713,7 +720,13 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.item(random.weighted([{ w: 1, v: 0 }, { w: 1, v: 1 }, { w: 1, v: 2 }]))
+          const tmp = random.item(
+            random.weighted([
+              { w: 1, v: 0 },
+              { w: 1, v: 1 },
+              { w: 1, v: 2 },
+            ])
+          )
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
         }
@@ -738,7 +751,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('choose(flat) with unequal distribution', () => {
+  test("choose(flat) with unequal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -750,7 +763,14 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.choose([[1, 0], [2, 1], [1, 2]], true)
+          const tmp = random.choose(
+            [
+              [1, 0],
+              [2, 1],
+              [1, 2],
+            ],
+            true
+          )
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
         }
@@ -775,7 +795,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('weighted() with unequal distribution', () => {
+  test("weighted() with unequal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -787,7 +807,13 @@ describe('Random', () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.item(random.weighted([{ w: 1, v: 0 }, { w: 2, v: 1 }, { w: 1, v: 2 }]))
+          const tmp = random.item(
+            random.weighted([
+              { w: 1, v: 0 },
+              { w: 2, v: 1 },
+              { w: 1, v: 2 },
+            ])
+          )
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
         }
@@ -812,7 +838,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('weighted() equal distribution with types not picked', () => {
+  test("weighted() equal distribution with types not picked", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -828,7 +854,11 @@ describe('Random', () => {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
           let tmp = random.item(
-            random.weighted([{ w: 1, v: v1 }, { w: 1, v: v2 }, { w: 1, v: v3 }])
+            random.weighted([
+              { w: 1, v: v1 },
+              { w: 1, v: v2 },
+              { w: 1, v: v3 },
+            ])
           )
           if (tmp === v1) {
             tmp = 0
@@ -861,7 +891,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('choose() with unequal distribution and pick', () => {
+  test("choose() with unequal distribution and pick", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -876,10 +906,7 @@ describe('Random', () => {
           const tmp = random.choose([
             [1, 0],
             [2, [1, 2]],
-            [
-              1,
-              () => 2
-            ]
+            [1, () => 2],
           ])
           expect(tmp).toBeGreaterThanOrEqual(0)
           expect(tmp).toBeLessThan(bins.length)
@@ -905,7 +932,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('weighted() equal distribution with types not picked', () => {
+  test("weighted() equal distribution with types not picked", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -922,7 +949,11 @@ describe('Random', () => {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
           let tmp = random.item(
-            random.weighted([{ w: 1, v: v1 }, { w: 1, v: v2 }, { w: 1, v: v3 }])
+            random.weighted([
+              { w: 1, v: v1 },
+              { w: 1, v: v2 },
+              { w: 1, v: v3 },
+            ])
           )
           if (tmp === v1) {
             tmp = 0
@@ -955,7 +986,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('use() distribution', () => {
+  test("use() distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
@@ -971,7 +1002,7 @@ describe('Random', () => {
           let use = random.use(rnd)
           if (use === rnd) {
             use = 1
-          } else if (use === '') {
+          } else if (use === "") {
             use = 0
           } else {
             throw new Error(`Unexpected random.use() result: ${use}`)
@@ -998,7 +1029,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('shuffle() distribution', () => {
+  test("shuffle() distribution", () => {
     const N = 1e4
     const M = 10
     const TRIES = 3
@@ -1022,9 +1053,9 @@ describe('Random', () => {
           return a + Math.pow(v - e, 2) / e
         }, 0)
         /*
-       * XSQ = scipy.stats.chi2.isf(.05, 99)
-       * if xsq > XSQ, the result is biased at 95% significance
-       */
+         * XSQ = scipy.stats.chi2.isf(.05, 99)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (xsq < XSQ) {
           console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
           return true
@@ -1038,7 +1069,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('shuffled() distribution', () => {
+  test("shuffled() distribution", () => {
     const N = 1e4
     const M = 10
     const TRIES = 3
@@ -1066,9 +1097,9 @@ describe('Random', () => {
             return a + Math.pow(v - e, 2) / e
           }, 0)
           /*
-         * XSQ = scipy.stats.chi2.isf(.05, 99)
-         * if xsq > XSQ, the result is biased at 95% significance
-         */
+           * XSQ = scipy.stats.chi2.isf(.05, 99)
+           * if xsq > XSQ, the result is biased at 95% significance
+           */
           if (xsq < XSQ) {
             console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
             return true
@@ -1083,7 +1114,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test.skip('subset() with equal distribution', () => {
+  test.skip("subset() with equal distribution", () => {
     /*
      * This doesn't specify limit, so length distribution should be even,
      * and selections should be even within each length.
@@ -1104,11 +1135,7 @@ describe('Random', () => {
         const bins = [new Uint32Array(3), new Uint32Array(9), new Uint32Array(27)]
         const lengths = new Uint32Array(M + 1)
         for (let i = 0; i < N; ++i) {
-          const tmp = random.subset([
-            0,
-            [1, 1],
-            () => 2
-          ])
+          const tmp = random.subset([0, [1, 1], () => 2])
           expect(tmp.length).toBeLessThanOrEqual(M)
           ++lengths[tmp.length]
           if (tmp.length) {
@@ -1132,14 +1159,22 @@ describe('Random', () => {
           return a + Math.pow(v - e, 2) / e
         }, 0)
         /*
-        * XSQ = scipy.stats.chi2.isf(.05, 2)
-        * if xsq > XSQ, the result is biased at 95% significance
-        */
+         * XSQ = scipy.stats.chi2.isf(.05, 2)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (bin0_xsq < B0_XSQ && bin1_xsq < B1_XSQ && bin2_xsq < B2_XSQ && length_xsq < LEN_XSQ) {
-          console.log(`Expected lengths x^2 to be < ${LEN_XSQ} got ${length_xsq}  on attempt #${attempt + 1}`)
-          console.log(`Expected length=1 x^2 to be < ${B0_XSQ} got ${bin0_xsq} on attempt # ${attempt + 1}`)
-          console.log(`Expected length=2 x^2 to be < ${B1_XSQ} got ${bin1_xsq} on attempt #${attempt + 1}`)
-          console.log(`Expected length=3 x^2 to be < ${B2_XSQ} got ${bin2_xsq} on attempt #${attempt + 1}`)
+          console.log(
+            `Expected lengths x^2 to be < ${LEN_XSQ} got ${length_xsq}  on attempt #${attempt + 1}`
+          )
+          console.log(
+            `Expected length=1 x^2 to be < ${B0_XSQ} got ${bin0_xsq} on attempt # ${attempt + 1}`
+          )
+          console.log(
+            `Expected length=2 x^2 to be < ${B1_XSQ} got ${bin1_xsq} on attempt #${attempt + 1}`
+          )
+          console.log(
+            `Expected length=3 x^2 to be < ${B2_XSQ} got ${bin2_xsq} on attempt #${attempt + 1}`
+          )
           return true
         }
       }
@@ -1154,7 +1189,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test.skip('subset(limit) with equal distribution', () => {
+  test.skip("subset(limit) with equal distribution", () => {
     /*
      * limit is specified, so length should always == limit, and selections should be even
      */
@@ -1182,7 +1217,7 @@ describe('Random', () => {
           new Uint32Array(3),
           new Uint32Array(9),
           new Uint32Array(27),
-          new Uint32Array(81)
+          new Uint32Array(81),
         ]
         for (let i = 0; i < N; ++i) {
           let tmp = random.subset([0, 1, 2], 1)
@@ -1240,7 +1275,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('pop() distribution', () => {
+  test("pop() distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
@@ -1258,7 +1293,11 @@ describe('Random', () => {
           expect(tmp).toBeGreaterThanOrEqual(0)
           expect(tmp).toBeLessThan(bins.length)
           expect(arr.length).toBe(2)
-          expect(arr.reduce((a, v) => { return a + v }, tmp)).toBe(201)
+          expect(
+            arr.reduce((a, v) => {
+              return a + v
+            }, tmp)
+          ).toBe(201)
           ++bins[tmp]
         }
         const xsq = bins.reduce((a, v) => {
@@ -1281,7 +1320,7 @@ describe('Random', () => {
     expect(_test()).toBe(true)
   })
 
-  test('ludOneTo() distribution', () => {
+  test("ludOneTo() distribution", () => {
     const N = 1e5
     const TRIES = 3
     const XSQ = 123.22 // quantile of chi-square dist. k=99, p=.05
@@ -1313,9 +1352,9 @@ describe('Random', () => {
           xsq += Math.pow(bins[i] - dist[i], 2) / dist[i]
         }
         /*
-       * XSQ = scipy.stats.chi2.isf(.05, 99)
-       * if xsq > XSQ, the result is biased at 95% significance
-       */
+         * XSQ = scipy.stats.chi2.isf(.05, 99)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (xsq < XSQ) {
           console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
           return true

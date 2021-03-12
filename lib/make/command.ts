@@ -2,18 +2,18 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { colors } from './colors'
-import { font } from './fonts'
-import { html } from './html'
-import { random } from '../random'
-import { text } from './text'
-import { uri } from './uri'
+import { colors } from "./colors"
+import { font } from "./fonts"
+import { html } from "./html"
+import { random } from "../random"
+import { text } from "./text"
+import { uri } from "./uri"
 
 /**
  * Class for generator
  */
 export class command {
-  static get data () {
+  static get data() {
     return {
       backColor: colors.any,
       bold: null,
@@ -31,9 +31,24 @@ export class command {
       fontName: font.family,
       fontSize: font.relativeSize,
       foreColor: colors.any,
-      formatBlock: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'pre', 'address', 'blockquote', 'dl', 'div'],
+      formatBlock: [
+        "p",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "ol",
+        "ul",
+        "pre",
+        "address",
+        "blockquote",
+        "dl",
+        "div",
+      ],
       forwardDelete: null,
-      heading: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+      heading: ["p", "h1", "h2", "h3", "h4", "h5", "h6"],
       hiliteColor: colors.any,
       increaseFontSize: null,
       indent: null,
@@ -63,7 +78,7 @@ export class command {
       underline: null,
       undo: null,
       unlink: null,
-      useCSS: random.bool
+      useCSS: random.bool,
     }
   }
 
@@ -73,7 +88,7 @@ export class command {
    * @returns {string}
    */
   // @ts-ignore
-  static name () {
+  static name() {
     return random.item(Object.keys(command.data) as Array<keyof typeof command.data>)
   }
 
@@ -83,7 +98,7 @@ export class command {
    * @param {string} name - Command name
    * @returns {string}
    */
-  static value (name: keyof typeof command.data): any {
+  static value(name: keyof typeof command.data): any {
     // @ts-ignore
     return random.pick(command.data[name])
   }

@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { random } from '../random'
+import { random } from "../random"
 
 /**
  * Utility class for MathML generators
@@ -13,12 +13,8 @@ export class mathml {
    *
    * @returns {string}
    */
-  static pseudounit () {
-    return random.item([
-      'depth',
-      'height',
-      'width'
-    ])
+  static pseudounit() {
+    return random.item(["depth", "height", "width"])
   }
 
   /**
@@ -26,22 +22,22 @@ export class mathml {
    *
    * @returns {string}
    */
-  static namedspace () {
+  static namedspace() {
     return random.item([
-      'veryverythinmathspace',
-      'verythinmathspace',
-      'thinmathspace',
-      'mediummathspace',
-      'thickmathspace',
-      'verythickmathspace',
-      'veryverythickmathspace',
-      'negativeveryverythinmathspace',
-      'negativeverythinmathspace',
-      'negativethinmathspace',
-      'negativemediummathspace',
-      'negativethickmathspace',
-      'negativeverythickmathspace',
-      'negativeveryverythickmathspace'
+      "veryverythinmathspace",
+      "verythinmathspace",
+      "thinmathspace",
+      "mediummathspace",
+      "thickmathspace",
+      "verythickmathspace",
+      "veryverythickmathspace",
+      "negativeveryverythinmathspace",
+      "negativeverythinmathspace",
+      "negativethinmathspace",
+      "negativemediummathspace",
+      "negativethickmathspace",
+      "negativeverythickmathspace",
+      "negativeveryverythickmathspace",
     ])
   }
 }

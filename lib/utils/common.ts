@@ -1,8 +1,8 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-import { XmlEntities } from 'html-entities'
-import jsesc from 'jsesc'
+import { XmlEntities } from "html-entities"
+import jsesc from "jsesc"
 
 export class common {
   /**
@@ -12,11 +12,11 @@ export class common {
    * @param {boolean} html - Identifies whether the string must be HTML safe
    * @returns {string}
    */
-  static quote (str: any, html = false) {
+  static quote(str: any, html = false) {
     const options = {
       minimal: true,
       isScriptContext: html,
-      wrap: true
+      wrap: true,
     }
 
     return jsesc(str, options)
@@ -28,12 +28,13 @@ export class common {
    * @param {string} str - Object to be unquoted
    * @returns {string}
    */
-  static unquote (str: string) {
-    return str.replace(/\\'/g, '\'')
+  static unquote(str: string) {
+    return str
+      .replace(/\\'/g, "'")
       .replace(/\\"/g, '"')
-      .replace(/\\0/g, '\0')
-      .replace(/\\\\/g, '\\')
-      .replace(/(^['|"])(.*)\1$/gm, '$2')
+      .replace(/\\0/g, "\0")
+      .replace(/\\\\/g, "\\")
+      .replace(/(^['|"])(.*)\1$/gm, "$2")
   }
 
   /**
@@ -42,8 +43,8 @@ export class common {
    * @param {string} str - String to encode
    * @returns {string}
    */
-  static b64encode (str: string) {
-    return Buffer.from(str).toString('base64')
+  static b64encode(str: string) {
+    return Buffer.from(str).toString("base64")
   }
 
   /**
@@ -52,8 +53,8 @@ export class common {
    * @param {string} str - String to decode
    * @returns {string}
    */
-  static b64decode (str: string) {
-    return Buffer.from(str, 'base64').toString('utf8')
+  static b64decode(str: string) {
+    return Buffer.from(str, "base64").toString("utf8")
   }
 
   /**
@@ -62,7 +63,7 @@ export class common {
    * @param {string} str - String to escape
    * @returns {string}
    */
-  static htmlEscape (str: string) {
+  static htmlEscape(str: string) {
     // @ts-ignore - Typescript can't find this definition for some unknown reason
     return XmlEntities.encode(str)
   }
@@ -73,7 +74,7 @@ export class common {
    * @param {string} str - String to unescape
    * @returns {string}
    */
-  static htmlUnescape (str: string) {
+  static htmlUnescape(str: string) {
     // @ts-ignore - Typescript can't find this definition for some unknown reason
     return XmlEntities.decode(str)
   }
@@ -85,10 +86,10 @@ export class common {
    * @param {object} obj2 - Object to merge from
    * @returns {*}
    */
-  static mergeHash (obj1: Record<string, any>, obj2: Record<string, any>) {
+  static mergeHash(obj1: Record<string, any>, obj2: Record<string, any>) {
     for (const p in obj2) {
       try {
-        if (obj2[p].constructor.name === 'Object') {
+        if (obj2[p].constructor.name === "Object") {
           obj1[p] = common.mergeHash(obj1[p], obj2[p])
         } else {
           obj1[p] = obj2[p]
@@ -106,7 +107,10 @@ export class common {
    * @param {string} obj - Array of commands to beautify
    * @returns {string}
    */
-  static mockup (obj: string) {
-    return obj.split('\n').map((ln) => ln.trim()).join('')
+  static mockup(obj: string) {
+    return obj
+      .split("\n")
+      .map((ln) => ln.trim())
+      .join("")
   }
 }

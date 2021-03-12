@@ -2,14 +2,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { make } from '../index'
-import { random } from '../../random'
-import { utils } from '../../utils'
+import { make } from "../index"
+import { random } from "../../random"
+import { utils } from "../../utils"
 
 /* Interface representing options for ranged datatypes */
 interface RangedTypeOptions {
-  min: number | null;
-  max: number | null;
+  min: number | null
+  max: number | null
 }
 
 /**
@@ -18,17 +18,17 @@ interface RangedTypeOptions {
  * @param {Function} generator - The value generation function
  * @returns {string}
  */
-export function calc (generator: () => string) {
+export function calc(generator: () => string) {
   /* eslint-disable @typescript-eslint/no-use-before-define */
   const values: string[] = []
 
-  const op = random.item(['+', '-', '*', '/'])
+  const op = random.item(["+", "-", "*", "/"])
   switch (op) {
-    case '*':
+    case "*":
       // at least one of the arguments must be a <number>
       values.push(...random.shuffled([datatypes.number(null), generator()]))
       break
-    case '/':
+    case "/":
       // right-hand side must be a <number>
       values.push(...[generator(), datatypes.number(null)])
       break
@@ -48,11 +48,9 @@ export function calc (generator: () => string) {
  * @param {number?} min - Minimum value
  * @param {number?} max - Maximum value
  */
-export function expandRange (min: number | null, max: number | null) {
-  const _min = (min !== null) ? min : -2147483648
-  const _max = (max !== null)
-    ? max : (min == null)
-      ? 0x7fffffff : 0xffffffff
+export function expandRange(min: number | null, max: number | null) {
+  const _min = min !== null ? min : -2147483648
+  const _max = max !== null ? max : min == null ? 0x7fffffff : 0xffffffff
 
   return [_min, _max]
 }
@@ -64,12 +62,12 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static angle (opts?: RangedTypeOptions | null): string {
+  static angle(opts?: RangedTypeOptions | null): string {
     const [suffix, limit] = random.item([
-      ['deg', 360],
-      ['grad', 400],
-      ['rad', Math.PI * 2],
-      ['turn', 1]
+      ["deg", 360],
+      ["grad", 400],
+      ["rad", Math.PI * 2],
+      ["turn", 1],
     ])
 
     if (opts) {
@@ -87,7 +85,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static decibel () {
+  static decibel() {
     return `${make.numbers.any()}dB`
   }
 
@@ -97,7 +95,7 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static dimension (opts?: RangedTypeOptions | null) {
+  static dimension(opts?: RangedTypeOptions | null) {
     switch (random.number(4)) {
       case 0:
         return datatypes.frequency(opts)
@@ -115,7 +113,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static expression () {
+  static expression() {
     // ToDo: Deprecated MS only feature - not complete
     return `expression(body.scrollTop + ${datatypes.length()});`
   }
@@ -125,7 +123,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static flex () {
+  static flex() {
     return `${make.numbers.any()}fr`
   }
 
@@ -135,16 +133,16 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static frequency (opts?: RangedTypeOptions | null): string {
+  static frequency(opts?: RangedTypeOptions | null): string {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
-      const unit = random.item(['Hz', 'kHz'])
+      const unit = random.item(["Hz", "kHz"])
       return `${make.numbers.frange(min, max)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.frequency(opts))
     }
 
-    const unit = random.item(['Hz', 'kHz'])
+    const unit = random.item(["Hz", "kHz"])
     return `${make.numbers.any()}${unit}`
   }
 
@@ -153,7 +151,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static hexColor () {
+  static hexColor() {
     const len = random.item([4, 8])
     return `#${random.hex(len)}`
   }
@@ -164,7 +162,7 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static integer (opts?: RangedTypeOptions | null) {
+  static integer(opts?: RangedTypeOptions | null) {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
       return String(random.range(min, max))
@@ -183,10 +181,10 @@ export class datatypes {
    * @returns {string}
    */
   // @ts-ignore
-  static length (opts?: RangedTypeOptions | null, allowRelative = true): string {
-    const units = ['cm', 'mm', 'Q', 'in', 'pc', 'pt', 'px']
+  static length(opts?: RangedTypeOptions | null, allowRelative = true): string {
+    const units = ["cm", "mm", "Q", "in", "pc", "pt", "px"]
     if (!allowRelative) {
-      units.push('em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin', 'vmax')
+      units.push("em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax")
     }
 
     const unit = random.item(units)
@@ -206,7 +204,7 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static number (opts?: RangedTypeOptions | null): string {
+  static number(opts?: RangedTypeOptions | null): string {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
       return String(make.numbers.frange(min, max))
@@ -222,7 +220,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static numberOneOrGreater () {
+  static numberOneOrGreater() {
     return String(Math.abs(make.numbers.any()))
   }
 
@@ -231,7 +229,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static numberZeroOne () {
+  static numberZeroOne() {
     return String(make.numbers.frange(0, 1))
   }
 
@@ -241,7 +239,7 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static percentage (opts?: RangedTypeOptions | null) {
+  static percentage(opts?: RangedTypeOptions | null) {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
       return `${random.range(min, max)}%`
@@ -257,7 +255,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static positiveInteger () {
+  static positiveInteger() {
     return String(Math.abs(make.numbers.any(false)))
   }
 
@@ -266,7 +264,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static progid () {
+  static progid() {
     // ToDo: Deprecated MS only feature - not complete
     switch (random.number(3)) {
       case 0:
@@ -274,8 +272,10 @@ export class datatypes {
       case 1:
         return `progid:DXImageTransform.Microsoft.BasicImage(mirror=1)`
       default:
-        return `progid:DXImageTransform.Microsoft.Gradient` +
+        return (
+          `progid:DXImageTransform.Microsoft.Gradient` +
           `(startColorStr="${datatypes.hexColor()}", endColorStr="${datatypes.hexColor()}", GradientType=${make.numbers.any()})`
+        )
     }
   }
 
@@ -284,7 +284,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static ratio () {
+  static ratio() {
     if (random.chance(1000)) {
       return `${make.numbers.unsigned()}/${make.numbers.unsigned()}`
     }
@@ -297,8 +297,8 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static resolution (opts?: RangedTypeOptions | null): string {
-    const unit = random.item(['dpi', 'dpcm', 'dppx'])
+  static resolution(opts?: RangedTypeOptions | null): string {
+    const unit = random.item(["dpi", "dpcm", "dppx"])
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
       return `${make.numbers.frange(min, max)}${unit}`
@@ -314,7 +314,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static semitones () {
+  static semitones() {
     return `${make.numbers.any()}st`
   }
 
@@ -323,7 +323,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static string () {
+  static string() {
     return utils.common.quote(make.text.any())
   }
 
@@ -333,17 +333,17 @@ export class datatypes {
    * @param {?RangedTypeOptions} opts - Options
    * @returns {string}
    */
-  static time (opts?: RangedTypeOptions | null): string {
+  static time(opts?: RangedTypeOptions | null): string {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
-      const unit = random.item(['s', 'ms'])
+      const unit = random.item(["s", "ms"])
       return `${random.range(min, max)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.time(opts))
     }
 
-    const unit = random.item(['s', 'ms'])
-    if (unit === 's') {
+    const unit = random.item(["s", "ms"])
+    if (unit === "s") {
       return `${random.range(1, 4)}${unit}`
     } else {
       return `${random.range(0, 4000)}${unit}`
@@ -355,7 +355,7 @@ export class datatypes {
    *
    * @returns {string}
    */
-  static urange () {
+  static urange() {
     const convert = (n: number) => (n + 0x10000).toString(16).substr(-4).toUpperCase()
     const end = random.number(65535 + 1)
     const start = random.number(end)
@@ -365,7 +365,7 @@ export class datatypes {
       case 1:
         return `U+${convert(start)}-${convert(end)}`
       default:
-        return `U+${convert(start).replace(/..$/, '??')}`
+        return `U+${convert(start).replace(/..$/, "??")}`
     }
   }
 }

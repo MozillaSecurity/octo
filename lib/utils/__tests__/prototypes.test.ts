@@ -5,31 +5,31 @@
 /* eslint-disable camelcase */
 /* eslint-env jest */
 
-import { prototypes } from '../prototypes'
+import { prototypes } from "../prototypes"
 
 beforeAll(() => {
   prototypes.enable()
 })
 
-describe('Prototypes', () => {
-  describe('enable()', () => {
-    test('defines all polyfills', () => {
-      expect(typeof Object.isObject).toBe('function')
-      expect(typeof ''.insert).toBe('function')
+describe("Prototypes", () => {
+  describe("enable()", () => {
+    test("defines all polyfills", () => {
+      expect(typeof Object.isObject).toBe("function")
+      expect(typeof "".insert).toBe("function")
     })
   })
 
-  describe('String.insert()', () => {
-    test('simple test', () => {
-      const str = 'foobar'
-      expect(str.insert('123', 3)).toBe('foo123bar')
+  describe("String.insert()", () => {
+    test("simple test", () => {
+      const str = "foobar"
+      expect(str.insert("123", 3)).toBe("foo123bar")
     })
   })
 
-  describe('Object.isObject()', () => {
-    test('simple test', () => {
+  describe("Object.isObject()", () => {
+    test("simple test", () => {
       expect(Object.isObject({})).toBe(true)
-      expect(Object.isObject('foobar')).toBe(false)
+      expect(Object.isObject("foobar")).toBe(false)
       expect(Object.isObject(null)).toBe(false)
       expect(Object.isObject(undefined)).toBe(false)
       expect(Object.isObject(123)).toBe(false)

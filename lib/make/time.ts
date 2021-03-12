@@ -2,17 +2,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { make } from '../make'
-import { random } from '../random'
+import { make } from "../make"
+import { random } from "../random"
 
 export class time {
-  static unit () {
-    return random.pick([
-      's', 'ms'
-    ])
+  static unit() {
+    return random.pick(["s", "ms"])
   }
 
-  static datetime () {
+  static datetime() {
     if (random.bool()) {
       return new Date(new Date().getTime() + random.number())
     } else {
@@ -20,23 +18,23 @@ export class time {
     }
   }
 
-  static date () {
+  static date() {
     return time.datetime().toDateString()
   }
 
-  static time () {
+  static time() {
     return time.datetime().toTimeString()
   }
 
-  static iso () {
+  static iso() {
     return time.datetime().toISOString()
   }
 
-  static epoch () {
+  static epoch() {
     return Math.floor(+time.datetime() / 1000)
   }
 
-  static any () {
+  static any() {
     return make.numbers.any() + time.unit()
   }
 }

@@ -2,13 +2,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { random } from '../random'
+import { random } from "../random"
 
 export class block {
-  static block (list: any[], optional?: boolean) {
+  static block(list: any[], optional?: boolean) {
     if (optional === true) {
       if (random.chance(6)) {
-        return ''
+        return ""
       }
     }
 
@@ -17,18 +17,18 @@ export class block {
      *
      * @param {*} item - Item to pick
      */
-    function deeper (item: any) {
+    function deeper(item: any) {
       if (item === null || item === undefined) {
-        return ''
+        return ""
       }
-      if (typeof (item) === 'function') {
+      if (typeof item === "function") {
         return item()
       }
-      if (typeof (item) === 'string') {
+      if (typeof item === "string") {
         return item
       }
       if (Array.isArray(item)) {
-        let s = ''
+        let s = ""
         for (let i = 0; i < item.length; i++) {
           s += deeper(item[i])
         }
@@ -37,7 +37,7 @@ export class block {
       return item
     }
 
-    let asString = ''
+    let asString = ""
     for (let i = 0; i < list.length; i++) {
       asString += deeper(list[i])
     }

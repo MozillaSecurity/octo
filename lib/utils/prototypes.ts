@@ -5,16 +5,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 export class prototypes {
-  static enable () {
-    if (!Object.hasOwnProperty('isObject')) {
+  static enable() {
+    if (!Object.hasOwnProperty("isObject")) {
       // eslint-disable-next-line no-extend-native
       Object.prototype.isObject = function (obj) {
-        return (obj !== null && typeof obj === 'object' &&
-          Object.prototype.toString.call(obj) === '[object Object]')
+        return (
+          obj !== null &&
+          typeof obj === "object" &&
+          Object.prototype.toString.call(obj) === "[object Object]"
+        )
       }
     }
 
-    if (!String.prototype.hasOwnProperty('insert')) {
+    if (!String.prototype.hasOwnProperty("insert")) {
       String.prototype.insert = function (data, i) {
         return this.slice(0, i) + data + this.slice(i, this.length)
       }

@@ -2,25 +2,25 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { make } from '../make'
-import { random } from '../random'
+import { make } from "../make"
+import { random } from "../random"
 
 export class mutate {
-  static text (str: string) {
+  static text(str: string) {
     const mutator = function (m: string) {
       return random.chance(4) ? m : make.text.any()
     }
     return str.replace(/[a-zA-Z]+?/g, mutator)
   }
 
-  static numbers (str: string) {
+  static numbers(str: string) {
     const mutator = function (m: string) {
       return random.chance(4) ? m : make.numbers.any()
     }
     return str.replace(/-?\d+(\.\d+)?/g, mutator)
   }
 
-  static units (str: string) {
+  static units(str: string) {
     const mutator = function (m: string, p1: string) {
       if (random.chance(4)) {
         return m
@@ -31,7 +31,7 @@ export class mutate {
     return str.replace(/(\d+)(px|em|ex|ch|rem|mm|cm|in|pt|pc|%')/g, mutator)
   }
 
-  static random (str: string) {
+  static random(str: string) {
     const mutator = function (m: string) {
       if (random.chance(20)) {
         if (str.match(/[0-9]/g)) {
@@ -46,7 +46,7 @@ export class mutate {
     return str.replace(/./g, mutator)
   }
 
-  static any (str: string) {
+  static any(str: string) {
     switch (random.number(4)) {
       case 0:
         return mutate.text(str)

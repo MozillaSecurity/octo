@@ -6,51 +6,51 @@
 /* eslint-disable new-cap */
 /* eslint-env jest */
 
-import { tracker } from '../index'
+import { tracker } from "../index"
 
 // Initialize rng
-import { random } from '../../random'
+import { random } from "../../random"
 random.init()
 
-describe('Tracker', () => {
-  test('init', () => {
+describe("Tracker", () => {
+  test("init", () => {
     expect(() => {
       const t = new tracker() /* eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars */
     }).not.toThrow()
   })
 
-  test('add new prefix', () => {
+  test("add new prefix", () => {
     const t = new tracker()
     for (let i = 0; i < 20; i++) {
-      const id = t.add('foo')
+      const id = t.add("foo")
       expect(id).toBe(`foo_${i}`)
     }
   })
 
-  test('get random value', () => {
+  test("get random value", () => {
     const t = new tracker()
     for (let i = 0; i < 9; i++) {
-      t.add('foo')
+      t.add("foo")
     }
 
-    const id = t.get('foo')
+    const id = t.get("foo")
     expect(id).toMatch(/foo_[0-9]/)
   })
 
-  test('get uninitialized value', () => {
+  test("get uninitialized value", () => {
     const t = new tracker()
-    const id = t.add('foo')
+    const id = t.add("foo")
     expect(id).toBe(`foo_0`)
   })
 
-  test('check length', () => {
+  test("check length", () => {
     const t = new tracker()
-    expect(t.length('foo')).toBe(0)
+    expect(t.length("foo")).toBe(0)
 
     for (let i = 0; i < 9; i++) {
-      t.add('foo')
+      t.add("foo")
     }
 
-    expect(t.length('foo')).toBe(9)
+    expect(t.length("foo")).toBe(9)
   })
 })

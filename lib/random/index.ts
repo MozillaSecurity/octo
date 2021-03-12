@@ -2,8 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { logger } from '../logging'
-import MersenneTwister from 'mersenne-twister'
+import { logger } from "../logging"
+import MersenneTwister from "mersenne-twister"
 
 export class random {
   static twister: MersenneTwister
@@ -12,7 +12,7 @@ export class random {
    *
    * @param {?number} seed - Value to initialize MersenneTwister
    */
-  static init (seed?: number) {
+  static init(seed?: number) {
     random.twister = new MersenneTwister(seed)
   }
 
@@ -22,9 +22,9 @@ export class random {
    * @param {number} limit - Maximum number
    * @param {number} factor - Number of iterations to perform (reduces max)
    */
-  static number (limit = 0xffffffff, factor = 1): number {
+  static number(limit = 0xffffffff, factor = 1): number {
     if (!random.twister) {
-      throw new Error('random.init must be called first.')
+      throw new Error("random.init must be called first.")
     }
 
     const x = (0x100000000 / limit) >>> 0
@@ -45,9 +45,9 @@ export class random {
   /**
    * Returns a float in [0, 1) (uniform distribution)
    */
-  static float () {
+  static float() {
     if (!random.twister) {
-      throw new Error('random.init_seed() must be called first.')
+      throw new Error("random.init_seed() must be called first.")
     }
 
     return random.twister.random_long()
@@ -60,7 +60,7 @@ export class random {
    * @param {number} limit - Maximum value
    * @param {number} factor - Reduce possibility of maximum by factor
    */
-  static range (start: number, limit: number, factor = 1) {
+  static range(start: number, limit: number, factor = 1) {
     if (isNaN(start) || isNaN(limit)) {
       logger.traceback()
       throw new TypeError(`random.range() received non-number type: (${start}, ${limit})`)
@@ -74,7 +74,7 @@ export class random {
    *
    * @param {number} limit - Maximum value
    */
-  static ludOneTo (limit: number) {
+  static ludOneTo(limit: number) {
     return Math.exp(random.float() * Math.log(limit))
   }
 
@@ -84,7 +84,7 @@ export class random {
    * @param {Array} list - List to choose from
    * @returns {*}
    */
-  static item <T> (list: T[]): T {
+  static item<T>(list: T[]): T {
     return list[random.number(list.length)]
   }
 
@@ -93,14 +93,14 @@ export class random {
    *
    * @param {object} obj - Source object
    */
-  static key (obj: object) {
+  static key(obj: object) {
     return random.item(Object.keys(obj))
   }
 
   /**
    * Return a random Boolean value
    */
-  static bool () {
+  static bool() {
     return random.item([true, false])
   }
 
@@ -111,8 +111,8 @@ export class random {
    * @param {*} obj - Source object
    * @returns {*}
    */
-  static pick (obj: any): any {
-    if (typeof obj === 'function') {
+  static pick(obj: any): any {
+    if (typeof obj === "function") {
       return obj()
     } else if (Array.isArray(obj)) {
       return random.pick(random.item(obj))
@@ -127,7 +127,7 @@ export class random {
    * @param {number} limit - Maximum value
    * @returns {boolean}
    */
-  static chance (limit = 2) {
+  static chance(limit = 2) {
     if (isNaN(limit)) {
       logger.traceback()
       throw new TypeError(`random.chance() received non-number type: (${limit})`)
@@ -143,8 +143,8 @@ export class random {
    * @param {boolean} flat - Indicates whether we should iterate over the arrays recursively
    * @returns {*}
    */
-  static choose (list: any[], flat = false) {
-    if (!(Array.isArray(list))) {
+  static choose(list: any[], flat = false) {
+    if (!Array.isArray(list)) {
       logger.traceback()
       throw new TypeError(`random.choose() received non-array type: (${list})`)
     }
@@ -170,7 +170,7 @@ export class random {
    * @param {Array} list - List of weighted values
    * @returns {Array}
    */
-  static weighted (list: any[]) {
+  static weighted(list: any[]) {
     const expanded: any[] = []
     list.forEach((item) => {
       for (let i = 0; i < item.w; i++) {
@@ -181,8 +181,8 @@ export class random {
     return expanded
   }
 
-  static use (obj: any): any | string {
-    return random.bool() ? obj : ''
+  static use(obj: any): any | string {
+    return random.bool() ? obj : ""
   }
 
   /**
@@ -190,7 +190,7 @@ export class random {
    *
    * @param {Array} arr - Array to shuffle
    */
-  static shuffle (arr: any[]) {
+  static shuffle(arr: any[]) {
     for (let i = 0; i < arr.length; i++) {
       const p = random.number(i + 1)
       const t = arr[i]
@@ -205,7 +205,7 @@ export class random {
    * @param {Array} arr - Source Array to shuffle
    * @returns {*}
    */
-  static shuffled <T> (arr: T[]): T[] {
+  static shuffled<T>(arr: T[]): T[] {
     const newArray = arr.slice()
     random.shuffle(newArray)
     return newArray
@@ -218,13 +218,13 @@ export class random {
    * @param {?number} limit - Number of elements to be returned
    * @returns {Array}
    */
-  static subset <T> (list: T[], limit?: number): any[] {
-    if (!(Array.isArray(list))) {
+  static subset<T>(list: T[], limit?: number): any[] {
+    if (!Array.isArray(list)) {
       logger.traceback()
       throw new TypeError(`random.subset() received non-array type: (${list})`)
     }
 
-    if (typeof limit !== 'number' || limit > list.length) {
+    if (typeof limit !== "number" || limit > list.length) {
       limit = random.range(0, list.length)
     }
 
@@ -243,7 +243,7 @@ export class random {
    *
    * @param {Array} arr - Source array to pop from
    */
-  static pop <T> (arr: T[]): T {
+  static pop<T>(arr: T[]): T {
     const i = random.number(arr.length)
     const obj = arr[i]
     arr.splice(i, 1)
@@ -251,8 +251,8 @@ export class random {
     return obj
   }
 
-  static hex (len: number) {
+  static hex(len: number) {
     const val = random.number(Math.pow(2, len * 4)).toString(16)
-    return '0'.repeat(len - val.length) + val
+    return "0".repeat(len - val.length) + val
   }
 }

@@ -1,8 +1,8 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-import { make } from '../make'
-import { random } from '../random'
+import { make } from "../make"
+import { random } from "../random"
 
 export class arrays {
   /**
@@ -12,7 +12,7 @@ export class arrays {
    * @param {number} limit - Length of the array
    * @returns {Array}
    */
-  static filledArray (fn: Function, limit = make.numbers.tiny()) {
+  static filledArray(fn: Function, limit = make.numbers.tiny()) {
     const array: any[] = []
 
     for (let i = 0; i < limit; i++) {

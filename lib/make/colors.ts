@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { random } from '../random'
+import { random } from "../random"
 
 export class colors {
-  static any () {
+  static any() {
     switch (random.number(2)) {
       case 0:
         return colors.rgb()
@@ -16,7 +16,7 @@ export class colors {
     }
   }
 
-  static rgb () {
+  static rgb() {
     let values
 
     switch (random.number(4)) {
@@ -29,11 +29,11 @@ export class colors {
           // Percents
           values = [`%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
         }
-        return `rgba(${values.join(',')})`
+        return `rgba(${values.join(",")})`
       case 1:
         // Rgba functional notation
         values = [random.number(255), random.number(255), random.number(255), random.float()]
-        return `rgba(${values.join(',')})`
+        return `rgba(${values.join(",")})`
       case 2:
         // 4 char hex
         return `#${random.hex(4)}`
@@ -43,48 +43,117 @@ export class colors {
     }
   }
 
-  static hsl () {
+  static hsl() {
     let values, opt
 
     switch (random.number(4)) {
       case 0:
         values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`]
-        return `hsl(${values.join(',')})`
+        return `hsl(${values.join(",")})`
       case 1:
-        values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
-        return `hsl(${values.join(',')})`
+        values = [
+          random.number(255),
+          `%${random.number(255)}`,
+          `%${random.number(255)}`,
+          `%${random.number(255)}`,
+        ]
+        return `hsl(${values.join(",")})`
       case 2:
-        opt = random.item(['deg', 'rad', 'grad', 'turn'])
-        values = [random.number(255) + opt, `%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
-        return `hsl(${values.join(',')})`
+        opt = random.item(["deg", "rad", "grad", "turn"])
+        values = [
+          random.number(255) + opt,
+          `%${random.number(255)}`,
+          `%${random.number(255)}`,
+          `%${random.number(255)}`,
+        ]
+        return `hsl(${values.join(",")})`
       default:
-        values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`, random.float()]
-        return `hsl(${values.join(',')})`
+        values = [
+          random.number(255),
+          `%${random.number(255)}`,
+          `%${random.number(255)}`,
+          random.float(),
+        ]
+        return `hsl(${values.join(",")})`
     }
   }
 
-  static keyword () {
+  static keyword() {
     return random.item([
-      'lime', 'red', 'blue', 'invert', 'currentColor', 'ActiveBorder', 'ActiveCaption',
-      'AppWorkspace', 'Background', 'ButtonFace', 'ButtonHighlight', 'ButtonShadow',
-      'ButtonText', 'CaptionText', 'GrayText', 'Highlight', 'HighlightText',
-      'InactiveBorder', 'InactiveCaption', 'InactiveCaptionText', 'InfoBackground',
-      'InfoText', 'Menu', 'MenuText', 'Scrollbar', 'ThreeDDarkShadow', 'ThreeDFace',
-      'ThreeDHighlight', 'ThreeDLightShadow', 'ThreeDShadow', 'Window', 'WindowFrame',
-      'WindowText', '-moz-ButtonDefault', '-moz-ButtonHoverFace', '-moz-ButtonHoverText',
-      '-moz-CellHighlight', '-moz-CellHighlightText', '-moz-Combobox', '-moz-ComboboxText',
-      '-moz-Dialog', '-moz-DialogText', '-moz-dragtargetzone', '-moz-EvenTreeRow',
-      '-moz-Field', '-moz-FieldText', '-moz-html-CellHighlight',
-      '-moz-html-CellHighlightText', '-moz-mac-accentdarkestshadow',
-      '-moz-mac-accentdarkshadow', '-moz-mac-accentface',
-      '-moz-mac-accentlightesthighlight', '-moz-mac-accentlightshadow',
-      '-moz-mac-accentregularhighlight', '-moz-mac-accentregularshadow',
-      '-moz-mac-chrome-active', '-moz-mac-chrome-inactive', '-moz-mac-focusring',
-      '-moz-mac-menuselect', '-moz-mac-menushadow', '-moz-mac-menutextselect',
-      '-moz-MenuHover', '-moz-MenuHoverText', '-moz-MenuBarText', '-moz-MenuBarHoverText',
-      '-moz-nativehyperlinktext', '-moz-OddTreeRow', '-moz-win-communicationstext',
-      '-moz-win-mediatext', '-moz-activehyperlinktext', '-moz-default-background-color',
-      '-moz-default-color', '-moz-hyperlinktext', '-moz-visitedhyperlinktext'
+      "lime",
+      "red",
+      "blue",
+      "invert",
+      "currentColor",
+      "ActiveBorder",
+      "ActiveCaption",
+      "AppWorkspace",
+      "Background",
+      "ButtonFace",
+      "ButtonHighlight",
+      "ButtonShadow",
+      "ButtonText",
+      "CaptionText",
+      "GrayText",
+      "Highlight",
+      "HighlightText",
+      "InactiveBorder",
+      "InactiveCaption",
+      "InactiveCaptionText",
+      "InfoBackground",
+      "InfoText",
+      "Menu",
+      "MenuText",
+      "Scrollbar",
+      "ThreeDDarkShadow",
+      "ThreeDFace",
+      "ThreeDHighlight",
+      "ThreeDLightShadow",
+      "ThreeDShadow",
+      "Window",
+      "WindowFrame",
+      "WindowText",
+      "-moz-ButtonDefault",
+      "-moz-ButtonHoverFace",
+      "-moz-ButtonHoverText",
+      "-moz-CellHighlight",
+      "-moz-CellHighlightText",
+      "-moz-Combobox",
+      "-moz-ComboboxText",
+      "-moz-Dialog",
+      "-moz-DialogText",
+      "-moz-dragtargetzone",
+      "-moz-EvenTreeRow",
+      "-moz-Field",
+      "-moz-FieldText",
+      "-moz-html-CellHighlight",
+      "-moz-html-CellHighlightText",
+      "-moz-mac-accentdarkestshadow",
+      "-moz-mac-accentdarkshadow",
+      "-moz-mac-accentface",
+      "-moz-mac-accentlightesthighlight",
+      "-moz-mac-accentlightshadow",
+      "-moz-mac-accentregularhighlight",
+      "-moz-mac-accentregularshadow",
+      "-moz-mac-chrome-active",
+      "-moz-mac-chrome-inactive",
+      "-moz-mac-focusring",
+      "-moz-mac-menuselect",
+      "-moz-mac-menushadow",
+      "-moz-mac-menutextselect",
+      "-moz-MenuHover",
+      "-moz-MenuHoverText",
+      "-moz-MenuBarText",
+      "-moz-MenuBarHoverText",
+      "-moz-nativehyperlinktext",
+      "-moz-OddTreeRow",
+      "-moz-win-communicationstext",
+      "-moz-win-mediatext",
+      "-moz-activehyperlinktext",
+      "-moz-default-background-color",
+      "-moz-default-color",
+      "-moz-hyperlinktext",
+      "-moz-visitedhyperlinktext",
     ])
   }
 }

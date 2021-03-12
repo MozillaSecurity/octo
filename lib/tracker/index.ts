@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { random } from '../random'
+import { random } from "../random"
 
 /**
  * Generic tracking object
@@ -13,7 +13,7 @@ export class tracker {
   /**
    * Create a new instance
    */
-  constructor () {
+  constructor() {
     this.tracker = {}
   }
 
@@ -25,7 +25,7 @@ export class tracker {
    * @param {?string} value - Optional value to store
    * @returns {string}
    */
-  add (prefix: string, value?: string) {
+  add(prefix: string, value?: string) {
     if (!this.tracker.hasOwnProperty(prefix)) {
       this.tracker[prefix] = []
     }
@@ -46,7 +46,7 @@ export class tracker {
    * @param {string} prefix - Prefix of item to track
    * @returns {string}
    */
-  get (prefix: string) {
+  get(prefix: string) {
     if (!this.tracker.hasOwnProperty(prefix)) {
       this.tracker[prefix] = [`${prefix}_0`]
     }
@@ -60,7 +60,7 @@ export class tracker {
    * @param {string} prefix - Prefix of item to track
    * @returns {number}
    */
-  length (prefix: string) {
-    return (this.tracker.hasOwnProperty(prefix)) ? this.tracker[prefix].length : 0
+  length(prefix: string) {
+    return this.tracker.hasOwnProperty(prefix) ? this.tracker[prefix].length : 0
   }
 }

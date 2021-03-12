@@ -3,10 +3,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* eslint-env jest */
-import MersenneTwister from 'mersenne-twister'
+import MersenneTwister from "mersenne-twister"
 
-describe('MersenneTwister', () => {
-  test('uniform distribution', () => {
+describe("MersenneTwister", () => {
+  test("uniform distribution", () => {
     const N = Math.pow(2, 18)
     const TRIES = 10
     const XSQ = 293.25 // quantile of chi-square dist. k=255, p=.05
@@ -32,9 +32,9 @@ describe('MersenneTwister', () => {
             return a + Math.pow(v - e, 2) / e
           }, 0)
           /*
-          * XSQ = scipy.stats.chi2.isf(.05, 255)
-          * if xsq > XSQ, the result is biased at 95% significance
-          */
+           * XSQ = scipy.stats.chi2.isf(.05, 255)
+           * if xsq > XSQ, the result is biased at 95% significance
+           */
           if (xsq < XSQ) {
             console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
             return true
@@ -51,7 +51,7 @@ describe('MersenneTwister', () => {
     expect(_test()).toBe(true)
   })
 
-  test('float distribution', () => {
+  test("float distribution", () => {
     const N = Math.pow(2, 18)
     const TRIES = 3
     const XSQ = 564.7 // quantile of chi-square dist. k=511, p=.05
@@ -66,7 +66,7 @@ describe('MersenneTwister', () => {
         for (let i = 0; i < N; ++i) {
           const tmp = (mt.random_long() * bins.length) >>> 0
           if (tmp >= bins.length) {
-            throw new Error('random.float() >= 1.0')
+            throw new Error("random.float() >= 1.0")
           }
           ++bins[tmp]
         }
@@ -75,9 +75,9 @@ describe('MersenneTwister', () => {
           return a + Math.pow(v - e, 2) / e
         }, 0)
         /*
-        * XSQ = scipy.stats.chi2.isf(.05, 511)
-        * if xsq > XSQ, the result is biased at 95% significance
-        */
+         * XSQ = scipy.stats.chi2.isf(.05, 511)
+         * if xsq > XSQ, the result is biased at 95% significance
+         */
         if (xsq < XSQ) {
           console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
           return true
