@@ -1,58 +1,42 @@
 {
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
-    "project": [
-      "tsconfig.eslint.json"
-    ],
-    "sourceType": "module"
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/typescript",
-    "plugin:jsdoc/recommended",
-    "standard"
-  ],
-  "env": {
-    "es6": true,
-    "node": true
+    "project": "./tsconfig.eslint.json"
   },
   "plugins": [
     "@typescript-eslint",
-    "import",
+    "jest",
     "jsdoc",
-    "standard"
+    "prettier"
   ],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "no-dupe-class-members": "off"
-      }
-    }
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:jsdoc/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
   ],
   "rules": {
-    "no-console": "off",
-    "no-prototype-builtins": "off",
-    "quotes": [
+    "@typescript-eslint/no-floating-promises": [
       "error",
-      "single",
       {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
+        "ignoreIIFE": true
       }
     ],
-    "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/class-name-casing": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "@typescript-eslint/indent": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/ban-ts-ignore": "off",
-    // disable until https://github.com/gajus/eslint-plugin-jsdoc/issues/145 is resolved
-    "jsdoc/no-undefined-types": "off",
     "jsdoc/require-returns": "off",
-    "jsdoc/require-returns-description": "off"
+    "jsdoc/require-returns-description": "off",
+    "prettier/prettier": "error",
+    "sort-imports": [
+      "error",
+      {
+        "allowSeparatedGroups": true
+      }
+    ]
   }
 }
