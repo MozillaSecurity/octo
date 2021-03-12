@@ -30,7 +30,7 @@ export class logger {
       if (window.dump) {
         // @ts-ignore
         dump(msg) // eslint-disable-line no-undef
-      } else if (window.console && window.console.log) {
+      } else if (window.console) {
         // @ts-ignore
         console.log(msg)
       } else {
