@@ -932,60 +932,6 @@ describe("Random", () => {
     expect(_test()).toBe(true)
   })
 
-  test("weighted() equal distribution with types not picked", () => {
-    const N = 1e4
-    const TRIES = 3
-    const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
-    const v1 = 1
-    const v2 = [12]
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const v3 = () => {}
-
-    random.init(Math.random() * 0x100000000)
-
-    const _test = () => {
-      const tries = []
-      for (let attempt = 0; attempt < TRIES; ++attempt) {
-        const bins = new Uint32Array(3)
-        for (let i = 0; i < N; ++i) {
-          let tmp = random.item(
-            random.weighted([
-              { w: 1, v: v1 },
-              { w: 1, v: v2 },
-              { w: 1, v: v3 },
-            ])
-          )
-          if (tmp === v1) {
-            tmp = 0
-          } else if (tmp === v2) {
-            tmp = 1
-          } else if (tmp === v3) {
-            tmp = 2
-          } else {
-            throw new Error(`Unexpected random.weighted() result: ${tmp}`)
-          }
-          ++bins[tmp]
-        }
-        const xsq = bins.reduce((a, v) => {
-          const e = N / bins.length
-          return a + Math.pow(v - e, 2) / e
-        }, 0)
-        /*
-         *  XSQ = scipy.stats.chi2.isf(.05, 2)
-         * if xsq > XSQ, the result is biased at 95% significance
-         */
-        if (xsq < XSQ) {
-          console.log(`Expected x^2 to be < ${XSQ}, got ${xsq} on attempt #${attempt + 1}`)
-          return true
-        }
-        tries.push(xsq)
-      }
-      // assert.ok(false, "Failed in " + TRIES + " attempts to get xsq lower than " + XSQ + ": "+ tries);
-      return false
-    }
-    expect(_test()).toBe(true)
-  })
-
   test("use() distribution", () => {
     const N = 1e4
     const TRIES = 3
