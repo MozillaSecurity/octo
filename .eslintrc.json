@@ -10,33 +10,24 @@
   },
   "plugins": [
     "@typescript-eslint",
+    "eslint-plugin-tsdoc",
     "jest",
-    "jsdoc",
     "prettier"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "plugin:jsdoc/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "rules": {
-    "@typescript-eslint/no-floating-promises": [
-      "error",
-      {
-        "ignoreIIFE": true
-      }
-    ],
-    "jsdoc/require-returns": "off",
-    "jsdoc/require-returns-description": "off",
-    "prettier/prettier": "error",
+    "@typescript-eslint/no-explicit-any": "off",
     "sort-imports": [
       "error",
       {
         "allowSeparatedGroups": true
       }
-    ]
+    ],
+    "tsdoc/syntax": "warn"
   }
 }
