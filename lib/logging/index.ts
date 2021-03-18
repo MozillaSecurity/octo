@@ -17,20 +17,24 @@ if (utils.platform.name.isWindows) {
 }
 
 export class logger {
-  static console(msg: string) {
+  static console(msg: string): void {
     if (typeof window === "undefined") {
       try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        print(msg) // eslint-disable-line no-undef
+        print(msg)
       } catch (e) {
         console.log(msg)
       }
     } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (window.dump) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         dump(msg) // eslint-disable-line no-undef
       } else if (window.console) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         console.log(msg)
       } else {
@@ -39,46 +43,47 @@ export class logger {
     }
   }
 
-  static dump(msg: string) {
+  static dump(msg: string): void {
     this.console(msg)
   }
 
-  static dumpln(msg: string) {
+  static dumpln(msg: string): void {
     this.dump(`${msg}\n`)
   }
 
-  static log(msg: string) {
+  static log(msg: string): void {
     this.dumpln(`/*L*/ ${utils.script.safely(msg)}`)
   }
 
-  static info(msg: string) {
+  static info(msg: string): void {
     this.dumpln(`/*L*/ /* ${msg} */`)
   }
 
-  static error(msg: string) {
+  static error(msg: string): void {
     this.dumpln(color.red + msg + color.clear)
   }
 
-  static ok(msg: string) {
+  static ok(msg: string): void {
     // eslint-disable-line no-unused-vars
     this.dumpln(color.green + msg + color.green)
   }
 
-  static JSError(msg: string) {
+  static JSError(msg: string): void {
     this.error(`/* ERROR: ${msg} */`)
   }
 
-  static comment(msg: string) {
+  static comment(msg: string): void {
     this.dumpln(`/*L*/ // ${msg}`)
   }
 
-  static separator() {
+  static separator(): void {
     this.dumpln(color.green + sep + color.clear)
   }
 
-  static traceback() {
+  static traceback(): void {
     this.error("===[ Traceback ] ===")
     const e = new Error()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.dump(e.stack || e.stacktrace || "")
   }

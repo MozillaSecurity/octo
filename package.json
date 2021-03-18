@@ -40,6 +40,7 @@
     "@types/html-entities": "^1.2.16",
     "@types/jsesc": "^2.5.0",
     "@types/mersenne-twister": "^1.1.2",
+    "eslint-plugin-jsdoc": "^32.3.0",
     "html-entities": "^1.2.1",
     "jsesc": "^2.5.1",
     "mersenne-twister": "^1.1.0",

@@ -12,13 +12,13 @@ interface RangedTypeOptions {
   max: number | null
 }
 
-/**
+/**.
  * Generate a calc value
  *
- * @param {Function} generator - The value generation function
- * @returns {string}
+ * @param generator - The value generation function
+ * @returns
  */
-export function calc(generator: () => string) {
+export function calc(generator: () => string): string {
   /* eslint-disable @typescript-eslint/no-use-before-define */
   const values: string[] = []
 
@@ -42,13 +42,13 @@ export function calc(generator: () => string) {
   return `calc(${values.join(` ${op} `)})`
 }
 
-/**
+/**.
  * Simple helper function for extrapolating ranged types
  *
- * @param {number?} min - Minimum value
- * @param {number?} max - Maximum value
+ * @param min - Minimum value
+ * @param max - Maximum value
  */
-export function expandRange(min: number | null, max: number | null) {
+export function expandRange(min: number | null, max: number | null): [number, number] {
   const _min = min !== null ? min : -2147483648
   const _max = max !== null ? max : min == null ? 0x7fffffff : 0xffffffff
 
@@ -56,11 +56,11 @@ export function expandRange(min: number | null, max: number | null) {
 }
 
 export class datatypes {
-  /**
+  /**.
    * Generator for CSS <angle> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
   static angle(opts?: RangedTypeOptions | null): string {
     const [suffix, limit] = random.item([
@@ -80,22 +80,22 @@ export class datatypes {
     return `${make.numbers.frange(0, limit)}${suffix}`
   }
 
-  /**
+  /**.
    * Generator for CSS <decibel> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static decibel() {
+  static decibel(): string {
     return `${make.numbers.any()}dB`
   }
 
-  /**
+  /**.
    * Generator for CSS <dimension> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
-  static dimension(opts?: RangedTypeOptions | null) {
+  static dimension(opts?: RangedTypeOptions | null): string {
     switch (random.number(4)) {
       case 0:
         return datatypes.frequency(opts)
@@ -108,30 +108,30 @@ export class datatypes {
     }
   }
 
-  /**
+  /**.
    * Generator for CSS <expression> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static expression() {
+  static expression(): string {
     // ToDo: Deprecated MS only feature - not complete
     return `expression(body.scrollTop + ${datatypes.length()});`
   }
 
-  /**
+  /**.
    * Generator for CSS <flex> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static flex() {
+  static flex(): string {
     return `${make.numbers.any()}fr`
   }
 
-  /**
+  /**.
    * Generator for CSS <frequency> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
   static frequency(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -146,23 +146,23 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**
+  /**.
    * Generator for CSS <hex-color> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static hexColor() {
+  static hexColor(): string {
     const len = random.item([4, 8])
     return `#${random.hex(len)}`
   }
 
-  /**
+  /**.
    * Generator for CSS <integer> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
-  static integer(opts?: RangedTypeOptions | null) {
+  static integer(opts?: RangedTypeOptions | null): string {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
       return String(random.range(min, max))
@@ -173,13 +173,14 @@ export class datatypes {
     return String(make.numbers.any(false))
   }
 
-  /**
+  /**.
    * Generator for CSS <length> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @param {boolean} allowRelative - Allow relative units
-   * @returns {string}
+   * @param opts - Options
+   * @param allowRelative - Allow relative units
+   * @returns
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   static length(opts?: RangedTypeOptions | null, allowRelative = true): string {
     const units = ["cm", "mm", "Q", "in", "pc", "pt", "px"]
@@ -198,11 +199,11 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**
+  /**.
    * Generator for CSS <number> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
   static number(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -215,31 +216,31 @@ export class datatypes {
     return String(make.numbers.any(true))
   }
 
-  /**
+  /**.
    * Generator for CSS <number-one-or-greater> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static numberOneOrGreater() {
+  static numberOneOrGreater(): string {
     return String(Math.abs(make.numbers.any()))
   }
 
-  /**
+  /**.
    * Generator for CSS <number-zero-one> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static numberZeroOne() {
+  static numberZeroOne(): string {
     return String(make.numbers.frange(0, 1))
   }
 
-  /**
+  /**.
    * Generator for CSS <percentage> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
-  static percentage(opts?: RangedTypeOptions | null) {
+  static percentage(opts?: RangedTypeOptions | null): string {
     if (opts) {
       const [min, max] = expandRange(opts.min, opts.max)
       return `${random.range(min, max)}%`
@@ -250,21 +251,21 @@ export class datatypes {
     return make.unit.percent()
   }
 
-  /**
+  /**.
    * Generator for CSS <positive-integer> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static positiveInteger() {
+  static positiveInteger(): string {
     return String(Math.abs(make.numbers.any(false)))
   }
 
-  /**
+  /**.
    * Generator for CSS <progid> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static progid() {
+  static progid(): string {
     // ToDo: Deprecated MS only feature - not complete
     switch (random.number(3)) {
       case 0:
@@ -279,23 +280,23 @@ export class datatypes {
     }
   }
 
-  /**
+  /**.
    * Generator for CSS <ratio> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static ratio() {
+  static ratio(): string {
     if (random.chance(1000)) {
       return `${make.numbers.unsigned()}/${make.numbers.unsigned()}`
     }
     return `${random.range(1, 255)}/${random.range(1, 255)}`
   }
 
-  /**
+  /**.
    * Generator for CSS <resolution> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
   static resolution(opts?: RangedTypeOptions | null): string {
     const unit = random.item(["dpi", "dpcm", "dppx"])
@@ -309,29 +310,29 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**
+  /**.
    * Generator for CSS <semitones> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static semitones() {
+  static semitones(): string {
     return `${make.numbers.any()}st`
   }
 
-  /**
+  /**.
    * Generator for CSS <string> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static string() {
+  static string(): string {
     return utils.common.quote(make.text.any())
   }
 
-  /**
+  /**.
    * Generator for CSS <time> data type
    *
-   * @param {?RangedTypeOptions} opts - Options
-   * @returns {string}
+   * @param opts - Options
+   * @returns
    */
   static time(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -350,12 +351,12 @@ export class datatypes {
     }
   }
 
-  /**
+  /**.
    * Generator for CSS <urange> data type
    *
-   * @returns {string}
+   * @returns
    */
-  static urange() {
+  static urange(): string {
     const convert = (n: number) => (n + 0x10000).toString(16).substr(-4).toUpperCase()
     const end = random.number(65535 + 1)
     const start = random.number(end)

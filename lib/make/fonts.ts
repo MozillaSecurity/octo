@@ -5,19 +5,19 @@ import { make } from "../make"
 import { random } from "../random"
 
 export class font {
-  static globalValue() {
-    return random.pick(["inherit", "initial", "unset"])
+  static globalValue(): string {
+    return random.item(["inherit", "initial", "unset"])
   }
 
-  static style() {
-    return random.pick(["italic", "normal", "oblique", "inherit"])
+  static style(): string {
+    return random.item(["italic", "normal", "oblique", "inherit"])
   }
 
-  static variant() {
-    return random.pick(["normal", "small-caps", "inherit"])
+  static variant(): string {
+    return random.item(["normal", "small-caps", "inherit"])
   }
 
-  static weight() {
+  static weight(): string | number {
     return random.pick([
       /* standard */
       ["normal", "bold"],
@@ -28,7 +28,7 @@ export class font {
     ])
   }
 
-  static size() {
+  static size(): string {
     return random.pick([
       /* <absolute-size> values */
       ["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"],
@@ -41,29 +41,29 @@ export class font {
     ])
   }
 
-  static relativeSize() {
+  static relativeSize(): string {
     const value = random.number(8)
     return random.item(["", "+", "-"]) + value
   }
 
-  static genericFamily() {
-    return random.pick(["serif", "sans-serif", "cursive", "fantasy", "monospace"])
+  static genericFamily(): string {
+    return random.item(["serif", "sans-serif", "cursive", "fantasy", "monospace"])
   }
 
-  static familyName() {
-    return random.pick(["Times New Roman", "Arial", "Courier", "Helvetica"])
+  static familyName(): string {
+    return random.item(["Times New Roman", "Arial", "Courier", "Helvetica"])
   }
 
-  static family() {
-    let s = random.pick(font.familyName)
+  static family(): string {
+    let s = font.familyName()
     if (random.chance(8)) {
-      s += `, ${random.pick(font.genericFamily)}`
+      s += `, ${font.genericFamily()}`
     }
     return s
   }
 
-  static registeredFontFeatures() {
-    return random.pick([
+  static registeredFontFeatures(): string {
+    return random.item([
       "aalt",
       "abvf",
       "abvm",
@@ -201,16 +201,16 @@ export class font {
     ])
   }
 
-  static font() {
+  static font(): string {
     let s = ""
     if (random.chance(4)) {
-      s += `${random.pick(font.style)} `
+      s += `${font.style()} `
     }
     if (random.chance(4)) {
-      s += `${random.pick(font.variant)} `
+      s += `${font.variant()} `
     }
     if (random.chance(4)) {
-      s += `${random.pick(font.weight)} `
+      s += `${font.weight()} `
     }
     if (random.chance(4)) {
       s += `${make.numbers.any()}/`

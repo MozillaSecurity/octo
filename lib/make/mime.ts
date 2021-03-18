@@ -5,12 +5,12 @@
 import { random } from "../random"
 
 export class mime {
-  static any() {
+  static any(): string {
     return random.pick([mime.standard, mime.xml, mime.image, mime.media, mime.form])
   }
 
-  static standard() {
-    return random.pick([
+  static standard(): string {
+    return random.item([
       "text/html",
       "text/html; charset=utf-8",
       "text/plain",
@@ -23,8 +23,8 @@ export class mime {
     ])
   }
 
-  static xml() {
-    return random.pick([
+  static xml(): string {
+    return random.item([
       "application/xml",
       "text/xml",
       "application/xhtml+xml",
@@ -36,12 +36,12 @@ export class mime {
     ])
   }
 
-  static image() {
-    return random.pick(["image/jpeg", "image/gif", "image/png", "image/mng", "image/*"])
+  static image(): string {
+    return random.item(["image/jpeg", "image/gif", "image/png", "image/mng", "image/*"])
   }
 
-  static media() {
-    return random.pick([
+  static media(): string {
+    return random.item([
       "audio/ogg",
       "audio/webm",
       "video/webm",
@@ -50,7 +50,7 @@ export class mime {
     ])
   }
 
-  static form() {
-    return random.pick(["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"])
+  static form(): string {
+    return random.item(["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"])
   }
 }

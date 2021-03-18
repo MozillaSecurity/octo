@@ -4,15 +4,14 @@
 
 import { random } from "../random"
 
-// @ts-ignore
 export class numbers {
-  /**
+  /**.
    * Returns a number that is more likely to exceed the supplied boundary
    *
-   * @param {number} value - Source value
+   * @param value - Source value
    * @private
    */
-  static _exceed(value: number) {
+  static _exceed(value: number): number {
     switch (random.number(4)) {
       case 0:
         // Divisions
@@ -28,13 +27,13 @@ export class numbers {
     }
   }
 
-  /**
+  /**.
    * Returns a int8 [-128, 127]
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static int8(bypass = false) {
+  static int8(bypass = false): number {
     if (bypass || random.chance(50)) {
       return numbers._exceed(
         random.choose([
@@ -47,13 +46,13 @@ export class numbers {
     return random.range(-128, 127)
   }
 
-  /**
+  /**.
    * Returns a uint8 [0, 255]
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static uint8(bypass = false) {
+  static uint8(bypass = false): number {
     if (bypass || random.chance(50)) {
       return numbers._exceed(255)
     }
@@ -61,13 +60,13 @@ export class numbers {
     return random.range(0, 255)
   }
 
-  /**
+  /**.
    * Returns a int16 [-32768, 32767]
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static int16(bypass = false) {
+  static int16(bypass = false): number {
     if (bypass || random.chance(50)) {
       return numbers._exceed(
         random.choose([
@@ -80,13 +79,13 @@ export class numbers {
     return random.range(-32768, 32767)
   }
 
-  /**
+  /**.
    * Returns a uint16 [0, 65535]
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {*}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static uint16(bypass = false) {
+  static uint16(bypass = false): number {
     if (bypass || random.chance(50)) {
       return numbers._exceed(65535)
     }
@@ -94,13 +93,13 @@ export class numbers {
     return random.range(-0, 65535)
   }
 
-  /**
+  /**.
    * Returns a int32 [-2147483648, 2147483647]
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static int32(bypass = false) {
+  static int32(bypass = false): number {
     if (bypass || random.chance(50)) {
       return numbers._exceed(
         random.choose([
@@ -113,13 +112,13 @@ export class numbers {
     return random.range(-2147483648, 2147483647)
   }
 
-  /**
+  /**.
    * Returns a uint32 [0, 4294967295]
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static uint32(bypass = false) {
+  static uint32(bypass = false): number {
     if (bypass || random.chance(50)) {
       return numbers._exceed(4294967295)
     }
@@ -127,13 +126,13 @@ export class numbers {
     return random.range(0, 4294967295)
   }
 
-  /**
+  /**.
    * Returns a random floating point number
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static float(bypass = false) {
+  static float(bypass = false): number {
     const min = 1.2 * 10 ** -38
     const max = 3.4 * 10 ** 38
 
@@ -149,13 +148,13 @@ export class numbers {
     return numbers.frange(min, max)
   }
 
-  /**
+  /**.
    * Returns a random double
    *
-   * @param {boolean} bypass - Determines if the range should be exceeded
-   * @returns {number}
+   * @param bypass - Determines if the range should be exceeded
+   * @returns
    */
-  static double(bypass = false) {
+  static double(bypass = false): number {
     const min = Number.MIN_SAFE_INTEGER
     const max = Number.MAX_SAFE_INTEGER
     if (bypass || random.chance(50)) {

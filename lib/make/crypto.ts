@@ -4,24 +4,39 @@
 import { random } from "../random"
 import { utils } from "../utils"
 
+interface AlgorithmMap {
+  sign: string[]
+  verify: string[]
+  generateKey: string[]
+  importKey: string[]
+  exportKey: string[]
+  encrypt: string[]
+  decrypt: string[]
+  deriveBits: string[]
+  deriveKey: string[]
+  wrapKey: string[]
+  unwrapKey: string[]
+  digest: string[]
+}
+
 export class crypto {
-  static get keyFormats() {
+  static get keyFormats(): string[] {
     return ["raw", "spki", "pkcs8", "jwk"]
   }
 
-  static randomKeyFormat() {
+  static randomKeyFormat(): string {
     return random.item(crypto.keyFormats)
   }
 
-  static get keyTypes() {
+  static get keyTypes(): string[] {
     return ["public", "private", "secret"]
   }
 
-  static randomKeyType() {
+  static randomKeyType(): string {
     return random.item(crypto.keyTypes)
   }
 
-  static get keyUsages() {
+  static get keyUsages(): string[] {
     return [
       "encrypt",
       "decrypt",
@@ -34,35 +49,35 @@ export class crypto {
     ]
   }
 
-  static randomKeyUsage() {
+  static randomKeyUsage(): string[] {
     return random.subset(crypto.keyUsages)
   }
 
-  static get curves() {
+  static get curves(): string[] {
     return ["P-256", "P-384", "P-521"]
   }
 
-  static randomCurve() {
+  static randomCurve(): string {
     return random.item(crypto.curves)
   }
 
-  static get jwkUsages() {
+  static get jwkUsages(): string[] {
     return ["enc", "sig"]
   }
 
-  static randomJwkUsage() {
+  static randomJwkUsage(): string[] {
     return random.subset(crypto.keyUsages)
   }
 
-  static get jwkKeyTypes() {
+  static get jwkKeyTypes(): string[] {
     return ["oct", "RSA", "EC"]
   }
 
-  static randomJwkKeyType() {
+  static randomJwkKeyType(): string[] {
     return random.subset(crypto.jwkKeyTypes)
   }
 
-  static get algorithmNames() {
+  static get algorithmNames(): AlgorithmMap {
     // https://www.w3.org/TR/WebCryptoAPI/#algorithm-overview
     return {
       sign: ["RSASSA-PKCS1-v1_5", "RSA-PSS", "ECDSA", "HMAC"],
@@ -115,27 +130,27 @@ export class crypto {
     }
   }
 
-  static randomAlgorithmName(method: keyof typeof crypto.algorithmNames) {
+  static randomAlgorithmName(method: keyof AlgorithmMap): string {
     return random.item(crypto.algorithmNames[method])
   }
 
-  static randomDigestName() {
+  static randomDigestName(): string {
     return random.item(crypto.algorithmNames.digest)
   }
 
   static get algorithms() {
     return {
       /* (Unsupported as of 30/01/2017)
-      -------------------------------
-      |          | Firefox | Chrome |
-      ----------------------------- |
-      | AES-CMAC |   x    |    x    |
-      | AES-CFB  |   x    |    x    |
-      | CONCAT   |   x    |    x    |
-      | HKDF-CTR |   x    |    x    |
-      | DH       |        |    x    |
-      -------------------------------
-      */
+            -------------------------------
+            |          | Firefox | Chrome |
+            ----------------------------- |
+            | AES-CMAC |   x    |    x    |
+            | AES-CFB  |   x    |    x    |
+            | CONCAT   |   x    |    x    |
+            | HKDF-CTR |   x    |    x    |
+            | DH       |        |    x    |
+            -------------------------------
+            */
       "RSASSA-PKCS1-v1_5": {
         // RSASA-PKCS1_v1_5 algorithm, using a SHA hash function.
         keyUsages: ["sign", "verify"],
@@ -872,10 +887,10 @@ export class crypto {
     }
   }
 
-  /**
+  /**.
    * Return all supported algorithms
    *
-   * @returns {string}
+   * @returns
    */
   static supportedAlgorithms() {
     return Object.keys(crypto.algorithms) as Array<keyof typeof crypto.algorithms>
@@ -886,7 +901,7 @@ export class crypto {
     return crypto.algorithms[key]
   }
 
-  static randomCandidate(operation: keyof typeof crypto.algorithmNames) {
+  static randomCandidate(operation: keyof AlgorithmMap) {
     // Find and return a random algorithm suitable for a given operation.
     const algo = crypto.randomAlgorithmName(operation) as keyof typeof crypto.algorithms
     return crypto.algorithms[algo]

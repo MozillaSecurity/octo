@@ -5,7 +5,7 @@
 import { random } from "../random"
 
 export class html {
-  static tag() {
+  static tag(): string {
     return random.item([
       "a",
       "abbr",
@@ -155,7 +155,7 @@ export class html {
     ])
   }
 
-  static attribute() {
+  static attribute(): string {
     return random.item([
       "accept",
       "accept-charset",
@@ -276,7 +276,7 @@ export class html {
     ])
   }
 
-  static interfaceName() {
+  static interfaceName(): string {
     return random.pick([
       "HTMLBRElement",
       "HTMLTableSectionElement",
@@ -348,7 +348,7 @@ export class html {
     ])
   }
 
-  static className() {
+  static className(): string {
     return random.item(["class_1", "class_2", "class_3", "class_4"])
   }
 }

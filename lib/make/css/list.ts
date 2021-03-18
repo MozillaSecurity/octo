@@ -5,13 +5,13 @@
 import { random } from "../../random"
 
 export class list {
-  /**
+  /**.
    * Generate random list-style-types
    * https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type#Browser_compatibility
    *
-   * @returns {string}
+   * @returns
    */
-  static styles() {
+  static styles(): string {
     return random.item([
       "arabic-indic",
       "armenian",

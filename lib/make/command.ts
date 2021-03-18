@@ -9,11 +9,17 @@ import { random } from "../random"
 import { text } from "./text"
 import { uri } from "./uri"
 
+type CommandValue = (() => string | boolean) | string[] | null
+
+interface CommandPair {
+  [key: string]: CommandValue
+}
+
 /**
- * Class for generator
+ * Class for generator.
  */
 export class command {
-  static get data() {
+  static get data(): CommandPair {
     return {
       backColor: colors.any,
       bold: null,
@@ -82,23 +88,25 @@ export class command {
     }
   }
 
-  /**
+  /**.
    * Return a random command name
    *
-   * @returns {string}
+   * @returns
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  static name() {
-    return random.item(Object.keys(command.data) as Array<keyof typeof command.data>)
+  static name(): string {
+    return random.item(Object.keys(command.data))
   }
 
-  /**
+  /**.
    * Return a random command value
    *
-   * @param {string} name - Command name
-   * @returns {string}
+   * @param name - Command name
+   * @returns
    */
-  static value(name: keyof typeof command.data): any {
+  static value(name: keyof typeof command.data): string | boolean | null {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return random.pick(command.data[name])
   }

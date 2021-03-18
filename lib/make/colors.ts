@@ -5,18 +5,18 @@
 import { random } from "../random"
 
 export class colors {
-  static any() {
+  static any(): string {
     switch (random.number(2)) {
       case 0:
         return colors.rgb()
       case 1:
         return colors.hsl()
       default:
-        return colors.keyword
+        return colors.keyword()
     }
   }
 
-  static rgb() {
+  static rgb(): string {
     let values
 
     switch (random.number(4)) {
@@ -43,7 +43,7 @@ export class colors {
     }
   }
 
-  static hsl() {
+  static hsl(): string {
     let values, opt
 
     switch (random.number(4)) {
@@ -78,7 +78,7 @@ export class colors {
     }
   }
 
-  static keyword() {
+  static keyword(): string {
     return random.item([
       "lime",
       "red",

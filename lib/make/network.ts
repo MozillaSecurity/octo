@@ -6,11 +6,11 @@ import { random } from "../random"
 import { utils } from "../utils"
 
 export class network {
-  static ufrag() {
+  static ufrag(): string {
     return "f5fda439"
   }
 
-  static sdp() {
+  static sdp(): string {
     // session description protocol template
     return [
       "v=0",
@@ -46,7 +46,7 @@ export class network {
     ].join("\n")
   }
 
-  static IceCandidate() {
+  static IceCandidate(): string {
     // https://tools.ietf.org/html/rfc5245#section-15
     // candidate=
     return utils.block.block([
@@ -81,7 +81,7 @@ export class network {
     ])
   }
 
-  static SdpMid() {
+  static SdpMid(): string {
     // m=
     return utils.block.block([
       random.pick(["application", "video", "audio"]),
@@ -94,7 +94,7 @@ export class network {
     ])
   }
 
-  static Turn() {
+  static Turn(): string {
     // https://tools.ietf.org/html/rfc7065#section-3.1
     return utils.block.block([
       // scheme
@@ -112,16 +112,16 @@ export class network {
     ])
   }
 
-  static PeerConnectionProtocols() {
+  static PeerConnectionProtocols(): string[] {
     return ["turn", "turns", "stun", "stuns"]
   }
 
-  /**
+  /**.
    * Generate a random IPv4 Address
    *
-   * @returns {string}
+   * @returns
    */
-  static randomIPv4() {
+  static randomIPv4(): string {
     /**
      *
      */
@@ -132,12 +132,12 @@ export class network {
     return `${octet()}.${octet()}.${octet()}.${octet()}.`
   }
 
-  /**
+  /**.
    * Generate a random IPv6 Address
    *
-   * @returns {string}
+   * @returns
    */
-  static randomIPv6() {
+  static randomIPv6(): string {
     const parts: string[] = []
 
     for (let i = 0; i < 8; i++) {
@@ -147,11 +147,11 @@ export class network {
     return parts.join(":")
   }
 
-  static iceServer() {
+  static iceServer(): any {
     return random.pick(["stun:23.21.150.121"])
   }
 
-  static dtmf() {
+  static dtmf(): string {
     let count = make.numbers.tiny()
     const values: string[] = []
     while (count--) {
@@ -180,12 +180,12 @@ export class network {
     return values.join("")
   }
 
-  /**
+  /**.
    * Generate a random hostname that should be valid in all environments
    *
-   * @returns {string}
+   * @returns
    */
-  static goodHostnames() {
+  static goodHostnames(): string {
     const hostnames = ["localhost", "0.0.0.0", "127.0.0.1", "[::1]"]
 
     switch (random.number(10)) {
@@ -208,12 +208,12 @@ export class network {
     }
   }
 
-  /**
+  /**.
    * Generate malformed hostnames
    *
-   * @returns {string}
+   * @returns
    */
-  static badHostnames() {
+  static badHostnames(): string {
     return random.item([
       "google.org",
       "[::192.9.5.5]:42",
@@ -228,51 +228,51 @@ export class network {
     ])
   }
 
-  /**
+  /**.
    * Generate a random hostname
    *
-   * @returns {*}
+   * @returns
    */
-  static hostname() {
+  static hostname(): any {
     return random.choose([
       [10, network.goodHostnames],
       [1, [network.randomIPv4, network.randomIPv6, network.badHostnames]],
     ])
   }
 
-  /**
+  /**.
    * Generate a random port number
    *
-   * @returns {number}
+   * @returns
    */
-  static port() {
+  static port(): number {
     return random.item([21, 23, 80, 443, 9310])
   }
 
-  /**
+  /**.
    * Generate a random hash value
    *
-   * @returns {string}
+   * @returns
    */
-  static hash() {
+  static hash(): any {
     return random.pick(["", "#", "#main-content", () => `#${make.text.any()}`])
   }
 
-  /**
+  /**.
    * Generate a random path
    *
-   * @returns {string}
+   * @returns
    */
-  static path() {
+  static path(): any {
     return random.pick(["/", "/index.html", () => `/${make.text.any()}`])
   }
 
-  /**
+  /**.
    * Generate a random protocol handler
    *
-   * @returns {string}
+   * @returns
    */
-  static protocol() {
+  static protocol(): string {
     return random.item([
       "chrome",
       "file",
@@ -286,12 +286,12 @@ export class network {
     ])
   }
 
-  /**
+  /**.
    * Generate a random search string
    *
-   * @returns {string}
+   * @returns
    */
-  static search() {
+  static search(): any {
     return random.choose([
       [1, ["", "?"]],
       [3, () => `?${make.text.any()}`],
@@ -301,13 +301,13 @@ export class network {
     ])
   }
 
-  /**
+  /**.
    * Generate a random bitmask
    *
-   * @param {Array} list - Array of bitmask values
-   * @returns {string}
+   * @param list - Array of bitmask values
+   * @returns
    */
-  static randomBitmask(list: string[]) {
+  static randomBitmask(list: string[]): any {
     if (list.length <= 1) {
       return list.join("")
     }
@@ -319,12 +319,12 @@ export class network {
     return mask
   }
 
-  /**
+  /**.
    * Generate a random header
    *
-   * @returns {string}
+   * @returns
    */
-  static header() {
+  static header(): string {
     return random.item([
       "Accept",
       "Accept-Additions",
@@ -654,12 +654,12 @@ export class network {
     ])
   }
 
-  /**
+  /**.
    * Generate a random request method
    *
-   * @returns {string}
+   * @returns
    */
-  static requestMethod() {
+  static requestMethod(): string {
     return random.item(["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE"])
   }
 }
