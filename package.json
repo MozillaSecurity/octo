@@ -28,7 +28,7 @@
     "build": "webpack --mode=production",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
-    "docs": "esdoc",
+    "docs": "typedoc ./lib",
     "lint": "cross-env NODE_ENV=test eslint ./lib --ext ts",
     "lint:fix": "cross-env NODE_ENV=test eslint ./lib --ext ts --fix",
     "prepare": "npm run build",
@@ -84,9 +84,6 @@
     "@typescript-eslint/parser": "^4.17.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.1.4",
-    "esdoc": "^1.1.0",
-    "esdoc-node": "^1.0.3",
-    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-jest": "^24.3.1",
@@ -98,26 +95,6 @@
     "sort-package-json": "^1.49.0",
     "ts-jest": "^26.4.2",
     "typedoc": "^0.20.32"
-  },
-  "esdoc": {
-    "source": "./lib",
-    "destination": "./docs",
-    "plugins": [
-      {
-        "name": "esdoc-standard-plugin",
-        "option": {
-          "lint": {
-            "enable": true
-          },
-          "coverage": {
-            "enable": true
-          }
-        }
-      },
-      {
-        "name": "esdoc-node"
-      }
-    ]
   },
   "release": {
     "branches": [

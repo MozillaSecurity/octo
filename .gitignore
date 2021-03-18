@@ -14,3 +14,6 @@ tests/coverage
 
 # Build dir
 dist/
+
+# Typedocs
+docs/
