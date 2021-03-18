@@ -12,11 +12,10 @@ interface RangedTypeOptions {
   max: number | null
 }
 
-/**.
- * Generate a calc value
+/**
+ * Generate a calc value.
  *
- * @param generator - The value generation function
- * @returns
+ * @param generator - The value generation function.
  */
 export function calc(generator: () => string): string {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -42,11 +41,11 @@ export function calc(generator: () => string): string {
   return `calc(${values.join(` ${op} `)})`
 }
 
-/**.
- * Simple helper function for extrapolating ranged types
+/**
+ * Simple helper function for extrapolating ranged types.
  *
- * @param min - Minimum value
- * @param max - Maximum value
+ * @param min - Minimum value.
+ * @param max - Maximum value.
  */
 export function expandRange(min: number | null, max: number | null): [number, number] {
   const _min = min !== null ? min : -2147483648
@@ -55,12 +54,14 @@ export function expandRange(min: number | null, max: number | null): [number, nu
   return [_min, _max]
 }
 
+/**
+ * Class for generating random CSS datatypes.
+ */
 export class datatypes {
-  /**.
-   * Generator for CSS <angle> data type
+  /**
+   * Generate a random <angle> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static angle(opts?: RangedTypeOptions | null): string {
     const [suffix, limit] = random.item([
@@ -80,20 +81,17 @@ export class datatypes {
     return `${make.numbers.frange(0, limit)}${suffix}`
   }
 
-  /**.
-   * Generator for CSS <decibel> data type
-   *
-   * @returns
+  /**
+   * Generate a random <decibel> data type.
    */
   static decibel(): string {
     return `${make.numbers.any()}dB`
   }
 
-  /**.
-   * Generator for CSS <dimension> data type
+  /**
+   * Generate a random <dimension> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static dimension(opts?: RangedTypeOptions | null): string {
     switch (random.number(4)) {
@@ -108,30 +106,25 @@ export class datatypes {
     }
   }
 
-  /**.
-   * Generator for CSS <expression> data type
-   *
-   * @returns
+  /**
+   * Generate a random <expression> data type.
    */
   static expression(): string {
     // ToDo: Deprecated MS only feature - not complete
     return `expression(body.scrollTop + ${datatypes.length()});`
   }
 
-  /**.
-   * Generator for CSS <flex> data type
-   *
-   * @returns
+  /**
+   * Generate a random <flex> data type.
    */
   static flex(): string {
     return `${make.numbers.any()}fr`
   }
 
-  /**.
-   * Generator for CSS <frequency> data type
+  /**
+   * Generate a random <frequency> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static frequency(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -146,21 +139,18 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**.
-   * Generator for CSS <hex-color> data type
-   *
-   * @returns
+  /**
+   * Generate a random <hex-color> data type.
    */
   static hexColor(): string {
     const len = random.item([4, 8])
     return `#${random.hex(len)}`
   }
 
-  /**.
-   * Generator for CSS <integer> data type
+  /**
+   * Generate a random <integer> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static integer(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -173,14 +163,12 @@ export class datatypes {
     return String(make.numbers.any(false))
   }
 
-  /**.
-   * Generator for CSS <length> data type
+  /**
+   * Generate a random <length> data type.
    *
-   * @param opts - Options
-   * @param allowRelative - Allow relative units
-   * @returns
+   * @param opts - Options.
+   * @param allowRelative - Allow relative units.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   static length(opts?: RangedTypeOptions | null, allowRelative = true): string {
     const units = ["cm", "mm", "Q", "in", "pc", "pt", "px"]
@@ -199,11 +187,10 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**.
-   * Generator for CSS <number> data type
+  /**
+   * Generate a random <number> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static number(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -216,29 +203,24 @@ export class datatypes {
     return String(make.numbers.any(true))
   }
 
-  /**.
-   * Generator for CSS <number-one-or-greater> data type
-   *
-   * @returns
+  /**
+   * Generate a random <number-one-or-greater> data type.
    */
   static numberOneOrGreater(): string {
     return String(Math.abs(make.numbers.any()))
   }
 
-  /**.
-   * Generator for CSS <number-zero-one> data type
-   *
-   * @returns
+  /**
+   * Generate a random <number-zero-one> data type.
    */
   static numberZeroOne(): string {
     return String(make.numbers.frange(0, 1))
   }
 
-  /**.
-   * Generator for CSS <percentage> data type
+  /**
+   * Generate a random <percentage> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static percentage(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -251,19 +233,15 @@ export class datatypes {
     return make.unit.percent()
   }
 
-  /**.
-   * Generator for CSS <positive-integer> data type
-   *
-   * @returns
+  /**
+   * Generate a random <positive-integer> data type.
    */
   static positiveInteger(): string {
     return String(Math.abs(make.numbers.any(false)))
   }
 
-  /**.
-   * Generator for CSS <progid> data type
-   *
-   * @returns
+  /**
+   * Generate a random <progid> data type.
    */
   static progid(): string {
     // ToDo: Deprecated MS only feature - not complete
@@ -280,10 +258,8 @@ export class datatypes {
     }
   }
 
-  /**.
-   * Generator for CSS <ratio> data type
-   *
-   * @returns
+  /**
+   * Generate a random <ratio> data type.
    */
   static ratio(): string {
     if (random.chance(1000)) {
@@ -292,11 +268,10 @@ export class datatypes {
     return `${random.range(1, 255)}/${random.range(1, 255)}`
   }
 
-  /**.
-   * Generator for CSS <resolution> data type
+  /**
+   * Generate a random <resolution> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static resolution(opts?: RangedTypeOptions | null): string {
     const unit = random.item(["dpi", "dpcm", "dppx"])
@@ -310,29 +285,24 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**.
-   * Generator for CSS <semitones> data type
-   *
-   * @returns
+  /**
+   * Generate a random <semitones> data type.
    */
   static semitones(): string {
     return `${make.numbers.any()}st`
   }
 
-  /**.
-   * Generator for CSS <string> data type
-   *
-   * @returns
+  /**
+   * Generate a random <string> data type.
    */
   static string(): string {
     return utils.common.quote(make.text.any())
   }
 
-  /**.
-   * Generator for CSS <time> data type
+  /**
+   * Generate a random <time> data type.
    *
-   * @param opts - Options
-   * @returns
+   * @param opts - Options.
    */
   static time(opts?: RangedTypeOptions | null): string {
     if (opts) {
@@ -351,10 +321,8 @@ export class datatypes {
     }
   }
 
-  /**.
-   * Generator for CSS <urange> data type
-   *
-   * @returns
+  /**
+   * Generate a random <urange> data type.
    */
   static urange(): string {
     const convert = (n: number) => (n + 0x10000).toString(16).substr(-4).toUpperCase()

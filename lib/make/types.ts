@@ -4,8 +4,14 @@
 
 import { random } from "../random"
 
+/**
+ * Class for generating random JavaScript primitive types.
+ */
 export class types {
-  static random() {
+  /**
+   * Generate a random primitive type.
+   */
+  static random(): string {
     return random.item([
       "true",
       "null",

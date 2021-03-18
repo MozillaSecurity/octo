@@ -5,57 +5,81 @@
 import { make } from "../make"
 import { random } from "../random"
 
+/**
+ * Class for performing generic value mutation.
+ */
 export class mutate {
-  static text(str: string) {
-    const mutator = function (m: string) {
+  /**
+   * Mutate a string.
+   *
+   * @param src - Source string to mutate.
+   */
+  static text(src: string): string {
+    return src.replace(/[a-zA-Z]+?/g, (m: string) => {
       return random.chance(4) ? m : make.text.any()
-    }
-    return str.replace(/[a-zA-Z]+?/g, mutator)
+    })
   }
 
-  static numbers(str: string) {
-    const mutator = function (m: string) {
-      return random.chance(4) ? m : make.numbers.any()
-    }
-    return str.replace(/-?\d+(\.\d+)?/g, mutator)
+  /**
+   * Mutate a number.
+   *
+   * @param src - Source number to mutate.
+   */
+  static numbers(src: string): string {
+    return src.replace(/-?\d+(\.\d+)?/g, (m: string) => {
+      return random.chance(4) ? m : String(make.numbers.any())
+    })
   }
 
-  static units(str: string) {
-    const mutator = function (m: string, p1: string) {
+  /**
+   * Mutate the unit in a length value.
+   *
+   * @param src - The source length to mutate.
+   */
+  static units(src: string): string {
+    return src.replace(/(\d+)(px|em|ex|ch|rem|mm|cm|in|pt|pc|%')/g, (m: string, p1: string) => {
       if (random.chance(4)) {
         return m
       } else {
         return p1 + make.unit.unit()
       }
-    }
-    return str.replace(/(\d+)(px|em|ex|ch|rem|mm|cm|in|pt|pc|%')/g, mutator)
+    })
   }
 
-  static random(str: string) {
-    const mutator = function (m: string) {
+  /**
+   * Randomly mutate the supplied string.
+   *
+   * @param src - The source string to mutate.
+   */
+  static random(src: string): string {
+    return src.replace(/./g, (m: string) => {
       if (random.chance(20)) {
-        if (str.match(/[0-9]/g)) {
-          return make.numbers.any()
+        if (src.match(/[0-9]/g)) {
+          return String(make.numbers.any())
         } else {
           return make.text.any()
         }
       } else {
         return m
       }
-    }
-    return str.replace(/./g, mutator)
+    })
   }
 
-  static any(str: string) {
+  /**
+   * Applies a single mutation to the supplied string.
+   *
+   * @param src - The source string to mutate.
+   */
+  static any(src: string): string {
     switch (random.number(4)) {
       case 0:
-        return mutate.text(str)
+        return mutate.text(src)
       case 1:
-        return mutate.numbers(str)
+        return mutate.numbers(src)
       case 2:
-        return mutate.units(str)
+        return mutate.units(src)
       default:
-        return mutate.random(str)
+        return mutate.random(src)
     }
   }
 }

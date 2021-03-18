@@ -4,18 +4,23 @@
 
 import { random } from "../random"
 
+/**
+ * Class for generating strings from recursive array of values and generators.
+ *
+ * @deprecated - This class serves no real purpose and the intent of any code using it is obscured.
+ */
 export class block {
-  static block(list: any[], optional?: boolean) {
-    if (optional === true) {
-      if (random.chance(6)) {
-        return ""
-      }
-    }
-
+  /**
+   * Generate a string using a nested array of values and value generators.
+   *
+   * @param list - An array of values and value generators.
+   * @param optional - Boolean indicating if the values are optional.
+   */
+  static block(list: any[], optional?: boolean): string {
     /**
-     * Recursively pick through list
+     * Recursively pick through list.
      *
-     * @param {*} item - Item to pick
+     * @param item - Item to pick.
      */
     function deeper(item: any) {
       if (item === null || item === undefined) {
@@ -35,6 +40,12 @@ export class block {
         return s
       }
       return item
+    }
+
+    if (optional === true) {
+      if (random.chance(6)) {
+        return ""
+      }
     }
 
     let asString = ""

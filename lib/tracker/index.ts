@@ -6,27 +6,26 @@ import { random } from "../random"
 
 /**
  * Generic tracking object
- * Generates unique identifiers for a given prefix
+ * Generates unique identifiers for a given prefix.
  */
 export class tracker {
   private readonly tracker: Record<string, string[]>
   /**
-   * Create a new instance
+   * Create a new instance.
    */
   constructor() {
     this.tracker = {}
   }
 
   /**
-   * Generate a new value
-   * If the prefix doesn't exist, initialize it
+   * Add a new tracker value.
+   * If the prefix doesn't exist, initialize it.
    *
-   * @param {string} prefix - Prefix of item to track
-   * @param {?string} value - Optional value to store
-   * @returns {string}
+   * @param prefix - Prefix of item to track.
+   * @param value - Optional value to store.
    */
-  add(prefix: string, value?: string) {
-    if (!this.tracker.hasOwnProperty(prefix)) {
+  add(prefix: string, value?: string): string {
+    if (!(prefix in this.tracker)) {
       this.tracker[prefix] = []
     }
 
@@ -40,14 +39,13 @@ export class tracker {
   }
 
   /**
-   * Retreive an id for the supplied prefix
-   * If the prefix doesn't already exist, return the initial value without initializing it
+   * Retrieve an id for the supplied prefix.
+   * If the prefix doesn't already exist, return the initial value without initializing it.
    *
-   * @param {string} prefix - Prefix of item to track
-   * @returns {string}
+   * @param prefix - Prefix of item to track.
    */
-  get(prefix: string) {
-    if (!this.tracker.hasOwnProperty(prefix)) {
+  get(prefix: string): string {
+    if (!(prefix in this.tracker)) {
       this.tracker[prefix] = [`${prefix}_0`]
     }
 
@@ -55,12 +53,11 @@ export class tracker {
   }
 
   /**
-   * Returns the number of ids for the supplied prefix
+   * Returns the number of ids for the supplied prefix.
    *
-   * @param {string} prefix - Prefix of item to track
-   * @returns {number}
+   * @param prefix - Prefix of item to track.
    */
-  length(prefix: string) {
-    return this.tracker.hasOwnProperty(prefix) ? this.tracker[prefix].length : 0
+  length(prefix: string): number {
+    return prefix in this.tracker ? this.tracker[prefix].length : 0
   }
 }

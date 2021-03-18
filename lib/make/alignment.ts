@@ -5,25 +5,25 @@
 import { random } from "../random"
 
 /**
- * Class for generating various alignment values
+ * Class for generating various alignment values.
  */
 export class alignment {
   /**
-   * Generate a random horizontal alignment value
+   * Generate a random horizontal alignment value.
    */
   static horizontal(): string {
     return random.item(["left", "right", "justify", "center"])
   }
 
   /**
-   * Generate a random vertical alignment value
+   * Generate a random vertical alignment value.
    */
   static vertical(): string {
     return random.item(["top", "bottom", "middle", "baseline"])
   }
 
   /**
-   * Generate a random horizontal or vertical alignment value
+   * Generate a random horizontal or vertical alignment value.
    */
   static any(): string {
     return random.pick([this.horizontal, this.vertical])

@@ -4,12 +4,14 @@
 
 import { random } from "../random"
 
+/**
+ * Class for generating random numerical values.
+ */
 export class numbers {
-  /**.
-   * Returns a number that is more likely to exceed the supplied boundary
+  /**
+   * Returns a number that is more likely to exceed the supplied boundary.
    *
-   * @param value - Source value
-   * @private
+   * @param value - Source value.
    */
   static _exceed(value: number): number {
     switch (random.number(4)) {
@@ -27,11 +29,10 @@ export class numbers {
     }
   }
 
-  /**.
-   * Returns a int8 [-128, 127]
+  /**
+   * Returns a int8 [-128, 127].
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static int8(bypass = false): number {
     if (bypass || random.chance(50)) {
@@ -46,11 +47,10 @@ export class numbers {
     return random.range(-128, 127)
   }
 
-  /**.
-   * Returns a uint8 [0, 255]
+  /**
+   * Returns a uint8 [0, 255].
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static uint8(bypass = false): number {
     if (bypass || random.chance(50)) {
@@ -60,11 +60,10 @@ export class numbers {
     return random.range(0, 255)
   }
 
-  /**.
-   * Returns a int16 [-32768, 32767]
+  /**
+   * Returns a int16 [-32768, 32767].
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static int16(bypass = false): number {
     if (bypass || random.chance(50)) {
@@ -79,11 +78,10 @@ export class numbers {
     return random.range(-32768, 32767)
   }
 
-  /**.
-   * Returns a uint16 [0, 65535]
+  /**
+   * Returns a uint16 [0, 65535].
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static uint16(bypass = false): number {
     if (bypass || random.chance(50)) {
@@ -93,11 +91,10 @@ export class numbers {
     return random.range(-0, 65535)
   }
 
-  /**.
-   * Returns a int32 [-2147483648, 2147483647]
+  /**
+   * Returns a int32 [-2147483648, 2147483647].
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static int32(bypass = false): number {
     if (bypass || random.chance(50)) {
@@ -112,11 +109,10 @@ export class numbers {
     return random.range(-2147483648, 2147483647)
   }
 
-  /**.
-   * Returns a uint32 [0, 4294967295]
+  /**
+   * Returns a uint32 [0, 4294967295].
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static uint32(bypass = false): number {
     if (bypass || random.chance(50)) {
@@ -126,11 +122,10 @@ export class numbers {
     return random.range(0, 4294967295)
   }
 
-  /**.
-   * Returns a random floating point number
+  /**
+   * Returns a random floating point number.
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static float(bypass = false): number {
     const min = 1.2 * 10 ** -38
@@ -148,11 +143,10 @@ export class numbers {
     return numbers.frange(min, max)
   }
 
-  /**.
-   * Returns a random double
+  /**
+   * Returns a random double.
    *
-   * @param bypass - Determines if the range should be exceeded
-   * @returns
+   * @param bypass - Determines if the range should be exceeded.
    */
   static double(bypass = false): number {
     const min = Number.MIN_SAFE_INTEGER
@@ -170,14 +164,13 @@ export class numbers {
   }
 
   /**
-   * Returns a float value within the supplied range
+   * Returns a float value within the supplied range.
    *
-   * @param {number} min - Start value
-   * @param {number} max - End value
-   * @param {?number} precision - Precision
-   * @returns {number}
+   * @param min - Start value.
+   * @param max - End value.
+   * @param precision - Precision.
    */
-  static frange(min: number, max: number, precision?: number) {
+  static frange(min: number, max: number, precision?: number): number {
     let x = random.float() * (max - min) + min
     if (precision !== undefined) {
       const power = Math.pow(10, precision)
@@ -187,31 +180,26 @@ export class numbers {
   }
 
   /**
-   * Returns a random power of 2 between 1 and 2048
-   *
-   * @returns {number}
+   * Returns a random power of 2 between 1 and 2048.
    */
-  static tiny() {
+  static tiny(): number {
     // Calling random.number twice prefers lower values
     return Math.pow(2, random.number(random.number(13)))
   }
 
   /**
-   * Returns a random number adjacent to the supplied number
+   * Returns a random number adjacent to the supplied number.
    *
-   * @param {number} number - Source value
-   * @returns {number}
+   * @param number - Source value.
    */
-  static even(number: number) {
+  static even(number: number): number {
     return number % 2 === 1 ? ++number : number
   }
 
   /**
-   * Returns a random number that may be interesting
-   *
-   * @returns {number}
+   * Returns a random number that may be interesting.
    */
-  static interesting() {
+  static interesting(): number {
     return random.choose([
       [100, [-128, -1, 0, 1, 16, 32, 64, 100, 127]],
       [75, [-32768, -129, 128, 255, 256, 512, 1000, 1024, 4096, 32767]],
@@ -221,11 +209,9 @@ export class numbers {
   }
 
   /**
-   * Returns a random signed number
-   *
-   * @returns {number}
+   * Returns a random signed number.
    */
-  static signed() {
+  static signed(): number {
     return random.choose([
       [50, [numbers.int8]],
       [30, [numbers.int16]],
@@ -234,11 +220,9 @@ export class numbers {
   }
 
   /**
-   * Returns a random unsigned number
-   *
-   * @returns {number}
+   * Returns a random unsigned number.
    */
-  static unsigned() {
+  static unsigned(): number {
     return random.choose([
       [50, [numbers.uint8]],
       [30, [numbers.uint16]],
@@ -247,12 +231,11 @@ export class numbers {
   }
 
   /**
-   * Returns a random number using the type base number generators above
+   * Returns a random number using the type base number generators above.
    *
-   * @param {boolean} floats - Allow floats?
-   * @returns {number}
+   * @param floats - Allow floats.
    */
-  static any(floats = true) {
+  static any(floats = true): number {
     const num = random.choose([
       [50, [numbers.int8, numbers.uint8]],
       [30, [numbers.int16, numbers.uint16]],

@@ -2,23 +2,35 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import { random } from "../random"
 import { logger } from "../logging"
+import { random } from "../random"
 
 interface ContainerEntry {
   type: string
   name: string
 }
 
+/**
+ * Class for tracking objects.
+ */
 export class objects {
   private counter: number
   private readonly container: { [id: string]: ContainerEntry[] }
+  /**
+   * Create a new instance.
+   */
   constructor() {
     this.counter = 0
     this.container = {}
   }
 
-  add(category: string, member: string) {
+  /**
+   * Add a new object.
+   *
+   * @param category - Type of object to be added.
+   * @param member - Object instance to be added.
+   */
+  add(category: string, member: string): string {
     if (!member) {
       member = "o" + this.counter
     }
@@ -30,7 +42,13 @@ export class objects {
     return this.container[category].slice(-1)[0].name
   }
 
-  get(category: string, last: boolean) {
+  /**
+   * Retrieve an object.
+   *
+   * @param category - Type of object to be retrieved.
+   * @param last - Retrieve the most recently added object instance.
+   */
+  get(category: string, last: boolean): ContainerEntry {
     if (!(category in this.container)) {
       // return {type:null, name:null};
       logger.traceback()
@@ -39,10 +57,16 @@ export class objects {
     if (last) {
       return this.container[category].slice(-1)[0]
     }
-    return random.pick(this.container[category])
+    return random.item(this.container[category])
   }
 
-  pick(category: string, last: boolean) {
+  /**
+   * Retrieve a object name.
+   *
+   * @param category - Type of object to be retrieved.
+   * @param last - Retrieve the most recently added object instance.
+   */
+  pick(category: string, last: boolean): string {
     try {
       return this.get(category, last).name
     } catch (e) {
@@ -51,7 +75,12 @@ export class objects {
     }
   }
 
-  pop(objectName: string) {
+  /**
+   * Remove objects matching the supplied name.
+   *
+   * @param objectName - The name of the objects to remove.
+   */
+  pop(objectName: string): void {
     Object.keys(this.container).forEach((category) => {
       this.container[category].forEach((obj) => {
         if (obj.name === objectName) {
@@ -61,20 +90,40 @@ export class objects {
     })
   }
 
-  contains(categoryNames: string[]) {
+  /**
+   * Enumerate list of categories currently being tracked.
+   *
+   * @param categoryNames - List of category names to filter on.
+   */
+  contains(categoryNames: string[]): null | string[] {
     const categories = categoryNames.filter((name) => this.has(name))
     return categories.length === 0 ? null : categories
   }
 
-  show(category: string) {
+  /**
+   * Return a list of objects matching the supplied category.
+   *
+   * @param category - Type of object to filter on.
+   */
+  show(category: string): ContainerEntry[] | { [p: string]: ContainerEntry[] } {
     return category in this.container ? this.container[category] : this.container
   }
 
-  count(category: string) {
+  /**
+   * Return the number of objects matching the supplied category.
+   *
+   * @param category - Type of object to count.
+   */
+  count(category: string): number {
     return category in this.container ? this.container[category].length : 0
   }
 
-  has(category: string) {
+  /**
+   * Indicates if the instance contains the supplied category.
+   *
+   * @param category - Type of object.
+   */
+  has(category: string): boolean {
     if (category in this.container) {
       this.check(category)
       return this.container[category].length > 0
@@ -82,7 +131,10 @@ export class objects {
     return false
   }
 
-  valid() {
+  /**
+   * Returns an array of all objects that are not null or undefined.
+   */
+  valid(): string[] {
     const items: string[] = []
     Object.keys(this.container).forEach((category) => {
       this.check(category)
@@ -95,7 +147,12 @@ export class objects {
     return items
   }
 
-  check(category: string) {
+  /**
+   * Remove objects matching category that are undefined or null.
+   *
+   * @param category - The category to check.
+   */
+  check(category: string): void {
     this.container[category].forEach((object) => {
       try {
         const x = /* frame.contentWindow. */ eval(object.name) // eslint-disable-line no-eval

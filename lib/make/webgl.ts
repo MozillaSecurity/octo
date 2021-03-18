@@ -5,8 +5,23 @@
 import { make } from "../make"
 import { random } from "../random"
 
+interface FormatEntry {
+  format: string
+  type: string[]
+}
+
+interface InternalFormatTypes {
+  [key: string]: FormatEntry
+}
+
+/**
+ * Class for generating WebGL related values.
+ */
 export class webgl {
-  static get internalFormat(): Record<string, any> {
+  /**
+   * Return an object containing valid internal formats and their associated types.
+   */
+  static get internalFormat(): InternalFormatTypes {
     return {
       RGB: { format: "RGB", type: ["UNSIGNED_BYTE", "UNSIGNED_SHORT_5_6_5"] },
       RGBA: {
@@ -46,7 +61,10 @@ export class webgl {
     }
   }
 
-  static WebGLFormat() {
+  /**
+   * Generate a random format value.
+   */
+  static WebGLFormat(): string[] {
     const keys = Object.keys(webgl.internalFormat)
     const internalformat = random.item(keys)
     const format = webgl.internalFormat[internalformat].format
@@ -54,13 +72,24 @@ export class webgl {
     return [internalformat, format, type]
   }
 
-  static textureSources() {
+  /**
+   * Generate a random textureSource interface type.
+   */
+  static textureSources(): string {
     const sources = ["HTMLCanvasElement", "HTMLImageElement", "HTMLVideoElement", "ImageData"]
     return random.item(sources)
   }
 
-  static match(shader: string, regex: RegExp, group = 1) {
+  /**
+   * Extract matching attributes from a WebGL shader.
+   *
+   * @param shader - The target shader.
+   * @param regex - The regex to match.
+   * @param group - The capture group.
+   */
+  static match(shader: string, regex: RegExp, group = 1): string[] {
     const matches: string[] = []
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       const match = regex.exec(shader)
       if (match) {
@@ -72,30 +101,65 @@ export class webgl {
     return matches
   }
 
-  static parseUniforms(shader: string, group = 1) {
+  /**
+   * Extract the uniform value from a shader.
+   *
+   * @param shader - The target shader.
+   * @param group - That capture group to match.
+   */
+  static parseUniforms(shader: string, group = 1): string[] {
     /* Todo: Parse their individual data types into categories. */
     return webgl.match(shader, /uniform .+? (\w+)(?=[\[;])/gm, group) // eslint-disable-line no-useless-escape
   }
 
-  static parseAttributes(shader: string, group = 1) {
+  /**
+   * Extract the attribute value from a shader.
+   *
+   * @param shader - The target shader.
+   * @param group - The capture group to match.
+   */
+  static parseAttributes(shader: string, group = 1): string[] {
     return webgl.match(shader, /attribute .+? (\w+)(?=;)/gm, group)
   }
 
-  static parseVaryings(shader: string, group = 1) {
+  /**
+   * Extract the varying value from a WebGL shader.
+   *
+   * @param shader - The target shader.
+   * @param group - The capture group to match.
+   */
+  static parseVaryings(shader: string, group = 1): string[] {
     return webgl.match(shader, /varying .+? (\w+)(?=;)/gm, group)
   }
 
-  static parseFragDatav2(shader: string, group = 1) {
+  /**
+   * Extract the gl_Frag value from a shader.
+   *
+   * @param shader - The target shader.
+   * @param group - The capture group to match.
+   */
+  static parseFragDatav2(shader: string, group = 1): string[] {
     // #version 200
     return webgl.match(shader, /(gl_Frag[^[ =]+)/gm, group)
   }
 
-  static parseFragDatav3(shader: string, group = 1) {
+  /**
+   * Extract the out value from a shader.
+   *
+   * @param shader - The target shader.
+   * @param group - The capture group to match.
+   */
+  static parseFragDatav3(shader: string, group = 1): string[] {
     // #version 300
     return webgl.match(shader, /out .+? (\w+)(?=[\[;])/gm, group) // eslint-disable-line no-useless-escape
   }
 
-  static parseFrag(shader: string) {
+  /**
+   * Extract the fragment value from a shader.
+   *
+   * @param shader - The target shader.
+   */
+  static parseFrag(shader: string): string[] {
     const matches = webgl.parseFragDatav2(shader)
     if (matches.length) {
       return matches
@@ -103,7 +167,10 @@ export class webgl {
     return webgl.parseFragDatav3(shader)
   }
 
-  static randomBitmask() {
+  /**
+   * Generate a random bitmask.
+   */
+  static randomBitmask(): number {
     const values: number[] = []
     for (let i = 0; i < 8; i++) {
       values.push(random.item([1, 0]))
@@ -112,7 +179,12 @@ export class webgl {
     return parseInt(values.join(""))
   }
 
-  static randomBufferTarget(isWebGL2: boolean) {
+  /**
+   * Generate a random buffer target.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomBufferTarget(isWebGL2: boolean): string {
     const target = ["ARRAY_BUFFER", "ELEMENT_ARRAY_BUFFER"]
     if (isWebGL2) {
       target.push(
@@ -129,7 +201,12 @@ export class webgl {
     return random.item(target)
   }
 
-  static randomTexParameter(isWebGL2: boolean) {
+  /**
+   * Generate a random texture name.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomTexParameter(isWebGL2: boolean): string {
     const pname = ["TEXTURE_MAG_FILTER", "TEXTURE_MIN_FILTER", "TEXTURE_WRAP_S", "TEXTURE_WRAP_T"]
     if (isWebGL2) {
       pname.push(
@@ -147,7 +224,12 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomTexParameterValue(isWebGL2: boolean) {
+  /**
+   * Generate a random texture parameter value.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomTexParameterValue(isWebGL2: boolean): string[] {
     let pnameparam: Record<string, string[]> = {
       TEXTURE_MAG_FILTER: ["LINEAR", "NEAREST"],
       TEXTURE_MIN_FILTER: [
@@ -186,7 +268,12 @@ export class webgl {
     return [pname, param]
   }
 
-  static randomBlendMode(isWebGL2: boolean) {
+  /**
+   * Generate a random blend mode name.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomBlendMode(isWebGL2: boolean): string {
     const mode = ["FUNC_ADD", "FUNC_SUBTRACT", "FUNC_REVERSE_SUBTRACT"]
     if (isWebGL2) {
       mode.push(...["MIN", "MAX"])
@@ -194,7 +281,10 @@ export class webgl {
     return random.item(mode)
   }
 
-  static randomBlendFactor() {
+  /**
+   * Generate a random blend value.
+   */
+  static randomBlendFactor(): string {
     const factor = [
       "ZERO",
       "ONE",
@@ -215,12 +305,18 @@ export class webgl {
     return random.item(factor)
   }
 
-  static randomFace() {
+  /**
+   * Generate a random culling candidate.
+   */
+  static randomFace(): string {
     const mode = ["FRONT", "BACK", "FRONT_AND_BACK"]
     return random.item(mode)
   }
 
-  static randomTexImage2DTarget() {
+  /**
+   * Generate a random texture image target.
+   */
+  static randomTexImage2DTarget(): string {
     const target = [
       "TEXTURE_2D",
       "TEXTURE_CUBE_MAP_POSITIVE_X",
@@ -233,7 +329,12 @@ export class webgl {
     return random.item(target)
   }
 
-  static randomTextureTarget(isWebGL2: boolean) {
+  /**
+   * Generate a random texture target.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomTextureTarget(isWebGL2: boolean): string {
     const target = ["TEXTURE_2D", "TEXTURE_CUBE_MAP"]
     if (isWebGL2) {
       target.push(...["TEXTURE_3D", "TEXTURE_2D_ARRAY"])
@@ -241,12 +342,20 @@ export class webgl {
     return random.item(target)
   }
 
-  static randomFunc() {
+  /**
+   * Generate a random function operator.
+   */
+  static randomFunc(): string {
     const func = ["NEVER", "LESS", "EQUAL", "LEQUAL", "GREATER", "NOTEQUAL", "GEQUAL", "ALWAYS"]
     return random.item(func)
   }
 
-  static randomCap(isWebGL2: boolean) {
+  /**
+   * Generate a random context capability value.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomCap(isWebGL2: boolean): string {
     const cap = [
       "BLEND",
       "CULL_FACE",
@@ -264,7 +373,10 @@ export class webgl {
     return random.item(cap)
   }
 
-  static randomPrimitive() {
+  /**
+   * Generate a random context primitive name.
+   */
+  static randomPrimitive(): string {
     const mode = [
       "POINTS",
       "LINE_STRIP",
@@ -277,7 +389,12 @@ export class webgl {
     return random.item(mode)
   }
 
-  static randomTextureAttachment(isWebGL2: boolean) {
+  /**
+   * Generate a random texture attachment.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomTextureAttachment(isWebGL2: boolean): string {
     const attachment = [
       "COLOR_ATTACHMENT0",
       "DEPTH_ATTACHMENT",
@@ -290,7 +407,12 @@ export class webgl {
     return random.item(attachment)
   }
 
-  static randomAttachmentQuery(isWebGL2: boolean) {
+  /**
+   * Generate a random attachment query value.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomAttachmentQuery(isWebGL2: boolean): string {
     const pname = [
       "FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE",
       "FRAMEBUFFER_ATTACHMENT_OBJECT_NAME",
@@ -315,7 +437,10 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomShaderPrecision() {
+  /**
+   * Generate a random shader precision value.
+   */
+  static randomShaderPrecision(): string {
     const precisiontype = [
       "LOW_FLOAT",
       "MEDIUM_FLOAT",
@@ -327,7 +452,10 @@ export class webgl {
     return random.item(precisiontype)
   }
 
-  static randomStencilRefParameter() {
+  /**
+   * Generate a random stencil reference parameter.
+   */
+  static randomStencilRefParameter(): string {
     const param = [
       "STENCIL_FUNC",
       "STENCIL_VALUE_MASK",
@@ -340,12 +468,20 @@ export class webgl {
     return random.item(param)
   }
 
-  static randomStencilMaskParameter() {
+  /**
+   * Generate a random stencil mask parameter.
+   */
+  static randomStencilMaskParameter(): string {
     const param = ["STENCIL_WRITEMASK", "STENCIL_BACK_WRITEMASK", "STENCIL_BITS"]
     return random.item(param)
   }
 
-  static randomVertexAttribParameter(isWebGL2: boolean) {
+  /**
+   * Generate a random vertex attribute parameter.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomVertexAttribParameter(isWebGL2: boolean): string {
     const pname = [
       "VERTEX_ATTRIB_ARRAY_BUFFER_BINDING",
       "VERTEX_ATTRIB_ARRAY_ENABLED",
@@ -367,7 +503,12 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomHint(isWebGL2: boolean) {
+  /**
+   * Generate a random behavior hint name.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomHint(isWebGL2: boolean): string {
     const target = ["GENERATE_MIPMAP_HINT"]
     if (isWebGL2) {
       target.push(...["FRAGMENT_SHADER_DERIVATIVE_HINT"])
@@ -375,12 +516,20 @@ export class webgl {
     return random.item(target)
   }
 
-  static randomHintMode() {
+  /**
+   * Generate a random behavior hint mode.
+   */
+  static randomHintMode(): string {
     const mode = ["FASTEST", "NICEST", "DONT_CARE"]
     return random.item(mode)
   }
 
-  static randomPixelStorage(isWebGL2: boolean) {
+  /**
+   * Generate a random pixel storage name and value.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomPixelStorage(isWebGL2: boolean): (string | number | boolean)[] {
     const pname: Record<string, number | boolean> = {
       PACK_ALIGNMENT: random.item([1, 2, 4, 8]),
       UNPACK_ALIGNMENT: random.item([1, 2, 4, 8]),
@@ -404,12 +553,18 @@ export class webgl {
     return [name, pname[name]]
   }
 
-  static randomStencilAction() {
+  /**
+   * Generate a random stencil action.
+   */
+  static randomStencilAction(): string {
     const action = ["KEEP", "ZERO", "REPLACE", "INCR", "INCR_WRAP", "DECR", "DECR_WRAP", "INVERT"]
     return random.item(action)
   }
 
-  static randomQueryTarget() {
+  /**
+   * Generate a random query target.
+   */
+  static randomQueryTarget(): string {
     const target = [
       "ANY_SAMPLES_PASSED",
       "ANY_SAMPLES_PASSED_CONSERVATIVE",
@@ -418,12 +573,18 @@ export class webgl {
     return random.item(target)
   }
 
-  static randomQueryPname() {
+  /**
+   * Generate a random query parameter name.
+   */
+  static randomQueryPname(): string {
     const pname = ["CURRENT_QUERY", "QUERY_RESULT", "QUERY_RESULT_AVAILABLE"]
     return random.item(pname)
   }
 
-  static randomSamplerParameter() {
+  /**
+   * Generate a random sampler parameter name.
+   */
+  static randomSamplerParameter(): string {
     const pname = [
       "TEXTURE_MAG_FILTER",
       "TEXTURE_MIN_FILTER",
@@ -441,22 +602,34 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomSyncParameter() {
+  /**
+   * Generate a random sync parameter name.
+   */
+  static randomSyncParameter(): string {
     const pname = ["OBJECT_TYPE", "SYNC_STATUS", "SYNC_CONDITION", "SYNC_FLAGS"]
     return random.item(pname)
   }
 
-  static randomClearBuffer() {
+  /**
+   * Generate a random clear buffer target.
+   */
+  static randomClearBuffer(): string {
     const buffer = ["COLOR", "DEPTH", "STENCIL", "DEPTH_STENCIL"]
     return random.item(buffer)
   }
 
-  static randomBindBufferTarget() {
+  /**
+   * Generate a random bind buffer target.
+   */
+  static randomBindBufferTarget(): string {
     const target = ["TRANSFORM_FEEDBACK_BUFFER", "UNIFORM_BUFFER"]
     return random.item(target)
   }
 
-  static randomIndexedParameterTarget() {
+  /**
+   * Generate a random indexed parameter target name.
+   */
+  static randomIndexedParameterTarget(): string {
     const target = [
       "TRANSFORM_FEEDBACK_BUFFER_BINDING",
       "TRANSFORM_FEEDBACK_BUFFER_SIZE",
@@ -468,7 +641,10 @@ export class webgl {
     return random.item(target)
   }
 
-  static randomUniformParameter() {
+  /**
+   * Generate a random uniform parameter name.
+   */
+  static randomUniformParameter(): string {
     const pname = [
       "UNIFORM_TYPE",
       "UNIFORM_SIZE",
@@ -481,7 +657,10 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomUniformBlockParameter() {
+  /**
+   * Generate a random uniform block parameter name.
+   */
+  static randomUniformBlockParameter(): string {
     const pname = [
       "UNIFORM_BLOCK_BINDING",
       "UNIFORM_BLOCK_DATA_SIZE",
@@ -493,7 +672,10 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomPixelDatatype() {
+  /**
+   * Generate a random pixel data type.
+   */
+  static randomPixelDatatype(): string {
     const type = [
       "UNSIGNED_BYTE",
       "UNSIGNED_SHORT",
@@ -506,7 +688,12 @@ export class webgl {
     return random.item(type)
   }
 
-  static randomBufferUsage(isWebGL2: boolean) {
+  /**
+   * Generate a random buffer usage value.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomBufferUsage(isWebGL2: boolean): string {
     const usage = ["STATIC_DRAW", "DYNAMIC_DRAW", "STREAM_DRAW"]
     if (isWebGL2) {
       usage.push(
@@ -523,7 +710,12 @@ export class webgl {
     return random.item(usage)
   }
 
-  static randomParameter(isWebGL2: boolean) {
+  /**
+   * Generate a random parameter name.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomParameter(isWebGL2: boolean): string {
     const pname = [
       "ACTIVE_TEXTURE",
       "ALIASED_LINE_WIDTH_RANGE",
@@ -685,7 +877,10 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomProgramParameter() {
+  /**
+   * Generate a random program parameter name.
+   */
+  static randomProgramParameter(): string {
     const pname = [
       "DELETE_STATUS",
       "LINK_STATUS",
@@ -700,7 +895,10 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomRenderBufferParameter() {
+  /**
+   * Generate a random render buffer parameter.
+   */
+  static randomRenderBufferParameter(): string {
     const pname = [
       "RENDERBUFFER_WIDTH",
       "RENDERBUFFER_HEIGHT",
@@ -715,7 +913,12 @@ export class webgl {
     return random.item(pname)
   }
 
-  static randomExtension(pattern?: string) {
+  /**
+   * Generate a random extension interface name.
+   *
+   * @param pattern - Limits results to those matching the supplied string.
+   */
+  static randomExtension(pattern?: string): string {
     const extensions = [
       "ANGLE_instanced_arrays",
       "EXT_blend_minmax",

@@ -3,15 +3,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 import { make } from "../make"
 import { random } from "../random"
-import { utils } from "../utils"
 
+/**
+ * Class for generating networking related values.
+ */
 export class network {
+  /**
+   * Generate a ufrag value.
+   */
   static ufrag(): string {
     return "f5fda439"
   }
 
+  /**
+   * Generate a random session description protocol.
+   */
   static sdp(): string {
-    // session description protocol template
     return [
       "v=0",
       "o=Mozilla-SIPUA 23597 0 IN IP4 0.0.0.0",
@@ -46,96 +53,78 @@ export class network {
     ].join("\n")
   }
 
+  /**
+   * Generate a random ICE candidate.
+   */
   static IceCandidate(): string {
     // https://tools.ietf.org/html/rfc5245#section-15
     // candidate=
-    return utils.block.block([
-      random.pick([0, 1, make.numbers.any]),
-      " ",
-      random.pick([0, 1, make.numbers.any]),
-      " ",
-      random.pick(["UDP", "TCP", "SCTP"]),
-      random.pick(["", `/${random.pick(["DTLS", "DTLS-SRTP"])}`]),
-      " ",
-      random.pick([make.numbers.any]),
-      " ",
-      random.pick([network.goodHostnames]),
-      " ",
-      random.pick([56187, make.numbers.any]),
-      " ",
-      "type",
-      " ",
-      random.pick([
-        "host",
-        utils.block.block([
-          random.pick(["srflx", "prflx", "relay"]),
-          " ",
-          random.pick(["raddr"]),
-          " ",
-          random.pick([network.goodHostnames]),
-          " ",
-          random.pick(["rport"]),
-          random.use([utils.block.block([" ", make.numbers.any])]),
-        ]),
-      ]),
-    ])
+    const foundation = random.pick([0, 1, make.numbers.any])
+    const compId = random.pick([0, 1, make.numbers.any])
+    const transport = random.item(["UDP", "TCP", "SCTP"])
+    const ext = random.chance() ? `/${random.item(["DTLS", "DTLS-SRTP"])}` : ""
+    const priority = make.numbers.any()
+    const host = network.goodHostnames()
+    const port = random.pick([56187, make.numbers.any])
+
+    // Candidate types
+    const canType = `typ ${random.item(["host", "srflx", "prflx", "relay"])}`
+    const relAddr = random.chance()
+      ? `raddr ${network.goodHostnames()} rport ${random.pick([56187, make.numbers.any])}`
+      : ""
+
+    return [foundation, compId, transport, ext, priority, host, port, canType, relAddr].join(" ")
   }
 
+  /**
+   * Generate a random media stream identification tag.
+   *
+   * {@link https://datatracker.ietf.org/doc/html/rfc3264}.
+   */
   static SdpMid(): string {
     // m=
-    return utils.block.block([
-      random.pick(["application", "video", "audio"]),
-      " ",
-      make.numbers.any,
-      " ",
-      random.pick(["RTP/AVP", "RTP/SAVPF", "RTP/SAVP", "SCTP/DTLS"]),
-      " ",
-      make.numbers.any,
-    ])
+    const type = random.item(["application", "video", "audio"])
+    const port = make.numbers.any()
+    const proto = random.item(["RTP/AVP", "RTP/SAVPF", "RTP/SAVP", "SCTP/DTLS"])
+    const unknown = make.numbers.any()
+    return `${type} ${port} ${proto} ${unknown}`
   }
 
+  /**
+   * Generate a random TURN URL.
+   *
+   * {@link https://tools.ietf.org/html/rfc7065#section-3.1}.
+   */
   static Turn(): string {
-    // https://tools.ietf.org/html/rfc7065#section-3.1
-    return utils.block.block([
-      // scheme
-      random.pick(network.PeerConnectionProtocols),
-      ":",
-      // turn-host
-      network.hostname,
-      // turn-port
-      random.use([utils.block.block([":", make.numbers.any])]),
-      random.use([utils.block.block(["/", make.text.any])]),
-      "?",
-      random.pick(["transport"]),
-      "=",
-      random.pick(["udp", "tcp", make.text.any]),
-    ])
+    const scheme = network.PeerConnectionProtocols()
+    const host = network.hostname()
+    const port = random.chance() ? `:${make.numbers.any()}` : ""
+    const path = random.chance() ? `/${make.text.any()}` : ""
+    const proto = random.pick(["udp", "tcp", make.text.any])
+    return `${scheme}:${host}${port}${path}${proto}`
   }
 
+  /**
+   * Return a list of peer connection protocols.
+   */
   static PeerConnectionProtocols(): string[] {
     return ["turn", "turns", "stun", "stuns"]
   }
 
-  /**.
-   * Generate a random IPv4 Address
-   *
-   * @returns
+  /**
+   * Generate a random IPv4 Address.
    */
   static randomIPv4(): string {
-    /**
-     *
-     */
-    function octet() {
-      return random.pick([random.number(255), make.numbers.any])
+    const octets = []
+    for (let i = 0; i < 4; i++) {
+      octets.push(random.number(255))
     }
 
-    return `${octet()}.${octet()}.${octet()}.${octet()}.`
+    return octets.join(".")
   }
 
-  /**.
-   * Generate a random IPv6 Address
-   *
-   * @returns
+  /**
+   * Generate a random IPv6 Address.
    */
   static randomIPv6(): string {
     const parts: string[] = []
@@ -147,10 +136,16 @@ export class network {
     return parts.join(":")
   }
 
-  static iceServer(): any {
-    return random.pick(["stun:23.21.150.121"])
+  /**
+   * Generate a random ICE address.
+   */
+  static iceServer(): string {
+    return random.item(["stun:23.21.150.121"])
   }
 
+  /**
+   * Generate a random DTMF value.
+   */
   static dtmf(): string {
     let count = make.numbers.tiny()
     const values: string[] = []
@@ -180,10 +175,8 @@ export class network {
     return values.join("")
   }
 
-  /**.
-   * Generate a random hostname that should be valid in all environments
-   *
-   * @returns
+  /**
+   * Generate a random hostname that should be valid in all environments.
    */
   static goodHostnames(): string {
     const hostnames = ["localhost", "0.0.0.0", "127.0.0.1", "[::1]"]
@@ -208,10 +201,8 @@ export class network {
     }
   }
 
-  /**.
-   * Generate malformed hostnames
-   *
-   * @returns
+  /**
+   * Generate malformed hostnames.
    */
   static badHostnames(): string {
     return random.item([
@@ -228,49 +219,39 @@ export class network {
     ])
   }
 
-  /**.
-   * Generate a random hostname
-   *
-   * @returns
+  /**
+   * Generate a random hostname.
    */
-  static hostname(): any {
+  static hostname(): string {
     return random.choose([
       [10, network.goodHostnames],
       [1, [network.randomIPv4, network.randomIPv6, network.badHostnames]],
     ])
   }
 
-  /**.
-   * Generate a random port number
-   *
-   * @returns
+  /**
+   * Generate a random port number.
    */
   static port(): number {
     return random.item([21, 23, 80, 443, 9310])
   }
 
-  /**.
-   * Generate a random hash value
-   *
-   * @returns
+  /**
+   * Generate a random hash value.
    */
-  static hash(): any {
+  static hash(): string {
     return random.pick(["", "#", "#main-content", () => `#${make.text.any()}`])
   }
 
-  /**.
-   * Generate a random path
-   *
-   * @returns
+  /**
+   * Generate a random path.
    */
-  static path(): any {
+  static path(): string {
     return random.pick(["/", "/index.html", () => `/${make.text.any()}`])
   }
 
-  /**.
-   * Generate a random protocol handler
-   *
-   * @returns
+  /**
+   * Generate a random protocol handler.
    */
   static protocol(): string {
     return random.item([
@@ -286,12 +267,10 @@ export class network {
     ])
   }
 
-  /**.
-   * Generate a random search string
-   *
-   * @returns
+  /**
+   * Generate a random search string.
    */
-  static search(): any {
+  static search(): string {
     return random.choose([
       [1, ["", "?"]],
       [3, () => `?${make.text.any()}`],
@@ -301,13 +280,12 @@ export class network {
     ])
   }
 
-  /**.
-   * Generate a random bitmask
+  /**
+   * Generate a random bitmask.
    *
-   * @param list - Array of bitmask values
-   * @returns
+   * @param list - Array of bitmask values.
    */
-  static randomBitmask(list: string[]): any {
+  static randomBitmask(list: string[]): string {
     if (list.length <= 1) {
       return list.join("")
     }
@@ -319,10 +297,8 @@ export class network {
     return mask
   }
 
-  /**.
-   * Generate a random header
-   *
-   * @returns
+  /**
+   * Generate a random header.
    */
   static header(): string {
     return random.item([
@@ -654,10 +630,8 @@ export class network {
     ])
   }
 
-  /**.
-   * Generate a random request method
-   *
-   * @returns
+  /**
+   * Generate a random request method.
    */
   static requestMethod(): string {
     return random.item(["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE"])

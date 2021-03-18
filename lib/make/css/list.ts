@@ -4,12 +4,14 @@
 
 import { random } from "../../random"
 
+/**
+ * Class for generating random CSS list related values.
+ */
 export class list {
-  /**.
-   * Generate random list-style-types
-   * https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type#Browser_compatibility
+  /**
+   * Generate random list-style-types.
    *
-   * @returns
+   * {@link https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type#Browser_compatibility}.
    */
   static styles(): string {
     return random.item([

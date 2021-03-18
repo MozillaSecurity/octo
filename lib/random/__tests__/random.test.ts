@@ -43,7 +43,7 @@ describe("Random", () => {
     expect(sum >>> 0).toEqual(0xffffffff)
   })
 
-  test("number() uniform distriution", () => {
+  test("number() uniform distribution", () => {
     const N = Math.pow(2, 17)
     const TRIES = 3
     const XSQ = 564.7 // quantile of chi-square dist. k=511, p=.05
@@ -853,7 +853,7 @@ describe("Random", () => {
       for (let attempt = 0; attempt < TRIES; ++attempt) {
         const bins = new Uint32Array(3)
         for (let i = 0; i < N; ++i) {
-          let tmp = random.item(
+          let tmp: number | number[] | (() => undefined) = random.item(
             random.weighted([
               { w: 1, v: v1 },
               { w: 1, v: v2 },
@@ -1085,7 +1085,11 @@ describe("Random", () => {
           expect(tmp.length).toBeLessThanOrEqual(M)
           ++lengths[tmp.length]
           if (tmp.length) {
-            ++bins[tmp.length - 1][tmp.reduce((a, v) => a * 3 + v, 0)]
+            ++bins[tmp.length - 1][
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              tmp.reduce((a, v) => a * 3 + v, 0)
+            ]
           }
         }
         bin0_xsq = bins[0].reduce((a, v) => {

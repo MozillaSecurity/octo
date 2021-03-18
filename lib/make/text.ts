@@ -5,25 +5,28 @@ import { make } from "../make"
 import { random } from "../random"
 import { utils } from "../utils"
 
+/**
+ * Class for generating generic text values.
+ */
 export class text {
   /**
-   * Generate a random alphabetic character
+   * Generate a random alphabetic character.
    */
-  static alpha() {
+  static alpha(): string {
     return String.fromCharCode(random.range("A".charCodeAt(0), "z".charCodeAt(0)))
   }
 
   /**
-   * Generate a random ASCII printable character
+   * Generate a random ASCII printable character.
    */
-  static asciiPrintable() {
+  static asciiPrintable(): string {
     return String.fromCharCode(random.range(0x20, 0x7e))
   }
 
   /**
-   * Generate a random bytestring
+   * Generate a random bytestring.
    */
-  static bytestring() {
+  static bytestring(): string {
     let s = ""
     let len = random.range(1, 126)
 
@@ -35,17 +38,17 @@ export class text {
   }
 
   /**
-   * Generate a random alphanumeric character
+   * Generate a random alphanumeric character.
    */
-  static alphanum() {
+  static alphanum(): string {
     return String.fromCharCode(random.range("0".charCodeAt(0), "z".charCodeAt(0)))
   }
 
   /**
-   * Generate a random assignment operator
+   * Generate a random assignment operator.
    */
-  static assignmentOperator() {
-    return random.pick([
+  static assignmentOperator(): string {
+    return random.item([
       "=",
       "+=",
       "-=",
@@ -63,17 +66,17 @@ export class text {
   }
 
   /**
-   * Generate a random arithmetic operator
+   * Generate a random arithmetic operator.
    */
-  static arithmeticOperator() {
-    return random.pick(["%", "-", "+", "*", "/"])
+  static arithmeticOperator(): string {
+    return random.item(["%", "-", "+", "*", "/"])
   }
 
   /**
-   * Generate a random control character
+   * Generate a random control character.
    */
-  static controlChar() {
-    return random.pick([
+  static controlChar(): string {
+    return random.item([
       "\b",
       "\t",
       "\n",
@@ -88,24 +91,24 @@ export class text {
   }
 
   /**
-   * Generate a random digit
+   * Generate a random digit.
    */
-  static digit() {
+  static digit(): string {
     return String.fromCharCode(random.range("0".charCodeAt(0), "9".charCodeAt(0)))
   }
 
   /**
-   * Generate a random line ending
+   * Generate a random line ending.
    */
-  static lineEnd() {
-    return random.pick(["\n", "\r", "\r\n", "\n\r"])
+  static lineEnd(): string {
+    return random.item(["\n", "\r", "\r\n", "\n\r"])
   }
 
   /**
-   * Generate a random token
+   * Generate a random token.
    */
-  static token() {
-    return random.pick([
+  static token(): string {
+    return random.item([
       "*",
       "+",
       "%",
@@ -136,73 +139,81 @@ export class text {
     ])
   }
 
-  static charset() {
-    return random.pick(["UTF-8", "ISO-8859-1"])
-  }
-
-  static language() {
-    return random.pick([
-      // special casing for i, I, dotted/dotless variants
-      ["tr", "az", "crh", "tt", "ba"],
-      // special casing rules: https://developer.mozilla.org/en/CSS/text-transform
-      ["nl", "el", "ga"],
-      // special justification rules
-      ["ja", "zh"],
-      // tend to be RTL
-      ["ar", "he"],
-      // http://mxr.mozilla.org/mozilla-central/source/gfx/thebes/gfxAtomList.h
-      [
-        "en",
-        "x-unicode",
-        "x-western",
-        "ja",
-        "ko",
-        "zh-cn",
-        "zh-hk",
-        "zh-tw",
-        "x-cyrillic",
-        "el",
-        "tr",
-        "he",
-        "ar",
-        "x-baltic",
-        "th",
-        "x-devanagari",
-        "x-tamil",
-        "x-armn",
-        "x-beng",
-        "x-cans",
-        "x-ethi",
-        "x-geor",
-        "x-gujr",
-        "x-guru",
-        "x-khmr",
-        "x-knda",
-        "x-mlym",
-        "x-orya",
-        "x-sinh",
-        "x-telu",
-        "x-tibt",
-        "ko-xxx",
-        "x-central-euro",
-        "x-symbol",
-        "x-user-def",
-        "az",
-        "ba",
-        "crh",
-        "tt",
-      ],
-      // Seen in mxr
-      ["en-US", "fr", "fra", "de", "ru", "en-us", "is-IS", "xyzzy"],
-    ])
+  /**
+   * Generate a random character set value.
+   */
+  static charset(): string {
+    return random.item(["UTF-8", "ISO-8859-1"])
   }
 
   /**
-   * Generate a random character that may affect layout
+   * Generate a random language code.
    */
-  static layoutCharCodes() {
+  static language(): string {
+    return random.item(
+      random.item([
+        // special casing for i, I, dotted/dotless variants
+        ["tr", "az", "crh", "tt", "ba"],
+        // special casing rules: https://developer.mozilla.org/en/CSS/text-transform
+        ["nl", "el", "ga"],
+        // special justification rules
+        ["ja", "zh"],
+        // tend to be RTL
+        ["ar", "he"],
+        // http://mxr.mozilla.org/mozilla-central/source/gfx/thebes/gfxAtomList.h
+        [
+          "en",
+          "x-unicode",
+          "x-western",
+          "ja",
+          "ko",
+          "zh-cn",
+          "zh-hk",
+          "zh-tw",
+          "x-cyrillic",
+          "el",
+          "tr",
+          "he",
+          "ar",
+          "x-baltic",
+          "th",
+          "x-devanagari",
+          "x-tamil",
+          "x-armn",
+          "x-beng",
+          "x-cans",
+          "x-ethi",
+          "x-geor",
+          "x-gujr",
+          "x-guru",
+          "x-khmr",
+          "x-knda",
+          "x-mlym",
+          "x-orya",
+          "x-sinh",
+          "x-telu",
+          "x-tibt",
+          "ko-xxx",
+          "x-central-euro",
+          "x-symbol",
+          "x-user-def",
+          "az",
+          "ba",
+          "crh",
+          "tt",
+        ],
+        // Seen in mxr
+        ["en-US", "fr", "fra", "de", "ru", "en-us", "is-IS", "xyzzy"],
+      ])
+    )
+  }
+
+  /**
+   * Generate a random character that may affect layout.
+   */
+  static layoutCharCodes(): string {
     return String.fromCodePoint(
-      random.pick([
+      random.item([
         0, // null
         160, // non-breaking space
         0x005c, // backslash, but in some countries, represents local currency symbol (e.g. yen)
@@ -272,11 +283,11 @@ export class text {
   }
 
   /**
-   * Generate a random character that affects bidi layout
+   * Generate a random character that affects bidi layout.
    */
-  static bidiCharCodes() {
+  static bidiCharCodes(): string {
     return String.fromCodePoint(
-      random.pick([
+      random.item([
         0x0660, // START_HINDI_DIGITS
         0x0669, // END_HINDI_DIGITS
         0x066a, // START_ARABIC_SEPARATOR
@@ -290,10 +301,11 @@ export class text {
   }
 
   /**
-   * Generate a random unicode combining character
-   * http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt
+   * Generate a random unicode combining character.
+   *
+   * {@link http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt}.
    */
-  static unicodeCombiningCharacter() {
+  static unicodeCombiningCharacter(): string {
     const [start, end] = random.item([
       [0x0300, 0x036f], // Combining Diacritical Marks
       [0x0483, 0x0489],
@@ -318,16 +330,16 @@ export class text {
   }
 
   /**
-   * Generate a random basic multilingual plane character
+   * Generate a random basic multilingual plane character.
    */
-  static unicodeBMP() {
+  static unicodeBMP(): string {
     return String.fromCodePoint(random.range(0x0000, 0xffff))
   }
 
   /**
-   * Generate a random supplementary multilingual plane character
+   * Generate a random supplementary multilingual plane character.
    */
-  static unicodeSMP() {
+  static unicodeSMP(): string {
     const [start, end] = random.item([
       [0x10000, 0x13fff],
       [0x16000, 0x16fff],
@@ -339,9 +351,9 @@ export class text {
   }
 
   /**
-   * Generate a random supplementary ideographic plane character
+   * Generate a random supplementary ideographic plane character.
    */
-  static unicodeSIP() {
+  static unicodeSIP(): string {
     const [start, end] = random.item([
       [0x20000, 0x2bfff],
       [0x2f000, 0x2ffff],
@@ -350,14 +362,17 @@ export class text {
   }
 
   /**
-   * Generate a random supplementary special-purpose plane character
+   * Generate a random supplementary special-purpose plane character.
    */
-  static unicodeSSP() {
+  static unicodeSSP(): string {
     return String.fromCodePoint(random.range(0xe0000, 0xe0fff))
   }
 
-  static currency() {
-    return random.pick([
+  /**
+   * Generate a random currency unit.
+   */
+  static currency(): string {
+    return random.item([
       // https://en.wikipedia.org/wiki/ISO_4217
       "USD",
       "USS",
@@ -376,7 +391,15 @@ export class text {
     ])
   }
 
-  static fromBlocks(set: any, maxlen?: number) {
+  /**
+   * Generate a string from an array of values and generators.
+   *
+   * @deprecated - This method does not appear to be useful and will be removed.
+   * @param set - Array of values and generators.
+   * @param maxlen - Maximum number of iterations to perform.
+   */
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  static fromBlocks(set: any, maxlen?: number): string {
     let s = ""
 
     for (let i = 0; i < random.number(maxlen || 255); i++) {
@@ -386,16 +409,17 @@ export class text {
     return s
   }
 
-  static quotedString() {
+  /**
+   * Generate a random quoted string.
+   */
+  static quotedString(): string {
     return utils.common.quote(text.any())
   }
 
   /**
-   * Wrapper for all text generators
-   *
-   * @returns {string}
+   * Generate a random text value.
    */
-  static random() {
+  static random(): string {
     return random.choose([
       [1, text.alpha],
       [1, text.alphanum],
@@ -416,16 +440,16 @@ export class text {
   }
 
   /**
-   * Generate a single character
+   * Generate a random character.
    */
-  static character() {
+  static character(): string {
     return text.random().charAt(0)
   }
 
   /**
-   * Generate string comprised of random generators
+   * Generate a string comprised of random generators.
    */
-  static any() {
+  static any(): string {
     let s = ""
     let len = random.range(1, 126)
 

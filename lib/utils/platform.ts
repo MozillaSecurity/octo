@@ -2,9 +2,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+/**
+ * Class for enumerating platform metadata.
+ */
 export class platform {
+  /**
+   * Enumerate the current platform's capabilities.
+   */
   // @ts-ignore
-  static get name() {
+  static get name(): Record<string, any> {
     const platform: Record<string, any> = {}
 
     /* In case we are running in Node. */
@@ -20,18 +26,17 @@ export class platform {
     ) || [])[1])
     const webkitVersion = (userAgent.match(/webkit\/(.+?) /) || [])[1]
 
-    platform.windows = platform.isWindows = !!/windows/.test(userAgent)
+    platform.windows = platform.isWindows = /windows/.test(userAgent)
     platform.mac = platform.isMac =
-      !!/macintosh/.test(userAgent) ||
+      /macintosh/.test(userAgent) ||
       (/mac os x/.test(userAgent) && !/like mac os x/.test(userAgent))
-    platform.lion = platform.isLion = !!(
+    platform.lion = platform.isLion =
       /mac os x 10_7/.test(userAgent) && !/like mac os x 10_7/.test(userAgent)
-    )
-    platform.iPhone = platform.isiPhone = !!/iphone/.test(userAgent)
-    platform.iPod = platform.isiPod = !!/ipod/.test(userAgent)
-    platform.iPad = platform.isiPad = !!/ipad/.test(userAgent)
+    platform.iPhone = platform.isiPhone = /iphone/.test(userAgent)
+    platform.iPod = platform.isiPod = /ipod/.test(userAgent)
+    platform.iPad = platform.isiPad = /ipad/.test(userAgent)
     platform.iOS = platform.isiOS = platform.iPhone || platform.iPod || platform.iPad
-    platform.android = platform.isAndroid = !!/android/.test(userAgent)
+    platform.android = platform.isAndroid = /android/.test(userAgent)
     platform.opera = /opera/.test(userAgent) ? version : 0
     platform.isOpera = !!platform.opera
     platform.msie = /msie/.test(userAgent) && !platform.opera ? version : 0
@@ -74,10 +79,9 @@ export class platform {
       : "unknown"
 
     /**
-     * Identify available feature locations
+     * Identify available feature locations.
      *
-     * @param {Array} candidates - Array of features to check
-     * @returns {string?}
+     * @param candidates - Array of features to check.
      */
     function platformName(candidates: string[]): string | undefined {
       for (let i = 0; i < candidates.length; i++) {
@@ -120,23 +124,8 @@ export class platform {
     platform.SpeechGrammarList = platformName(["SpeechGrammarList", "webkitSpeechGrammarList"])
     platform.SpeechGrammar = platformName(["SpeechGrammar"])
 
-    /*
-     function findWebGLContextName (candidates) {
-     var canvas = document.createElement('canvas')
-     for (var i = 0; i < candidates.length; i++) {
-     var name = candidates[i]
-     try {
-     if (canvas.getContext(name)) {
-     return name
-     }
-     } catch (e) {}
-     }
-     return null
-     }
-     */
-
-    platform.WebGL = "webgl" // findWebGLContextName(["webgl", "experimental-webgl", "webkit-3d"]);
-    platform.WebGL2 = "webgl2" // findWebGLContextName(["webgl2", "experimental-webgl2"]);
+    platform.WebGL = "webgl"
+    platform.WebGL2 = "webgl2"
 
     platform.captureStreamUntilEnded = "captureStreamUntilEnded"
     if (platform.isMozilla) {

@@ -5,13 +5,14 @@
 import { make } from "../make"
 import { random } from "../random"
 
+/**
+ * Class for generating random URI values.
+ */
 export class uri {
   /**
-   * Generate a random URI that is known to cause issues
-   *
-   * @returns {string}
+   * Generate a random URI that is known to cause issues.
    */
-  static problematic() {
+  static problematic(): string {
     return random.item([
       "aim:yaz", // Often triggers an 'external protocol request' dialog
       "foop:yaz", // Often triggers an unknown protocol
@@ -21,11 +22,9 @@ export class uri {
   }
 
   /**
-   * Generate a random URI that should be valid in all environments
-   *
-   * @returns {string}
+   * Generate a random URI that should be valid in all environments.
    */
-  static standard() {
+  static standard(): string {
     return random.item([
       "about:blank",
       "about:srcdoc",
@@ -47,11 +46,9 @@ export class uri {
   }
 
   /**
-   * Generate a random namespaceURI
-   *
-   * @returns {string}
+   * Generate a random namespaceURI.
    */
-  static namespace() {
+  static namespace(): string {
     return random.item([
       "http://www.w3.org/1999/xhtml",
       "http://www.w3.org/2000/svg",
@@ -60,11 +57,9 @@ export class uri {
   }
 
   /**
-   * Generate a random URI
-   *
-   * @returns {string}
+   * Generate a random URI.
    */
-  static any() {
+  static any(): string {
     if (random.chance(20)) {
       return uri.problematic()
     } else {

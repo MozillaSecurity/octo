@@ -4,7 +4,7 @@
 import { random } from "../random"
 import { utils } from "../utils"
 
-interface AlgorithmMap {
+interface AlgorithmOperationMap {
   sign: string[]
   verify: string[]
   generateKey: string[]
@@ -19,23 +19,41 @@ interface AlgorithmMap {
   digest: string[]
 }
 
+/**
+ * Class for generating SubtleCrypto related values.
+ */
 export class crypto {
+  /**
+   * Return an array of key formats.
+   */
   static get keyFormats(): string[] {
     return ["raw", "spki", "pkcs8", "jwk"]
   }
 
+  /**
+   * Generate a random key format.
+   */
   static randomKeyFormat(): string {
     return random.item(crypto.keyFormats)
   }
 
+  /**
+   * Return an array of key types.
+   */
   static get keyTypes(): string[] {
     return ["public", "private", "secret"]
   }
 
+  /**
+   * Generate a random key type.
+   */
   static randomKeyType(): string {
     return random.item(crypto.keyTypes)
   }
 
+  /**
+   * Return an array of method names.
+   */
   static get keyUsages(): string[] {
     return [
       "encrypt",
@@ -49,36 +67,61 @@ export class crypto {
     ]
   }
 
+  /**
+   * Return a subset of all valid method names.
+   */
   static randomKeyUsage(): string[] {
     return random.subset(crypto.keyUsages)
   }
 
+  /**
+   * Return an array of curve values.
+   */
   static get curves(): string[] {
     return ["P-256", "P-384", "P-521"]
   }
 
+  /**
+   * Generate a random curve value.
+   */
   static randomCurve(): string {
     return random.item(crypto.curves)
   }
 
+  /**
+   * Return an array of methods that can use JSON Web Keys.
+   */
   static get jwkUsages(): string[] {
     return ["enc", "sig"]
   }
 
+  /**
+   * Return a subset of methods than can use JSON Web Keys.
+   */
   static randomJwkUsage(): string[] {
     return random.subset(crypto.keyUsages)
   }
 
+  /**
+   * Return an array of JSON Web Key types.
+   */
   static get jwkKeyTypes(): string[] {
     return ["oct", "RSA", "EC"]
   }
 
+  /**
+   * Return a subset of JSON Web Key types.
+   */
   static randomJwkKeyType(): string[] {
     return random.subset(crypto.jwkKeyTypes)
   }
 
-  static get algorithmNames(): AlgorithmMap {
-    // https://www.w3.org/TR/WebCryptoAPI/#algorithm-overview
+  /**
+   * Return an object containing methods and their corresponding algorithms.
+   *
+   * {@link https://www.w3.org/TR/WebCryptoAPI/#algorithm-overview}.
+   */
+  static get algorithmNames(): AlgorithmOperationMap {
     return {
       sign: ["RSASSA-PKCS1-v1_5", "RSA-PSS", "ECDSA", "HMAC"],
       verify: ["RSASSA-PKCS1-v1_5", "RSA-PSS", "ECDSA", "HMAC"],
@@ -130,33 +173,45 @@ export class crypto {
     }
   }
 
-  static randomAlgorithmName(method: keyof AlgorithmMap): string {
+  /**
+   * Return a random algorithm that supports the supplied method.
+   *
+   * @param method - Method name.
+   */
+  static randomAlgorithmName(method: keyof AlgorithmOperationMap): string {
     return random.item(crypto.algorithmNames[method])
   }
 
+  /**
+   * Return a random digest type.
+   */
   static randomDigestName(): string {
     return random.item(crypto.algorithmNames.digest)
   }
 
-  static get algorithms() {
+  /**
+   * Return object containing all algorithms, and the algorithm format needed for each operation.
+   *
+   * TODO: This method MUST be refactored into individual classes that share a single base class.
+   */
+  static get algorithms(): any {
     return {
-      /* (Unsupported as of 30/01/2017)
-            -------------------------------
-            |          | Firefox | Chrome |
-            ----------------------------- |
-            | AES-CMAC |   x    |    x    |
-            | AES-CFB  |   x    |    x    |
-            | CONCAT   |   x    |    x    |
-            | HKDF-CTR |   x    |    x    |
-            | DH       |        |    x    |
-            -------------------------------
-            */
       "RSASSA-PKCS1-v1_5": {
         // RSASA-PKCS1_v1_5 algorithm, using a SHA hash function.
         keyUsages: ["sign", "verify"],
+        /**
+         * Returns a random key length.
+         *
+         * @param len - Use the supplied length.
+         */
         length: function (len?: number) {
           return len || random.item([1, 256, 384, 512])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'RSASSA-PKCS1-v1_5',
@@ -167,21 +222,38 @@ export class crypto {
             publicExponent: new Uint8Array([0x01, 0x00, 0x01])
           }`)
         },
-        jwk: function (len: number) {
+        /**
+         * Returns a JSON web key (JWK) for the requested length.
+         *
+         * @param len - Key length.
+         */
+        jwk: function (len?: number) {
           return utils.common.mockup(`{
             kty: 'RSA',
             alg: 'RS${this.length(len)}'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.sign().
+         */
         sign: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.verify().
+         */
         verify: function () {
           return this.alg()
         },
@@ -225,9 +297,19 @@ export class crypto {
       },
       "RSA-PSS": {
         keyUsages: ["sign", "verify"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([1, 256, 384, 512])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'RSA-PSS',
@@ -239,21 +321,38 @@ export class crypto {
             saltLength: 8
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'RSA',
             alg: 'PS${this.length(len)}'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.sign().
+         */
         sign: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.verify().
+         */
         verify: function () {
           return this.alg()
         },
@@ -298,9 +397,19 @@ export class crypto {
       "RSA-OAEP": {
         // RSAES-OAEP algorithm using a SHA hash functions and a MGF1 mask generating function.
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([1, 256, 384, 512])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'RSA-OAEP',
@@ -311,18 +420,32 @@ export class crypto {
             publicExponent: new Uint8Array([0x01, 0x00, 0x01])
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'RSA',
             alg: 'RSA-OAEP-${this.length(len)}'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.encrypt().
+         */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'RSA-OAEP',
@@ -334,12 +457,21 @@ export class crypto {
             label: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.decrypt().
+         */
         decrypt: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.unwrapKey().
+         */
         unwrapKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.wrapKey().
+         */
         wrapKey: function () {
           return this.alg()
         },
@@ -383,9 +515,19 @@ export class crypto {
       },
       ECDSA: {
         keyUsages: ["sign", "verify"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([256, 384, 512])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           len = this.length(len)
           return utils.common.mockup(`{
@@ -396,21 +538,38 @@ export class crypto {
             }
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'EC',
             alg: 'ES${this.length(len)}'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.sign().
+         */
         sign: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.verify().
+         */
         verify: function () {
           return this.alg()
         },
@@ -441,36 +600,65 @@ export class crypto {
       },
       ECDH: {
         keyUsages: ["deriveKey", "deriveBits"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([256, 384, 512])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'ECDSA',
             namedCurve: 'P-${this.length(len)}'
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         */
         jwk: function () {
           return {}
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveKey().
+         *
+         * @param key - The public key to use.
+         */
         deriveKey: function (key: string) {
           return utils.common.mockup(`{
             name: 'ECDSA',
             namedCurve: 'P-${this.length()}',
-            ${key}
+            publicKey: ${key}
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveBits().
+         *
+         * @param key - The public key to use.
+         */
         deriveBits: function (key: string) {
           return utils.common.mockup(`{
             name: 'ECDSA',
             namedCurve: 'P-${this.length()}',
-            ${key}
+            publicKey: ${key}
           }`)
         },
         presets: {
@@ -501,27 +689,51 @@ export class crypto {
       "AES-CTR": {
         // AES in Counter Mode.
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([128, 192, 256])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'AES-CTR',
             length: '${this.length(len)}'
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'oct',
             alg: 'A${this.length(len)}CTR'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.encrypt().
+         */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'AES-CTR',
@@ -529,12 +741,21 @@ export class crypto {
             counter: new Uint8Array(16)
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.decrypt().
+         */
         decrypt: function () {
           return this.encrypt()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.wrapKey().
+         */
         wrapKey: function () {
           return this.encrypt()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.unwrapKey().
+         */
         unwrapKey: function () {
           return this.encrypt()
         },
@@ -556,27 +777,51 @@ export class crypto {
       "AES-CBC": {
         // AES in Cipher Block Chaining mode.
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([128, 192, 256])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'AES-CBC',
             length: ${this.length(len)}
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'oct',
             alg: 'A${this.length(len)}CBC'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.encrypt().
+         */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'AES-CBC',
@@ -584,12 +829,21 @@ export class crypto {
             iv: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.decrypt().
+         */
         decrypt: function () {
           return this.encrypt()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.wrapKey().
+         */
         wrapKey: function () {
           return this.encrypt()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.unwrapKey().
+         */
         unwrapKey: function () {
           return this.encrypt()
         },
@@ -611,15 +865,30 @@ export class crypto {
       "AES-GCM": {
         // AES in Galois/Counter Mode.
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([128, 192, 256])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'AES-GCM',
             length: ${this.length(len)}
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           if (random.chance(4)) {
             return utils.common.mockup(`{
@@ -633,12 +902,21 @@ export class crypto {
             }`)
           }
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.encrypt().
+         */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'AES-GCM',
@@ -647,15 +925,24 @@ export class crypto {
             tagLength: ${random.item([32, 64, 96, 104, 112, 120, 128])}
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.decrypt().
+         */
         decrypt: function () {
           return this.encrypt()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.wrapKey().
+         */
         wrapKey: function () {
           return utils.common.mockup(`{
             name: 'AES-GCM',
             iv: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.unwrapKey().
+         */
         unwrapKey: function () {
           return this.wrapKey()
         },
@@ -677,32 +964,59 @@ export class crypto {
       "AES-KW": {
         // Key wrapping in AES algorithm.
         keyUsages: ["wrapKey", "unwrapKey"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([128, 192, 256])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'AES-KW',
             length: ${this.length(len)}
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'oct',
             alg: 'A${this.length(len)}KW'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.wrapKey().
+         */
         wrapKey: function () {
           return utils.common.mockup(`{
             name: 'AES-KW'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.unwrapKey().
+         */
         unwrapKey: function () {
           return this.wrapKey()
         },
@@ -724,9 +1038,19 @@ export class crypto {
       HMAC: {
         // Hash-based message authentication method using SHA hash functions.
         keyUsages: ["sign", "verify"],
+        /**
+         * Return a random key length.
+         *
+         * @param len - Requested key length.
+         */
         length: function (len?: number) {
           return len || random.item([1, 256, 384, 512])
         },
+        /**
+         * Return the algorithm object.
+         *
+         * @param len - The requested hash length.
+         */
         alg: function (len?: number) {
           return utils.common.mockup(`{
             name: 'HMAC',
@@ -735,21 +1059,38 @@ export class crypto {
             }
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         *
+         * @param len - Requested key length.
+         */
         jwk: function (len: number) {
           return utils.common.mockup(`{
             kty: 'oct',
             alg: 'HS${this.length(len)}'
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.sign().
+         */
         sign: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.verify().
+         */
         verify: function () {
           return this.alg()
         },
@@ -769,20 +1110,35 @@ export class crypto {
       HKDF: {
         // Key derivation using the extraction-then-expansion approach and using the SHA hash functions.
         keyUsages: ["deriveKey", "deriveBits"],
+        /**
+         * Return the algorithm object.
+         */
         alg: function () {
           return utils.common.mockup(`{
             name: 'HKDF'
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         */
         jwk: function () {
           return utils.common.mockup(`{}`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveBits().
+         */
         deriveBits: function () {
           return utils.common.mockup(`{
             name: 'HKDF',
@@ -793,6 +1149,9 @@ export class crypto {
             info: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveKey().
+         */
         deriveKey: function () {
           return this.deriveBits()
         },
@@ -806,20 +1165,35 @@ export class crypto {
       PBKDF2: {
         // Key derivation using the PKCS#5 password-based key derivation function v2.0.
         keyUsages: ["deriveKey", "deriveBits"],
+        /**
+         * Return the algorithm object.
+         */
         alg: function () {
           return utils.common.mockup(`{
             name: 'PBKDF2'
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         */
         jwk: function () {
           return utils.common.mockup(`{}`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.alg()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveBits().
+         */
         deriveBits: function () {
           return utils.common.mockup(`{
             name: 'PBKDF2',
@@ -830,6 +1204,9 @@ export class crypto {
             iterations: ${random.number(1000)}
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveKey().
+         */
         deriveKey: function () {
           return this.deriveBits()
         },
@@ -842,14 +1219,23 @@ export class crypto {
       },
       DH: {
         keyUsages: ["deriveKey", "deriveBits"],
+        /**
+         * Return the algorithm object.
+         */
         alg: function () {
           return utils.common.mockup(`{
             name: 'DH'
           }`)
         },
+        /**
+         * Return the JSON Web Key (JWK).
+         */
         jwk: function () {
           return utils.common.mockup(`{}`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.generateKey().
+         */
         generateKey: function () {
           return utils.common.mockup(`{
             name: 'DH',
@@ -857,18 +1243,31 @@ export class crypto {
             generator: new Uint8Array([2])
           }`)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.importKey().
+         */
         importKey: function () {
           return this.generateKey()
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveKey().
+         *
+         * @param key - The public key to use.
+         */
         deriveKey: function (key: string) {
           // return Object.assign(this.generateKey(),key)
           return utils.common.mockup(`
             name: 'DH',
             prime: new Uint8Array([255, 255, 255, 255, 255, 255, 255, 255, 201, 15, 218, 162, 33, 104, 194, 52, 196, 198, 98, 139, 128, 220, 28, 209, 41, 2, 78, 8, 138, 103, 204, 116, 2, 11, 190, 166, 59, 19, 155, 34, 81, 74, 8, 121, 142, 52, 4, 221, 239, 149, 25, 179, 205, 58, 67, 27, 48, 43, 10, 109, 242, 95, 20, 55, 79, 225, 53, 109, 109, 81, 194, 69, 228, 133, 181, 118, 98, 94, 126, 198, 244, 76, 66, 233, 166, 55, 237, 107, 11, 255, 92, 182, 244, 6, 183, 237, 238, 56, 107, 251, 90, 137, 159, 165, 174, 159, 36, 17, 124, 75, 31, 230, 73, 40, 102, 81, 236, 228, 91, 61, 194, 0, 124, 184, 161, 99, 191, 5, 152, 218, 72, 54, 28, 85, 211, 154, 105, 22, 63, 168, 253, 36, 207, 95, 131, 101, 93, 35, 220, 163, 173, 150, 28, 98, 243, 86, 32, 133, 82, 187, 158, 213, 41, 7, 112, 150, 150, 109, 103, 12, 53, 78, 74, 188, 152, 4, 241, 116, 108, 8, 202, 35, 115, 39, 255, 255, 255, 255, 255, 255, 255, 255]),
             generator: new Uint8Array([2]),
-            ${key}
+            publicKey: ${key}
           `)
         },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveBits().
+         *
+         * @param key - The public key to use.
+         */
         deriveBits: function (key: string) {
           return utils.common.mockup(`
             name: 'DH',
@@ -887,22 +1286,27 @@ export class crypto {
     }
   }
 
-  /**.
-   * Return all supported algorithms
-   *
-   * @returns
+  /**
+   * Return the name of all supported algorithms.
    */
-  static supportedAlgorithms() {
+  static supportedAlgorithms(): Array<keyof typeof crypto.algorithms> {
     return Object.keys(crypto.algorithms) as Array<keyof typeof crypto.algorithms>
   }
 
-  static randomAlgorithm() {
+  /**
+   * Returns a random algorithm generator.
+   */
+  static randomAlgorithm(): any {
     const key = random.item(this.supportedAlgorithms())
     return crypto.algorithms[key]
   }
 
-  static randomCandidate(operation: keyof AlgorithmMap) {
-    // Find and return a random algorithm suitable for a given operation.
+  /**
+   * Find and return a random algorithm suitable for a given operation.
+   *
+   * @param operation - The target operation.
+   */
+  static randomCandidate(operation: keyof AlgorithmOperationMap): any {
     const algo = crypto.randomAlgorithmName(operation) as keyof typeof crypto.algorithms
     return crypto.algorithms[algo]
   }

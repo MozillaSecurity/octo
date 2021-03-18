@@ -4,8 +4,14 @@
 import { random } from "../random"
 import { utils } from "../utils"
 
+/**
+ * Class for generating WebGL shader related values.
+ */
 export class shaders {
-  static get fragment1() {
+  /**
+   * Return a WebGL2 shader fragment.
+   */
+  static get fragment1(): string[][] {
     return [
       [
         "#ifdef GL_ES",
@@ -28,7 +34,10 @@ export class shaders {
     ]
   }
 
-  static get vertex1() {
+  /**
+   * Return a WebGL2 shader vertex.
+   */
+  static get vertex1(): string[][] {
     return [
       [
         "attribute vec4 aVertex;",
@@ -62,7 +71,10 @@ export class shaders {
     ]
   }
 
-  static get fragment2() {
+  /**
+   * Return a WebGL shader fragment.
+   */
+  static get fragment2(): string[][] {
     return [
       [
         "varying highp vec2 vTextureCoord;",
@@ -95,7 +107,10 @@ export class shaders {
     ]
   }
 
-  static get vertex2() {
+  /**
+   * Return a WebGL shader vertex.
+   */
+  static get vertex2(): string[][] {
     return [
       [
         "attribute highp vec3 aVertexNormal;",
@@ -142,7 +157,13 @@ export class shaders {
     ]
   }
 
-  static shaderPair(v: any, f: any) {
+  /**
+   * Generate a WebGL shader pair using the supplied vertex and fragment.
+   *
+   * @param v - A WebGL shader vertex.
+   * @param f - A WebGL shader fragment.
+   */
+  static shaderPair(v: string[][], f: string[][]): { fragment: string; vertex: string } {
     const i = random.number(v.length)
     return {
       vertex: utils.common.quote(v[i].join(" ")),

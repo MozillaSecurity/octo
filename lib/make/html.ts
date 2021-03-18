@@ -4,7 +4,13 @@
 
 import { random } from "../random"
 
+/**
+ * Class for generating random HTML values.
+ */
 export class html {
+  /**
+   * Generate a random HTML tag.
+   */
   static tag(): string {
     return random.item([
       "a",
@@ -155,6 +161,9 @@ export class html {
     ])
   }
 
+  /**
+   * Generate a random HTML attribute name.
+   */
   static attribute(): string {
     return random.item([
       "accept",
@@ -276,6 +285,9 @@ export class html {
     ])
   }
 
+  /**
+   * Generate a random HTML interface name.
+   */
   static interfaceName(): string {
     return random.pick([
       "HTMLBRElement",
@@ -348,6 +360,9 @@ export class html {
     ])
   }
 
+  /**
+   * Generate a random class name.
+   */
   static className(): string {
     return random.item(["class_1", "class_2", "class_3", "class_4"])
   }

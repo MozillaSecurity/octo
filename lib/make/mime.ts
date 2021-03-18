@@ -4,11 +4,20 @@
 
 import { random } from "../random"
 
+/**
+ * A class for generating random MIME related values.
+ */
 export class mime {
+  /**
+   * Generate a random mimetype.
+   */
   static any(): string {
     return random.pick([mime.standard, mime.xml, mime.image, mime.media, mime.form])
   }
 
+  /**
+   * Generate a common mimetype.
+   */
   static standard(): string {
     return random.item([
       "text/html",
@@ -23,6 +32,9 @@ export class mime {
     ])
   }
 
+  /**
+   * Generate a random XML related mimetype.
+   */
   static xml(): string {
     return random.item([
       "application/xml",
@@ -36,10 +48,16 @@ export class mime {
     ])
   }
 
+  /**
+   * Generate a random image related mimetype.
+   */
   static image(): string {
     return random.item(["image/jpeg", "image/gif", "image/png", "image/mng", "image/*"])
   }
 
+  /**
+   * Generate a random media related mimetype.
+   */
   static media(): string {
     return random.item([
       "audio/ogg",
@@ -50,6 +68,9 @@ export class mime {
     ])
   }
 
+  /**
+   * Generate a random form related mimetype.
+   */
   static form(): string {
     return random.item(["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"])
   }

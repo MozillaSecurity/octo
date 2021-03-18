@@ -5,12 +5,21 @@
 import { make } from "../make"
 import { random } from "../random"
 
+/**
+ * Class for generating time related values.
+ */
 export class time {
-  static unit() {
-    return random.pick(["s", "ms"])
+  /**
+   * Generate a random time unit.
+   */
+  static unit(): string {
+    return random.item(["s", "ms"])
   }
 
-  static datetime() {
+  /**
+   * Generate a random datetime object.
+   */
+  static datetime(): Date {
     if (random.bool()) {
       return new Date(new Date().getTime() + random.number())
     } else {
@@ -18,23 +27,38 @@ export class time {
     }
   }
 
-  static date() {
+  /**
+   * Generate a random date string.
+   */
+  static date(): string {
     return time.datetime().toDateString()
   }
 
-  static time() {
+  /**
+   * Generate a random time string.
+   */
+  static time(): string {
     return time.datetime().toTimeString()
   }
 
-  static iso() {
+  /**
+   * Generate a random ISO string.
+   */
+  static iso(): string {
     return time.datetime().toISOString()
   }
 
-  static epoch() {
+  /**
+   * Generate a random epoch time value.
+   */
+  static epoch(): number {
     return Math.floor(+time.datetime() / 1000)
   }
 
-  static any() {
+  /**
+   * Generate a random time value.
+   */
+  static any(): string {
     return make.numbers.any() + time.unit()
   }
 }

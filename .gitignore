@@ -3,6 +3,9 @@
 .DS_Store
 .vscode
 
+# eslint cache
+.eslintcache
+
 # Package dependencies
 node_modules
 

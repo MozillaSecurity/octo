@@ -4,8 +4,14 @@
 
 import { random } from "../random"
 
+/**
+ * Class for generating CSS style related values.
+ */
 export class style {
-  static pseudoElement() {
+  /**
+   * Generate a random pseudoElement.
+   */
+  static pseudoElement(): string {
     return random.item([
       "::after",
       "::before",

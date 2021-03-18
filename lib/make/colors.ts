@@ -4,7 +4,13 @@
 
 import { random } from "../random"
 
+/**
+ * Class for generating random colors.
+ */
 export class colors {
+  /**
+   * Generates a random color.
+   */
   static any(): string {
     switch (random.number(2)) {
       case 0:
@@ -16,6 +22,9 @@ export class colors {
     }
   }
 
+  /**
+   * Generates a random rgb() color.
+   */
   static rgb(): string {
     let values
 
@@ -43,6 +52,9 @@ export class colors {
     }
   }
 
+  /**
+   * Generates a random hsl() color.
+   */
   static hsl(): string {
     let values, opt
 
@@ -78,6 +90,9 @@ export class colors {
     }
   }
 
+  /**
+   * Generates a random color keyword.
+   */
   static keyword(): string {
     return random.item([
       "lime",

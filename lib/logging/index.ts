@@ -16,25 +16,29 @@ if (utils.platform.name.isWindows) {
   color.clear = ""
 }
 
+/**
+ * General logging utilities.
+ */
 export class logger {
+  /**
+   * Log to console using appropriate environment.
+   *
+   * @param msg - Message to log.
+   */
   static console(msg: string): void {
     if (typeof window === "undefined") {
       try {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         print(msg)
       } catch (e) {
         console.log(msg)
       }
     } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (window.dump) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        dump(msg) // eslint-disable-line no-undef
+        dump(msg)
       } else if (window.console) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         console.log(msg)
       } else {
@@ -43,47 +47,92 @@ export class logger {
     }
   }
 
+  /**
+   * Alias for logger.console.
+   *
+   * @param msg - Message to log.
+   */
   static dump(msg: string): void {
     this.console(msg)
   }
 
+  /**
+   * Log message with trailing newline.
+   *
+   * @param msg - Message to log.
+   */
   static dumpln(msg: string): void {
     this.dump(`${msg}\n`)
   }
 
+  /**
+   * Log message with prefix and wrapped in try/catch.
+   *
+   * @param msg - Message to log.
+   */
   static log(msg: string): void {
     this.dumpln(`/*L*/ ${utils.script.safely(msg)}`)
   }
 
+  /**
+   * Log a comment.
+   *
+   * @param msg - Message to log.
+   */
   static info(msg: string): void {
     this.dumpln(`/*L*/ /* ${msg} */`)
   }
 
+  /**
+   * Log an error.
+   *
+   * @param msg - Message to log.
+   */
   static error(msg: string): void {
     this.dumpln(color.red + msg + color.clear)
   }
 
+  /**
+   * Log a message.
+   *
+   * @param msg - Message to log.
+   */
   static ok(msg: string): void {
     // eslint-disable-line no-unused-vars
     this.dumpln(color.green + msg + color.green)
   }
 
+  /**
+   * Log a message as a comment and prefixed with ERROR.
+   *
+   * @param msg - Message to log.
+   */
   static JSError(msg: string): void {
     this.error(`/* ERROR: ${msg} */`)
   }
 
+  /**
+   * Log a message as a comment.
+   *
+   * @param msg - Message to log.
+   */
   static comment(msg: string): void {
     this.dumpln(`/*L*/ // ${msg}`)
   }
 
+  /**
+   * Log a testcase separator.
+   */
   static separator(): void {
     this.dumpln(color.green + sep + color.clear)
   }
 
+  /**
+   * Log a traceback.
+   */
   static traceback(): void {
     this.error("===[ Traceback ] ===")
     const e = new Error()
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.dump(e.stack || e.stacktrace || "")
   }

@@ -16,9 +16,12 @@ interface CommandPair {
 }
 
 /**
- * Class for generator.
+ * Class for generating designMode commands.
  */
 export class command {
+  /**
+   * Returns a object containing all designMode commands and their arguments.
+   */
   static get data(): CommandPair {
     return {
       backColor: colors.any,
@@ -88,25 +91,20 @@ export class command {
     }
   }
 
-  /**.
-   * Return a random command name
-   *
-   * @returns
+  /**
+   * Generate a random command name.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   static name(): string {
     return random.item(Object.keys(command.data))
   }
 
-  /**.
-   * Return a random command value
+  /**
+   * Generate a random command value.
    *
-   * @param name - Command name
-   * @returns
+   * @param name - Command name.
    */
   static value(name: keyof typeof command.data): string | boolean | null {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return random.pick(command.data[name])
   }

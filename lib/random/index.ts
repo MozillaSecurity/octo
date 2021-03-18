@@ -1,26 +1,30 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-import { logger } from "../logging"
 import MersenneTwister from "mersenne-twister"
 
+import { logger } from "../logging"
+
+/**
+ * A MersenneTwister based PRNG with a number of useful utility functions.
+ */
 export class random {
   static twister: MersenneTwister
+
   /**
-   * Must be called before any other methods can be called to initialize MersenneTwister
+   * Must be called before any other methods can be called to initialize MersenneTwister.
    *
-   * @param {?number} seed - Value to initialize MersenneTwister
+   * @param seed - Value to initialize MersenneTwister.
    */
-  static init(seed?: number) {
+  static init(seed?: number): void {
     random.twister = new MersenneTwister(seed)
   }
 
   /**
-   * Returns an integer in [0, limit) (uniform distribution)
+   * Returns an integer in [0, limit) (uniform distribution).
    *
-   * @param {number} limit - Maximum number
-   * @param {number} factor - Number of iterations to perform (reduces max)
+   * @param limit - Maximum number.
+   * @param factor - Number of iterations to perform (reduces max).
    */
   static number(limit = 0xffffffff, factor = 1): number {
     if (!random.twister) {
@@ -43,9 +47,9 @@ export class random {
   }
 
   /**
-   * Returns a float in [0, 1) (uniform distribution)
+   * Returns a float in [0, 1) (uniform distribution).
    */
-  static float() {
+  static float(): number {
     if (!random.twister) {
       throw new Error("random.init_seed() must be called first.")
     }
@@ -54,13 +58,13 @@ export class random {
   }
 
   /**
-   * Returns an integer in [start, limit) (uniform distribution)
+   * Returns an integer in [start, limit) (uniform distribution).
    *
-   * @param {number} start - Minimum value
-   * @param {number} limit - Maximum value
-   * @param {number} factor - Reduce possibility of maximum by factor
+   * @param start - Minimum value.
+   * @param limit - Maximum value.
+   * @param factor - Reduce possibility of maximum by factor.
    */
-  static range(start: number, limit: number, factor = 1) {
+  static range(start: number, limit: number, factor = 1): number {
     if (isNaN(start) || isNaN(limit)) {
       logger.traceback()
       throw new TypeError(`random.range() received non-number type: (${start}, ${limit})`)
@@ -72,45 +76,44 @@ export class random {
   /**
    * Returns a float in [1, limit). The logarithm has uniform distribution.
    *
-   * @param {number} limit - Maximum value
+   * @param limit - Maximum value.
    */
-  static ludOneTo(limit: number) {
+  static ludOneTo(limit: number): number {
     return Math.exp(random.float() * Math.log(limit))
   }
 
   /**
-   * Returns a random index from a list
+   * Returns a random index from a list.
    *
-   * @param {Array} list - List to choose from
-   * @returns {*}
+   * @param list - List to choose from.
    */
   static item<T>(list: T[]): T {
     return list[random.number(list.length)]
   }
 
   /**
-   * Returns a random key of a provided object
+   * Returns a random key of a provided object.
    *
-   * @param {object} obj - Source object
+   * @param obj - Source object.
    */
-  static key(obj: object) {
+  static key(obj: Record<string, any>): string {
     return random.item(Object.keys(obj))
   }
 
   /**
-   * Return a random Boolean value
+   * Return a random Boolean value.
    */
-  static bool() {
+  static bool(): boolean {
     return random.item([true, false])
   }
 
   /**
-   * Recursively iterate over array until non-array item identified
-   * If item is a function, evaluate it with no args
+   * Recursively iterate over array until non-array item identified.
+   * If item is a function, evaluate it with no args.
    *
-   * @param {*} obj - Source object
-   * @returns {*}
+   * @param obj - Source object.
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static pick(obj: any): any {
     if (typeof obj === "function") {
       return obj()
@@ -122,12 +125,11 @@ export class random {
   }
 
   /**
-   * Returns a boolean result based on limit
+   * Returns a boolean result based on limit.
    *
-   * @param {number} limit - Maximum value
-   * @returns {boolean}
+   * @param limit - Maximum value.
    */
-  static chance(limit = 2) {
+  static chance(limit = 2): boolean {
     if (isNaN(limit)) {
       logger.traceback()
       throw new TypeError(`random.chance() received non-number type: (${limit})`)
@@ -137,13 +139,12 @@ export class random {
   }
 
   /**
-   * Return an item from an array of arrays where the first index in each sub-array denotes the weight
+   * Return an item from an array of arrays where the first index in each sub-array denotes the weight.
    *
-   * @param {Array} list - Array of arrays
-   * @param {boolean} flat - Indicates whether we should iterate over the arrays recursively
-   * @returns {*}
+   * @param list - Array of arrays.
+   * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
-  static choose(list: any[], flat = false) {
+  static choose(list: any[], flat = false): any {
     if (!Array.isArray(list)) {
       logger.traceback()
       throw new TypeError(`random.choose() received non-array type: (${list})`)
@@ -164,13 +165,11 @@ export class random {
   }
 
   /**
-   * Return a flattened list of weighted values
-   * [{w: 1, v: 'foo'}, {w: 1, v: 'bar'}]
+   * Return a flattened list of weighted values.
    *
-   * @param {Array} list - List of weighted values
-   * @returns {Array}
+   * @param list - List of weighted values.
    */
-  static weighted(list: any[]) {
+  static weighted(list: { w: number; v: any }[]): any[] {
     const expanded: any[] = []
     list.forEach((item) => {
       for (let i = 0; i < item.w; i++) {
@@ -181,16 +180,22 @@ export class random {
     return expanded
   }
 
-  static use(obj: any): any | string {
+  /**
+   * Returns either the supplied object or an empty string.
+   *
+   * @param obj - The object to consider.
+   */
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  static use(obj: any): typeof obj | string {
     return random.bool() ? obj : ""
   }
 
   /**
-   * Returns arr shuffled
+   * Return a shuffled array.
    *
-   * @param {Array} arr - Array to shuffle
+   * @param arr - Array to shuffle.
    */
-  static shuffle(arr: any[]) {
+  static shuffle(arr: any[]): void {
     for (let i = 0; i < arr.length; i++) {
       const p = random.number(i + 1)
       const t = arr[i]
@@ -200,10 +205,9 @@ export class random {
   }
 
   /**
-   * Returns a shuffled copy of arr
+   * Return a shuffled copy of an array.
    *
-   * @param {Array} arr - Source Array to shuffle
-   * @returns {*}
+   * @param arr - Source Array to shuffle.
    */
   static shuffled<T>(arr: T[]): T[] {
     const newArray = arr.slice()
@@ -212,13 +216,12 @@ export class random {
   }
 
   /**
-   * Select an array containing a subset of 'list'
+   * Return a subset of the supplied array.
    *
-   * @param {Array} list - List to be parsed
-   * @param {?number} limit - Number of elements to be returned
-   * @returns {Array}
+   * @param list - List to be parsed.
+   * @param limit - Number of elements to be returned.
    */
-  static subset<T>(list: T[], limit?: number): any[] {
+  static subset<T>(list: T[], limit?: number): T[] {
     if (!Array.isArray(list)) {
       logger.traceback()
       throw new TypeError(`random.subset() received non-array type: (${list})`)
@@ -230,7 +233,7 @@ export class random {
 
     // Shallowclone list
     const temp = list.slice(0)
-    const result: any[] = []
+    const result: T[] = []
     for (let i = 0; i < limit; i++) {
       result.push(random.pop(temp))
     }
@@ -241,7 +244,7 @@ export class random {
   /**
    * Removes and returns a random item from an array.
    *
-   * @param {Array} arr - Source array to pop from
+   * @param arr - Source array to pop from.
    */
   static pop<T>(arr: T[]): T {
     const i = random.number(arr.length)
@@ -251,7 +254,12 @@ export class random {
     return obj
   }
 
-  static hex(len: number) {
+  /**
+   * Return a random hex string.
+   *
+   * @param len - Length of string to generate.
+   */
+  static hex(len: number): string {
     const val = random.number(Math.pow(2, len * 4)).toString(16)
     return "0".repeat(len - val.length) + val
   }
