@@ -1,6 +1,10 @@
 {
+  "compilerOptions": {
+    "allowJs": true
+  },
   "extends": "./tsconfig.json",
   "include": [
+    ".eslintrc.js",
     "jest.config.js",
     "lib/**/*.ts"
   ],
