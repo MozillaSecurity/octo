@@ -24,6 +24,9 @@
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
   "main": "dist/octo.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "webpack --mode=production",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
