@@ -30,44 +30,52 @@ tasks:
       then: ${event.pull_request.base.repo.ssh_url}
       else: ${event.repository.ssh_url}
 
-    secret_url:
-      http://taskcluster/secrets/v1/secret/project/fuzzing/deploy-octo-private
+    commit_msg:
+      $if: 'tasks_for == "github-push" && len(event.commits) == 1'
+      then: ${event.commits[0].message}
+      else: ''
+
+    octo_deploy_url:
+      http://taskcluster/secrets/v1/secret/project/fuzzing/deploy-octo
+    npm_deploy_url:
+      http://taskcluster/secrets/v1/secret/project/fuzzing/deploy-npm
 
   in:
-    $if: 'tasks_for in ["github-pull-request", "github-push"]'
-    then:
-      $map:
-        - 10
-        - 12
-      each(nodever):
+    - $if: 'tasks_for in ["github-pull-request", "github-push"] && !("[skip ci]" in commit_msg)'
+      then:
         provisionerId: proj-fuzzing
         workerType: ci
         created: {$fromNow: ''}
         deadline: {$fromNow: '1 hour'}
-        scopes: [secrets:get:project/fuzzing/deploy-octo-private]
+        scopes:
+          - secrets:get:project/fuzzing/deploy-octo
+          - secrets:get:project/fuzzing/deploy-npm
         payload:
           maxRunTime: 3600
-          image: mozillasecurity/ci-node-${nodever}
+          image: mozillasecurity/ci-node-14
           features:
             taskclusterProxy: true
           command:
             - /bin/bash
             - '--login'
-            - '-x'
             - '-c'
             - >-
-              curl -L ${secret_url} | jshon -e secret -e key -u > .ssh/id_rsa &&
-              chmod 0400 .ssh/id_rsa &&
+              curl -sL ${octo_deploy_url} | jshon -e secret -e key -u > .ssh/id_ecdsa &&
+              chmod 0400 .ssh/id_ecdsa &&
+              export NPM_TOKEN=$(curl -sL ${npm_deploy_url} | jshon -e secret -e key -u) &&
+              npm set //registry.npmjs.org/:_authToken="$NPM_TOKEN" &&
+              set -x &&
               git init repo &&
               cd repo &&
               git remote add origin ${ssh_repo} &&
               git fetch -q --depth=10 origin "${fetch_ref}" &&
               git -c advice.detachedHead=false checkout ${head_rev} &&
               npm i &&
-              npm test
+              npm test &&
+              npx semantic-release --no-ci
         metadata:
-          name: octo-private tests nodejs ${nodever}
-          description: octo-private tests nodejs ${nodever}
+          name: octo tests node v14
+          description: octo tests node v14
           owner: '${event.sender.login}@users.noreply.github.com'
           source: ${http_repo}/raw/${head_rev}/.taskcluster.yml
 
