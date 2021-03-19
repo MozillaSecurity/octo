@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mozillasecurity/octo.git"
+    "url": "git@github.com:MozillaSecurity/octo.git"
   },
   "license": "MPL-2.0",
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
@@ -101,7 +101,14 @@
   },
   "release": {
     "branches": [
-      "master"
+      {
+        "name": "master"
+      },
+      {
+        "name": "v3",
+        "channel": "next",
+        "prerelease": "next"
+      }
     ],
     "plugins": [
       "@semantic-release/commit-analyzer",
