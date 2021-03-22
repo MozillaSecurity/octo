@@ -122,8 +122,11 @@ export class script {
    * dynamic entries.
    *
    * @example
-   *   const offset = utils.script.offset('document.childNodes.length')
-   *   eval(`document.body.appendChild(${offset})`
+   *
+   * ```
+   * const offset = utils.script.offset('document.childNodes.length')
+   * document.body.appendChild(document.childNodes[eval(offset)])
+   * ```
    *
    * @param s - The variable to generate a modulo for.
    */

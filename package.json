@@ -60,7 +60,8 @@
   "prettier": {
     "jsdocSingleLineComment": false,
     "printWidth": 100,
-    "semi": false
+    "semi": false,
+    "tsdoc": true
   },
   "dependencies": {
     "@types/html-entities": "^1.2.16",
