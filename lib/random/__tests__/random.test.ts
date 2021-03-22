@@ -611,7 +611,7 @@ describe("Random", () => {
     expect(_test()).toBe(true)
   })
 
-  test.skip('choose() with unequal distribution', () => {
+  test.skip("choose() with unequal distribution", () => {
     const N = 1e4
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05

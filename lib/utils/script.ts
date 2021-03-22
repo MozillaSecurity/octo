@@ -22,7 +22,6 @@ export class script {
    * Generates a typed array filled with contents.
    *
    * @deprecated - This method does not appear to be useful and will be removed.
-   *
    * @param type - The type of TypedArray to create.
    * @param arrayLength - The array length.
    * @param cb - A callback that will fill the array.
@@ -119,12 +118,13 @@ export class script {
   }
 
   /**
-   * Returns a command that generates the modulo of a value.
-   * Useful for identifying lengths in dynamic entries.
+   * Returns a command that generates the modulo of a value. Useful for identifying lengths in
+   * dynamic entries.
    *
    * @example
    *   const offset = utils.script.offset('document.childNodes.length')
    *   eval(`document.body.appendChild(${offset})`
+   *
    * @param s - The variable to generate a modulo for.
    */
   static offset(s: string): string {

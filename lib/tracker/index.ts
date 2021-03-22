@@ -5,8 +5,7 @@
 import { random } from "../random"
 
 /**
- * Generic tracking object
- * Generates unique identifiers for a given prefix.
+ * Generic tracking object Generates unique identifiers for a given prefix.
  */
 export class tracker {
   private readonly tracker: Record<string, string[]>
@@ -18,8 +17,7 @@ export class tracker {
   }
 
   /**
-   * Add a new tracker value.
-   * If the prefix doesn't exist, initialize it.
+   * Add a new tracker value. If the prefix doesn't exist, initialize it.
    *
    * @param prefix - Prefix of item to track.
    * @param value - Optional value to store.
@@ -39,8 +37,8 @@ export class tracker {
   }
 
   /**
-   * Retrieve an id for the supplied prefix.
-   * If the prefix doesn't already exist, return the initial value without initializing it.
+   * Retrieve an id for the supplied prefix. If the prefix doesn't already exist, return the initial
+   * value without initializing it.
    *
    * @param prefix - Prefix of item to track.
    */

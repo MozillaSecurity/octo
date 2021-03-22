@@ -108,8 +108,8 @@ export class random {
   }
 
   /**
-   * Recursively iterate over array until non-array item identified.
-   * If item is a function, evaluate it with no args.
+   * Recursively iterate over array until non-array item identified. If item is a function, evaluate
+   * it with no args.
    *
    * @param obj - Source object.
    */
