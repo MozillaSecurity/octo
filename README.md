@@ -6,7 +6,7 @@
 A unified shared library which aids in building fuzzers for browsers or as complement for an already existing fuzzing framework.
 </p>
 
-[![Task Status](https://community-tc.services.mozilla.com/api/github/v1/repository/MozillaSecurity/octo-private/master/badge.svg)](https://community-tc.services.mozilla.com/api/github/v1/repository/MozillaSecurity/octo-private/master/latest)
+[![Task Status](https://community-tc.services.mozilla.com/api/github/v1/repository/MozillaSecurity/octo/master/badge.svg)](https://community-tc.services.mozilla.com/api/github/v1/repository/MozillaSecurity/octo/master/latest)
 [![Matrix](https://img.shields.io/badge/dynamic/json?color=green&label=chat&query=%24.chunk[%3F(%40.canonical_alias%3D%3D%22%23fuzzing%3Amozilla.org%22)].num_joined_members&suffix=%20users&url=https%3A%2F%2Fmozilla.modular.im%2F_matrix%2Fclient%2Fr0%2FpublicRooms&style=flat&logo=matrix)](https://riot.im/app/#/room/#fuzzing:mozilla.org)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
