@@ -150,9 +150,7 @@ export class script {
           `setInterval(${async ? "async" : ""} () => { ${safe} }, ${random.range(1000, 2000)} )`,
         ]
       case 1:
-        return [
-          `setTimeout(${async ? "async " : ""} () => { ${safe} }, ${random.range(100, 400)} )`,
-        ]
+        return [`setTimeout(${async ? "async" : ""} () => { ${safe} }, ${random.range(100, 400)} )`]
       case 2:
         return [`for (let i = 0; i < ${random.range(1, random.range(1, 30))}; i++) { ${safe} }`]
       default:
