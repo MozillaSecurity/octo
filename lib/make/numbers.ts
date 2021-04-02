@@ -239,7 +239,8 @@ export class numbers {
     const num = random.choose([
       [50, [numbers.int8, numbers.uint8]],
       [30, [numbers.int16, numbers.uint16]],
-      [1, [numbers.int32, numbers.uint32]],
+      [10, [numbers.int32, numbers.uint32]],
+      [1, numbers.double],
     ])
 
     if (floats && random.chance(10)) {
