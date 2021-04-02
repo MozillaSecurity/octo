@@ -149,8 +149,8 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static double(bypass = false): number {
-    const min = Number.MIN_SAFE_INTEGER
-    const max = Number.MAX_SAFE_INTEGER
+    const min = Number.MIN_VALUE
+    const max = Number.MAX_VALUE
     if (bypass || random.chance(50)) {
       return numbers._exceed(
         random.choose([
