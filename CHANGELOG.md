@@ -1,3 +1,11 @@
+# [3.0.0-next.2](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.1...v3.0.0-next.2) (2021-04-02)
+
+
+### Bug Fixes
+
+* include numbers.double when calculating numbers.any ([9bfbf4d](https://github.com/MozillaSecurity/octo/commit/9bfbf4d892e7ff4fd115fddb42d57619c28d5a58))
+* numbers.double should use Number.[MIN|MAX]_VALUE ([8f02fa0](https://github.com/MozillaSecurity/octo/commit/8f02fa0cfb3d47cb5e1ca54e115c71dbc690470d))
+
 # [3.0.0-next.1](https://github.com/MozillaSecurity/octo/compare/v2.0.0...v3.0.0-next.1) (2021-03-22)
 
 
