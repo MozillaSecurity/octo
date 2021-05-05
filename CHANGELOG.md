@@ -1,3 +1,10 @@
+# [3.0.0-next.3](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.2...v3.0.0-next.3) (2021-05-05)
+
+
+### Bug Fixes
+
+* use cssesc to escape css string values ([c9e1c8d](https://github.com/MozillaSecurity/octo/commit/c9e1c8d348e76c27587c483ab047301e92b9744a))
+
 # [3.0.0-next.2](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.1...v3.0.0-next.2) (2021-04-02)
 
 
