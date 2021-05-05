@@ -2,9 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+import cssesc from "cssesc"
+
 import { make } from "../index"
 import { random } from "../../random"
-import { utils } from "../../utils"
 
 /* Interface representing options for ranged datatypes */
 interface RangedTypeOptions {
@@ -296,7 +297,7 @@ export class datatypes {
    * Generate a random <string> data type.
    */
   static string(): string {
-    return utils.common.quote(make.text.any())
+    return cssesc(make.text.any(), { wrap: true })
   }
 
   /**
