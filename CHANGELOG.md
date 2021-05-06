@@ -1,3 +1,10 @@
+# [3.0.0-next.4](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.3...v3.0.0-next.4) (2021-05-06)
+
+
+### Bug Fixes
+
+* resolution does not support calc or negative numbers ([d3ce53c](https://github.com/MozillaSecurity/octo/commit/d3ce53c4011563aa4b49bfca6e5ce8678f2d604c))
+
 # [3.0.0-next.3](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.2...v3.0.0-next.3) (2021-05-05)
 
 
