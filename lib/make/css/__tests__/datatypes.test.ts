@@ -83,7 +83,19 @@ describe("ranged datatypes", () => {
         expect(value).toBeLessThanOrEqual(0)
       }
     })
+  })
+})
 
+describe("calc datatypes", () => {
+  describe.each([
+    "angle",
+    "frequency",
+    "integer",
+    "length",
+    "number",
+    "percentage",
+    "time",
+  ] as const)("%s", (name) => {
     test("using calc values", () => {
       jest.spyOn(random, "chance").mockReturnValueOnce(true)
       const value = datatypes[name]()
