@@ -22,13 +22,15 @@
   },
   "license": "MPL-2.0",
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
-  "main": "dist/octo.js",
+  "main": "dist/index.js",
+  "browser": "dist/main.bundle.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "npm run build:ts && webpack",
+    "build:ts": "tsc",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "docs": "typedoc ./lib",

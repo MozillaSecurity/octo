@@ -1,25 +1,22 @@
-const path = require('path')
+const path = require("path")
 
 module.exports = {
-  entry: './lib/index.ts',
-  devtool: 'inline-source-map',
+  entry: "./lib/index.ts",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/
       }
     ]
   },
-  output: {
-    filename: 'octo.js',
-    globalObject: 'this',
-    library: 'octo',
-    libraryTarget: 'umd',
-    path: path.resolve(__dirname, 'dist'),
-  },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: [".tsx", ".ts", ".js"]
   },
+  output: {
+    filename: "octo.bundle.js",
+    path: path.resolve(__dirname, "dist")
+  }
 }
