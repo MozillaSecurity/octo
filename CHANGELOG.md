@@ -1,3 +1,17 @@
+# [3.0.0-next.5](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.4...v3.0.0-next.5) (2021-08-19)
+
+
+### chore
+
+* trigger release ([837255b](https://github.com/MozillaSecurity/octo/commit/837255b411238abce1224d8d6715a010db6565bc))
+
+
+### BREAKING CHANGES
+
+* These build changes prevent bundling dependencies when
+used as a node module.  This caused issues when checking instanceof of
+types that were imported in both the consumer and the bundle.
+
 # [3.0.0-next.4](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.3...v3.0.0-next.4) (2021-05-06)
 
 
