@@ -22,13 +22,15 @@
   },
   "license": "MPL-2.0",
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
-  "main": "dist/octo.js",
+  "main": "dist/index.js",
+  "browser": "dist/main.bundle.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "npm run build:ts && webpack",
+    "build:ts": "tsc",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "docs": "typedoc ./lib",
@@ -101,8 +103,8 @@
     "sort-package-json": "^1.49.0",
     "ts-jest": "^26.4.2",
     "typedoc": "^0.20.32",
-    "webpack": "^5.25.0",
-    "webpack-cli": "^4.5.0"
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.8.0"
   },
   "release": {
     "branches": [
