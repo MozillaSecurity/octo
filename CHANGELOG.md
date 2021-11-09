@@ -1,3 +1,12 @@
+# [3.0.0-next.6](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.5...v3.0.0-next.6) (2021-11-09)
+
+
+### Features
+
+* **make:** adjust weights in numbers.signed and numbers.unsigned ([458c82e](https://github.com/MozillaSecurity/octo/commit/458c82ee643d5e5a34ab300d7e576ab0a8f55a70))
+* **make:** allow bypassing limits in numbers.signed and numbers.unsigned ([3218eeb](https://github.com/MozillaSecurity/octo/commit/3218eeb87de8b2aa1a0010d0d543c50cc22a0dc6))
+* **make:** numbers._exceed should generate numbers just beyond the limit ([ada6724](https://github.com/MozillaSecurity/octo/commit/ada6724a335741342ec1233b6693a7629a68bce8))
+
 # [3.0.0-next.5](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.4...v3.0.0-next.5) (2021-08-19)
 
 
