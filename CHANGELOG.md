@@ -1,3 +1,11 @@
+# [3.0.0-next.7](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.6...v3.0.0-next.7) (2021-11-09)
+
+
+### Features
+
+* **make.numbers:** add interestingUnsigned and rebalance weights ([08df7ac](https://github.com/MozillaSecurity/octo/commit/08df7ac3dbe255616fbbae8985d64f0d318b0db0))
+* **make.numbers:** include interesting numbers in signed and unsigned ([a06e380](https://github.com/MozillaSecurity/octo/commit/a06e380ff8ec5bc4dacbf898468eb43d4691bc0c))
+
 # [3.0.0-next.6](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.5...v3.0.0-next.6) (2021-11-09)
 
 
