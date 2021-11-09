@@ -214,23 +214,27 @@ export class numbers {
 
   /**
    * Returns a random signed number.
+   *
+   * @param bypass - Determines if the range should be exceeded.
    */
-  static signed(): number {
+  static signed(bypass = false): number {
     return random.choose([
-      [50, [numbers.int8]],
-      [30, [numbers.int16]],
-      [1, [numbers.int32]],
+      [50, [() => numbers.int8(bypass)]],
+      [30, [() => numbers.int16(bypass)]],
+      [1, [() => numbers.int32(bypass)]],
     ])
   }
 
   /**
    * Returns a random unsigned number.
+   *
+   * @param bypass - Determines if the range should be exceeded.
    */
-  static unsigned(): number {
+  static unsigned(bypass = false): number {
     return random.choose([
-      [50, [numbers.uint8]],
-      [30, [numbers.uint16]],
-      [1, [numbers.uint32]],
+      [50, [() => numbers.uint8(bypass)]],
+      [30, [() => numbers.uint16(bypass)]],
+      [1, [() => numbers.uint32(bypass)]],
     ])
   }
 
