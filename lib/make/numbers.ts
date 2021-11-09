@@ -23,6 +23,10 @@ export class numbers {
         const offset = Math.pow(2, random.range(1, 7))
         return value > 0 ? value - offset : value + offset
       }
+      case 2: {
+        // Slightly more than the limit
+        return value < 0 ? value - random.number(3) : value + random.number(3)
+      }
       default:
         // Slightly less than limit
         return value > 0 ? value - random.number(3) : value + random.number(3)
