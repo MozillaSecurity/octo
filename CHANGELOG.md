@@ -1,3 +1,10 @@
+# [3.0.0-next.8](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.7...v3.0.0-next.8) (2021-11-09)
+
+
+### Bug Fixes
+
+* **make.numbers:** pass bypass parameter to generators ([c3411c9](https://github.com/MozillaSecurity/octo/commit/c3411c9f293c137cd839e608587d6b089fd2a554))
+
 # [3.0.0-next.7](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.6...v3.0.0-next.7) (2021-11-09)
 
 
