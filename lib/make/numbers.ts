@@ -245,9 +245,9 @@ export class numbers {
    */
   static unsigned(bypass = false): number {
     return random.choose([
-      [16, () => numbers.uint8(bypass)],
-      [12, () => numbers.uint16(bypass)],
-      [8, () => numbers.uint32(bypass)],
+      [24, () => numbers.uint8(bypass)],
+      [24, () => numbers.uint16(bypass)],
+      [1, () => numbers.uint32(bypass)],
       [1, numbers.interestingUnsigned],
     ])
   }
