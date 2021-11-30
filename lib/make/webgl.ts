@@ -390,21 +390,31 @@ export class webgl {
   }
 
   /**
-   * Generate a random texture attachment.
+   * Return an array of texture attachment points.
    *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
-  static randomTextureAttachment(isWebGL2: boolean): string {
-    const attachment = [
+  static textureAttachments(isWebGL2: boolean): string[] {
+    const attachments = [
       "COLOR_ATTACHMENT0",
       "DEPTH_ATTACHMENT",
       "STENCIL_ATTACHMENT",
       "DEPTH_STENCIL_ATTACHMENT",
     ]
     if (isWebGL2) {
-      attachment.push(...[`COLOR_ATTACHMENT${random.range(0, 15)}`])
+      attachments.push(...[`COLOR_ATTACHMENT${random.range(0, 15)}`])
     }
-    return random.item(attachment)
+
+    return attachments
+  }
+
+  /**
+   * Generate a random texture attachment.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomTextureAttachment(isWebGL2: boolean): string {
+    return random.item(webgl.textureAttachments(isWebGL2))
   }
 
   /**
