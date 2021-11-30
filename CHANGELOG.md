@@ -1,3 +1,10 @@
+# [3.0.0-next.9](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.8...v3.0.0-next.9) (2021-11-30)
+
+
+### Features
+
+* add function for generating array of texture attachments ([ae8c5b8](https://github.com/MozillaSecurity/octo/commit/ae8c5b8c54198d687c8f558b8a99aa5ce50b5e72))
+
 # [3.0.0-next.8](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.7...v3.0.0-next.8) (2021-11-09)
 
 
