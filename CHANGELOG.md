@@ -1,3 +1,10 @@
+# [3.0.0-next.10](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.9...v3.0.0-next.10) (2021-12-01)
+
+
+### Bug Fixes
+
+* parseInt as base-2 ([736ae94](https://github.com/MozillaSecurity/octo/commit/736ae94b34d8d6c96c651143a3007728d0bdb02d))
+
 # [3.0.0-next.9](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.8...v3.0.0-next.9) (2021-11-30)
 
 
