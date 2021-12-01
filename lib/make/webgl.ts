@@ -176,7 +176,7 @@ export class webgl {
       values.push(random.item([1, 0]))
     }
 
-    return parseInt(values.join(""))
+    return parseInt(values.join(""), 2)
   }
 
   /**
