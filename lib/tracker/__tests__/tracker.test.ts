@@ -10,13 +10,12 @@ import { tracker } from "../index"
 
 // Initialize rng
 import { random } from "../../random"
+
 random.init()
 
 describe("Tracker", () => {
   test("init", () => {
-    expect(() => {
-      const t = new tracker() /* eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars */
-    }).not.toThrow()
+    expect(() => new tracker()).not.toThrow()
   })
 
   test("add new prefix", () => {

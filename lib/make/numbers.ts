@@ -42,7 +42,7 @@ export class numbers {
     if (bypass && random.chance(50)) {
       return numbers._exceed(random.item([-128, 127]))
     }
-    
+
     return random.choose([
       [4, () => random.range(-128, 127)],
       [1, [-128, -1, 0, 1, 16, 32, 64, 100, 127]],
@@ -176,7 +176,7 @@ export class numbers {
 
     return random.choose([
       [20, numbers.float],
-      [1, () => numbers.frange(min, max)]
+      [1, () => numbers.frange(min, max)],
     ])
   }
 
