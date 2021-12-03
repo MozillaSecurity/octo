@@ -715,6 +715,19 @@ export class webgl {
   }
 
   /**
+   * Generate a random pixel format type.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomPixelFormat(isWebGL2: boolean): string {
+    const formats = ["ALPHA", "RGB", "RGBA"]
+    if (isWebGL2) {
+      formats.push(...["RED", "RG", "RED_INTEGER", "RG_INTEGER", "RGB_INTEGER", "RGBA_INTEGER"])
+    }
+    return random.item(formats)
+  }
+
+  /**
    * Generate a random buffer usage value.
    *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
