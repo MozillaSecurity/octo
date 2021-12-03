@@ -1,3 +1,10 @@
+# [3.0.0-next.12](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.11...v3.0.0-next.12) (2021-12-03)
+
+
+### Features
+
+* improve support for webgl pixel data types and formats ([#44](https://github.com/MozillaSecurity/octo/issues/44)) ([0897758](https://github.com/MozillaSecurity/octo/commit/08977586a1e2e17e454b4a454389fa653c49e7d7))
+
 # [3.0.0-next.11](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.10...v3.0.0-next.11) (2021-12-03)
 
 
