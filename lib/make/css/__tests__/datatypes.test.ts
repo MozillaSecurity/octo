@@ -3,6 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* eslint-env jest */
+/* eslint-disable jest/no-conditional-expect */
 
 import { calc, datatypes, expandRange } from "../datatypes"
 import { random } from "../../../random"
