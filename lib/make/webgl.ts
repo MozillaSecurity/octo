@@ -684,18 +684,47 @@ export class webgl {
 
   /**
    * Generate a random pixel data type.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
-  static randomPixelDatatype(): string {
-    const type = [
+  static randomPixelDatatype(isWebGL2: boolean): string {
+    const types = [
       "UNSIGNED_BYTE",
-      "UNSIGNED_SHORT",
       "UNSIGNED_SHORT_5_6_5",
       "UNSIGNED_SHORT_4_4_4_4",
       "UNSIGNED_SHORT_5_5_5_1",
-      "UNSIGNED_INT",
       "FLOAT",
     ]
-    return random.item(type)
+
+    if (isWebGL2) {
+      types.push(
+        ...[
+          "BYTE",
+          "UNSIGNED_INT_2_10_10_10_REV",
+          "HALF_FLOAT",
+          "SHORT",
+          "UNSIGNED_SHORT",
+          "INT",
+          "UNSIGNED_INT",
+          "UNSIGNED_INT_10F_11F_11F_REV",
+          "UNSIGNED_INT_5_9_9_9_REV",
+        ]
+      )
+    }
+    return random.item(types)
+  }
+
+  /**
+   * Generate a random pixel format type.
+   *
+   * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
+   */
+  static randomPixelFormat(isWebGL2: boolean): string {
+    const formats = ["ALPHA", "RGB", "RGBA"]
+    if (isWebGL2) {
+      formats.push(...["RED", "RG", "RED_INTEGER", "RG_INTEGER", "RGB_INTEGER", "RGBA_INTEGER"])
+    }
+    return random.item(formats)
   }
 
   /**
