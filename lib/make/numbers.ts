@@ -172,15 +172,13 @@ export class numbers {
     const min = Number.MIN_VALUE
     const max = Number.MAX_VALUE
     if (bypass && random.chance(50)) {
-      return numbers._exceed(
-        random.choose([
-          [1, min],
-          [10, max],
-        ])
-      )
+      return numbers._exceed(random.item([min, max]))
     }
 
-    return numbers.frange(min, max)
+    return random.choose([
+      [20, numbers.float],
+      [1, () => numbers.frange(min, max)]
+    ])
   }
 
   /**
