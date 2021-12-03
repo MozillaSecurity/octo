@@ -40,12 +40,11 @@ export class numbers {
    */
   static int8(bypass = false): number {
     if (bypass && random.chance(50)) {
-      return numbers._exceed(
-        random.choose([
-          [1, -128],
-          [10, 127],
-        ])
-      )
+      return numbers._exceed(random.item([-128, 127]))
+    }
+
+    if (random.chance(20)) {
+      return random.item([-128, -1, 0, 1, 16, 32, 64, 100, 127])
     }
 
     return random.range(-128, 127)
@@ -61,7 +60,10 @@ export class numbers {
       return numbers._exceed(255)
     }
 
-    return random.range(0, 255)
+    return random.choose([
+      [4, () => random.range(0, 255)],
+      [1, [0, 1, 16, 32, 64, 100, 127, 255]],
+    ])
   }
 
   /**
@@ -71,15 +73,14 @@ export class numbers {
    */
   static int16(bypass = false): number {
     if (bypass && random.chance(50)) {
-      return numbers._exceed(
-        random.choose([
-          [1, -32768],
-          [10, 32767],
-        ])
-      )
+      return numbers._exceed(random.item([-32768, 32767]))
     }
 
-    return random.range(-32768, 32767)
+    return random.choose([
+      [6, numbers.int8],
+      [4, () => random.range(-32768, 32767)],
+      [1, [-32768, -129, 128, 256, 512, 1000, 1024, 4096, 32767, 65535]],
+    ])
   }
 
   /**
@@ -92,7 +93,11 @@ export class numbers {
       return numbers._exceed(65535)
     }
 
-    return random.range(-0, 65535)
+    return random.choose([
+      [6, numbers.uint8],
+      [4, () => random.range(0, 65535)],
+      [1, [128, 256, 512, 1000, 1024, 4096, 32767, 65535]],
+    ])
   }
 
   /**
@@ -102,15 +107,15 @@ export class numbers {
    */
   static int32(bypass = false): number {
     if (bypass && random.chance(50)) {
-      return numbers._exceed(
-        random.choose([
-          [1, -2147483648],
-          [10, 2147483647],
-        ])
-      )
+      return numbers._exceed(random.item([-2147483648, 2147483647]))
     }
 
-    return random.range(-2147483648, 2147483647)
+    return random.choose([
+      [8, numbers.int8],
+      [6, numbers.int16],
+      [4, () => random.range(-2147483648, 2147483647)],
+      [1, [-2147483649, 2147483648, 4294967296]],
+    ])
   }
 
   /**
@@ -123,7 +128,12 @@ export class numbers {
       return numbers._exceed(4294967295)
     }
 
-    return random.range(0, 4294967295)
+    return random.choose([
+      [8, numbers.uint8],
+      [6, numbers.uint16],
+      [4, () => random.range(0, 4294967295)],
+      [1, [-2147483649, 2147483648, 4294967296]],
+    ])
   }
 
   /**
@@ -136,15 +146,20 @@ export class numbers {
     const max = 3.4 * 10 ** 38
 
     if (bypass && random.chance(50)) {
-      return numbers._exceed(
-        random.choose([
-          [1, min],
-          [10, max],
-        ])
-      )
+      return numbers._exceed(random.item([min, max]))
     }
 
-    return numbers.frange(min, max)
+    if (random.chance(20)) {
+      return numbers.frange(min, max)
+    }
+
+    const base = random.choose([
+      [3, numbers.int8],
+      [2, numbers.int16],
+      [1, numbers.int32],
+    ])
+
+    return numbers.frange(base, base + 1)
   }
 
   /**
