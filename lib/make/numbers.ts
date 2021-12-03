@@ -39,7 +39,7 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static int8(bypass = false): number {
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(
         random.choose([
           [1, -128],
@@ -57,7 +57,7 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static uint8(bypass = false): number {
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(255)
     }
 
@@ -70,7 +70,7 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static int16(bypass = false): number {
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(
         random.choose([
           [1, -32768],
@@ -88,7 +88,7 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static uint16(bypass = false): number {
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(65535)
     }
 
@@ -101,7 +101,7 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static int32(bypass = false): number {
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(
         random.choose([
           [1, -2147483648],
@@ -119,7 +119,7 @@ export class numbers {
    * @param bypass - Determines if the range should be exceeded.
    */
   static uint32(bypass = false): number {
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(4294967295)
     }
 
@@ -135,7 +135,7 @@ export class numbers {
     const min = 1.2 * 10 ** -38
     const max = 3.4 * 10 ** 38
 
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(
         random.choose([
           [1, min],
@@ -155,7 +155,7 @@ export class numbers {
   static double(bypass = false): number {
     const min = Number.MIN_VALUE
     const max = Number.MAX_VALUE
-    if (bypass || random.chance(50)) {
+    if (bypass && random.chance(50)) {
       return numbers._exceed(
         random.choose([
           [1, min],
