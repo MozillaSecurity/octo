@@ -1,3 +1,10 @@
+# [3.0.0-next.11](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.10...v3.0.0-next.11) (2021-12-03)
+
+
+### Features
+
+* improve number generation ([#43](https://github.com/MozillaSecurity/octo/issues/43)) ([ed81c2c](https://github.com/MozillaSecurity/octo/commit/ed81c2caa8115c06e31824dc4e914f1b17732d4e))
+
 # [3.0.0-next.10](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.9...v3.0.0-next.10) (2021-12-01)
 
 
