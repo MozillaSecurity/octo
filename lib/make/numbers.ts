@@ -154,6 +154,7 @@ export class numbers {
     }
 
     const base = random.choose([
+      [4, random.float],
       [3, numbers.int8],
       [2, numbers.int16],
       [1, numbers.int32],
