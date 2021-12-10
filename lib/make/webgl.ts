@@ -229,7 +229,7 @@ export class webgl {
    *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
-  static randomTexParameterValue(isWebGL2: boolean): string[] {
+  static randomTexParameterValue(isWebGL2: boolean): [string, string | number] {
     let pnameparam: Record<string, string[]> = {
       TEXTURE_MAG_FILTER: ["LINEAR", "NEAREST"],
       TEXTURE_MIN_FILTER: [
