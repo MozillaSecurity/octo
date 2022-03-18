@@ -1,3 +1,10 @@
+# [3.0.0-next.14](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.13...v3.0.0-next.14) (2022-03-18)
+
+
+### Bug Fixes
+
+* **utils.script:** return 0 if offset generates NaN ([7d525b1](https://github.com/MozillaSecurity/octo/commit/7d525b109f79ba033d51904bec907d5d62ff857d))
+
 # [3.0.0-next.13](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.12...v3.0.0-next.13) (2022-03-18)
 
 
