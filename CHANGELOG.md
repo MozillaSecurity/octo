@@ -1,3 +1,13 @@
+# [3.0.0-next.13](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.12...v3.0.0-next.13) (2022-03-18)
+
+
+### Bug Fixes
+
+* **make.numbers:** double should use a min/max of SAFE_INTEGER ([5dbfdd8](https://github.com/MozillaSecurity/octo/commit/5dbfdd8a057fd7d81f4b8f0f68dd62647e1287b8))
+* **make.numbers:** remove signed value from uint32 ([b700780](https://github.com/MozillaSecurity/octo/commit/b700780bc8dd32bdaa5e723891054970039dd307))
+* **make.shaders:** shader ifdef is not required ([3db1e4b](https://github.com/MozillaSecurity/octo/commit/3db1e4b6db30c5cac9f3653857c96f37caa3fdd6))
+* randomTexParameterValue can return string or number params ([3f3ff20](https://github.com/MozillaSecurity/octo/commit/3f3ff206b15748b68a5c0623e641f0c8d7080333))
+
 # [3.0.0-next.12](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.11...v3.0.0-next.12) (2021-12-03)
 
 
