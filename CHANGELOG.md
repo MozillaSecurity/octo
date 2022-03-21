@@ -1,3 +1,10 @@
+# [3.0.0-next.15](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.14...v3.0.0-next.15) (2022-03-21)
+
+
+### Bug Fixes
+
+* **make.numbers:** return int32 values within boundary ([4bc66c3](https://github.com/MozillaSecurity/octo/commit/4bc66c3f10cbff04f44b5e751ac047c1567b5b8a))
+
 # [3.0.0-next.14](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.13...v3.0.0-next.14) (2022-03-18)
 
 
