@@ -188,10 +188,10 @@ export class numbers {
    * @param precision - Precision.
    */
   static frange(min: number, max: number, precision?: number): number {
-    let x = random.float() * (max - min) + min
+    const x = random.float() * (max - min) + min
     if (precision !== undefined) {
       const power = Math.pow(10, precision)
-      x = Math.round(x * power) / power
+      return Math.round(x * power) / power
     }
     return x
   }
