@@ -549,14 +549,14 @@ export class webgl {
     }
     if (isWebGL2) {
       Object.assign(pname, {
-        PACK_ROW_LENGTH: make.numbers.any(),
-        PACK_SKIP_PIXELS: make.numbers.any(),
-        PACK_SKIP_ROWS: make.numbers.any(),
-        UNPACK_ROW_LENGTH: make.numbers.any(),
-        UNPACK_IMAGE_HEIGHT: make.numbers.any(),
-        UNPACK_SKIP_PIXELS: make.numbers.any(),
-        UNPACK_SKIP_ROWS: make.numbers.any(),
-        UNPACK_SKIP_IMAGES: make.numbers.any(),
+        PACK_ROW_LENGTH: make.numbers.uint32(),
+        PACK_SKIP_PIXELS: make.numbers.uint32(),
+        PACK_SKIP_ROWS: make.numbers.uint32(),
+        UNPACK_ROW_LENGTH: make.numbers.uint32(),
+        UNPACK_IMAGE_HEIGHT: make.numbers.uint32(),
+        UNPACK_SKIP_PIXELS: make.numbers.uint32(),
+        UNPACK_SKIP_ROWS: make.numbers.uint32(),
+        UNPACK_SKIP_IMAGES: make.numbers.uint32(),
       })
     }
     const name = random.item(Object.keys(pname))
