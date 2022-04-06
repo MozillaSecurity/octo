@@ -127,7 +127,7 @@ export class script {
    * @param s - The variable to generate a modulo for.
    */
   static offset(s: string): string {
-    return `((${random.number()} % ${s}) || 0)`
+    return `(${random.number()} % ${s})`
   }
 
   /**
