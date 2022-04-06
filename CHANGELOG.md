@@ -1,3 +1,15 @@
+# [3.0.0-next.16](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.15...v3.0.0-next.16) (2022-04-06)
+
+
+### Bug Fixes
+
+* **make.webgl:** webgl2 pixelStorei params must be non-negative ([461cf15](https://github.com/MozillaSecurity/octo/commit/461cf15e4608ed00d5614d14d69b34389656afcb))
+
+
+### Reverts
+
+* Revert "fix(utils.script): return 0 if offset generates NaN" ([e1d2d88](https://github.com/MozillaSecurity/octo/commit/e1d2d88d783047baf4ec26afe52a0f9258f0b91b))
+
 # [3.0.0-next.15](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.14...v3.0.0-next.15) (2022-03-21)
 
 
