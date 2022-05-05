@@ -4,168 +4,207 @@
 import { random } from "../random"
 import { utils } from "../utils"
 
+const webgl2VertexShader = `#version 300 es
+precision highp float;
+uniform bool u_bool;
+uniform bvec2 u_bvec2;
+uniform bvec3 u_bvec3;
+uniform bvec4 u_bvec4;
+uniform float u_float;
+uniform int u_int;
+uniform ivec2 u_ivec2;
+uniform ivec3 u_ivec3;
+uniform ivec4 u_ivec4;
+uniform mat2 u_mat2;
+uniform mat3 u_mat3;
+uniform mat4 u_mat4;
+uniform mat2x3 u_mat2x3;
+uniform mat2x4 u_mat2x4;
+uniform mat3x2 u_mat3x2;
+uniform mat3x4 u_mat3x4;
+uniform mat4x2 u_mat4x2;
+uniform mat4x3 u_mat4x3;
+uniform uint u_uint;
+uniform uvec2 u_uvec2;
+uniform uvec3 u_uvec3;
+uniform uvec4 u_uvec4;
+uniform vec2 u_vec2;
+uniform vec3 u_vec3;
+uniform vec4 u_vec4;
+in vec3 position;
+out vec2 v_vec2;
+out vec3 v_vec3;
+void main() {
+  gl_Position.x += u_float;
+  gl_Position.x += u_vec2.x;
+  gl_Position.x += u_vec3.x;
+  gl_Position.x += u_vec4.x;
+  gl_Position.x += u_mat2[0][0];
+  gl_Position.x += u_mat3[0][0];
+  gl_Position.x += u_mat4[0][0];
+  gl_Position.x += u_mat2x3[0][0];
+  gl_Position.x += u_mat2x4[0][0];
+  gl_Position.x += u_mat3x2[0][0];
+  gl_Position.x += u_mat3x4[0][0];
+  gl_Position.x += u_mat4x2[0][0];
+  gl_Position.x += u_mat4x3[0][0];
+  gl_Position.x += float(u_int);
+  gl_Position.x += float(u_uint);
+  gl_Position.x += float(u_ivec2.x);
+  gl_Position.x += float(u_ivec3.x);
+  gl_Position.x += float(u_ivec4.x);
+  gl_Position.x += float(u_uvec2.x);
+  gl_Position.x += float(u_uvec3.x);
+  gl_Position.x += float(u_uvec4.x);
+  if (u_bool || u_bvec2.x || u_bvec3.x || u_bvec4.x) {
+    gl_Position += float(0.1);
+  }
+}`
+
 /**
  * Class for generating WebGL shader related values.
  */
 export class shaders {
   /**
-   * Return a WebGL2 shader fragment.
+   * Return a WebGL fragment shader.
    */
-  static get fragment1(): string[][] {
+  static get fragment1(): string {
     return [
-      [
-        "precision mediump float;",
-        "varying vec4 vColor;",
-        "void main() {",
-        "gl_FragColor=vColor;",
-        "}",
-      ],
-      [
-        "varying highp vec2 vTextureCoord;",
-        "varying highp vec3 vLighting;",
-        "uniform sampler2D uSampler;",
-        "void main(void) {",
-        "highp vec4 texelColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));",
-        "gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);",
-        "}",
-      ],
-    ]
+      "precision highp float;",
+      "varying vec2 v_vec2;",
+      "varying vec3 v_vec3;",
+      "uniform sampler2D u_sampler2d;",
+      "uniform samplerCube u_samplercube;",
+      "void main() {",
+      "  gl_FragColor = texture2D(u_sampler2d, v_vec2);",
+      "  gl_FragColor += textureCube(u_samplercube, normalize(v_vec3));",
+      "}",
+    ].join("\n")
   }
 
   /**
-   * Return a WebGL2 shader vertex.
+   * Return a WebGL vertex shader.
    */
-  static get vertex1(): string[][] {
+  static get vertex1(): string {
     return [
-      [
-        "attribute vec4 aVertex;",
-        "attribute vec4 aColor;",
-        "varying vec4 vColor;",
-        "void main(){",
-        "vColor=aColor;",
-        "gl_Position=aVertex;",
-        "}",
-      ],
-      [
-        "attribute highp vec3 aVertexNormal;",
-        "attribute highp vec3 aVertexPosition;",
-        "attribute highp vec2 aTextureCoord;",
-        "uniform highp mat4 uNormalMatrix;",
-        "uniform highp mat4 uMVMatrix;",
-        "uniform highp mat4 uPMatrix;",
-        "varying highp vec2 vTextureCoord;",
-        "varying highp vec3 vLighting;",
-        "void main(void) {",
-        "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);",
-        "vTextureCoord = aTextureCoord;",
-        "highp vec3 ambientLight = vec3(0.6, 0.6, 0.6);",
-        "highp vec3 directionalLightColor = vec3(0.5, 0.5, 0.75);",
-        "highp vec3 directionalVector = vec3(0.85, 0.8, 0.75);",
-        "highp vec4 transformedNormal = uNormalMatrix * vec4(aVertexNormal, 1.0);",
-        "highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);",
-        "vLighting = ambientLight + (directionalLightColor * directional);",
-        "}",
-      ],
-    ]
+      "precision highp float;",
+      "uniform bool u_bool;",
+      "uniform bvec2 u_bvec2;",
+      "uniform bvec3 u_bvec3;",
+      "uniform bvec4 u_bvec4;",
+      "uniform float u_float;",
+      "uniform int u_int;",
+      "uniform ivec2 u_ivec2;",
+      "uniform ivec3 u_ivec3;",
+      "uniform ivec4 u_ivec4;",
+      "uniform mat2 u_mat2;",
+      "uniform mat3 u_mat3;",
+      "uniform mat4 u_mat4;",
+      "uniform vec2 u_vec2;",
+      "uniform vec3 u_vec3;",
+      "uniform vec4 u_vec4;",
+      "varying vec3 position;",
+      "varying vec2 v_vec2;",
+      "varying vec3 v_vec3;",
+      "void main() {",
+      "  gl_Position.x += u_float;",
+      "  gl_Position.x += u_vec2.x;",
+      "  gl_Position.x += u_vec3.x;",
+      "  gl_Position.x += u_vec4.x;",
+      "  gl_Position.x += u_mat2[0][0];",
+      "  gl_Position.x += u_mat3[0][0];",
+      "  gl_Position.x += u_mat4[0][0];",
+      "  gl_Position.x += float(u_int);",
+      "  gl_Position.x += float(u_ivec2.x);",
+      "  gl_Position.x += float(u_ivec3.x);",
+      "  gl_Position.x += float(u_ivec4.x);",
+      "  if (u_bool || u_bvec2.x || u_bvec3.x || u_bvec4.x) {",
+      "    gl_Position += float(0.1);",
+      "  }",
+      "}",
+    ].join("\n")
   }
 
   /**
-   * Return a WebGL shader fragment.
+   * Return a WebGL2 fragment shader.
    */
-  static get fragment2(): string[][] {
+  static get fragment2(): string {
     return [
-      [
-        "varying highp vec2 vTextureCoord;",
-        "varying highp vec3 vLighting;",
-        "uniform sampler2D uSampler;",
-        "void main(void) {",
-        "highp vec4 texelColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));",
-        "gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);",
-        "}",
-      ],
-      [
-        "#version proto-200",
-        "uniform sampler2D albedoMap;",
-        "uniform sampler2D normalMap;",
-        "varying vec3 varyingTangent;",
-        "varying vec3 varyingBitangent;",
-        "varying vec3 varyingNormal;",
-        "varying vec2 varyingUV;",
-        "void main(void) {",
-        "vec3 albedo=texture2D(albedoMap,varyingUV).rgb;",
-        "vec3 normal=texture2D(normalMap,varyingUV).rgb*2.0-1.0;",
-        "float specularFactor=pow((albedo.r+albedo.g+albedo.b)*0.33,2.0);",
-        "float specularHardness=2.0;",
-        "vec3 spaceNormal=varyingTangent*normal.x+varyingBitangent*normal.y+varyingNormal*normal.z;",
-        "gl_FragData[0]=vec4(albedo,1.0);",
-        "gl_FragData[1]=vec4(spaceNormal*0.5 +0.5,1.0);",
-        "gl_FragData[2]=vec4(specularFactor,specularHardness*0.1,0.0,1.0);",
-        "}",
-      ],
-    ]
+      "#version 300 es",
+      "precision highp float;",
+      "in vec2 v_vec2;",
+      "in vec3 v_vec3;",
+      "uniform sampler2D u_sampler2d;",
+      "uniform samplerCube u_samplercube;",
+      "out vec4 outColor;",
+      "void main() {",
+      "  outColor = texture(u_sampler2d, v_vec2);",
+      "  outColor += texture(u_samplercube, normalize(v_vec3));",
+      "}",
+    ].join("\n")
   }
 
   /**
-   * Return a WebGL shader vertex.
+   * Return a WebGL2 vertex shader.
    */
-  static get vertex2(): string[][] {
+  static get vertex2(): string {
     return [
-      [
-        "attribute highp vec3 aVertexNormal;",
-        "attribute highp vec3 aVertexPosition;",
-        "attribute highp vec2 aTextureCoord;",
-        "uniform highp mat4 uNormalMatrix;",
-        "uniform highp mat4 uMVMatrix;",
-        "uniform highp mat4 uPMatrix;",
-        "varying highp vec2 vTextureCoord;",
-        "varying highp vec3 vLighting;",
-        "void main(void) {",
-        "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);",
-        "vTextureCoord = aTextureCoord;",
-        "highp vec3 ambientLight = vec3(0.6, 0.6, 0.6);",
-        "highp vec3 directionalLightColor = vec3(0.5, 0.5, 0.75);",
-        "highp vec3 directionalVector = vec3(0.85, 0.8, 0.75);",
-        "highp vec4 transformedNormal = uNormalMatrix * vec4(aVertexNormal, 1.0);",
-        "highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);",
-        "vLighting = ambientLight + (directionalLightColor * directional);",
-        "}",
-      ],
-      [
-        "#version proto-200",
-        "attribute vec3 vertexPosition;",
-        "attribute vec3 vertexTangent;",
-        "attribute vec3 vertexBitangent;",
-        "attribute vec3 vertexNormal;",
-        "attribute vec2 vertexUV;",
-        "uniform mat4 modelMatrix;",
-        "uniform mat4 viewMatrix;",
-        "varying vec3 varyingTangent;",
-        "varying vec3 varyingBitangent;",
-        "varying vec3 varyingNormal;",
-        "varying vec2 varyingUV;",
-        "void main(void){",
-        "gl_Position=viewMatrix*(modelMatrix*vec4(vertexPosition,1.0));",
-        "gl_Position.xy=gl_Position.xy*0.5+(float(gl_InstanceID)-0.5);",
-        "varyingTangent=(modelMatrix*vec4(vertexTangent,0.0)).xyz;",
-        "varyingBitangent=(modelMatrix*vec4(vertexBitangent,0.0)).xyz;",
-        "varyingNormal=(modelMatrix*vec4(vertexNormal,0.0)).xyz;",
-        "varyingUV = vertexUV;",
-        "}",
-      ],
-    ]
-  }
-
-  /**
-   * Generate a WebGL shader pair using the supplied vertex and fragment.
-   *
-   * @param v - A WebGL shader vertex.
-   * @param f - A WebGL shader fragment.
-   */
-  static shaderPair(v: string[][], f: string[][]): { fragment: string; vertex: string } {
-    const i = random.number(v.length)
-    return {
-      vertex: utils.common.quote(v[i].join(" ")),
-      fragment: utils.common.quote(f[i].join(" ")),
-    }
+      "#version 300 es",
+      "precision highp float;",
+      "uniform bool u_bool;",
+      "uniform bvec2 u_bvec2;",
+      "uniform bvec3 u_bvec3;",
+      "uniform bvec4 u_bvec4;",
+      "uniform float u_float;",
+      "uniform int u_int;",
+      "uniform ivec2 u_ivec2;",
+      "uniform ivec3 u_ivec3;",
+      "uniform ivec4 u_ivec4;",
+      "uniform mat2 u_mat2;",
+      "uniform mat3 u_mat3;",
+      "uniform mat4 u_mat4;",
+      "uniform mat2x3 u_mat2x3;",
+      "uniform mat2x4 u_mat2x4;",
+      "uniform mat3x2 u_mat3x2;",
+      "uniform mat3x4 u_mat3x4;",
+      "uniform mat4x2 u_mat4x2;",
+      "uniform mat4x3 u_mat4x3;",
+      "uniform uint u_uint;",
+      "uniform uvec2 u_uvec2;",
+      "uniform uvec3 u_uvec3;",
+      "uniform uvec4 u_uvec4;",
+      "uniform vec2 u_vec2;",
+      "uniform vec3 u_vec3;",
+      "uniform vec4 u_vec4;",
+      "in vec3 position;",
+      "out vec2 v_vec2;",
+      "out vec3 v_vec3;",
+      "void main() {",
+      "  gl_Position.x += u_float;",
+      "  gl_Position.x += u_vec2.x;",
+      "  gl_Position.x += u_vec3.x;",
+      "  gl_Position.x += u_vec4.x;",
+      "  gl_Position.x += u_mat2[0][0];",
+      "  gl_Position.x += u_mat3[0][0];",
+      "  gl_Position.x += u_mat4[0][0];",
+      "  gl_Position.x += u_mat2x3[0][0];",
+      "  gl_Position.x += u_mat2x4[0][0];",
+      "  gl_Position.x += u_mat3x2[0][0];",
+      "  gl_Position.x += u_mat3x4[0][0];",
+      "  gl_Position.x += u_mat4x2[0][0];",
+      "  gl_Position.x += u_mat4x3[0][0];",
+      "  gl_Position.x += float(u_int);",
+      "  gl_Position.x += float(u_uint);",
+      "  gl_Position.x += float(u_ivec2.x);",
+      "  gl_Position.x += float(u_ivec3.x);",
+      "  gl_Position.x += float(u_ivec4.x);",
+      "  gl_Position.x += float(u_uvec2.x);",
+      "  gl_Position.x += float(u_uvec3.x);",
+      "  gl_Position.x += float(u_uvec4.x);",
+      "  if (u_bool || u_bvec2.x || u_bvec3.x || u_bvec4.x) {",
+      "    gl_Position += float(0.1);",
+      "  }",
+      "}",
+    ].join("\n")
   }
 }
