@@ -1,3 +1,16 @@
+# [3.0.0-next.17](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.16...v3.0.0-next.17) (2022-05-05)
+
+
+### Features
+
+* replace shaders with more complete samples ([7b95bb0](https://github.com/MozillaSecurity/octo/commit/7b95bb0a538c03fa3d457e6bc4598c6c7dd78f4e))
+
+
+### BREAKING CHANGES
+
+* Modifies the public shader.fragment and shader.vertex
+method output.
+
 # [3.0.0-next.16](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.15...v3.0.0-next.16) (2022-04-06)
 
 
