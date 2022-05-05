@@ -1,6 +1,6 @@
 {
   "name": "@mozillasecurity/octo",
-  "version": "3.0.0-next.17",
+  "version": "3.0.0-next.18",
   "description": "A unified shared library which aids in building fuzzers for browsers or as complement for an existing fuzzing framework.",
   "keywords": [
     "fuzzing",
@@ -52,17 +52,12 @@
     ]
   },
   "lint-staged": {
-    "**.ts": [
-      "npx prettier --write",
-      "eslint --cache ./lib/ --fix"
-    ],
-    "package.json": "sort-package-json"
+    "package.json": "sort-package-json",
+    "*.{js,ts}": "eslint --cache --fix"
   },
   "prettier": {
-    "jsdocSingleLineComment": false,
     "printWidth": 100,
-    "semi": false,
-    "tsdoc": true
+    "semi": false
   },
   "release": {
     "branches": [
@@ -127,6 +122,7 @@
     "lint-staged": "^12.4.1",
     "prettier": "^2.6.2",
     "prettier-plugin-jsdoc": "^0.3.38",
+    "semantic-release": "^19.0.2",
     "sort-package-json": "^1.57.0",
     "ts-jest": "^28.0.1",
     "typedoc": "^0.22.15",
