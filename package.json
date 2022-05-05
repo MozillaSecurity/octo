@@ -23,13 +23,12 @@
   "license": "MPL-2.0",
   "author": "Christoph Diehl <cdiehl@mozilla.com>",
   "main": "dist/index.js",
-  "browser": "dist/main.bundle.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "npm run build:ts && webpack",
+    "build": "npm run build:ts",
     "build:ts": "tsc",
     "coverage": "cross-env NODE_ENV=test jest --silent --coverage --collectCoverageFrom=lib/**/*.ts",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
@@ -37,8 +36,8 @@
     "lint": "cross-env NODE_ENV=test eslint ./lib --ext ts",
     "lint:fix": "cross-env NODE_ENV=test eslint ./lib --ext ts --fix",
     "prepare": "husky install",
-    "test": "jest --silent",
-    "watch": "webpack --watch"
+    "prepublishOnly": "npm run build",
+    "test": "jest --silent"
   },
   "husky": {
     "hooks": {
@@ -132,8 +131,6 @@
     "semantic-release": "^19.0.2",
     "sort-package-json": "^1.57.0",
     "ts-jest": "^28.0.1",
-    "typedoc": "^0.22.15",
-    "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2"
+    "typedoc": "^0.22.15"
   }
 }
