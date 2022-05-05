@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-import { XmlEntities } from "html-entities"
+import { decode, encode } from "html-entities"
 import jsesc from "jsesc"
 
 /**
@@ -63,7 +63,7 @@ export class common {
    * @param str - String to escape.
    */
   static htmlEscape(str: string): string {
-    return XmlEntities.encode(str)
+    return encode(str)
   }
 
   /**
@@ -72,7 +72,7 @@ export class common {
    * @param str - String to unescape.
    */
   static htmlUnescape(str: string): string {
-    return XmlEntities.decode(str)
+    return decode(str)
   }
 
   /**
