@@ -1,3 +1,11 @@
+# [3.0.0-next.19](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.18...v3.0.0-next.19) (2022-05-05)
+
+
+### Bug Fixes
+
+* remove duplicate entries in husky config ([f81d885](https://github.com/MozillaSecurity/octo/commit/f81d885b4f4ace2783d749061c422a2ffc368ae3))
+* remove webpack bundling and add prepublish script ([c1878a8](https://github.com/MozillaSecurity/octo/commit/c1878a8f587865fea76c6af528f5b3cc5dcd9edf))
+
 # [3.0.0-next.18](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.17...v3.0.0-next.18) (2022-05-05)
 
 
