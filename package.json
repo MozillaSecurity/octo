@@ -49,7 +49,14 @@
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
+    ],
+    "rules": {
+      "body-max-line-length": [
+        0,
+        "always",
+        0
+      ]
+    }
   },
   "lint-staged": {
     "package.json": "sort-package-json",
