@@ -1,3 +1,10 @@
+# [3.0.0-next.18](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.17...v3.0.0-next.18) (2022-05-05)
+
+
+### Bug Fixes
+
+* update html-entities usage to match installed version ([e06b25b](https://github.com/MozillaSecurity/octo/commit/e06b25b54aaafb96d71d407b4563288e700b7201))
+
 # [3.0.0-next.17](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.16...v3.0.0-next.17) (2022-05-05)
 
 
