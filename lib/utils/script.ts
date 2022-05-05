@@ -123,7 +123,6 @@ export class script {
    *
    * @example Const offset = utils.script.offset("document.childNodes.length")
    * document.body.appendChild(document.childNodes[eval(offset)])
-   *
    * @param s - The variable to generate a modulo for.
    */
   static offset(s: string): string {
