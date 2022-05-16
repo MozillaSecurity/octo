@@ -1,3 +1,10 @@
+# [3.0.0-next.20](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.19...v3.0.0-next.20) (2022-05-16)
+
+
+### Features
+
+* add attribute to webgl shaders ([236c5d1](https://github.com/MozillaSecurity/octo/commit/236c5d1382837a72e064d7171b13efb9f7e0a9aa))
+
 # [3.0.0-next.19](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.18...v3.0.0-next.19) (2022-05-05)
 
 
