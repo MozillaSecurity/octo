@@ -29,6 +29,7 @@ export class shaders {
   static get vertex1(): string {
     return [
       "precision highp float;",
+      "attribute vec4 a_vec4;",
       "uniform bool u_bool;",
       "uniform bvec2 u_bvec2;",
       "uniform bvec3 u_bvec3;",
@@ -48,6 +49,7 @@ export class shaders {
       "varying vec2 v_vec2;",
       "varying vec3 v_vec3;",
       "void main() {",
+      "  gl_Position.x += float(a_vec4.x);",
       "  gl_Position.x += u_float;",
       "  gl_Position.x += u_vec2.x;",
       "  gl_Position.x += u_vec3.x;",
@@ -62,6 +64,7 @@ export class shaders {
       "  if (u_bool || u_bvec2.x || u_bvec3.x || u_bvec4.x) {",
       "    gl_Position += float(0.1);",
       "  }",
+      "  gl_Position.x += float(position.x);",
       "}",
     ].join("\n")
   }
@@ -145,6 +148,7 @@ export class shaders {
       "  if (u_bool || u_bvec2.x || u_bvec3.x || u_bvec4.x) {",
       "    gl_Position += float(0.1);",
       "  }",
+      "  gl_Position.x += float(position.x);",
       "}",
     ].join("\n")
   }
