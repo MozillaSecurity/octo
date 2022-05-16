@@ -237,7 +237,7 @@ export class webgl {
         "NEAREST",
         "NEAREST_MIPMAP_NEAREST",
         "LINEAR_MIPMAP_NEAREST",
-        "NEAREST_MIPMAP_LINEA",
+        "NEAREST_MIPMAP_LINEAR",
         "LINEAR_MIPMAP_LINEAR",
       ],
       TEXTURE_WRAP_S: ["REPEAT", "CLAMP_TO_EDGE", "MIRRORED_REPEAT"],
