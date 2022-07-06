@@ -1,3 +1,10 @@
+# [3.0.0-next.22](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.21...v3.0.0-next.22) (2022-07-06)
+
+
+### Bug Fixes
+
+* **make.numbers:** set correct uint32 max ([4bb1090](https://github.com/MozillaSecurity/octo/commit/4bb10908dd61c9757aa68ff4da75d3daab40d0c6))
+
 # [3.0.0-next.21](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.20...v3.0.0-next.21) (2022-05-16)
 
 
