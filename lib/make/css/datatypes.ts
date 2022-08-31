@@ -48,7 +48,7 @@ export function calc(generator: () => string): string {
 /**
  * Normalize suffix for RangedTypeOptions.
  *
- * Both min and max are not required to contain a suffix (i.e. \<time [0, 100s]\>). Ensures the suffix
+ * Both min and max are not required to contain a suffix (i.e. <time [0, 100s]>). Ensures the suffix
  * exists on both.
  *
  * @param min - Minimum value.
@@ -58,9 +58,8 @@ export function normalizeSuffix(
   min: RangedTypeOption,
   max: RangedTypeOption
 ): [RangedTypeOption, RangedTypeOption] {
-
-  let suffix = (typeof min === "string") ? min.match(/[a-zA-Z]+/g) : null
-  suffix = (suffix === null && typeof max === "string") ? max.match(/[a-zA-Z]+/g) : null
+  let suffix = typeof min === "string" ? min.match(/[a-zA-Z]+/g) : null
+  suffix = suffix === null && typeof max === "string" ? max.match(/[a-zA-Z]+/g) : null
 
   // Both min and max are not required to contain a suffix (i.e. <time [0, 100s]>)
   // Ensure the suffix exists on both
@@ -103,9 +102,7 @@ export function expandRange(min: number | null, max: number | null): [number, nu
   return [_min, _max]
 }
 
-/**
- * Class for generating random CSS datatypes.
- */
+/** Class for generating random CSS datatypes. */
 export class datatypes {
   /**
    * Generate a random <angle> data type.
@@ -129,9 +126,7 @@ export class datatypes {
     return `${make.numbers.frange(-0x80000000, 0x7fffffff)}${unit}`
   }
 
-  /**
-   * Generate a random <decibel> data type.
-   */
+  /** Generate a random <decibel> data type. */
   static decibel(): string {
     return `${make.numbers.any()}dB`
   }
@@ -154,17 +149,13 @@ export class datatypes {
     }
   }
 
-  /**
-   * Generate a random <expression> data type.
-   */
+  /** Generate a random <expression> data type. */
   static expression(): string {
     // ToDo: Deprecated MS only feature - not complete
     return `expression(body.scrollTop + ${datatypes.length()});`
   }
 
-  /**
-   * Generate a random <flex> data type.
-   */
+  /** Generate a random <flex> data type. */
   static flex(): string {
     return `${make.numbers.any()}fr`
   }
@@ -190,9 +181,7 @@ export class datatypes {
     return `${make.numbers.any()}${unit}`
   }
 
-  /**
-   * Generate a random <hex-color> data type.
-   */
+  /** Generate a random <hex-color> data type. */
   static hexColor(): string {
     const len = random.item([4, 8])
     return `#${random.hex(len)}`
@@ -260,16 +249,12 @@ export class datatypes {
     return String(make.numbers.any(true))
   }
 
-  /**
-   * Generate a random <number-one-or-greater> data type.
-   */
+  /** Generate a random <number-one-or-greater> data type. */
   static numberOneOrGreater(): string {
     return String(Math.abs(make.numbers.any()))
   }
 
-  /**
-   * Generate a random <number-zero-one> data type.
-   */
+  /** Generate a random <number-zero-one> data type. */
   static numberZeroOne(): string {
     return String(make.numbers.frange(0, 1))
   }
@@ -291,16 +276,12 @@ export class datatypes {
     return make.unit.percent()
   }
 
-  /**
-   * Generate a random <positive-integer> data type.
-   */
+  /** Generate a random <positive-integer> data type. */
   static positiveInteger(): string {
     return String(Math.abs(make.numbers.any(false)))
   }
 
-  /**
-   * Generate a random <progid> data type.
-   */
+  /** Generate a random <progid> data type. */
   static progid(): string {
     // ToDo: Deprecated MS only feature - not complete
     switch (random.number(3)) {
@@ -316,9 +297,7 @@ export class datatypes {
     }
   }
 
-  /**
-   * Generate a random <ratio> data type.
-   */
+  /** Generate a random <ratio> data type. */
   static ratio(): string {
     if (random.chance(1000)) {
       return `${make.numbers.unsigned()}/${make.numbers.unsigned()}`
@@ -345,16 +324,12 @@ export class datatypes {
     return `${Math.abs(make.numbers.any())}${unit}`
   }
 
-  /**
-   * Generate a random <semitones> data type.
-   */
+  /** Generate a random <semitones> data type. */
   static semitones(): string {
     return `${make.numbers.any()}st`
   }
 
-  /**
-   * Generate a random <string> data type.
-   */
+  /** Generate a random <string> data type. */
   static string(): string {
     return cssesc(make.text.any(), { wrap: true })
   }
@@ -384,9 +359,7 @@ export class datatypes {
     }
   }
 
-  /**
-   * Generate a random <urange> data type.
-   */
+  /** Generate a random <urange> data type. */
   static urange(): string {
     const convert = (n: number) => (n + 0x10000).toString(16).substr(-4).toUpperCase()
     const end = random.number(65535 + 1)

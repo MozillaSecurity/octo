@@ -4,34 +4,24 @@
 import { make } from "../make"
 import { random } from "../random"
 
-/**
- * Class for generating random font values.
- */
+/** Class for generating random font values. */
 export class font {
-  /**
-   * Generate a random CSS global value.
-   */
+  /** Generate a random CSS global value. */
   static globalValue(): string {
     return random.item(["inherit", "initial", "unset"])
   }
 
-  /**
-   * Generate a random font-style value.
-   */
+  /** Generate a random font-style value. */
   static style(): string {
     return random.item(["italic", "normal", "oblique", "inherit"])
   }
 
-  /**
-   * Generate a random font-variant value.
-   */
+  /** Generate a random font-variant value. */
   static variant(): string {
     return random.item(["normal", "small-caps", "inherit"])
   }
 
-  /**
-   * Generate a random font-weight value.
-   */
+  /** Generate a random font-weight value. */
   static weight(): string | number {
     return random.pick([
       /* standard */
@@ -43,9 +33,7 @@ export class font {
     ])
   }
 
-  /**
-   * Generate a random font-size value.
-   */
+  /** Generate a random font-size value. */
   static size(): string {
     return random.pick([
       /* <absolute-size> values */
@@ -59,31 +47,23 @@ export class font {
     ])
   }
 
-  /**
-   * Generate a random font relative size value.
-   */
+  /** Generate a random font relative size value. */
   static relativeSize(): string {
     const value = random.number(8)
     return random.item(["", "+", "-"]) + value
   }
 
-  /**
-   * Generate a random font family name.
-   */
+  /** Generate a random font family name. */
   static genericFamily(): string {
     return random.item(["serif", "sans-serif", "cursive", "fantasy", "monospace"])
   }
 
-  /**
-   * Generate a random font family name.
-   */
+  /** Generate a random font family name. */
   static familyName(): string {
     return random.item(["Times New Roman", "Arial", "Courier", "Helvetica"])
   }
 
-  /**
-   * Generate a random font family value.
-   */
+  /** Generate a random font family value. */
   static family(): string {
     let s = font.familyName()
     if (random.chance(8)) {
@@ -92,9 +72,7 @@ export class font {
     return s
   }
 
-  /**
-   * Generate a random registered font feature.
-   */
+  /** Generate a random registered font feature. */
   static registeredFontFeatures(): string {
     return random.item([
       "aalt",
@@ -234,9 +212,7 @@ export class font {
     ])
   }
 
-  /**
-   * Generate a random font.
-   */
+  /** Generate a random font. */
   static font(): string {
     let s = ""
     if (random.chance(4)) {

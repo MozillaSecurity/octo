@@ -16,9 +16,7 @@ if (utils.platform.name.isWindows) {
   color.clear = ""
 }
 
-/**
- * General logging utilities.
- */
+/** General logging utilities. */
 export class logger {
   /**
    * Log to console using appropriate environment.
@@ -120,16 +118,12 @@ export class logger {
     this.dumpln(`/*L*/ // ${msg}`)
   }
 
-  /**
-   * Log a testcase separator.
-   */
+  /** Log a testcase separator. */
   static separator(): void {
     this.dumpln(color.green + sep + color.clear)
   }
 
-  /**
-   * Log a traceback.
-   */
+  /** Log a traceback. */
   static traceback(): void {
     this.error("===[ Traceback ] ===")
     const e = new Error()

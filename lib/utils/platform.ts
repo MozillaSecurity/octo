@@ -2,13 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/**
- * Class for enumerating platform metadata.
- */
+/** Class for enumerating platform metadata. */
 export class platform {
-  /**
-   * Enumerate the current platform's capabilities.
-   */
+  /** Enumerate the current platform's capabilities. */
   // @ts-ignore
   static get name(): Record<string, any> {
     const platform: Record<string, any> = {}

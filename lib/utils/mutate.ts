@@ -5,9 +5,7 @@
 import { make } from "../make"
 import { random } from "../random"
 
-/**
- * Class for performing generic value mutation.
- */
+/** Class for performing generic value mutation. */
 export class mutate {
   /**
    * Mutate a string.

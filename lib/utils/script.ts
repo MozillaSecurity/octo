@@ -5,9 +5,7 @@
 import { make } from "../make"
 import { random } from "../random"
 
-/**
- * DOM-related JavaScript command generators.
- */
+/** DOM-related JavaScript command generators. */
 export class script {
   /**
    * Helper method for appending an element to body or documentElement.
@@ -121,8 +119,9 @@ export class script {
    * Returns a command that generates the modulo of a value. Useful for identifying lengths in
    * dynamic entries.
    *
-   * @example Const offset = utils.script.offset("document.childNodes.length")
-   * document.body.appendChild(document.childNodes[eval(offset)])
+   * @example
+   *   Const offset = utils.script.offset("document.childNodes.length")
+   *   document.body.appendChild(document.childNodes[eval(offset)])
    * @param s - The variable to generate a modulo for.
    */
   static offset(s: string): string {

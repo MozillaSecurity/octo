@@ -2,13 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/**
- * Class for generating WebGL shader related values.
- */
+/** Class for generating WebGL shader related values. */
 export class shaders {
-  /**
-   * Return a WebGL fragment shader.
-   */
+  /** Return a WebGL fragment shader. */
   static get fragment1(): string {
     return [
       "precision highp float;",
@@ -23,9 +19,7 @@ export class shaders {
     ].join("\n")
   }
 
-  /**
-   * Return a WebGL vertex shader.
-   */
+  /** Return a WebGL vertex shader. */
   static get vertex1(): string {
     return [
       "precision highp float;",
@@ -69,9 +63,7 @@ export class shaders {
     ].join("\n")
   }
 
-  /**
-   * Return a WebGL2 fragment shader.
-   */
+  /** Return a WebGL2 fragment shader. */
   static get fragment2(): string {
     return [
       "#version 300 es",
@@ -88,9 +80,7 @@ export class shaders {
     ].join("\n")
   }
 
-  /**
-   * Return a WebGL2 vertex shader.
-   */
+  /** Return a WebGL2 vertex shader. */
   static get vertex2(): string {
     return [
       "#version 300 es",

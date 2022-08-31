@@ -4,9 +4,7 @@
 
 import { random } from "../random"
 
-/**
- * Class for generating random numerical values.
- */
+/** Class for generating random numerical values. */
 export class numbers {
   /**
    * Returns a number that is more likely to exceed the supplied boundary.
@@ -196,9 +194,7 @@ export class numbers {
     return x
   }
 
-  /**
-   * Returns a random power of 2 between 1 and 2048.
-   */
+  /** Returns a random power of 2 between 1 and 2048. */
   static tiny(): number {
     // Calling random.number twice prefers lower values
     return Math.pow(2, random.number(random.number(13)))
@@ -213,9 +209,7 @@ export class numbers {
     return number % 2 === 1 ? ++number : number
   }
 
-  /**
-   * Returns a random number that may be interesting.
-   */
+  /** Returns a random number that may be interesting. */
   static interesting(): number {
     return random.choose([
       [8, [-128, -1, 0, 1, 16, 32, 64, 100, 127]],
@@ -225,9 +219,7 @@ export class numbers {
     ])
   }
 
-  /**
-   * Returns a random number that may be interesting.
-   */
+  /** Returns a random number that may be interesting. */
   static interestingUnsigned(): number {
     return random.choose([
       [8, [0, 1, 16, 32, 64, 100, 127, 255]],

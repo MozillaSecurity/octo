@@ -4,13 +4,9 @@
 
 import { random } from "../random"
 
-/**
- * Class for generating random JavaScript primitive types.
- */
+/** Class for generating random JavaScript primitive types. */
 export class types {
-  /**
-   * Generate a random primitive type.
-   */
+  /** Generate a random primitive type. */
   static random(): string {
     return random.item([
       "true",

@@ -14,13 +14,9 @@ interface InternalFormatTypes {
   [key: string]: FormatEntry
 }
 
-/**
- * Class for generating WebGL related values.
- */
+/** Class for generating WebGL related values. */
 export class webgl {
-  /**
-   * Return an object containing valid internal formats and their associated types.
-   */
+  /** Return an object containing valid internal formats and their associated types. */
   static get internalFormat(): InternalFormatTypes {
     return {
       RGB: { format: "RGB", type: ["UNSIGNED_BYTE", "UNSIGNED_SHORT_5_6_5"] },
@@ -61,9 +57,7 @@ export class webgl {
     }
   }
 
-  /**
-   * Generate a random format value.
-   */
+  /** Generate a random format value. */
   static WebGLFormat(): string[] {
     const keys = Object.keys(webgl.internalFormat)
     const internalformat = random.item(keys)
@@ -72,9 +66,7 @@ export class webgl {
     return [internalformat, format, type]
   }
 
-  /**
-   * Generate a random textureSource interface type.
-   */
+  /** Generate a random textureSource interface type. */
   static textureSources(): string {
     const sources = ["HTMLCanvasElement", "HTMLImageElement", "HTMLVideoElement", "ImageData"]
     return random.item(sources)
@@ -167,9 +159,7 @@ export class webgl {
     return webgl.parseFragDatav3(shader)
   }
 
-  /**
-   * Generate a random bitmask.
-   */
+  /** Generate a random bitmask. */
   static randomBitmask(): number {
     const values: number[] = []
     for (let i = 0; i < 8; i++) {
@@ -281,9 +271,7 @@ export class webgl {
     return random.item(mode)
   }
 
-  /**
-   * Generate a random blend value.
-   */
+  /** Generate a random blend value. */
   static randomBlendFactor(): string {
     const factor = [
       "ZERO",
@@ -305,17 +293,13 @@ export class webgl {
     return random.item(factor)
   }
 
-  /**
-   * Generate a random culling candidate.
-   */
+  /** Generate a random culling candidate. */
   static randomFace(): string {
     const mode = ["FRONT", "BACK", "FRONT_AND_BACK"]
     return random.item(mode)
   }
 
-  /**
-   * Generate a random texture image target.
-   */
+  /** Generate a random texture image target. */
   static randomTexImage2DTarget(): string {
     const target = [
       "TEXTURE_2D",
@@ -342,9 +326,7 @@ export class webgl {
     return random.item(target)
   }
 
-  /**
-   * Generate a random function operator.
-   */
+  /** Generate a random function operator. */
   static randomFunc(): string {
     const func = ["NEVER", "LESS", "EQUAL", "LEQUAL", "GREATER", "NOTEQUAL", "GEQUAL", "ALWAYS"]
     return random.item(func)
@@ -373,9 +355,7 @@ export class webgl {
     return random.item(cap)
   }
 
-  /**
-   * Generate a random context primitive name.
-   */
+  /** Generate a random context primitive name. */
   static randomPrimitive(): string {
     const mode = [
       "POINTS",
@@ -447,9 +427,7 @@ export class webgl {
     return random.item(pname)
   }
 
-  /**
-   * Generate a random shader precision value.
-   */
+  /** Generate a random shader precision value. */
   static randomShaderPrecision(): string {
     const precisiontype = [
       "LOW_FLOAT",
@@ -462,9 +440,7 @@ export class webgl {
     return random.item(precisiontype)
   }
 
-  /**
-   * Generate a random stencil reference parameter.
-   */
+  /** Generate a random stencil reference parameter. */
   static randomStencilRefParameter(): string {
     const param = [
       "STENCIL_FUNC",
@@ -478,9 +454,7 @@ export class webgl {
     return random.item(param)
   }
 
-  /**
-   * Generate a random stencil mask parameter.
-   */
+  /** Generate a random stencil mask parameter. */
   static randomStencilMaskParameter(): string {
     const param = ["STENCIL_WRITEMASK", "STENCIL_BACK_WRITEMASK", "STENCIL_BITS"]
     return random.item(param)
@@ -526,9 +500,7 @@ export class webgl {
     return random.item(target)
   }
 
-  /**
-   * Generate a random behavior hint mode.
-   */
+  /** Generate a random behavior hint mode. */
   static randomHintMode(): string {
     const mode = ["FASTEST", "NICEST", "DONT_CARE"]
     return random.item(mode)
@@ -563,17 +535,13 @@ export class webgl {
     return [name, pname[name]]
   }
 
-  /**
-   * Generate a random stencil action.
-   */
+  /** Generate a random stencil action. */
   static randomStencilAction(): string {
     const action = ["KEEP", "ZERO", "REPLACE", "INCR", "INCR_WRAP", "DECR", "DECR_WRAP", "INVERT"]
     return random.item(action)
   }
 
-  /**
-   * Generate a random query target.
-   */
+  /** Generate a random query target. */
   static randomQueryTarget(): string {
     const target = [
       "ANY_SAMPLES_PASSED",
@@ -583,17 +551,13 @@ export class webgl {
     return random.item(target)
   }
 
-  /**
-   * Generate a random query parameter name.
-   */
+  /** Generate a random query parameter name. */
   static randomQueryPname(): string {
     const pname = ["CURRENT_QUERY", "QUERY_RESULT", "QUERY_RESULT_AVAILABLE"]
     return random.item(pname)
   }
 
-  /**
-   * Generate a random sampler parameter name.
-   */
+  /** Generate a random sampler parameter name. */
   static randomSamplerParameter(): string {
     const pname = [
       "TEXTURE_MAG_FILTER",
@@ -612,33 +576,25 @@ export class webgl {
     return random.item(pname)
   }
 
-  /**
-   * Generate a random sync parameter name.
-   */
+  /** Generate a random sync parameter name. */
   static randomSyncParameter(): string {
     const pname = ["OBJECT_TYPE", "SYNC_STATUS", "SYNC_CONDITION", "SYNC_FLAGS"]
     return random.item(pname)
   }
 
-  /**
-   * Generate a random clear buffer target.
-   */
+  /** Generate a random clear buffer target. */
   static randomClearBuffer(): string {
     const buffer = ["COLOR", "DEPTH", "STENCIL", "DEPTH_STENCIL"]
     return random.item(buffer)
   }
 
-  /**
-   * Generate a random bind buffer target.
-   */
+  /** Generate a random bind buffer target. */
   static randomBindBufferTarget(): string {
     const target = ["TRANSFORM_FEEDBACK_BUFFER", "UNIFORM_BUFFER"]
     return random.item(target)
   }
 
-  /**
-   * Generate a random indexed parameter target name.
-   */
+  /** Generate a random indexed parameter target name. */
   static randomIndexedParameterTarget(): string {
     const target = [
       "TRANSFORM_FEEDBACK_BUFFER_BINDING",
@@ -651,9 +607,7 @@ export class webgl {
     return random.item(target)
   }
 
-  /**
-   * Generate a random uniform parameter name.
-   */
+  /** Generate a random uniform parameter name. */
   static randomUniformParameter(): string {
     const pname = [
       "UNIFORM_TYPE",
@@ -667,9 +621,7 @@ export class webgl {
     return random.item(pname)
   }
 
-  /**
-   * Generate a random uniform block parameter name.
-   */
+  /** Generate a random uniform block parameter name. */
   static randomUniformBlockParameter(): string {
     const pname = [
       "UNIFORM_BLOCK_BINDING",
@@ -916,9 +868,7 @@ export class webgl {
     return random.item(pname)
   }
 
-  /**
-   * Generate a random program parameter name.
-   */
+  /** Generate a random program parameter name. */
   static randomProgramParameter(): string {
     const pname = [
       "DELETE_STATUS",
@@ -934,9 +884,7 @@ export class webgl {
     return random.item(pname)
   }
 
-  /**
-   * Generate a random render buffer parameter.
-   */
+  /** Generate a random render buffer parameter. */
   static randomRenderBufferParameter(): string {
     const pname = [
       "RENDERBUFFER_WIDTH",
