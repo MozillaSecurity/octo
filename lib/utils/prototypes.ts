@@ -17,13 +17,9 @@ function isObject(obj: any) {
   )
 }
 
-/**
- * Various polyfills.
- */
+/** Various polyfills. */
 export class prototypes {
-  /**
-   * Polyfills Object.isObject and String.insert.
-   */
+  /** Polyfills Object.isObject and String.insert. */
   static enable(): void {
     if (!("isObject" in Object)) {
       ;(Object as any).prototype.isObject = isObject

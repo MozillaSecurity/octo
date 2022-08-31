@@ -4,14 +4,10 @@
 
 import { random } from "../random"
 
-/**
- * Generic tracking object Generates unique identifiers for a given prefix.
- */
+/** Generic tracking object Generates unique identifiers for a given prefix. */
 export class tracker {
   private readonly tracker: Record<string, string[]>
-  /**
-   * Create a new instance.
-   */
+  /** Create a new instance. */
   constructor() {
     this.tracker = {}
   }

@@ -4,9 +4,7 @@
 import { decode, encode } from "html-entities"
 import jsesc from "jsesc"
 
-/**
- * Common utilities.
- */
+/** Common utilities. */
 export class common {
   /**
    * Escape and quote a string.

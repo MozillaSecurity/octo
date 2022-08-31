@@ -5,9 +5,7 @@ import MersenneTwister from "mersenne-twister"
 
 import { logger } from "../logging"
 
-/**
- * A MersenneTwister based PRNG with a number of useful utility functions.
- */
+/** A MersenneTwister based PRNG with a number of useful utility functions. */
 export class random {
   static twister: MersenneTwister
 
@@ -46,9 +44,7 @@ export class random {
     return (r / x) >>> 0
   }
 
-  /**
-   * Returns a float in [0, 1) (uniform distribution).
-   */
+  /** Returns a float in [0, 1) (uniform distribution). */
   static float(): number {
     if (!random.twister) {
       throw new Error("random.init_seed() must be called first.")
@@ -100,9 +96,7 @@ export class random {
     return random.item(Object.keys(obj))
   }
 
-  /**
-   * Return a random Boolean value.
-   */
+  /** Return a random Boolean value. */
   static bool(): boolean {
     return random.item([true, false])
   }

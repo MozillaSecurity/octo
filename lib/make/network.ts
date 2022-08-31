@@ -4,20 +4,14 @@
 import { make } from "../make"
 import { random } from "../random"
 
-/**
- * Class for generating networking related values.
- */
+/** Class for generating networking related values. */
 export class network {
-  /**
-   * Generate a ufrag value.
-   */
+  /** Generate a ufrag value. */
   static ufrag(): string {
     return "f5fda439"
   }
 
-  /**
-   * Generate a random session description protocol.
-   */
+  /** Generate a random session description protocol. */
   static sdp(): string {
     return [
       "v=0",
@@ -53,9 +47,7 @@ export class network {
     ].join("\n")
   }
 
-  /**
-   * Generate a random ICE candidate.
-   */
+  /** Generate a random ICE candidate. */
   static IceCandidate(): string {
     // https://tools.ietf.org/html/rfc5245#section-15
     // candidate=
@@ -104,16 +96,12 @@ export class network {
     return `${scheme}:${host}${port}${path}${proto}`
   }
 
-  /**
-   * Return a list of peer connection protocols.
-   */
+  /** Return a list of peer connection protocols. */
   static PeerConnectionProtocols(): string[] {
     return ["turn", "turns", "stun", "stuns"]
   }
 
-  /**
-   * Generate a random IPv4 Address.
-   */
+  /** Generate a random IPv4 Address. */
   static randomIPv4(): string {
     const octets = []
     for (let i = 0; i < 4; i++) {
@@ -123,9 +111,7 @@ export class network {
     return octets.join(".")
   }
 
-  /**
-   * Generate a random IPv6 Address.
-   */
+  /** Generate a random IPv6 Address. */
   static randomIPv6(): string {
     const parts: string[] = []
 
@@ -136,16 +122,12 @@ export class network {
     return parts.join(":")
   }
 
-  /**
-   * Generate a random ICE address.
-   */
+  /** Generate a random ICE address. */
   static iceServer(): string {
     return random.item(["stun:23.21.150.121"])
   }
 
-  /**
-   * Generate a random DTMF value.
-   */
+  /** Generate a random DTMF value. */
   static dtmf(): string {
     let count = make.numbers.tiny()
     const values: string[] = []
@@ -175,9 +157,7 @@ export class network {
     return values.join("")
   }
 
-  /**
-   * Generate a random hostname that should be valid in all environments.
-   */
+  /** Generate a random hostname that should be valid in all environments. */
   static goodHostnames(): string {
     const hostnames = ["localhost", "0.0.0.0", "127.0.0.1", "[::1]"]
 
@@ -201,9 +181,7 @@ export class network {
     }
   }
 
-  /**
-   * Generate malformed hostnames.
-   */
+  /** Generate malformed hostnames. */
   static badHostnames(): string {
     return random.item([
       "google.org",
@@ -219,9 +197,7 @@ export class network {
     ])
   }
 
-  /**
-   * Generate a random hostname.
-   */
+  /** Generate a random hostname. */
   static hostname(): string {
     return random.choose([
       [10, network.goodHostnames],
@@ -229,30 +205,22 @@ export class network {
     ])
   }
 
-  /**
-   * Generate a random port number.
-   */
+  /** Generate a random port number. */
   static port(): number {
     return random.item([21, 23, 80, 443, 9310])
   }
 
-  /**
-   * Generate a random hash value.
-   */
+  /** Generate a random hash value. */
   static hash(): string {
     return random.pick(["", "#", "#main-content", () => `#${make.text.any()}`])
   }
 
-  /**
-   * Generate a random path.
-   */
+  /** Generate a random path. */
   static path(): string {
     return random.pick(["/", "/index.html", () => `/${make.text.any()}`])
   }
 
-  /**
-   * Generate a random protocol handler.
-   */
+  /** Generate a random protocol handler. */
   static protocol(): string {
     return random.item([
       "chrome",
@@ -267,9 +235,7 @@ export class network {
     ])
   }
 
-  /**
-   * Generate a random search string.
-   */
+  /** Generate a random search string. */
   static search(): string {
     return random.choose([
       [1, ["", "?"]],
@@ -297,9 +263,7 @@ export class network {
     return mask
   }
 
-  /**
-   * Generate a random header.
-   */
+  /** Generate a random header. */
   static header(): string {
     return random.item([
       "Accept",
@@ -630,9 +594,7 @@ export class network {
     ])
   }
 
-  /**
-   * Generate a random request method.
-   */
+  /** Generate a random request method. */
   static requestMethod(): string {
     return random.item(["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE"])
   }

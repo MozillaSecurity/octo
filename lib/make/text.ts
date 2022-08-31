@@ -5,27 +5,19 @@ import { make } from "../make"
 import { random } from "../random"
 import { utils } from "../utils"
 
-/**
- * Class for generating generic text values.
- */
+/** Class for generating generic text values. */
 export class text {
-  /**
-   * Generate a random alphabetic character.
-   */
+  /** Generate a random alphabetic character. */
   static alpha(): string {
     return String.fromCharCode(random.range("A".charCodeAt(0), "z".charCodeAt(0)))
   }
 
-  /**
-   * Generate a random ASCII printable character.
-   */
+  /** Generate a random ASCII printable character. */
   static asciiPrintable(): string {
     return String.fromCharCode(random.range(0x20, 0x7e))
   }
 
-  /**
-   * Generate a random bytestring.
-   */
+  /** Generate a random bytestring. */
   static bytestring(): string {
     let s = ""
     let len = random.range(1, 126)
@@ -37,16 +29,12 @@ export class text {
     return s
   }
 
-  /**
-   * Generate a random alphanumeric character.
-   */
+  /** Generate a random alphanumeric character. */
   static alphanum(): string {
     return String.fromCharCode(random.range("0".charCodeAt(0), "z".charCodeAt(0)))
   }
 
-  /**
-   * Generate a random assignment operator.
-   */
+  /** Generate a random assignment operator. */
   static assignmentOperator(): string {
     return random.item([
       "=",
@@ -65,16 +53,12 @@ export class text {
     ])
   }
 
-  /**
-   * Generate a random arithmetic operator.
-   */
+  /** Generate a random arithmetic operator. */
   static arithmeticOperator(): string {
     return random.item(["%", "-", "+", "*", "/"])
   }
 
-  /**
-   * Generate a random control character.
-   */
+  /** Generate a random control character. */
   static controlChar(): string {
     return random.item([
       "\b",
@@ -90,23 +74,17 @@ export class text {
     ])
   }
 
-  /**
-   * Generate a random digit.
-   */
+  /** Generate a random digit. */
   static digit(): string {
     return String.fromCharCode(random.range("0".charCodeAt(0), "9".charCodeAt(0)))
   }
 
-  /**
-   * Generate a random line ending.
-   */
+  /** Generate a random line ending. */
   static lineEnd(): string {
     return random.item(["\n", "\r", "\r\n", "\n\r"])
   }
 
-  /**
-   * Generate a random token.
-   */
+  /** Generate a random token. */
   static token(): string {
     return random.item([
       "*",
@@ -139,16 +117,12 @@ export class text {
     ])
   }
 
-  /**
-   * Generate a random character set value.
-   */
+  /** Generate a random character set value. */
   static charset(): string {
     return random.item(["UTF-8", "ISO-8859-1"])
   }
 
-  /**
-   * Generate a random language code.
-   */
+  /** Generate a random language code. */
   static language(): string {
     return random.item(
       random.item([
@@ -208,9 +182,7 @@ export class text {
     )
   }
 
-  /**
-   * Generate a random character that may affect layout.
-   */
+  /** Generate a random character that may affect layout. */
   static layoutCharCodes(): string {
     return String.fromCodePoint(
       random.item([
@@ -282,9 +254,7 @@ export class text {
     )
   }
 
-  /**
-   * Generate a random character that affects bidi layout.
-   */
+  /** Generate a random character that affects bidi layout. */
   static bidiCharCodes(): string {
     return String.fromCodePoint(
       random.item([
@@ -329,16 +299,12 @@ export class text {
     return String.fromCodePoint(random.range(start, end))
   }
 
-  /**
-   * Generate a random basic multilingual plane character.
-   */
+  /** Generate a random basic multilingual plane character. */
   static unicodeBMP(): string {
     return String.fromCodePoint(random.range(0x0000, 0xffff))
   }
 
-  /**
-   * Generate a random supplementary multilingual plane character.
-   */
+  /** Generate a random supplementary multilingual plane character. */
   static unicodeSMP(): string {
     const [start, end] = random.item([
       [0x10000, 0x13fff],
@@ -350,9 +316,7 @@ export class text {
     return String.fromCodePoint(random.range(start, end))
   }
 
-  /**
-   * Generate a random supplementary ideographic plane character.
-   */
+  /** Generate a random supplementary ideographic plane character. */
   static unicodeSIP(): string {
     const [start, end] = random.item([
       [0x20000, 0x2bfff],
@@ -361,16 +325,12 @@ export class text {
     return String.fromCodePoint(random.range(start, end))
   }
 
-  /**
-   * Generate a random supplementary special-purpose plane character.
-   */
+  /** Generate a random supplementary special-purpose plane character. */
   static unicodeSSP(): string {
     return String.fromCodePoint(random.range(0xe0000, 0xe0fff))
   }
 
-  /**
-   * Generate a random currency unit.
-   */
+  /** Generate a random currency unit. */
   static currency(): string {
     return random.item([
       // https://en.wikipedia.org/wiki/ISO_4217
@@ -409,16 +369,12 @@ export class text {
     return s
   }
 
-  /**
-   * Generate a random quoted string.
-   */
+  /** Generate a random quoted string. */
   static quotedString(): string {
     return utils.common.quote(text.any())
   }
 
-  /**
-   * Generate a random text value.
-   */
+  /** Generate a random text value. */
   static random(): string {
     return random.choose([
       [1, text.alpha],
@@ -439,16 +395,12 @@ export class text {
     ])
   }
 
-  /**
-   * Generate a random character.
-   */
+  /** Generate a random character. */
   static character(): string {
     return text.random().charAt(0)
   }
 
-  /**
-   * Generate a string comprised of random generators.
-   */
+  /** Generate a string comprised of random generators. */
   static any(): string {
     let s = ""
     let len = random.range(1, 126)

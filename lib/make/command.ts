@@ -15,13 +15,9 @@ interface CommandPair {
   [key: string]: CommandValue
 }
 
-/**
- * Class for generating designMode commands.
- */
+/** Class for generating designMode commands. */
 export class command {
-  /**
-   * Returns a object containing all designMode commands and their arguments.
-   */
+  /** Returns a object containing all designMode commands and their arguments. */
   static get data(): CommandPair {
     return {
       backColor: colors.any,
@@ -91,9 +87,7 @@ export class command {
     }
   }
 
-  /**
-   * Generate a random command name.
-   */
+  /** Generate a random command name. */
   // @ts-ignore
   static name(): string {
     return random.item(Object.keys(command.data))

@@ -10,15 +10,11 @@ interface ContainerEntry {
   name: string
 }
 
-/**
- * Class for tracking objects.
- */
+/** Class for tracking objects. */
 export class objects {
   private counter: number
   private readonly container: { [id: string]: ContainerEntry[] }
-  /**
-   * Create a new instance.
-   */
+  /** Create a new instance. */
   constructor() {
     this.counter = 0
     this.container = {}
@@ -131,9 +127,7 @@ export class objects {
     return false
   }
 
-  /**
-   * Returns an array of all objects that are not null or undefined.
-   */
+  /** Returns an array of all objects that are not null or undefined. */
   valid(): string[] {
     const items: string[] = []
     Object.keys(this.container).forEach((category) => {

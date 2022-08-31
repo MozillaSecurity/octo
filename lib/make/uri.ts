@@ -5,13 +5,9 @@
 import { make } from "../make"
 import { random } from "../random"
 
-/**
- * Class for generating random URI values.
- */
+/** Class for generating random URI values. */
 export class uri {
-  /**
-   * Generate a random URI that is known to cause issues.
-   */
+  /** Generate a random URI that is known to cause issues. */
   static problematic(): string {
     return random.item([
       "aim:yaz", // Often triggers an 'external protocol request' dialog
@@ -21,9 +17,7 @@ export class uri {
     ])
   }
 
-  /**
-   * Generate a random URI that should be valid in all environments.
-   */
+  /** Generate a random URI that should be valid in all environments. */
   static standard(): string {
     return random.item([
       "about:blank",
@@ -45,9 +39,7 @@ export class uri {
     ])
   }
 
-  /**
-   * Generate a random namespaceURI.
-   */
+  /** Generate a random namespaceURI. */
   static namespace(): string {
     return random.item([
       "http://www.w3.org/1999/xhtml",
@@ -56,9 +48,7 @@ export class uri {
     ])
   }
 
-  /**
-   * Generate a random URI.
-   */
+  /** Generate a random URI. */
   static any(): string {
     if (random.chance(20)) {
       return uri.problematic()

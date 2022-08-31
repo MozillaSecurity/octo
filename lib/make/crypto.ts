@@ -19,41 +19,29 @@ interface AlgorithmOperationMap {
   digest: string[]
 }
 
-/**
- * Class for generating SubtleCrypto related values.
- */
+/** Class for generating SubtleCrypto related values. */
 export class crypto {
-  /**
-   * Return an array of key formats.
-   */
+  /** Return an array of key formats. */
   static get keyFormats(): string[] {
     return ["raw", "spki", "pkcs8", "jwk"]
   }
 
-  /**
-   * Generate a random key format.
-   */
+  /** Generate a random key format. */
   static randomKeyFormat(): string {
     return random.item(crypto.keyFormats)
   }
 
-  /**
-   * Return an array of key types.
-   */
+  /** Return an array of key types. */
   static get keyTypes(): string[] {
     return ["public", "private", "secret"]
   }
 
-  /**
-   * Generate a random key type.
-   */
+  /** Generate a random key type. */
   static randomKeyType(): string {
     return random.item(crypto.keyTypes)
   }
 
-  /**
-   * Return an array of method names.
-   */
+  /** Return an array of method names. */
   static get keyUsages(): string[] {
     return [
       "encrypt",
@@ -67,51 +55,37 @@ export class crypto {
     ]
   }
 
-  /**
-   * Return a subset of all valid method names.
-   */
+  /** Return a subset of all valid method names. */
   static randomKeyUsage(): string[] {
     return random.subset(crypto.keyUsages)
   }
 
-  /**
-   * Return an array of curve values.
-   */
+  /** Return an array of curve values. */
   static get curves(): string[] {
     return ["P-256", "P-384", "P-521"]
   }
 
-  /**
-   * Generate a random curve value.
-   */
+  /** Generate a random curve value. */
   static randomCurve(): string {
     return random.item(crypto.curves)
   }
 
-  /**
-   * Return an array of methods that can use JSON Web Keys.
-   */
+  /** Return an array of methods that can use JSON Web Keys. */
   static get jwkUsages(): string[] {
     return ["enc", "sig"]
   }
 
-  /**
-   * Return a subset of methods than can use JSON Web Keys.
-   */
+  /** Return a subset of methods than can use JSON Web Keys. */
   static randomJwkUsage(): string[] {
     return random.subset(crypto.keyUsages)
   }
 
-  /**
-   * Return an array of JSON Web Key types.
-   */
+  /** Return an array of JSON Web Key types. */
   static get jwkKeyTypes(): string[] {
     return ["oct", "RSA", "EC"]
   }
 
-  /**
-   * Return a subset of JSON Web Key types.
-   */
+  /** Return a subset of JSON Web Key types. */
   static randomJwkKeyType(): string[] {
     return random.subset(crypto.jwkKeyTypes)
   }
@@ -182,9 +156,7 @@ export class crypto {
     return random.item(crypto.algorithmNames[method])
   }
 
-  /**
-   * Return a random digest type.
-   */
+  /** Return a random digest type. */
   static randomDigestName(): string {
     return random.item(crypto.algorithmNames.digest)
   }
@@ -233,27 +205,19 @@ export class crypto {
             alg: 'RS${this.length(len)}'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.sign().
-         */
+        /** Return the algorithm to be used for crypto.subtle.sign(). */
         sign: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.verify().
-         */
+        /** Return the algorithm to be used for crypto.subtle.verify(). */
         verify: function () {
           return this.alg()
         },
@@ -323,27 +287,19 @@ export class crypto {
             alg: 'PS${this.length(len)}'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.sign().
-         */
+        /** Return the algorithm to be used for crypto.subtle.sign(). */
         sign: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.verify().
-         */
+        /** Return the algorithm to be used for crypto.subtle.verify(). */
         verify: function () {
           return this.alg()
         },
@@ -413,21 +369,15 @@ export class crypto {
             alg: 'RSA-OAEP-${this.length(len)}'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.encrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.encrypt(). */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'RSA-OAEP',
@@ -439,21 +389,15 @@ export class crypto {
             label: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.decrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.decrypt(). */
         decrypt: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.unwrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.unwrapKey(). */
         unwrapKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.wrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.wrapKey(). */
         wrapKey: function () {
           return this.alg()
         },
@@ -522,27 +466,19 @@ export class crypto {
             alg: 'ES${this.length(len)}'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.sign().
-         */
+        /** Return the algorithm to be used for crypto.subtle.sign(). */
         sign: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.verify().
-         */
+        /** Return the algorithm to be used for crypto.subtle.verify(). */
         verify: function () {
           return this.alg()
         },
@@ -591,21 +527,15 @@ export class crypto {
             namedCurve: 'P-${this.length(len)}'
           }`)
         },
-        /**
-         * Return the JSON Web Key (JWK).
-         */
+        /** Return the JSON Web Key (JWK). */
         jwk: function () {
           return {}
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
@@ -690,21 +620,15 @@ export class crypto {
             alg: 'A${this.length(len)}CTR'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.encrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.encrypt(). */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'AES-CTR',
@@ -712,21 +636,15 @@ export class crypto {
             counter: new Uint8Array(16)
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.decrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.decrypt(). */
         decrypt: function () {
           return this.encrypt()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.wrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.wrapKey(). */
         wrapKey: function () {
           return this.encrypt()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.unwrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.unwrapKey(). */
         unwrapKey: function () {
           return this.encrypt()
         },
@@ -777,21 +695,15 @@ export class crypto {
             alg: 'A${this.length(len)}CBC'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.encrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.encrypt(). */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'AES-CBC',
@@ -799,21 +711,15 @@ export class crypto {
             iv: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.decrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.decrypt(). */
         decrypt: function () {
           return this.encrypt()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.wrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.wrapKey(). */
         wrapKey: function () {
           return this.encrypt()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.unwrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.unwrapKey(). */
         unwrapKey: function () {
           return this.encrypt()
         },
@@ -871,21 +777,15 @@ export class crypto {
             }`)
           }
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.encrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.encrypt(). */
         encrypt: function () {
           return utils.common.mockup(`{
             name: 'AES-GCM',
@@ -894,24 +794,18 @@ export class crypto {
             tagLength: ${random.item([32, 64, 96, 104, 112, 120, 128])}
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.decrypt().
-         */
+        /** Return the algorithm to be used for crypto.subtle.decrypt(). */
         decrypt: function () {
           return this.encrypt()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.wrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.wrapKey(). */
         wrapKey: function () {
           return utils.common.mockup(`{
             name: 'AES-GCM',
             iv: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.unwrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.unwrapKey(). */
         unwrapKey: function () {
           return this.wrapKey()
         },
@@ -962,29 +856,21 @@ export class crypto {
             alg: 'A${this.length(len)}KW'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.wrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.wrapKey(). */
         wrapKey: function () {
           return utils.common.mockup(`{
             name: 'AES-KW'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.unwrapKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.unwrapKey(). */
         unwrapKey: function () {
           return this.wrapKey()
         },
@@ -1037,27 +923,19 @@ export class crypto {
             alg: 'HS${this.length(len)}'
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.sign().
-         */
+        /** Return the algorithm to be used for crypto.subtle.sign(). */
         sign: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.verify().
-         */
+        /** Return the algorithm to be used for crypto.subtle.verify(). */
         verify: function () {
           return this.alg()
         },
@@ -1076,35 +954,25 @@ export class crypto {
       HKDF: {
         // Key derivation using the extraction-then-expansion approach and using the SHA hash functions.
         keyUsages: ["deriveKey", "deriveBits"],
-        /**
-         * Return the algorithm object.
-         */
+        /** Return the algorithm object. */
         alg: function () {
           return utils.common.mockup(`{
             name: 'HKDF'
           }`)
         },
-        /**
-         * Return the JSON Web Key (JWK).
-         */
+        /** Return the JSON Web Key (JWK). */
         jwk: function () {
           return utils.common.mockup(`{}`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.deriveBits().
-         */
+        /** Return the algorithm to be used for crypto.subtle.deriveBits(). */
         deriveBits: function () {
           return utils.common.mockup(`{
             name: 'HKDF',
@@ -1115,9 +983,7 @@ export class crypto {
             info: crypto.getRandomValues(new Uint8Array(16))
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.deriveKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.deriveKey(). */
         deriveKey: function () {
           return this.deriveBits()
         },
@@ -1131,35 +997,25 @@ export class crypto {
       PBKDF2: {
         // Key derivation using the PKCS#5 password-based key derivation function v2.0.
         keyUsages: ["deriveKey", "deriveBits"],
-        /**
-         * Return the algorithm object.
-         */
+        /** Return the algorithm object. */
         alg: function () {
           return utils.common.mockup(`{
             name: 'PBKDF2'
           }`)
         },
-        /**
-         * Return the JSON Web Key (JWK).
-         */
+        /** Return the JSON Web Key (JWK). */
         jwk: function () {
           return utils.common.mockup(`{}`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.alg()
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.deriveBits().
-         */
+        /** Return the algorithm to be used for crypto.subtle.deriveBits(). */
         deriveBits: function () {
           return utils.common.mockup(`{
             name: 'PBKDF2',
@@ -1170,9 +1026,7 @@ export class crypto {
             iterations: ${random.number(1000)}
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.deriveKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.deriveKey(). */
         deriveKey: function () {
           return this.deriveBits()
         },
@@ -1185,23 +1039,17 @@ export class crypto {
       },
       DH: {
         keyUsages: ["deriveKey", "deriveBits"],
-        /**
-         * Return the algorithm object.
-         */
+        /** Return the algorithm object. */
         alg: function () {
           return utils.common.mockup(`{
             name: 'DH'
           }`)
         },
-        /**
-         * Return the JSON Web Key (JWK).
-         */
+        /** Return the JSON Web Key (JWK). */
         jwk: function () {
           return utils.common.mockup(`{}`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.generateKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
         generateKey: function () {
           return utils.common.mockup(`{
             name: 'DH',
@@ -1209,9 +1057,7 @@ export class crypto {
             generator: new Uint8Array([2])
           }`)
         },
-        /**
-         * Return the algorithm to be used for crypto.subtle.importKey().
-         */
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
         importKey: function () {
           return this.generateKey()
         },
@@ -1252,16 +1098,12 @@ export class crypto {
     }
   }
 
-  /**
-   * Return the name of all supported algorithms.
-   */
+  /** Return the name of all supported algorithms. */
   static supportedAlgorithms(): Array<keyof typeof crypto.algorithms> {
     return Object.keys(crypto.algorithms) as Array<keyof typeof crypto.algorithms>
   }
 
-  /**
-   * Returns a random algorithm generator.
-   */
+  /** Returns a random algorithm generator. */
   static randomAlgorithm(): any {
     const key = random.item(this.supportedAlgorithms())
     return crypto.algorithms[key]

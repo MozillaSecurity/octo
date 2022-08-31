@@ -5,28 +5,20 @@
 import { make } from "../make"
 import { random } from "../random"
 
-/**
- * Class for generating random values with units.
- */
+/** Class for generating random values with units. */
 export class unit {
-  /**
-   * Generate a random length unit.
-   */
+  /** Generate a random length unit. */
   static unit(): string {
     return random.item(["px", "em", "ex", "ch", "rem", "mm", "cm", "in", "pt", "pc", "%"])
   }
 
-  /**
-   * Generate a random length value.
-   */
+  /** Generate a random length value. */
   // @ts-ignore
   static length(): string {
     return make.numbers.any() + make.unit.unit()
   }
 
-  /**
-   * Generate a random percent.
-   */
+  /** Generate a random percent. */
   static percent(): string {
     if (random.chance(100)) {
       return `${make.numbers.any()}%`

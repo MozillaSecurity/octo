@@ -4,9 +4,7 @@
 
 import { random } from "../../random"
 
-/**
- * Class for generating random CSS list related values.
- */
+/** Class for generating random CSS list related values. */
 export class list {
   /**
    * Generate random list-style-types.

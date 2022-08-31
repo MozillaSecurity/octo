@@ -62,6 +62,9 @@
     "*.{js,ts}": "eslint --cache --fix"
   },
   "prettier": {
+    "plugins": [
+      "prettier-plugin-jsdoc"
+    ],
     "printWidth": 100,
     "semi": false
   },

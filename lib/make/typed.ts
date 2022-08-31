@@ -4,9 +4,7 @@
 
 import { random } from "../random"
 
-/**
- * Class for generating random values using TypedArrays.
- */
+/** Class for generating random values using TypedArrays. */
 export class typed {
   /**
    * Generate a random int8 [-128, 127].
@@ -122,9 +120,7 @@ export class typed {
     }
   }
 
-  /**
-   * Generate a random typed array value.
-   */
+  /** Generate a random typed array value. */
   static any(): string {
     return random.choose([
       [1, [typed.byte, typed.octet]],
@@ -184,9 +180,7 @@ export class typed {
     }
   }
 
-  /**
-   * Generate a random buffer source.
-   */
+  /** Generate a random buffer source. */
   static bufferSource(): string {
     switch (random.number(4)) {
       case 0:

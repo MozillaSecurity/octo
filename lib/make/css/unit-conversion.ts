@@ -114,17 +114,17 @@ export class Length {
     switch (unit) {
       // Absolute lengths
       case "cm":
-        return value / _options.resolution * 2.54
+        return (value / _options.resolution) * 2.54
       case "mm":
-        return value / _options.resolution * 2.54 * 10
+        return (value / _options.resolution) * 2.54 * 10
       case "Q":
-        return value / _options.resolution * 2.54 * 40
+        return (value / _options.resolution) * 2.54 * 40
       case "in":
         return value / _options.resolution
       case "pc":
-        return value / _options.resolution * 6
+        return (value / _options.resolution) * 6
       case "pt":
-        return value * 72 / _options.resolution
+        return (value * 72) / _options.resolution
       case "px":
         return value
       // Font-relative lengths
