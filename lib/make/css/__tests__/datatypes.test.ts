@@ -5,7 +5,7 @@
 /* eslint-env jest */
 /* eslint-disable jest/no-conditional-expect */
 
-import { calc, datatypes, expandRange } from "../datatypes"
+import { calc, datatypes, expandRange, normalizeSuffix } from "../datatypes"
 import { random } from "../../../random"
 
 beforeAll(() => {
@@ -54,6 +54,18 @@ describe("expandRange()", () => {
   ])("%s", (_, opts, expected) => {
     const value = expandRange(opts[0], opts[1])
     expect(value).toEqual(expected)
+  })
+})
+
+type RangeType = null | number | string
+describe("normalizeSuffix()", () => {
+  test.each([
+    ["min (null)", [null, null], [null, null]],
+    ["min (unit)", ["1px", null], ["1px", null]],
+    ["max (null)", [0, null], [0, null]],
+    ["max (unit)", [null, "1px"], [null, "1px"]],
+  ])("%s", (name: string, values: RangeType[], expected: RangeType[]) => {
+    expect(normalizeSuffix(values[0], values[1])).toEqual(expected)
   })
 })
 
