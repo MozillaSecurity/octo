@@ -4,13 +4,16 @@
 
 import cssesc from "cssesc"
 
+import { Angle, Frequency, Length, Resolution, Time } from "./unit-conversion"
 import { make } from "../index"
 import { random } from "../../random"
 
+type RangedTypeOption = string | number | null
+
 /* Interface representing options for ranged datatypes */
 interface RangedTypeOptions {
-  min: number | null
-  max: number | null
+  min: RangedTypeOption
+  max: RangedTypeOption
 }
 
 /**
@@ -43,13 +46,58 @@ export function calc(generator: () => string): string {
 }
 
 /**
+ * Normalize suffix for RangedTypeOptions.
+ *
+ * Both min and max are not required to contain a suffix (i.e. \<time [0, 100s]\>). Ensures the suffix
+ * exists on both.
+ *
+ * @param min - Minimum value.
+ * @param max - Maximum value.
+ */
+export function normalizeSuffix(
+  min: RangedTypeOption,
+  max: RangedTypeOption
+): [RangedTypeOption, RangedTypeOption] {
+
+  let suffix = (typeof min === "string") ? min.match(/[a-zA-Z]+/g) : null
+  suffix = (suffix === null && typeof max === "string") ? max.match(/[a-zA-Z]+/g) : null
+
+  // Both min and max are not required to contain a suffix (i.e. <time [0, 100s]>)
+  // Ensure the suffix exists on both
+  if (suffix) {
+    min = min !== null && !String(min).includes(suffix[0]) ? `${min}${suffix[0]}` : min
+    max = max !== null && !String(max).includes(suffix[0]) ? `${max}${suffix[0]}` : max
+  }
+
+  return [min, max]
+}
+
+/**
+ * Split length and unit.
+ *
+ * @param value - The value to split.
+ */
+function splitUnit(value: string): [number, string] {
+  const match = value.match(/^([0-9]+)([a-z]+$)/)
+  if (match && match.length === 3) {
+    const digit = Number(match[1])
+    const unit = match[2]
+    if (!Number.isNaN(digit)) {
+      return [digit, unit]
+    }
+  }
+
+  throw new Error(`Invalid value! (${value})`)
+}
+
+/**
  * Simple helper function for extrapolating ranged types.
  *
  * @param min - Minimum value.
  * @param max - Maximum value.
  */
 export function expandRange(min: number | null, max: number | null): [number, number] {
-  const _min = min !== null ? min : -2147483648
+  const _min = min !== null ? min : -0x80000000
   const _max = max !== null ? max : min == null ? 0x7fffffff : 0xffffffff
 
   return [_min, _max]
@@ -65,21 +113,20 @@ export class datatypes {
    * @param opts - Options.
    */
   static angle(opts?: RangedTypeOptions | null): string {
-    const [suffix, limit] = random.item([
-      ["deg", 360],
-      ["grad", 400],
-      ["rad", Math.PI * 2],
-      ["turn", 1],
-    ])
+    const unit = random.item(["deg", "grad", "rad", "turn"])
 
     if (opts) {
-      const [min, max] = expandRange(opts.min, opts.max)
-      return `${make.numbers.frange(min, max)}${suffix}`
+      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+      // Convert both to a singular base type (degrees)
+      const min = typeof _min !== "string" ? _min : Angle.toDeg(...splitUnit(_min))
+      const max = typeof _max !== "string" ? _max : Angle.toDeg(...splitUnit(_max))
+      const value = make.numbers.frange(...expandRange(min, max))
+      return `${Angle.fromDeg(value, unit)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.angle(opts))
     }
 
-    return `${make.numbers.frange(0, limit)}${suffix}`
+    return `${make.numbers.frange(-0x80000000, 0x7fffffff)}${unit}`
   }
 
   /**
@@ -128,15 +175,18 @@ export class datatypes {
    * @param opts - Options.
    */
   static frequency(opts?: RangedTypeOptions | null): string {
+    const unit = random.item(["Hz", "kHz"])
     if (opts) {
-      const [min, max] = expandRange(opts.min, opts.max)
-      const unit = random.item(["Hz", "kHz"])
-      return `${make.numbers.frange(min, max)}${unit}`
+      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+      // Convert both to a singular base type (kHz)
+      const min = typeof _min !== "string" ? _min : Frequency.toKhz(...splitUnit(_min))
+      const max = typeof _max !== "string" ? _max : Frequency.toKhz(...splitUnit(_max))
+      const value = make.numbers.frange(...expandRange(min, max))
+      return `${Frequency.fromKhz(value, unit)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.frequency(opts))
     }
 
-    const unit = random.item(["Hz", "kHz"])
     return `${make.numbers.any()}${unit}`
   }
 
@@ -154,7 +204,8 @@ export class datatypes {
    * @param opts - Options.
    */
   static integer(opts?: RangedTypeOptions | null): string {
-    if (opts) {
+    // Integer options should never be strings
+    if (opts && typeof opts.min !== "string" && typeof opts.max !== "string") {
       const [min, max] = expandRange(opts.min, opts.max)
       return String(random.range(min, max))
     } else if (random.chance(75)) {
@@ -179,8 +230,12 @@ export class datatypes {
 
     const unit = random.item(units)
     if (opts) {
-      const [min, max] = expandRange(opts.min, opts.max)
-      return `${make.numbers.frange(min, max)}${unit}`
+      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+      // Convert both to a singular base type (degrees)
+      const min = typeof _min !== "string" ? _min : Length.toPx(...splitUnit(_min))
+      const max = typeof _max !== "string" ? _max : Length.toPx(...splitUnit(_max))
+      const value = make.numbers.frange(...expandRange(min, max))
+      return `${Length.fromPx(value, unit)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.length(opts))
     }
@@ -194,7 +249,8 @@ export class datatypes {
    * @param opts - Options.
    */
   static number(opts?: RangedTypeOptions | null): string {
-    if (opts) {
+    // Number options should never be strings
+    if (opts && typeof opts.min !== "string" && typeof opts.max !== "string") {
       const [min, max] = expandRange(opts.min, opts.max)
       return String(make.numbers.frange(min, max))
     } else if (random.chance(75)) {
@@ -224,7 +280,8 @@ export class datatypes {
    * @param opts - Options.
    */
   static percentage(opts?: RangedTypeOptions | null): string {
-    if (opts) {
+    // Percentage options should never be strings
+    if (opts && typeof opts.min !== "string" && typeof opts.max !== "string") {
       const [min, max] = expandRange(opts.min, opts.max)
       return `${random.range(min, max)}%`
     } else if (random.chance(75)) {
@@ -277,8 +334,12 @@ export class datatypes {
   static resolution(opts?: RangedTypeOptions | null): string {
     const unit = random.item(["dpi", "dpcm", "dppx"])
     if (opts) {
-      const [min, max] = expandRange(opts.min, opts.max)
-      return `${make.numbers.frange(min, max)}${unit}`
+      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+      // Convert both to a singular base type (dppx)
+      const min = typeof _min !== "string" ? _min : Resolution.toDppx(...splitUnit(_min))
+      const max = typeof _max !== "string" ? _max : Resolution.toDppx(...splitUnit(_max))
+      const value = make.numbers.frange(...expandRange(min, max))
+      return `${Resolution.fromDppx(value, unit)}${unit}`
     }
 
     return `${Math.abs(make.numbers.any())}${unit}`
@@ -304,15 +365,18 @@ export class datatypes {
    * @param opts - Options.
    */
   static time(opts?: RangedTypeOptions | null): string {
+    const unit = random.item(["s", "ms"])
     if (opts) {
-      const [min, max] = expandRange(opts.min, opts.max)
-      const unit = random.item(["s", "ms"])
-      return `${random.range(min, max)}${unit}`
+      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+      // Convert both to a singular base type (dppx)
+      const min = typeof _min !== "string" ? _min : Time.toMs(...splitUnit(_min))
+      const max = typeof _max !== "string" ? _max : Time.toMs(...splitUnit(_max))
+      const value = make.numbers.frange(...expandRange(min, max))
+      return `${Time.fromMs(value, unit)}${unit}`
     } else if (random.chance(75)) {
       return calc(() => datatypes.time(opts))
     }
 
-    const unit = random.item(["s", "ms"])
     if (unit === "s") {
       return `${random.range(1, 4)}${unit}`
     } else {
