@@ -85,10 +85,7 @@ describe("ranged datatypes", () => {
       ["positive", 0, null],
       ["negative", null, 0],
     ])("ranges (%s)", (type, min, max) => {
-      const raw = datatypes[name]({
-        min,
-        max,
-      })
+      const raw = datatypes[name]({ min, max })
       const value = parseInt(raw)
       if (type === "positive") {
         expect(value).toBeGreaterThanOrEqual(0)
