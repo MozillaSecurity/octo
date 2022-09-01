@@ -1,3 +1,10 @@
+# [3.0.0-next.24](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.23...v3.0.0-next.24) (2022-09-01)
+
+
+### Features
+
+* add unit conversions for relative viewport percentages ([#52](https://github.com/MozillaSecurity/octo/issues/52)) ([b42cefe](https://github.com/MozillaSecurity/octo/commit/b42cefe8d236d583fa8189779b38bc228bb46d50))
+
 # [3.0.0-next.23](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.22...v3.0.0-next.23) (2022-09-01)
 
 
