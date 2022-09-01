@@ -161,6 +161,15 @@ export class Length {
         // Equal to the computed value of the line-height property of the element on
         // which it is used.
         return value / (_options.fontSize * 1.2)
+      // Viewport-percentage lengths
+      case "vw":
+        return _options.viewportWidth / 100 / value
+      case "vh":
+        return _options.viewportHeight / 100 / value
+      case "vmin":
+        return Math.min(_options.viewportHeight, _options.viewportWidth) / 100 / value
+      case "vmax":
+        return Math.max(_options.viewportHeight, _options.viewportWidth) / 100 / value
     }
 
     throw new Error(`Invalid unit! (${unit})`)
@@ -219,6 +228,15 @@ export class Length {
         // Equal to the computed value of the line-height property of the element on
         // which it is used.  Line-height `normal` is typically 1.2em.
         return value * _options.fontSize * 1.2
+      // Viewport-percentage lengths
+      case "vw":
+        return (_options.viewportWidth / 100) * value
+      case "vh":
+        return (_options.viewportHeight / 100) * value
+      case "vmin":
+        return (Math.min(_options.viewportHeight, _options.viewportWidth) / 100) * value
+      case "vmax":
+        return (Math.max(_options.viewportHeight, _options.viewportWidth) / 100) * value
     }
 
     throw new Error(`Invalid unit! (${unit})`)
