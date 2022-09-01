@@ -99,6 +99,10 @@
       ]
     ]
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "@types/cssesc": "^3.0.0",
     "@types/html-entities": "^1.3.3",
