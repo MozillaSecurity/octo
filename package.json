@@ -58,8 +58,11 @@
     }
   },
   "lint-staged": {
-    "package.json": "sort-package-json",
-    "*.{js,ts}": "eslint --cache --fix"
+    "**.ts": [
+      "npx prettier --write",
+      "eslint --cache ./src/ --fix"
+    ],
+    "package.json": "sort-package-json"
   },
   "prettier": {
     "plugins": [
