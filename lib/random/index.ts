@@ -133,7 +133,8 @@ export class random {
   }
 
   /**
-   * Return an item from an array of arrays where the first index in each sub-array denotes the weight.
+   * Return an item from an array of arrays where the first index in each sub-array denotes the
+   * weight.
    *
    * @param list - Array of arrays.
    * @param flat - Indicates whether we should iterate over the arrays recursively.
