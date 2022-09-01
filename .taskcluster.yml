@@ -72,7 +72,7 @@ tasks:
               git -c advice.detachedHead=false checkout ${head_rev} &&
               npm i &&
               npm test &&
-              npx semantic-release --no-ci
+              HUSKY=0 CI=true npx semantic-release
         metadata:
           name: octo tests node v14
           description: octo tests node v14
