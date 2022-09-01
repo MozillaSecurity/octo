@@ -7,6 +7,7 @@ import { logger } from "../logging"
 
 /** A MersenneTwister based PRNG with a number of useful utility functions. */
 export class random {
+  /** Reference to the MersenneTwister instance. */
   static twister: MersenneTwister
 
   /**

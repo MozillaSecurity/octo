@@ -6,6 +6,7 @@ import { random } from "../random"
 
 /** Generic tracking object Generates unique identifiers for a given prefix. */
 export class tracker {
+  /** Recorded tracker entries. */
   private readonly tracker: Record<string, string[]>
   /** Create a new instance. */
   constructor() {
