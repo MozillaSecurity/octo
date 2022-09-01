@@ -1,3 +1,10 @@
+# [3.0.0-next.23](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.22...v3.0.0-next.23) (2022-09-01)
+
+
+### Features
+
+* add support for datatype ranged values containing units ([#48](https://github.com/MozillaSecurity/octo/issues/48)) ([b55817c](https://github.com/MozillaSecurity/octo/commit/b55817ca3d9a54545bfa2100caeeb1ed6e7e2a95))
+
 # [3.0.0-next.22](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.21...v3.0.0-next.22) (2022-07-06)
 
 
