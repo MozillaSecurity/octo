@@ -65,6 +65,10 @@ describe("Length", () => {
       ["ric", 16],
       ["lh", 19.2],
       ["rlh", 19.2],
+      ["vw", 10.24],
+      ["vh", 7.68],
+      ["vmax", 10.24],
+      ["vmin", 7.68],
     ])("%s", (unit, expected) => {
       const result = Length.toPx(1, unit)
       expect(result).toEqual(expected)
