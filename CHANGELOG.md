@@ -1,3 +1,10 @@
+# [3.0.0-next.25](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.24...v3.0.0-next.25) (2022-09-01)
+
+
+### Bug Fixes
+
+* update typescript to 4.8.2 ([3ef5ea2](https://github.com/MozillaSecurity/octo/commit/3ef5ea2f290371bfcb95dc442f51a3743c7bddde))
+
 # [3.0.0-next.24](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.23...v3.0.0-next.24) (2022-09-01)
 
 
