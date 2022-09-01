@@ -133,6 +133,6 @@
     "semantic-release": "^19.0.2",
     "sort-package-json": "^1.57.0",
     "ts-jest": "^28.0.8",
-    "typedoc": "^0.22.15"
+    "typedoc": "^0.23.13"
   }
 }
