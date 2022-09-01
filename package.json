@@ -105,7 +105,6 @@
     "html-entities": "^2.3.3",
     "jsesc": "^3.0.2",
     "mersenne-twister": "^1.1.0",
-    "ts-loader": "^9.3.0",
     "typescript": "^4.6.4"
   },
   "devDependencies": {
