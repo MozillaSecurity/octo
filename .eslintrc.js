@@ -1,7 +1,17 @@
-const paramContexts = ["FunctionExpression", "FunctionDeclaration", "MethodDefinition"]
-const requireOptions = {}
-for (const context of [...paramContexts, "ClassDeclaration", "ClassExpression"]) {
-  requireOptions[context] = true
+const contexts = [
+  "FunctionExpression",
+  "FunctionDeclaration",
+  "MethodDefinition",
+  "PropertyDefinition",
+  "TSInterfaceDeclaration",
+  "TSPropertySignature",
+]
+const required = {
+  ClassDeclaration: true,
+  ClassExpression: true,
+  FunctionExpression: true,
+  FunctionDeclaration: true,
+  MethodDefinition: true,
 }
 
 module.exports = {
@@ -25,15 +35,29 @@ module.exports = {
   rules: {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "jsdoc/require-jsdoc": ["warn", { require: requireOptions }],
-    "jsdoc/require-description": ["warn", { contexts: ["any"] }],
-    "jsdoc/require-description-complete-sentence": ["warn"],
-    "jsdoc/require-param": ["warn", { contexts: paramContexts }],
-    "jsdoc/require-param-description": ["warn", { contexts: paramContexts }],
-    "jsdoc/require-param-name": ["warn", { contexts: paramContexts }],
+    "jsdoc/require-jsdoc": [
+      "warn",
+      {
+        contexts,
+        publicOnly: { ancestorsOnly: true },
+        require: required,
+      },
+    ],
+    "jsdoc/require-description": ["warn"],
+    "jsdoc/require-description-complete-sentence": ["error"],
+    "jsdoc/require-param": ["warn"],
+    "jsdoc/require-param-description": ["warn"],
+    "jsdoc/require-param-name": ["warn"],
     "jsdoc/require-param-type": ["off"],
     "jsdoc/require-returns": ["off"],
+    "jsdoc/require-yields": ["off"],
+    "prettier/prettier": "error",
     "sort-imports": ["error", { allowSeparatedGroups: true }],
     "tsdoc/syntax": "warn",
+  },
+  settings: {
+    jsdoc: {
+      mode: "typescript",
+    },
   },
 }

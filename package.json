@@ -60,7 +60,7 @@
   "lint-staged": {
     "**.ts": [
       "npx prettier --write",
-      "eslint --cache ./src/ --fix"
+      "eslint --cache ./lib/ --fix"
     ],
     "package.json": "sort-package-json"
   },
@@ -98,6 +98,10 @@
         }
       ]
     ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@types/cssesc": "^3.0.0",
@@ -137,5 +141,8 @@
     "sort-package-json": "^1.57.0",
     "ts-jest": "^28.0.8",
     "typedoc": "^0.23.13"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

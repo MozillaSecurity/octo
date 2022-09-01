@@ -12,7 +12,9 @@ interface ContainerEntry {
 
 /** Class for tracking objects. */
 export class objects {
+  /** Counter used for tracking number of created objects. */
   private counter: number
+  /** Container for storing created objects. */
   private readonly container: { [id: string]: ContainerEntry[] }
   /** Create a new instance. */
   constructor() {

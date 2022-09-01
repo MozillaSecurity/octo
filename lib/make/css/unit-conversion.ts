@@ -2,11 +2,17 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+/** Configuration options required for relative unit conversions. */
 export interface BrowserDisplayOptions {
+  /** Target screen resolution. */
   resolution?: number
+  /** Target font-size. */
   fontSize?: number
+  /** Target line-height. */
   lineHeight?: number
+  /** Target viewport width. */
   viewportWidth?: number
+  /** Target viewport height. */
   viewportHeight?: number
 }
 

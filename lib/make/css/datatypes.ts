@@ -48,8 +48,8 @@ export function calc(generator: () => string): string {
 /**
  * Normalize suffix for RangedTypeOptions.
  *
- * Both min and max are not required to contain a suffix (i.e. <time [0, 100s]>). Ensures the suffix
- * exists on both.
+ * Both min and max are not required to contain a suffix (i.e. `<time [0, 100s]>`). Ensures the
+ * suffix exists on both.
  *
  * @param min - Minimum value.
  * @param max - Maximum value.
