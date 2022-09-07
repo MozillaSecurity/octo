@@ -126,6 +126,20 @@ export class datatypes {
     return `${make.numbers.frange(-0x80000000, 0x7fffffff)}${unit}`
   }
 
+  /** Generate a random <an-plus-b> data type. */
+  static anPlusB(): string {
+    switch (random.number(4)) {
+      case 0:
+        return random.item(["odd", "even"])
+      case 1:
+        return random.item(["+", "-", ""]) + random.number(4)
+      case 2:
+        return `${random.pick(["+", "-", ""]) + random.number(4)}n`
+      default:
+        return `${random.pick(["+", "-", ""])}n${random.pick(["+", "-"])}${random.number(4)}`
+    }
+  }
+
   /** Generate a random <decibel> data type. */
   static decibel(): string {
     return `${make.numbers.any()}dB`
