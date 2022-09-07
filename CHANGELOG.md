@@ -1,3 +1,10 @@
+# [3.0.0-next.26](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.25...v3.0.0-next.26) (2022-09-07)
+
+
+### Features
+
+* **make.css:** add generator for the <an-plus-b> datatype ([f5d835b](https://github.com/MozillaSecurity/octo/commit/f5d835b4546867108ee3c13bc0ee48e17551203d))
+
 # [3.0.0-next.25](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.24...v3.0.0-next.25) (2022-09-01)
 
 
