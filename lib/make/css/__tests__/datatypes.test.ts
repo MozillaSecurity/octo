@@ -64,6 +64,9 @@ describe("normalizeSuffix()", () => {
     ["min (unit)", ["1px", null], ["1px", null]],
     ["max (null)", [0, null], [0, null]],
     ["max (unit)", [null, "1px"], [null, "1px"]],
+    ["mismatch (min)", [1, "100px"], ["1px", "100px"]],
+    ["mismatch (max)", ["1px", 100], ["1px", "100px"]],
+    ["negative units (min)", ["-90deg", 90], ["-90deg", "90deg"]],
   ])("%s", (name: string, values: RangeType[], expected: RangeType[]) => {
     expect(normalizeSuffix(values[0], values[1])).toEqual(expected)
   })
