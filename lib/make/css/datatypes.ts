@@ -59,7 +59,9 @@ export function normalizeSuffix(
   max: RangedTypeOption
 ): [RangedTypeOption, RangedTypeOption] {
   let suffix = typeof min === "string" ? min.match(/[a-zA-Z]+/g) : null
-  suffix = suffix === null && typeof max === "string" ? max.match(/[a-zA-Z]+/g) : null
+  if (suffix === null && typeof max === "string") {
+    suffix = max.match(/[a-zA-Z]+/g)
+  }
 
   // Both min and max are not required to contain a suffix (i.e. <time [0, 100s]>)
   // Ensure the suffix exists on both
