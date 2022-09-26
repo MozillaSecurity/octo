@@ -5,7 +5,7 @@
 /* eslint-env jest */
 /* eslint-disable jest/no-conditional-expect */
 
-import { calc, datatypes, expandRange, normalizeSuffix } from "../datatypes"
+import { calc, datatypes, expandRange, normalizeSuffix, splitUnit } from "../datatypes"
 import { random } from "../../../random"
 
 beforeAll(() => {
@@ -69,6 +69,15 @@ describe("normalizeSuffix()", () => {
     ["negative units (min)", ["-90deg", 90], ["-90deg", "90deg"]],
   ])("%s", (name: string, values: RangeType[], expected: RangeType[]) => {
     expect(normalizeSuffix(values[0], values[1])).toEqual(expected)
+  })
+})
+
+describe("splitUnit()", () => {
+  test.each([
+    ["positive", "90deg", 90, "deg"],
+    ["negative", "-90deg", -90, "deg"],
+  ])("%s", (name: string, value: string, prefix: number, suffix: string) => {
+    expect(splitUnit(value)).toEqual([prefix, suffix])
   })
 })
 

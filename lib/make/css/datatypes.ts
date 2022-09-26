@@ -78,8 +78,8 @@ export function normalizeSuffix(
  *
  * @param value - The value to split.
  */
-function splitUnit(value: string): [number, string] {
-  const match = value.match(/^([0-9]+)([a-z]+$)/)
+export function splitUnit(value: string): [number, string] {
+  const match = value.match(/^(-?[0-9]+)([a-z]+$)/)
   if (match && match.length === 3) {
     const digit = Number(match[1])
     const unit = match[2]
