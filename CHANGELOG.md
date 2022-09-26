@@ -1,3 +1,10 @@
+# [3.0.0-next.27](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.26...v3.0.0-next.27) (2022-09-26)
+
+
+### Bug Fixes
+
+* only update suffix if min does not contain a unit ([c27f3ce](https://github.com/MozillaSecurity/octo/commit/c27f3ce098d8828a8ee1c839f6518ef5535bb473))
+
 # [3.0.0-next.26](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.25...v3.0.0-next.26) (2022-09-07)
 
 
