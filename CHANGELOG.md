@@ -1,3 +1,10 @@
+# [3.0.0-next.28](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.27...v3.0.0-next.28) (2022-11-18)
+
+
+### Features
+
+* treat flex types as ranged data types ([2eee378](https://github.com/MozillaSecurity/octo/commit/2eee378c6010c011895627d6b8c325c45506959e))
+
 # [3.0.0-next.27](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.26...v3.0.0-next.27) (2022-09-26)
 
 
