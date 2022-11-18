@@ -171,8 +171,19 @@ export class datatypes {
     return `expression(body.scrollTop + ${datatypes.length()});`
   }
 
-  /** Generate a random <flex> data type. */
-  static flex(): string {
+  /**
+   * Generate a random <flex> data type.
+   *
+   * @param opts - Options.
+   */
+  static flex(opts?: RangedTypeOptions | null): string {
+    if (opts) {
+      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+      const min = typeof _min !== "string" ? _min : splitUnit(_min)[0]
+      const max = typeof _max !== "string" ? _max : splitUnit(_max)[0]
+      const value = make.numbers.frange(...expandRange(min, max))
+      return `${value}fr`
+    }
     return `${make.numbers.any()}fr`
   }
 

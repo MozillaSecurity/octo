@@ -86,6 +86,7 @@ describe("ranged datatypes", () => {
     "angle",
     "dimension",
     "frequency",
+    "flex",
     "integer",
     "length",
     "number",
