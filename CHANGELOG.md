@@ -1,3 +1,17 @@
+# [3.0.0-next.29](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.28...v3.0.0-next.29) (2023-01-12)
+
+
+### Features
+
+* escape double quotes ([5e4ec7e](https://github.com/MozillaSecurity/octo/commit/5e4ec7e28a55c5180e01f1339b668fe7882e5340))
+
+
+### BREAKING CHANGES
+
+* This commit doesn't modify the API.  It does however,
+modify how strings are quoted and may impact users who are manually
+wrapping values with quotes.
+
 # [3.0.0-next.28](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.27...v3.0.0-next.28) (2022-11-18)
 
 
