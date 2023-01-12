@@ -15,8 +15,9 @@ export class common {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static quote(str: any, html = false): string {
     const options = {
-      minimal: true,
       isScriptContext: html,
+      minimal: true,
+      quotes: "double" as const,
       wrap: true,
     }
 

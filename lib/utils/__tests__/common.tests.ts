@@ -9,20 +9,14 @@ import { common } from "../common"
 
 describe("Common", () => {
   describe("quote()", () => {
-    test("simple strings", () => {
-      expect(common.quote("foobar")).toBe("'foobar'")
-    })
-    test("strings with quotes", () => {
-      expect(common.quote("foo'bar'")).toBe("'foo\\'bar\\''")
-    })
-    test("numbers", () => {
-      expect(common.quote(123)).toBe("123")
-    })
-    test("numbers as strings", () => {
-      expect(common.quote("123")).toBe("'123'")
-    })
-    test("vanilla objects", () => {
-      expect(common.quote({ a: 123, b: "foobar" })).toBe("{'a':123,'b':'foobar'}")
+    test.each([
+      ["simple strings", "foobar", '"foobar"'],
+      ["strings with quotes", 'foo"bar', '"foo\\"bar"'],
+      ["numbers", 123, "123"],
+      ["numbers as strings", "123", '"123"'],
+      ["vanilla objects", { a: 123, b: "foobar" }, '{"a":123,"b":"foobar"}'],
+    ])("%s", (_, value, expected) => {
+      expect(common.quote(value)).toBe(expected)
     })
   })
 
