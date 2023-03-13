@@ -1,3 +1,10 @@
+# [3.0.0-next.30](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.29...v3.0.0-next.30) (2023-03-13)
+
+
+### Features
+
+* **utils.script:** increase loop iteration count to 8000 ([18a2998](https://github.com/MozillaSecurity/octo/commit/18a299867d5a6d44e735ec171fe906a5cbc00d48))
+
 # [3.0.0-next.29](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.28...v3.0.0-next.29) (2023-01-12)
 
 
