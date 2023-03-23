@@ -1,3 +1,10 @@
+# [3.0.0-next.31](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.30...v3.0.0-next.31) (2023-03-23)
+
+
+### Reverts
+
+* Revert "feat(utils.script): increase loop iteration count to 8000" ([ad8c46d](https://github.com/MozillaSecurity/octo/commit/ad8c46d34269f46dfead90e796aff875b482e69b))
+
 # [3.0.0-next.30](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.29...v3.0.0-next.30) (2023-03-13)
 
 
