@@ -12,8 +12,8 @@ export class arrays {
    * @param fn - Function used to generate values.
    * @param limit - Length of the array.
    */
-  static filledArray(fn: () => any, limit = make.numbers.tiny()): any[] {
-    const array: any[] = []
+  static filledArray<T>(fn: () => T, limit = make.numbers.tiny()): T[] {
+    const array: T[] = []
 
     for (let i = 0; i < limit; i++) {
       const value = random.pick(fn)
