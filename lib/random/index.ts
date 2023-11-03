@@ -85,6 +85,9 @@ export class random {
    * @param list - List to choose from.
    */
   static item<T>(list: T[]): T {
+    if (!list.length) {
+      throw new Error("Cannot return random item from an empty list!")
+    }
     return list[random.number(list.length)]
   }
 
@@ -94,6 +97,11 @@ export class random {
    * @param obj - Source object.
    */
   static key(obj: Record<string, any>): string {
+    const keys = Object.keys(obj)
+    if (!keys.length) {
+      throw new Error("Cannot return a random key from an empty object!")
+    }
+
     return random.item(Object.keys(obj))
   }
 
