@@ -178,7 +178,7 @@ export class text {
         ],
         // Seen in mxr
         ["en-US", "fr", "fra", "de", "ru", "en-us", "is-IS", "xyzzy"],
-      ])
+      ]),
     )
   }
 
@@ -250,7 +250,7 @@ export class text {
         0x2061, // mathematical function application
         0x2064, // mathematical invisible separator
         0x2044, // fraction slash character
-      ])
+      ]),
     )
   }
 
@@ -266,7 +266,7 @@ export class text {
         0x0039, // END_ARABIC_DIGITS
         0x06f0, // START_FARSI_DIGITS
         0x06f9, // END_FARSI_DIGITS
-      ])
+      ]),
     )
   }
 
@@ -353,7 +353,6 @@ export class text {
 
   /**
    * Generate a string from an array of values and generators.
-   *
    * @deprecated - This method does not appear to be useful and will be removed.
    * @param set - Array of values and generators.
    * @param maxlen - Maximum number of iterations to perform.

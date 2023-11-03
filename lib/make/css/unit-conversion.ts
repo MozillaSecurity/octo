@@ -28,7 +28,6 @@ const VIEW_OPTS: Required<BrowserDisplayOptions> = {
 export class Angle {
   /**
    * Convert an angle value in degrees to an alternative angle unit.
-   *
    * @param value - The value.
    * @param unit - The unit.
    */
@@ -49,7 +48,6 @@ export class Angle {
 
   /**
    * Convert an angle value with a unit to degrees.
-   *
    * @param value - The value.
    * @param unit - The unit.
    */
@@ -73,7 +71,6 @@ export class Angle {
 export class Frequency {
   /**
    * Convert a frequency value in kHz to an alternative frequency unit.
-   *
    * @param value - The value.
    * @param unit - The unit.
    */
@@ -90,7 +87,6 @@ export class Frequency {
 
   /**
    * Convert a frequency value with a unit to kHz.
-   *
    * @param value - The value.
    * @param unit - The unit.
    */
@@ -110,7 +106,6 @@ export class Frequency {
 export class Length {
   /**
    * Convert a length value in px to an alternative time unit.
-   *
    * @param value - The value.
    * @param unit - The unit.
    * @param options - Optional resolution, font-size, and viewport values to override.
@@ -177,7 +172,6 @@ export class Length {
 
   /**
    * Convert a length value with a unit to px.
-   *
    * @param value - The value.
    * @param unit - The unit.
    * @param options - Optional resolution, font-size, and viewport values to override.
@@ -247,7 +241,6 @@ export class Length {
 export class Resolution {
   /**
    * Convert a resolution value in dppx to an alternative resolution unit.
-   *
    * @param value - The value.
    * @param unit - The unit.
    * @param options - Optional resolution to override.
@@ -268,7 +261,6 @@ export class Resolution {
 
   /**
    * Convert a resolution value with a unit to dppx.
-   *
    * @param value - The value.
    * @param unit - The unit.
    * @param options - Optional resolution to override.
@@ -292,7 +284,6 @@ export class Resolution {
 export class Time {
   /**
    * Convert a time value in ms to an alternative time unit.
-   *
    * @param value - The value.
    * @param unit - The unit.
    */
@@ -309,7 +300,6 @@ export class Time {
 
   /**
    * Convert a time value with a unit to ms.
-   *
    * @param value - The value.
    * @param unit - The unit.
    */

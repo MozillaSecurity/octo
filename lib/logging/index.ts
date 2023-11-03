@@ -20,7 +20,6 @@ if (utils.platform.name.isWindows) {
 export class logger {
   /**
    * Log to console using appropriate environment.
-   *
    * @param msg - Message to log.
    */
   static console(msg: string): void {
@@ -47,7 +46,6 @@ export class logger {
 
   /**
    * Alias for logger.console.
-   *
    * @param msg - Message to log.
    */
   static dump(msg: string): void {
@@ -56,7 +54,6 @@ export class logger {
 
   /**
    * Log message with trailing newline.
-   *
    * @param msg - Message to log.
    */
   static dumpln(msg: string): void {
@@ -65,7 +62,6 @@ export class logger {
 
   /**
    * Log message with prefix and wrapped in try/catch.
-   *
    * @param msg - Message to log.
    */
   static log(msg: string): void {
@@ -74,7 +70,6 @@ export class logger {
 
   /**
    * Log a comment.
-   *
    * @param msg - Message to log.
    */
   static info(msg: string): void {
@@ -83,7 +78,6 @@ export class logger {
 
   /**
    * Log an error.
-   *
    * @param msg - Message to log.
    */
   static error(msg: string): void {
@@ -92,7 +86,6 @@ export class logger {
 
   /**
    * Log a message.
-   *
    * @param msg - Message to log.
    */
   static ok(msg: string): void {
@@ -102,7 +95,6 @@ export class logger {
 
   /**
    * Log a message as a comment and prefixed with ERROR.
-   *
    * @param msg - Message to log.
    */
   static JSError(msg: string): void {
@@ -111,7 +103,6 @@ export class logger {
 
   /**
    * Log a message as a comment.
-   *
    * @param msg - Message to log.
    */
   static comment(msg: string): void {

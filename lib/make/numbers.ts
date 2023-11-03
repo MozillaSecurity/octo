@@ -8,7 +8,6 @@ import { random } from "../random"
 export class numbers {
   /**
    * Returns a number that is more likely to exceed the supplied boundary.
-   *
    * @param value - Source value.
    */
   static _exceed(value: number): number {
@@ -33,7 +32,6 @@ export class numbers {
 
   /**
    * Returns a int8 [-128, 127].
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static int8(bypass = false): number {
@@ -49,7 +47,6 @@ export class numbers {
 
   /**
    * Returns a uint8 [0, 255].
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static uint8(bypass = false): number {
@@ -65,7 +62,6 @@ export class numbers {
 
   /**
    * Returns a int16 [-32768, 32767].
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static int16(bypass = false): number {
@@ -82,7 +78,6 @@ export class numbers {
 
   /**
    * Returns a uint16 [0, 65535].
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static uint16(bypass = false): number {
@@ -99,7 +94,6 @@ export class numbers {
 
   /**
    * Returns a int32 [-2147483648, 2147483647].
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static int32(bypass = false): number {
@@ -117,7 +111,6 @@ export class numbers {
 
   /**
    * Returns a uint32 [0, 4294967295].
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static uint32(bypass = false): number {
@@ -135,7 +128,6 @@ export class numbers {
 
   /**
    * Returns a random floating point number.
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static float(bypass = false): number {
@@ -162,7 +154,6 @@ export class numbers {
 
   /**
    * Returns a random double.
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static double(bypass = false): number {
@@ -180,7 +171,6 @@ export class numbers {
 
   /**
    * Returns a float value within the supplied range.
-   *
    * @param min - Start value.
    * @param max - End value.
    * @param precision - Precision.
@@ -202,7 +192,6 @@ export class numbers {
 
   /**
    * Returns a random number adjacent to the supplied number.
-   *
    * @param number - Source value.
    */
   static even(number: number): number {
@@ -231,7 +220,6 @@ export class numbers {
 
   /**
    * Returns a random signed number.
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static signed(bypass = false): number {
@@ -245,7 +233,6 @@ export class numbers {
 
   /**
    * Returns a random unsigned number.
-   *
    * @param bypass - Determines if the range should be exceeded.
    */
   static unsigned(bypass = false): number {
@@ -259,7 +246,6 @@ export class numbers {
 
   /**
    * Returns a random number using the type base number generators above.
-   *
    * @param floats - Allow floats.
    */
   static any(floats = true): number {

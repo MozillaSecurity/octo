@@ -24,7 +24,6 @@ export class objects {
 
   /**
    * Add a new object.
-   *
    * @param category - Type of object to be added.
    * @param member - Object instance to be added.
    */
@@ -42,7 +41,6 @@ export class objects {
 
   /**
    * Retrieve an object.
-   *
    * @param category - Type of object to be retrieved.
    * @param last - Retrieve the most recently added object instance.
    */
@@ -60,7 +58,6 @@ export class objects {
 
   /**
    * Retrieve a object name.
-   *
    * @param category - Type of object to be retrieved.
    * @param last - Retrieve the most recently added object instance.
    */
@@ -75,7 +72,6 @@ export class objects {
 
   /**
    * Remove objects matching the supplied name.
-   *
    * @param objectName - The name of the objects to remove.
    */
   pop(objectName: string): void {
@@ -90,7 +86,6 @@ export class objects {
 
   /**
    * Enumerate list of categories currently being tracked.
-   *
    * @param categoryNames - List of category names to filter on.
    */
   contains(categoryNames: string[]): null | string[] {
@@ -100,7 +95,6 @@ export class objects {
 
   /**
    * Return a list of objects matching the supplied category.
-   *
    * @param category - Type of object to filter on.
    */
   show(category: string): ContainerEntry[] | { [p: string]: ContainerEntry[] } {
@@ -109,7 +103,6 @@ export class objects {
 
   /**
    * Return the number of objects matching the supplied category.
-   *
    * @param category - Type of object to count.
    */
   count(category: string): number {
@@ -118,7 +111,6 @@ export class objects {
 
   /**
    * Indicates if the instance contains the supplied category.
-   *
    * @param category - Type of object.
    */
   has(category: string): boolean {
@@ -145,7 +137,6 @@ export class objects {
 
   /**
    * Remove objects matching category that are undefined or null.
-   *
    * @param category - The category to check.
    */
   check(category: string): void {

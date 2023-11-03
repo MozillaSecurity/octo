@@ -8,7 +8,6 @@ import { random } from "../random"
 export class typed {
   /**
    * Generate a random int8 [-128, 127].
-   *
    * @param limit - Maximum possible value.
    */
   static byte(limit?: number): string {
@@ -19,7 +18,6 @@ export class typed {
 
   /**
    * Generate a random uint8 [0, 255].
-   *
    * @param limit - Maximum possible value.
    */
   static octet(limit?: number): string {
@@ -29,7 +27,6 @@ export class typed {
 
   /**
    * Generate a random int16 [-32768, 32767].
-   *
    * @param limit - Maximum possible value.
    */
   static short(limit?: number): string {
@@ -40,7 +37,6 @@ export class typed {
 
   /**
    * Generate a random uint16 [0, 65535].
-   *
    * @param limit - Maximum possible value.
    */
   static unsignedShort(limit?: number): string {
@@ -50,7 +46,6 @@ export class typed {
 
   /**
    * Generate a random int32 [-2147483648, 2147483647].
-   *
    * @param limit - Maximum possible value.
    */
   static long(limit?: number): string {
@@ -61,7 +56,6 @@ export class typed {
 
   /**
    * Generate a random uint32 [0, 4294967295].
-   *
    * @param limit - Maximum possible value.
    */
   static unsignedLong(limit?: number): string {
@@ -71,7 +65,6 @@ export class typed {
 
   /**
    * Generate a random float.
-   *
    * @param limit - Maximum possible value.
    */
   static float(limit?: number): string {
@@ -82,7 +75,6 @@ export class typed {
 
   /**
    * Generate a random unrestricted float.
-   *
    * @param limit - Maximum possible value.
    */
   static unrestrictedFloat(limit?: number): any {
@@ -96,7 +88,6 @@ export class typed {
 
   /**
    * Generate a random double.
-   *
    * @param limit - Maximum possible value.
    */
   static double(limit?: number): string {
@@ -107,7 +98,6 @@ export class typed {
 
   /**
    * Generate a random unrestricted double.
-   *
    * @param limit - Maximum possible value.
    */
   static unrestrictedDouble(limit?: number): any {
@@ -133,7 +123,6 @@ export class typed {
 
   /**
    * Generate a random array buffer.
-   *
    * @param src - A buffer length or TypedArray.
    */
   static arrayBuffer(src?: number | string): string {
@@ -143,7 +132,6 @@ export class typed {
 
   /**
    * Generate a random dataview.
-   *
    * @param src - A buffer length or TypedArray.
    */
   static dataView(src?: number | string): string {
@@ -153,7 +141,6 @@ export class typed {
 
   /**
    * Generate a random TypedArray.
-   *
    * @param src - A buffer length or TypedArray.
    */
   static typedArray(src?: number | string): string {

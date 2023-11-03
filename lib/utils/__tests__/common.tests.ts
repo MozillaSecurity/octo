@@ -52,7 +52,7 @@ describe("Common", () => {
         expect.objectContaining({
           member_1: "abc",
           member_2: "def",
-        })
+        }),
       )
     })
 
@@ -63,7 +63,7 @@ describe("Common", () => {
         expect.objectContaining({
           member_1: "xyz",
           member_2: "def",
-        })
+        }),
       )
     })
   })

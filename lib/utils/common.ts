@@ -8,7 +8,6 @@ import jsesc from "jsesc"
 export class common {
   /**
    * Escape and quote a string.
-   *
    * @param str - Object to be quoted.
    * @param html - Identifies whether the string must be HTML safe.
    */
@@ -26,7 +25,6 @@ export class common {
 
   /**
    * Remove quotes and escape sequence from string.
-   *
    * @param str - String to be unquoted.
    */
   static unquote(str: string): string {
@@ -40,7 +38,6 @@ export class common {
 
   /**
    * Unicode safe b64 encoding.
-   *
    * @param str - String to encode.
    */
   static b64encode(str: string): string {
@@ -49,7 +46,6 @@ export class common {
 
   /**
    * Unicode safe b64 decoding.
-   *
    * @param str - String to decode.
    */
   static b64decode(str: string): string {
@@ -58,7 +54,6 @@ export class common {
 
   /**
    * Escape special characters using HTML entities.
-   *
    * @param str - String to escape.
    */
   static htmlEscape(str: string): string {
@@ -67,7 +62,6 @@ export class common {
 
   /**
    * Remove HTML entities from string.
-   *
    * @param str - String to unescape.
    */
   static htmlUnescape(str: string): string {
@@ -76,7 +70,6 @@ export class common {
 
   /**
    * Merge two objects recursively.
-   *
    * @param obj1 - Object to merge into.
    * @param obj2 - Object to merge from.
    */
@@ -97,7 +90,6 @@ export class common {
 
   /**
    * Template string beautifier.
-   *
    * @param obj - Array of commands to beautify.
    */
   static mockup(obj: string): string {

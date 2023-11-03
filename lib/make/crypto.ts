@@ -149,7 +149,6 @@ export class crypto {
 
   /**
    * Return a random algorithm that supports the supplied method.
-   *
    * @param method - Method name.
    */
   static randomAlgorithmName(method: keyof AlgorithmOperationMap): string {
@@ -173,7 +172,6 @@ export class crypto {
         keyUsages: ["sign", "verify"],
         /**
          * Returns a random key length.
-         *
          * @param len - Use the supplied length.
          */
         length: function (len?: number) {
@@ -181,7 +179,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -196,7 +193,6 @@ export class crypto {
         },
         /**
          * Returns a JSON web key (JWK) for the requested length.
-         *
          * @param len - Key length.
          */
         jwk: function (len?: number) {
@@ -254,7 +250,6 @@ export class crypto {
         keyUsages: ["sign", "verify"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -262,7 +257,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -278,7 +272,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -337,7 +330,6 @@ export class crypto {
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -345,7 +337,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -360,7 +351,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -434,7 +424,6 @@ export class crypto {
         keyUsages: ["sign", "verify"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -442,7 +431,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -457,7 +445,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -510,7 +497,6 @@ export class crypto {
         keyUsages: ["deriveKey", "deriveBits"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -518,7 +504,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -541,7 +526,6 @@ export class crypto {
         },
         /**
          * Return the algorithm to be used for crypto.subtle.deriveKey().
-         *
          * @param key - The public key to use.
          */
         deriveKey: function (key: string) {
@@ -553,7 +537,6 @@ export class crypto {
         },
         /**
          * Return the algorithm to be used for crypto.subtle.deriveBits().
-         *
          * @param key - The public key to use.
          */
         deriveBits: function (key: string) {
@@ -592,7 +575,6 @@ export class crypto {
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -600,7 +582,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -611,7 +592,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -667,7 +647,6 @@ export class crypto {
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -675,7 +654,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -686,7 +664,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -742,7 +719,6 @@ export class crypto {
         keyUsages: ["encrypt", "decrypt", "wrapKey", "unwrapKey"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -750,7 +726,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -761,7 +736,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -828,7 +802,6 @@ export class crypto {
         keyUsages: ["wrapKey", "unwrapKey"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -836,7 +809,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -847,7 +819,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -893,7 +864,6 @@ export class crypto {
         keyUsages: ["sign", "verify"],
         /**
          * Return a random key length.
-         *
          * @param len - Requested key length.
          */
         length: function (len?: number) {
@@ -901,7 +871,6 @@ export class crypto {
         },
         /**
          * Return the algorithm object.
-         *
          * @param len - The requested hash length.
          */
         alg: function (len?: number) {
@@ -914,7 +883,6 @@ export class crypto {
         },
         /**
          * Return the JSON Web Key (JWK).
-         *
          * @param len - Requested key length.
          */
         jwk: function (len: number) {
@@ -1063,7 +1031,6 @@ export class crypto {
         },
         /**
          * Return the algorithm to be used for crypto.subtle.deriveKey().
-         *
          * @param key - The public key to use.
          */
         deriveKey: function (key: string) {
@@ -1077,7 +1044,6 @@ export class crypto {
         },
         /**
          * Return the algorithm to be used for crypto.subtle.deriveBits().
-         *
          * @param key - The public key to use.
          */
         deriveBits: function (key: string) {
@@ -1111,7 +1077,6 @@ export class crypto {
 
   /**
    * Find and return a random algorithm suitable for a given operation.
-   *
    * @param operation - The target operation.
    */
   static randomCandidate(operation: keyof AlgorithmOperationMap): any {

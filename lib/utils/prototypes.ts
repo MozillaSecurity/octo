@@ -6,7 +6,6 @@
 
 /**
  * Determine if an object is a vanilla object.
- *
  * @param obj - The object to evaluate.
  */
 function isObject(obj: any) {
@@ -28,7 +27,6 @@ export class prototypes {
     if (!("insert" in String)) {
       /**
        * Inserts a string at the supplied position.
-       *
        * @param data - The string to insert.
        * @param i - The location to insert it.
        */

@@ -9,7 +9,6 @@ import { random } from "../random"
 export class mutate {
   /**
    * Mutate a string.
-   *
    * @param src - Source string to mutate.
    */
   static text(src: string): string {
@@ -20,7 +19,6 @@ export class mutate {
 
   /**
    * Mutate a number.
-   *
    * @param src - Source number to mutate.
    */
   static numbers(src: string): string {
@@ -31,7 +29,6 @@ export class mutate {
 
   /**
    * Mutate the unit in a length value.
-   *
    * @param src - The source length to mutate.
    */
   static units(src: string): string {
@@ -46,7 +43,6 @@ export class mutate {
 
   /**
    * Randomly mutate the supplied string.
-   *
    * @param src - The source string to mutate.
    */
   static random(src: string): string {
@@ -65,7 +61,6 @@ export class mutate {
 
   /**
    * Applies a single mutation to the supplied string.
-   *
    * @param src - The source string to mutate.
    */
   static any(src: string): string {

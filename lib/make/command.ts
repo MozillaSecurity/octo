@@ -95,7 +95,6 @@ export class command {
 
   /**
    * Generate a random command value.
-   *
    * @param name - Command name.
    */
   static value(name: keyof typeof command.data): string | boolean | null {

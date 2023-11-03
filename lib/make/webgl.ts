@@ -74,7 +74,6 @@ export class webgl {
 
   /**
    * Extract matching attributes from a WebGL shader.
-   *
    * @param shader - The target shader.
    * @param regex - The regex to match.
    * @param group - The capture group.
@@ -95,7 +94,6 @@ export class webgl {
 
   /**
    * Extract the uniform value from a shader.
-   *
    * @param shader - The target shader.
    * @param group - That capture group to match.
    */
@@ -106,7 +104,6 @@ export class webgl {
 
   /**
    * Extract the attribute value from a shader.
-   *
    * @param shader - The target shader.
    * @param group - The capture group to match.
    */
@@ -116,7 +113,6 @@ export class webgl {
 
   /**
    * Extract the varying value from a WebGL shader.
-   *
    * @param shader - The target shader.
    * @param group - The capture group to match.
    */
@@ -126,7 +122,6 @@ export class webgl {
 
   /**
    * Extract the gl_Frag value from a shader.
-   *
    * @param shader - The target shader.
    * @param group - The capture group to match.
    */
@@ -137,7 +132,6 @@ export class webgl {
 
   /**
    * Extract the out value from a shader.
-   *
    * @param shader - The target shader.
    * @param group - The capture group to match.
    */
@@ -148,7 +142,6 @@ export class webgl {
 
   /**
    * Extract the fragment value from a shader.
-   *
    * @param shader - The target shader.
    */
   static parseFrag(shader: string): string[] {
@@ -171,7 +164,6 @@ export class webgl {
 
   /**
    * Generate a random buffer target.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomBufferTarget(isWebGL2: boolean): string {
@@ -185,7 +177,7 @@ export class webgl {
           "UNIFORM_BUFFER",
           "PIXEL_PACK_BUFFER",
           "PIXEL_UNPACK_BUFFER",
-        ]
+        ],
       )
     }
     return random.item(target)
@@ -193,7 +185,6 @@ export class webgl {
 
   /**
    * Generate a random texture name.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomTexParameter(isWebGL2: boolean): string {
@@ -208,7 +199,7 @@ export class webgl {
           "TEXTURE_MAX_LOD",
           "TEXTURE_MIN_LOD",
           "TEXTURE_WRAP_R",
-        ]
+        ],
       )
     }
     return random.item(pname)
@@ -216,7 +207,6 @@ export class webgl {
 
   /**
    * Generate a random texture parameter value.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomTexParameterValue(isWebGL2: boolean): [string, string | number] {
@@ -260,7 +250,6 @@ export class webgl {
 
   /**
    * Generate a random blend mode name.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomBlendMode(isWebGL2: boolean): string {
@@ -315,7 +304,6 @@ export class webgl {
 
   /**
    * Generate a random texture target.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomTextureTarget(isWebGL2: boolean): string {
@@ -334,7 +322,6 @@ export class webgl {
 
   /**
    * Generate a random context capability value.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomCap(isWebGL2: boolean): string {
@@ -371,7 +358,6 @@ export class webgl {
 
   /**
    * Return an array of texture attachment points.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static textureAttachments(isWebGL2: boolean): string[] {
@@ -390,7 +376,6 @@ export class webgl {
 
   /**
    * Generate a random texture attachment.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomTextureAttachment(isWebGL2: boolean): string {
@@ -399,7 +384,6 @@ export class webgl {
 
   /**
    * Generate a random attachment query value.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomAttachmentQuery(isWebGL2: boolean): string {
@@ -421,7 +405,7 @@ export class webgl {
           "FRAMEBUFFER_ATTACHMENT_RED_SIZE",
           "FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE",
           "FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER",
-        ]
+        ],
       )
     }
     return random.item(pname)
@@ -462,7 +446,6 @@ export class webgl {
 
   /**
    * Generate a random vertex attribute parameter.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomVertexAttribParameter(isWebGL2: boolean): string {
@@ -481,7 +464,7 @@ export class webgl {
           "VERTEX_ATTRIB_ARRAY_INTEGER",
           "VERTEX_ATTRIB_ARRAY_DIVISOR",
           "VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE",
-        ]
+        ],
       )
     }
     return random.item(pname)
@@ -489,7 +472,6 @@ export class webgl {
 
   /**
    * Generate a random behavior hint name.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomHint(isWebGL2: boolean): string {
@@ -508,7 +490,6 @@ export class webgl {
 
   /**
    * Generate a random pixel storage name and value.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomPixelStorage(isWebGL2: boolean): (string | number | boolean)[] {
@@ -636,7 +617,6 @@ export class webgl {
 
   /**
    * Generate a random pixel data type.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomPixelDatatype(isWebGL2: boolean): string {
@@ -660,7 +640,7 @@ export class webgl {
           "UNSIGNED_INT",
           "UNSIGNED_INT_10F_11F_11F_REV",
           "UNSIGNED_INT_5_9_9_9_REV",
-        ]
+        ],
       )
     }
     return random.item(types)
@@ -668,7 +648,6 @@ export class webgl {
 
   /**
    * Generate a random pixel format type.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomPixelFormat(isWebGL2: boolean): string {
@@ -681,7 +660,6 @@ export class webgl {
 
   /**
    * Generate a random buffer usage value.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomBufferUsage(isWebGL2: boolean): string {
@@ -695,7 +673,7 @@ export class webgl {
           "STATIC_COPY",
           "DYNAMIC_COPY",
           "STREAM_COPY",
-        ]
+        ],
       )
     }
     return random.item(usage)
@@ -703,7 +681,6 @@ export class webgl {
 
   /**
    * Generate a random parameter name.
-   *
    * @param isWebGL2 - Boolean indicating if WebGL2 is in use.
    */
   static randomParameter(isWebGL2: boolean): string {
@@ -862,7 +839,7 @@ export class webgl {
           "UNPACK_SKIP_PIXELS",
           "UNPACK_SKIP_ROWS",
           "VERTEX_ARRAY_BINDING",
-        ]
+        ],
       )
     }
     return random.item(pname)
@@ -902,7 +879,6 @@ export class webgl {
 
   /**
    * Generate a random extension interface name.
-   *
    * @param pattern - Limits results to those matching the supplied string.
    */
   static randomExtension(pattern?: string): string {

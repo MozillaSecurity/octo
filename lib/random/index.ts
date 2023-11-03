@@ -12,7 +12,6 @@ export class random {
 
   /**
    * Must be called before any other methods can be called to initialize MersenneTwister.
-   *
    * @param seed - Value to initialize MersenneTwister.
    */
   static init(seed?: number): void {
@@ -21,7 +20,6 @@ export class random {
 
   /**
    * Returns an integer in [0, limit) (uniform distribution).
-   *
    * @param limit - Maximum number.
    * @param factor - Number of iterations to perform (reduces max).
    */
@@ -56,7 +54,6 @@ export class random {
 
   /**
    * Returns an integer in [start, limit) (uniform distribution).
-   *
    * @param start - Minimum value.
    * @param limit - Maximum value.
    * @param factor - Reduce possibility of maximum by factor.
@@ -72,7 +69,6 @@ export class random {
 
   /**
    * Returns a float in [1, limit). The logarithm has uniform distribution.
-   *
    * @param limit - Maximum value.
    */
   static ludOneTo(limit: number): number {
@@ -81,7 +77,6 @@ export class random {
 
   /**
    * Returns a random index from a list.
-   *
    * @param list - List to choose from.
    */
   static item<T>(list: T[]): T {
@@ -93,7 +88,6 @@ export class random {
 
   /**
    * Returns a random key of a provided object.
-   *
    * @param obj - Source object.
    */
   static key(obj: Record<string, any>): string {
@@ -113,7 +107,6 @@ export class random {
   /**
    * Recursively iterate over array until non-array item identified. If item is a function, evaluate
    * it with no args.
-   *
    * @param obj - Source object.
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -129,7 +122,6 @@ export class random {
 
   /**
    * Returns a boolean result based on limit.
-   *
    * @param limit - Maximum value.
    */
   static chance(limit = 2): boolean {
@@ -144,7 +136,6 @@ export class random {
   /**
    * Return an item from an array of arrays where the first index in each sub-array denotes the
    * weight.
-   *
    * @param list - Array of arrays.
    * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
@@ -170,7 +161,6 @@ export class random {
 
   /**
    * Return a flattened list of weighted values.
-   *
    * @param list - List of weighted values.
    */
   static weighted(list: { w: number; v: any }[]): any[] {
@@ -186,7 +176,6 @@ export class random {
 
   /**
    * Returns either the supplied object or an empty string.
-   *
    * @param obj - The object to consider.
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -196,7 +185,6 @@ export class random {
 
   /**
    * Return a shuffled array.
-   *
    * @param arr - Array to shuffle.
    */
   static shuffle(arr: any[]): void {
@@ -210,7 +198,6 @@ export class random {
 
   /**
    * Return a shuffled copy of an array.
-   *
    * @param arr - Source Array to shuffle.
    */
   static shuffled<T>(arr: T[]): T[] {
@@ -221,7 +208,6 @@ export class random {
 
   /**
    * Return a subset of the supplied array.
-   *
    * @param list - List to be parsed.
    * @param limit - Number of elements to be returned.
    */
@@ -247,7 +233,6 @@ export class random {
 
   /**
    * Removes and returns a random item from an array.
-   *
    * @param arr - Source array to pop from.
    */
   static pop<T>(arr: T[]): T {
@@ -260,7 +245,6 @@ export class random {
 
   /**
    * Return a random hex string.
-   *
    * @param len - Length of string to generate.
    */
   static hex(len: number): string {

@@ -18,7 +18,6 @@ interface RangedTypeOptions {
 
 /**
  * Generate a calc value.
- *
  * @param generator - The value generation function.
  */
 export function calc(generator: () => string): string {
@@ -50,13 +49,12 @@ export function calc(generator: () => string): string {
  *
  * Both min and max are not required to contain a suffix (i.e. `<time [0, 100s]>`). Ensures the
  * suffix exists on both.
- *
  * @param min - Minimum value.
  * @param max - Maximum value.
  */
 export function normalizeSuffix(
   min: RangedTypeOption,
-  max: RangedTypeOption
+  max: RangedTypeOption,
 ): [RangedTypeOption, RangedTypeOption] {
   let suffix = typeof min === "string" ? min.match(/[a-zA-Z]+/g) : null
   if (suffix === null && typeof max === "string") {
@@ -75,7 +73,6 @@ export function normalizeSuffix(
 
 /**
  * Split length and unit.
- *
  * @param value - The value to split.
  */
 export function splitUnit(value: string): [number, string] {
@@ -93,7 +90,6 @@ export function splitUnit(value: string): [number, string] {
 
 /**
  * Simple helper function for extrapolating ranged types.
- *
  * @param min - Minimum value.
  * @param max - Maximum value.
  */
@@ -108,7 +104,6 @@ export function expandRange(min: number | null, max: number | null): [number, nu
 export class datatypes {
   /**
    * Generate a random <angle> data type.
-   *
    * @param opts - Options.
    */
   static angle(opts?: RangedTypeOptions | null): string {
@@ -149,7 +144,6 @@ export class datatypes {
 
   /**
    * Generate a random <dimension> data type.
-   *
    * @param opts - Options.
    */
   static dimension(opts?: RangedTypeOptions | null): string {
@@ -173,7 +167,6 @@ export class datatypes {
 
   /**
    * Generate a random <flex> data type.
-   *
    * @param opts - Options.
    */
   static flex(opts?: RangedTypeOptions | null): string {
@@ -189,7 +182,6 @@ export class datatypes {
 
   /**
    * Generate a random <frequency> data type.
-   *
    * @param opts - Options.
    */
   static frequency(opts?: RangedTypeOptions | null): string {
@@ -216,7 +208,6 @@ export class datatypes {
 
   /**
    * Generate a random <integer> data type.
-   *
    * @param opts - Options.
    */
   static integer(opts?: RangedTypeOptions | null): string {
@@ -233,7 +224,6 @@ export class datatypes {
 
   /**
    * Generate a random <length> data type.
-   *
    * @param opts - Options.
    * @param allowRelative - Allow relative units.
    */
@@ -261,7 +251,6 @@ export class datatypes {
 
   /**
    * Generate a random <number> data type.
-   *
    * @param opts - Options.
    */
   static number(opts?: RangedTypeOptions | null): string {
@@ -288,7 +277,6 @@ export class datatypes {
 
   /**
    * Generate a random <percentage> data type.
-   *
    * @param opts - Options.
    */
   static percentage(opts?: RangedTypeOptions | null): string {
@@ -334,7 +322,6 @@ export class datatypes {
 
   /**
    * Generate a random <resolution> data type.
-   *
    * @param opts - Options.
    */
   static resolution(opts?: RangedTypeOptions | null): string {
@@ -363,7 +350,6 @@ export class datatypes {
 
   /**
    * Generate a random <time> data type.
-   *
    * @param opts - Options.
    */
   static time(opts?: RangedTypeOptions | null): string {

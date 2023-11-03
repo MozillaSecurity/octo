@@ -9,7 +9,6 @@ import { random } from "../random"
 export class script {
   /**
    * Helper method for appending an element to body or documentElement.
-   *
    * @param name - Element identifier.
    */
   static addElementToBody(name: string): string {
@@ -18,7 +17,6 @@ export class script {
 
   /**
    * Generates a typed array filled with contents.
-   *
    * @deprecated - This method does not appear to be useful and will be removed.
    * @param type - The type of TypedArray to create.
    * @param arrayLength - The array length.
@@ -41,7 +39,6 @@ export class script {
 
   /**
    * Dynamically create dictionary using array of keys and values.
-   *
    * @param keys - Array of keys.
    * @param values - Array of values.
    */
@@ -56,7 +53,6 @@ export class script {
 
   /**
    * Wraps the supplied command in a loop.
-   *
    * @param s - The command to wrap.
    * @param max - The number of iterations to perform.
    */
@@ -66,7 +62,6 @@ export class script {
 
   /**
    * Shuffles dictionary keys and values.
-   *
    * @param baseObject - The base object to modify.
    */
   static makeRandomOptions(baseObject: Record<string, any>): string {
@@ -80,7 +75,6 @@ export class script {
 
   /**
    * Generate a method call command.
-   *
    * @param objectName - The object variable name.
    * @param methodHash - The object method to target.
    */
@@ -99,7 +93,6 @@ export class script {
 
   /**
    * Generate method using a subset of the supplied values.
-   *
    * @param list - Array of values.
    * @param numOptional - Number of values that are optional.
    */
@@ -118,7 +111,6 @@ export class script {
   /**
    * Returns a command that generates the modulo of a value. Useful for identifying lengths in
    * dynamic entries.
-   *
    * @param s - The variable to generate a modulo for.
    */
   static offset(s: string): string {
@@ -127,7 +119,6 @@ export class script {
 
   /**
    * Wrap command(s) in setInterval, setTimeout, loop or run directly.
-   *
    * @param cmds - Command(s) to be executed.
    * @param async - Use async functions.
    */
@@ -151,7 +142,6 @@ export class script {
 
   /**
    * Wrap a command in try/catch.
-   *
    * @param cmd - The command or array of commands to be wrapped.
    */
   static safely(cmd: string | string[]): string {
@@ -164,7 +154,6 @@ export class script {
 
   /**
    * Generate a command that sets an attribute.
-   *
    * @param objectName - The object variable name.
    * @param attributeHash - An object containing attribute names and values.
    */
@@ -179,7 +168,6 @@ export class script {
 
   /**
    * Generate function used for timing out promises that never reject or resolve.
-   *
    * @param time - Time limit.
    */
   static promiseTimeout(time: number): string {

@@ -15,7 +15,6 @@ export class tracker {
 
   /**
    * Add a new tracker value. If the prefix doesn't exist, initialize it.
-   *
    * @param prefix - Prefix of item to track.
    * @param value - Optional value to store.
    */
@@ -36,7 +35,6 @@ export class tracker {
   /**
    * Retrieve an id for the supplied prefix. If the prefix doesn't already exist, return the initial
    * value without initializing it.
-   *
    * @param prefix - Prefix of item to track.
    */
   get(prefix: string): string {
@@ -49,7 +47,6 @@ export class tracker {
 
   /**
    * Returns the number of ids for the supplied prefix.
-   *
    * @param prefix - Prefix of item to track.
    */
   length(prefix: string): number {

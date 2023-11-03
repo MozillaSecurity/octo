@@ -18,7 +18,7 @@ export class platform {
     const language = navigator.language
 
     const version = (platform.version = (userAgent.match(
-      /.*(?:rv|chrome|webkit|opera|ie)[/: ](.+?)([ );]|$)/
+      /.*(?:rv|chrome|webkit|opera|ie)[/: ](.+?)([ );]|$)/,
     ) || [])[1])
     const webkitVersion = (userAgent.match(/webkit\/(.+?) /) || [])[1]
 
@@ -76,7 +76,6 @@ export class platform {
 
     /**
      * Identify available feature locations.
-     *
      * @param candidates - Array of features to check.
      */
     function platformName(candidates: string[]): string | undefined {

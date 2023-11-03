@@ -150,7 +150,7 @@ export class network {
           "7",
           "8",
           "9",
-        ])
+        ]),
       )
     }
 
@@ -248,7 +248,6 @@ export class network {
 
   /**
    * Generate a random bitmask.
-   *
    * @param list - Array of bitmask values.
    */
   static randomBitmask(list: string[]): string {

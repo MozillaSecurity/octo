@@ -6,20 +6,17 @@ import { random } from "../random"
 
 /**
  * Class for generating strings from recursive array of values and generators.
- *
  * @deprecated - This class serves no real purpose and the intent of any code using it is obscured.
  */
 export class block {
   /**
    * Generate a string using a nested array of values and value generators.
-   *
    * @param list - An array of values and value generators.
    * @param optional - Boolean indicating if the values are optional.
    */
   static block(list: any[], optional?: boolean): string {
     /**
      * Recursively pick through list.
-     *
      * @param item - Item to pick.
      */
     function deeper(item: any) {

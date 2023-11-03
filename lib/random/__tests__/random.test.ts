@@ -674,7 +674,7 @@ describe("Random", () => {
               [1, v2],
               [1, v3],
             ],
-            true
+            true,
           )
           if (tmp === v1) {
             tmp = 0
@@ -725,7 +725,7 @@ describe("Random", () => {
               { w: 1, v: 0 },
               { w: 1, v: 1 },
               { w: 1, v: 2 },
-            ])
+            ]),
           )
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
@@ -769,7 +769,7 @@ describe("Random", () => {
               [2, 1],
               [1, 2],
             ],
-            true
+            true,
           )
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
@@ -812,7 +812,7 @@ describe("Random", () => {
               { w: 1, v: 0 },
               { w: 2, v: 1 },
               { w: 1, v: 2 },
-            ])
+            ]),
           )
           expect(tmp).toBeLessThan(bins.length)
           ++bins[tmp]
@@ -858,7 +858,7 @@ describe("Random", () => {
               { w: 1, v: v1 },
               { w: 1, v: v2 },
               { w: 1, v: v3 },
-            ])
+            ]),
           )
           if (tmp === v1) {
             tmp = 0
@@ -1114,16 +1114,16 @@ describe("Random", () => {
          */
         if (bin0_xsq < B0_XSQ && bin1_xsq < B1_XSQ && bin2_xsq < B2_XSQ && length_xsq < LEN_XSQ) {
           console.log(
-            `Expected lengths x^2 to be < ${LEN_XSQ} got ${length_xsq}  on attempt #${attempt + 1}`
+            `Expected lengths x^2 to be < ${LEN_XSQ} got ${length_xsq}  on attempt #${attempt + 1}`,
           )
           console.log(
-            `Expected length=1 x^2 to be < ${B0_XSQ} got ${bin0_xsq} on attempt # ${attempt + 1}`
+            `Expected length=1 x^2 to be < ${B0_XSQ} got ${bin0_xsq} on attempt # ${attempt + 1}`,
           )
           console.log(
-            `Expected length=2 x^2 to be < ${B1_XSQ} got ${bin1_xsq} on attempt #${attempt + 1}`
+            `Expected length=2 x^2 to be < ${B1_XSQ} got ${bin1_xsq} on attempt #${attempt + 1}`,
           )
           console.log(
-            `Expected length=3 x^2 to be < ${B2_XSQ} got ${bin2_xsq} on attempt #${attempt + 1}`
+            `Expected length=3 x^2 to be < ${B2_XSQ} got ${bin2_xsq} on attempt #${attempt + 1}`,
           )
           return true
         }
@@ -1246,7 +1246,7 @@ describe("Random", () => {
           expect(
             arr.reduce((a, v) => {
               return a + v
-            }, tmp)
+            }, tmp),
           ).toBe(201)
           ++bins[tmp]
         }
