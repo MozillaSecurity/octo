@@ -1,3 +1,12 @@
+# [3.0.0-next.32](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.31...v3.0.0-next.32) (2023-11-03)
+
+
+### Features
+
+* mass update of package dependencies ([df0d184](https://github.com/MozillaSecurity/octo/commit/df0d184c43cb6cef63aee4e1080f019e744e1f12))
+* strongly type the return value of filledArray ([6ad0fa1](https://github.com/MozillaSecurity/octo/commit/6ad0fa111581dad4702c4e3230536ba4d64a74e9))
+* to ensure array methods are strongly typed, throw if list is empty ([9ed4342](https://github.com/MozillaSecurity/octo/commit/9ed434209c1e2783b69bb4647774daed9da4b119))
+
 # [3.0.0-next.31](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.30...v3.0.0-next.31) (2023-03-23)
 
 
