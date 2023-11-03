@@ -3,8 +3,6 @@ policy:
   pullRequests: collaborators
 tasks:
   $let:
-    user: ${event.sender.login}
-
     head_rev:
       $if: 'tasks_for == "github-pull-request"'
       then: ${event.pull_request.head.sha}
@@ -12,6 +10,7 @@ tasks:
         $if: 'tasks_for == "github-push"'
         then: ${event.after}
         else: ${event.release.tag_name}
+
     fetch_ref:
       $if: 'tasks_for == "github-pull-request"'
       then: "pull/${event.number}/head"
@@ -30,29 +29,29 @@ tasks:
       then: ${event.pull_request.base.repo.ssh_url}
       else: ${event.repository.ssh_url}
 
-    commit_msg:
-      $if: 'tasks_for == "github-push" && len(event.commits) == 1'
-      then: ${event.commits[0].message}
-      else: ''
-
-    octo_deploy_url:
+    git_deploy_url:
       http://taskcluster/secrets/v1/secret/project/fuzzing/deploy-octo
     npm_deploy_url:
       http://taskcluster/secrets/v1/secret/project/fuzzing/deploy-npm
 
+    project_name:
+      octo
+
+    user: ${event.sender.login}
+
   in:
-    - $if: 'tasks_for in ["github-pull-request", "github-push"] && !("[skip ci]" in commit_msg)'
-      then:
+    $if: >
+      (tasks_for == "github-push")
+      || (tasks_for == "github-pull-request" && event["action"] in ["opened", "reopened", "synchronize"])
+      || (tasks_for == "github-release" && event["action"] in ["published"])
+    then:
+      - created: { $fromNow: '' }
+        deadline: { $fromNow: '1 hour' }
         provisionerId: proj-fuzzing
         workerType: ci
-        created: {$fromNow: ''}
-        deadline: {$fromNow: '1 hour'}
-        scopes:
-          - secrets:get:project/fuzzing/deploy-octo
-          - secrets:get:project/fuzzing/deploy-npm
         payload:
           maxRunTime: 3600
-          image: mozillasecurity/ci-node-14
+          image: mozillasecurity/ci-node-18
           features:
             taskclusterProxy: true
           command:
@@ -60,7 +59,7 @@ tasks:
             - '--login'
             - '-c'
             - >-
-              curl -sL ${octo_deploy_url} | jshon -e secret -e key -u > .ssh/id_ecdsa &&
+              curl -sL ${git_deploy_url} | jshon -e secret -e key -u > .ssh/id_ecdsa &&
               chmod 0400 .ssh/id_ecdsa &&
               export NPM_TOKEN=$(curl -sL ${npm_deploy_url} | jshon -e secret -e key -u) &&
               npm set //registry.npmjs.org/:_authToken="$NPM_TOKEN" &&
@@ -70,12 +69,15 @@ tasks:
               git remote add origin ${ssh_repo} &&
               git fetch -q --depth=10 origin "${fetch_ref}" &&
               git -c advice.detachedHead=false checkout ${head_rev} &&
-              npm i &&
+              npm i --no-progress &&
               npm test &&
               HUSKY=0 CI=true npx semantic-release
+        scopes:
+          - secrets:get:project/fuzzing/deploy-octo
+          - secrets:get:project/fuzzing/deploy-npm
         metadata:
-          name: octo tests node v14
-          description: octo tests node v14
-          owner: '${event.sender.login}@users.noreply.github.com'
+          name: ${project_name} ci decision
+          description: schedule ci tasks for ${project_name}
+          owner: '${user}@users.noreply.github.com'
           source: ${http_repo}/raw/${head_rev}/.taskcluster.yml
-
+    else: []
