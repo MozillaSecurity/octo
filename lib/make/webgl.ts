@@ -80,9 +80,8 @@ export class webgl {
    */
   static match(shader: string, regex: RegExp, group = 1): string[] {
     const matches: string[] = []
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      const match = regex.exec(shader)
+    let match
+    while ((match = regex.exec(shader)) !== null) {
       if (match) {
         matches.push(match[group])
       } else {
