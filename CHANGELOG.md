@@ -1,3 +1,15 @@
+# [3.0.0-next.33](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.32...v3.0.0-next.33) (2023-11-06)
+
+
+### Build System
+
+* set minimum node version to 18.17.0 ([eef92e4](https://github.com/MozillaSecurity/octo/commit/eef92e416f65203a05e9ba1bb34ef386577178f3))
+
+
+### BREAKING CHANGES
+
+* Updates minimum node version.
+
 # [3.0.0-next.32](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.31...v3.0.0-next.32) (2023-11-03)
 
 
