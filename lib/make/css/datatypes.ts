@@ -10,9 +10,11 @@ import { random } from "../../random"
 
 type RangedTypeOption = string | number | null
 
-/* Interface representing options for ranged datatypes */
-interface RangedTypeOptions {
+/** Interface representing options for ranged datatypes. */
+export interface RangedTypeOptions {
+  /** Minimum value. */
   min: RangedTypeOption
+  /** Maximum value. */
   max: RangedTypeOption
 }
 
