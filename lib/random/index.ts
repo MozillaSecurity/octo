@@ -200,7 +200,6 @@ export class random {
         ? random.number(Math.min(limit, list.length))
         : random.number(list.length)
 
-    // Shallowclone list
     const temp = list.slice(0)
     const result: T[] = []
     for (let i = 0; i < limit; i++) {
