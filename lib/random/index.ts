@@ -3,8 +3,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 import MersenneTwister from "mersenne-twister"
 
-import { logger } from "../logging"
-
 /** A MersenneTwister based PRNG with a number of useful utility functions. */
 export class random {
   /** Reference to the MersenneTwister instance. */
@@ -59,11 +57,6 @@ export class random {
    * @param factor - Reduce possibility of maximum by factor.
    */
   static range(start: number, limit: number, factor = 1): number {
-    if (isNaN(start) || isNaN(limit)) {
-      logger.traceback()
-      throw new TypeError(`random.range() received non-number type: (${start}, ${limit})`)
-    }
-
     return random.number(limit - start + 1, factor) + start
   }
 
@@ -124,12 +117,7 @@ export class random {
    * Returns a boolean result based on limit.
    * @param limit - Maximum value.
    */
-  static chance(limit = 2): boolean {
-    if (isNaN(limit)) {
-      logger.traceback()
-      throw new TypeError(`random.chance() received non-number type: (${limit})`)
-    }
-
+  static chance(limit: number = 2): boolean {
     return random.number(limit) === 1
   }
 
@@ -140,11 +128,6 @@ export class random {
    * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
   static choose(list: any[], flat = false): any {
-    if (!Array.isArray(list)) {
-      logger.traceback()
-      throw new TypeError(`random.choose() received non-array type: (${list})`)
-    }
-
     const expanded: any[] = []
     list.forEach(([weight, value]) => {
       for (let w = 0; w < weight; w++) {
@@ -212,11 +195,6 @@ export class random {
    * @param limit - Number of elements to be returned.
    */
   static subset<T>(list: T[], limit?: number): T[] {
-    if (!Array.isArray(list)) {
-      logger.traceback()
-      throw new TypeError(`random.subset() received non-array type: (${list})`)
-    }
-
     if (typeof limit !== "number" || limit > list.length) {
       limit = random.range(0, list.length)
     }
