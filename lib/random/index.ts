@@ -195,9 +195,10 @@ export class random {
    * @param limit - Number of elements to be returned.
    */
   static subset<T>(list: T[], limit?: number): T[] {
-    if (typeof limit !== "number" || limit > list.length) {
-      limit = random.range(0, list.length)
-    }
+    limit =
+      typeof limit === "number"
+        ? random.number(Math.min(limit, list.length))
+        : random.number(list.length)
 
     // Shallowclone list
     const temp = list.slice(0)
