@@ -12,10 +12,6 @@ beforeAll(() => {
   random.init()
 })
 
-afterEach(() => {
-  jest.restoreAllMocks()
-})
-
 describe("calc()", () => {
   test("multiplication", () => {
     const mockGenerator = jest.fn(() => "")
