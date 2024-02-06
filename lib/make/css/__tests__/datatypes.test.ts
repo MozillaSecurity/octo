@@ -8,10 +8,6 @@
 import { calc, datatypes, expandRange, normalizeSuffix, splitUnit } from "../datatypes"
 import { random } from "../../../random"
 
-beforeAll(() => {
-  random.init()
-})
-
 describe("calc()", () => {
   test("multiplication", () => {
     const mockGenerator = jest.fn(() => "")
@@ -35,6 +31,7 @@ describe("calc()", () => {
   ])("%s", (type, op) => {
     const mockGenerator = jest.fn(() => "1")
     jest.spyOn(random, "item").mockReturnValueOnce(op)
+    jest.spyOn(random, "pick").mockReturnValue("1")
     jest.spyOn(datatypes, "number").mockReturnValue("1")
     const value = calc(mockGenerator)
     expect(value).toEqual(`calc(1 ${op} 1)`)

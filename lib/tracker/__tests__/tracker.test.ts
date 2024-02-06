@@ -8,11 +8,6 @@
 
 import { tracker } from "../index"
 
-// Initialize rng
-import { random } from "../../random"
-
-random.init()
-
 describe("Tracker", () => {
   test("init", () => {
     expect(() => new tracker()).not.toThrow()

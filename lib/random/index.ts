@@ -3,17 +3,38 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 import MersenneTwister from "mersenne-twister"
 
+export type PRNGSeedType = number | number[] | MersenneTwister
+
 /** A MersenneTwister based PRNG with a number of useful utility functions. */
-export class random {
+export class Random {
+  /** Singleton instance. */
+  protected static instance: Random
+  /** The mersenne twister instance. */
+  protected prng: MersenneTwister
+
   /** Reference to the MersenneTwister instance. */
-  static twister: MersenneTwister
+  protected constructor() {
+    this.prng = new MersenneTwister()
+  }
+
+  /** Return the singleton instance. */
+  public static getInstance(): Random {
+    if (!this.instance) {
+      this.instance = new Random()
+    }
+    return this.instance
+  }
 
   /**
-   * Must be called before any other methods can be called to initialize MersenneTwister.
-   * @param seed - Value to initialize MersenneTwister.
+   * Seed the PRNG.
+   * @param seed - The seed to use.
    */
-  static init(seed?: number): void {
-    random.twister = new MersenneTwister(seed)
+  seed(seed: PRNGSeedType): void {
+    if (typeof seed === "number" || Array.isArray(seed)) {
+      this.prng = new MersenneTwister(seed)
+    } else {
+      this.prng = seed
+    }
   }
 
   /**
@@ -21,16 +42,12 @@ export class random {
    * @param limit - Maximum number.
    * @param factor - Number of iterations to perform (reduces max).
    */
-  static number(limit = 0xffffffff, factor = 1): number {
-    if (!random.twister) {
-      throw new Error("random.init must be called first.")
-    }
-
+  number(limit = 0xffffffff, factor = 1): number {
     const x = (0x100000000 / limit) >>> 0
     const y = (x * limit) >>> 0
     let r
     do {
-      r = random.twister.random_int()
+      r = this.prng.random_int()
     } while (y && r >= y) // eslint-disable-line no-unmodified-loop-condition
 
     if (--factor) {
@@ -42,12 +59,12 @@ export class random {
   }
 
   /** Returns a float in [0, 1) (uniform distribution). */
-  static float(): number {
-    if (!random.twister) {
-      throw new Error("random.init_seed() must be called first.")
+  float(): number {
+    if (!this.prng) {
+      throw new Error("this.init_seed() must be called first.")
     }
 
-    return random.twister.random_long()
+    return this.prng.random_long()
   }
 
   /**
@@ -56,45 +73,45 @@ export class random {
    * @param limit - Maximum value.
    * @param factor - Reduce possibility of maximum by factor.
    */
-  static range(start: number, limit: number, factor = 1): number {
-    return random.number(limit - start + 1, factor) + start
+  range(start: number, limit: number, factor = 1): number {
+    return this.number(limit - start + 1, factor) + start
   }
 
   /**
    * Returns a float in [1, limit). The logarithm has uniform distribution.
    * @param limit - Maximum value.
    */
-  static ludOneTo(limit: number): number {
-    return Math.exp(random.float() * Math.log(limit))
+  ludOneTo(limit: number): number {
+    return Math.exp(this.float() * Math.log(limit))
   }
 
   /**
    * Returns a random index from a list.
    * @param list - List to choose from.
    */
-  static item<T>(list: T[]): T {
+  item<T>(list: T[]): T {
     if (!list.length) {
       throw new Error("Cannot return random item from an empty list!")
     }
-    return list[random.number(list.length)]
+    return list[this.number(list.length)]
   }
 
   /**
    * Returns a random key of a provided object.
    * @param obj - Source object.
    */
-  static key(obj: Record<string, any>): string {
+  key(obj: Record<string, any>): string {
     const keys = Object.keys(obj)
     if (!keys.length) {
       throw new Error("Cannot return a random key from an empty object!")
     }
 
-    return random.item(Object.keys(obj))
+    return this.item(Object.keys(obj))
   }
 
   /** Return a random Boolean value. */
-  static bool(): boolean {
-    return random.item([true, false])
+  bool(): boolean {
+    return this.item([true, false])
   }
 
   /**
@@ -102,12 +119,11 @@ export class random {
    * it with no args.
    * @param obj - Source object.
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static pick(obj: any): any {
+  pick(obj: any): any {
     if (typeof obj === "function") {
       return obj()
     } else if (Array.isArray(obj)) {
-      return random.pick(random.item(obj))
+      return this.pick(this.item(obj))
     }
 
     return obj
@@ -117,8 +133,8 @@ export class random {
    * Returns a boolean result based on limit.
    * @param limit - Maximum value.
    */
-  static chance(limit: number = 2): boolean {
-    return random.number(limit) === 1
+  chance(limit: number = 2): boolean {
+    return this.number(limit) === 1
   }
 
   /**
@@ -127,7 +143,7 @@ export class random {
    * @param list - Array of arrays.
    * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
-  static choose(list: any[], flat = false): any {
+  choose(list: any[], flat = false): any {
     const expanded: any[] = []
     list.forEach(([weight, value]) => {
       for (let w = 0; w < weight; w++) {
@@ -136,17 +152,17 @@ export class random {
     })
 
     if (flat) {
-      return random.item(expanded)
+      return this.item(expanded)
     }
 
-    return random.pick(expanded)
+    return this.pick(expanded)
   }
 
   /**
    * Return a flattened list of weighted values.
    * @param list - List of weighted values.
    */
-  static weighted(list: { w: number; v: any }[]): any[] {
+  weighted(list: { w: number; v: any }[]): any[] {
     const expanded: any[] = []
     list.forEach((item) => {
       for (let i = 0; i < item.w; i++) {
@@ -161,18 +177,17 @@ export class random {
    * Returns either the supplied object or an empty string.
    * @param obj - The object to consider.
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static use(obj: any): typeof obj | string {
-    return random.bool() ? obj : ""
+  use(obj: any): typeof obj | string {
+    return this.bool() ? obj : ""
   }
 
   /**
    * Return a shuffled array.
    * @param arr - Array to shuffle.
    */
-  static shuffle(arr: any[]): void {
+  shuffle(arr: any[]): void {
     for (let i = 0; i < arr.length; i++) {
-      const p = random.number(i + 1)
+      const p = this.number(i + 1)
       const t = arr[i]
       arr[i] = arr[p]
       arr[p] = t
@@ -183,9 +198,9 @@ export class random {
    * Return a shuffled copy of an array.
    * @param arr - Source Array to shuffle.
    */
-  static shuffled<T>(arr: T[]): T[] {
+  shuffled<T>(arr: T[]): T[] {
     const newArray = arr.slice()
-    random.shuffle(newArray)
+    this.shuffle(newArray)
     return newArray
   }
 
@@ -194,16 +209,16 @@ export class random {
    * @param list - List to be parsed.
    * @param limit - Number of elements to be returned.
    */
-  static subset<T>(list: T[], limit?: number): T[] {
+  subset<T>(list: T[], limit?: number): T[] {
     limit =
       typeof limit === "number"
-        ? random.number(Math.min(limit, list.length))
-        : random.number(list.length)
+        ? this.number(Math.min(limit, list.length))
+        : this.number(list.length)
 
     const temp = list.slice(0)
     const result: T[] = []
     for (let i = 0; i < limit; i++) {
-      result.push(random.pop(temp))
+      result.push(this.pop(temp))
     }
 
     return result
@@ -213,8 +228,8 @@ export class random {
    * Removes and returns a random item from an array.
    * @param arr - Source array to pop from.
    */
-  static pop<T>(arr: T[]): T {
-    const i = random.number(arr.length)
+  pop<T>(arr: T[]): T {
+    const i = this.number(arr.length)
     const obj = arr[i]
     arr.splice(i, 1)
 
@@ -225,8 +240,10 @@ export class random {
    * Return a random hex string.
    * @param len - Length of string to generate.
    */
-  static hex(len: number): string {
-    const val = random.number(Math.pow(2, len * 4)).toString(16)
+  hex(len: number): string {
+    const val = this.number(Math.pow(2, len * 4)).toString(16)
     return "0".repeat(len - val.length) + val
   }
 }
+
+export const random = Random.getInstance()

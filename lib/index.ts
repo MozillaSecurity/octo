@@ -1,8 +1,6 @@
-import { logger } from "./logging"
-import { make } from "./make"
-import { objects } from "./objects"
-import { random } from "./random"
-import { tracker } from "./tracker"
-import { utils } from "./utils"
-
-export { logger, make, objects, random, tracker, utils }
+export { random, Random } from "./random"
+export { logger } from "./logging"
+export { make } from "./make"
+export { objects } from "./objects"
+export { tracker } from "./tracker"
+export { utils } from "./utils"

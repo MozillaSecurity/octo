@@ -11,12 +11,12 @@ describe("Random", () => {
     expect(() => {
       random.number()
     }).toThrow()
-    random.init(1)
+    random.seed(1)
     random.number()
   })
 
   test("number() corner cases", () => {
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
     let sum = 0
 
     for (let i = 0; i < 100; ++i) {
@@ -48,7 +48,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 564.7 // quantile of chi-square dist. k=511, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -85,7 +85,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 564.7 // quantile of chi-square dist. k=511, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -122,7 +122,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 66.34 // quantile of chi-square dist. k=49, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -159,7 +159,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 66.34 // quantile of chi-square dist. k=49, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -196,10 +196,10 @@ describe("Random", () => {
     let seed, result1, result2
     seed = Math.random() * 0x100000000
     for (let t = 0; t < 50; ++t) {
-      random.init(seed)
+      random.seed(seed)
       result1 = random.range(1, 20)
       for (let i = 0; i < 5; ++i) {
-        random.init(seed)
+        random.seed(seed)
         result2 = random.range(1, 20)
         expect(result1).toBe(result2)
       }
@@ -212,7 +212,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -251,7 +251,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -288,7 +288,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -319,7 +319,7 @@ describe("Random", () => {
   })
 
   test("pick() cases", () => {
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     for (let i = 0; i < 100; ++i) {
       const tmp = Math.random()
@@ -357,7 +357,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -395,7 +395,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -433,7 +433,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -469,7 +469,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -505,7 +505,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -540,7 +540,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -575,7 +575,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -616,7 +616,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -661,7 +661,7 @@ describe("Random", () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const v3 = () => {}
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -713,7 +713,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -756,7 +756,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -800,7 +800,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -847,7 +847,7 @@ describe("Random", () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const v3 = () => {}
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
     const _test = () => {
       const tries = []
       for (let attempt = 0; attempt < TRIES; ++attempt) {
@@ -896,7 +896,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -937,7 +937,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 3.84 // quantile of chi-square dist. k=1, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -982,7 +982,7 @@ describe("Random", () => {
     const XSQ = 123.23 // quantile of chi-square dist. k=M*M-1, p=.05
     // XXX: shouldn't k be M! ?
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -1022,7 +1022,7 @@ describe("Random", () => {
     const XSQ = 123.23 // quantile of chi-square dist. k=M*M-1, p=.05
     // XXX: shouldn't k be M! ?
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -1073,7 +1073,7 @@ describe("Random", () => {
     const B2_XSQ = 38.89
     const LEN_XSQ = 7.81 // quantile of chi-square dist. k=[2,8,26,3], p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       let bin0_xsq, bin1_xsq, bin2_xsq, length_xsq
@@ -1156,7 +1156,7 @@ describe("Random", () => {
     let bin2_xsq: number
     let bin3_xsq: number
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       for (let attempt = 0; attempt < 100; ++attempt) {
@@ -1230,7 +1230,7 @@ describe("Random", () => {
     const TRIES = 3
     const XSQ = 5.99 // quantile of chi-square dist. k=2, p=.05
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     const _test = () => {
       const tries = []
@@ -1276,7 +1276,7 @@ describe("Random", () => {
     const XSQ = 123.22 // quantile of chi-square dist. k=99, p=.05
     const dist = new Uint32Array(100)
 
-    random.init(Math.random() * 0x100000000)
+    random.seed(Math.random() * 0x100000000)
 
     /* Build the ideal distribution for comparison
      * I thought this would be the PDF of the log-normal distribution, but I couldn't get mu & sigma figured out? */
