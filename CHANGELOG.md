@@ -1,3 +1,19 @@
+# [3.0.0-next.34](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.33...v3.0.0-next.34) (2024-02-06)
+
+
+### Bug Fixes
+
+* let random.pick evaluate functions ([0dfaf13](https://github.com/MozillaSecurity/octo/commit/0dfaf13fa00845150b12512ada52590506622917))
+* remove unnecessary dynamic type checks ([b4c3858](https://github.com/MozillaSecurity/octo/commit/b4c385844e9168f24105bc52d44abf66e01d486e))
+* set minimum node version to 20.0.0 ([b4c095f](https://github.com/MozillaSecurity/octo/commit/b4c095f0efd8707a9cc04134ec821aa8c36c85e0))
+* simplify limit check ([ac49b2f](https://github.com/MozillaSecurity/octo/commit/ac49b2fce7ac5f1fb4cbc21043b4c96b1eb3f377))
+
+
+### Features
+
+* export ranged type options ([8da31fb](https://github.com/MozillaSecurity/octo/commit/8da31fb28d9b956c384499d15c34efc488a91034))
+* modify random to use singleton pattern ([ad06485](https://github.com/MozillaSecurity/octo/commit/ad064851d5ee242e7708e8b3ee656bf55595a50c))
+
 # [3.0.0-next.33](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.32...v3.0.0-next.33) (2023-11-06)
 
 
