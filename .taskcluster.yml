@@ -51,7 +51,7 @@ tasks:
         workerType: ci
         payload:
           maxRunTime: 3600
-          image: mozillasecurity/ci-node-18
+          image: mozillasecurity/ci-node-20
           features:
             taskclusterProxy: true
           command:
