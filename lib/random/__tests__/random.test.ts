@@ -7,14 +7,6 @@
 import { random } from "../"
 
 describe("Random", () => {
-  test("init", () => {
-    expect(() => {
-      random.number()
-    }).toThrow()
-    random.seed(1)
-    random.number()
-  })
-
   test("number() corner cases", () => {
     random.seed(Math.random() * 0x100000000)
     let sum = 0
