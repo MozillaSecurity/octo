@@ -38,7 +38,7 @@ export function calc(generator: () => string): string {
       break
     default:
       for (let i = 0; i < 2; i++) {
-        values.push(random.pick([datatypes.number(null), generator()]))
+        values.push(random.pick([datatypes.number, generator]))
       }
       break
   }
