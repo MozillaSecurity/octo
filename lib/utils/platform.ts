@@ -61,18 +61,18 @@ export class platform {
     platform.current = platform.msie
       ? "msie"
       : platform.mozilla
-      ? "mozilla"
-      : platform.chrome
-      ? "chrome"
-      : platform.safari
-      ? "safari"
-      : platform.opera
-      ? "opera"
-      : platform.mobileSafari
-      ? "mobile-safari"
-      : platform.android
-      ? "android"
-      : "unknown"
+        ? "mozilla"
+        : platform.chrome
+          ? "chrome"
+          : platform.safari
+            ? "safari"
+            : platform.opera
+              ? "opera"
+              : platform.mobileSafari
+                ? "mobile-safari"
+                : platform.android
+                  ? "android"
+                  : "unknown"
 
     /**
      * Identify available feature locations.
