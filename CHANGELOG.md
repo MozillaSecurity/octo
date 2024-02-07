@@ -1,3 +1,10 @@
+# [3.0.0-next.35](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.34...v3.0.0-next.35) (2024-02-07)
+
+
+### Bug Fixes
+
+* bind calls to random functions when used with random.choose ([798b722](https://github.com/MozillaSecurity/octo/commit/798b7220ec967cef5e01b7aec955a81fe9435045))
+
 # [3.0.0-next.34](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.33...v3.0.0-next.34) (2024-02-06)
 
 
