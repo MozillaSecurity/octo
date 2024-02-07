@@ -143,7 +143,7 @@ export class numbers {
     }
 
     const base = random.choose([
-      [4, random.float],
+      [4, random.float.bind(random)],
       [3, numbers.int8],
       [2, numbers.int16],
       [1, numbers.int32],
