@@ -60,10 +60,6 @@ export class Random {
 
   /** Returns a float in [0, 1) (uniform distribution). */
   float(): number {
-    if (!this.prng) {
-      throw new Error("this.init_seed() must be called first.")
-    }
-
     return this.prng.random_long()
   }
 
