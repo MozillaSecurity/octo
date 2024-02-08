@@ -17,25 +17,25 @@ interface CommandPair {
 
 /** Class for generating designMode commands. */
 export class command {
-  /** Returns a object containing all designMode commands and their arguments. */
+  /** Returns an object containing all designMode commands and their arguments. */
   static get data(): CommandPair {
     return {
-      backColor: colors.any,
+      backColor: () => colors.any(),
       bold: null,
       ClearAuthenticationCache: null,
-      contentReadOnly: random.bool,
+      contentReadOnly: () => random.bool(),
       copy: null,
       createLink: uri.any,
       cut: null,
       decreaseFontSize: null,
-      defaultParagraphSeparator: html.tag,
+      defaultParagraphSeparator: () => html.tag(),
       delete: null,
-      enableAbsolutePositionEditor: random.bool,
-      enableInlineTableEditing: random.bool,
-      enableObjectResizing: random.bool,
-      fontName: font.family,
-      fontSize: font.relativeSize,
-      foreColor: colors.any,
+      enableAbsolutePositionEditor: () => random.bool(),
+      enableInlineTableEditing: () => random.bool(),
+      enableObjectResizing: () => random.bool(),
+      fontName: () => font.family(),
+      fontSize: () => font.relativeSize(),
+      foreColor: () => colors.any(),
       formatBlock: [
         "p",
         "h1",
@@ -54,17 +54,17 @@ export class command {
       ],
       forwardDelete: null,
       heading: ["p", "h1", "h2", "h3", "h4", "h5", "h6"],
-      hiliteColor: colors.any,
+      hiliteColor: () => colors.any(),
       increaseFontSize: null,
       indent: null,
-      insertBrOnReturn: random.bool,
+      insertBrOnReturn: () => random.bool(),
       insertHorizontalRule: null,
       // 'insertHTML: function () { },
-      insertImage: uri.any,
+      insertImage: () => uri.any(),
       insertLineBreak: null,
       insertOrderedList: null,
       insertParagraph: null,
-      insertText: text.any,
+      insertText: () => text.any(),
       insertUnorderedList: null,
       italic: null,
       justifyCenter: null,
@@ -77,13 +77,13 @@ export class command {
       removeFormat: null,
       selectAll: null,
       strikeThrough: null,
-      styleWithCSS: random.bool,
+      styleWithCSS: () => random.bool(),
       subscript: null,
       superscript: null,
       underline: null,
       undo: null,
       unlink: null,
-      useCSS: random.bool,
+      useCSS: () => random.bool(),
     }
   }
 
