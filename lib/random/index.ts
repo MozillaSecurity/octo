@@ -25,104 +25,9 @@ export class Random {
     return this.instance
   }
 
-  /**
-   * Seed the PRNG.
-   * @param seed - The seed to use.
-   */
-  seed(seed: PRNGSeedType): void {
-    if (typeof seed === "number" || Array.isArray(seed)) {
-      this.prng = new MersenneTwister(seed)
-    } else {
-      this.prng = seed
-    }
-  }
-
-  /**
-   * Returns an integer in [0, limit) (uniform distribution).
-   * @param limit - Maximum number.
-   * @param factor - Number of iterations to perform (reduces max).
-   */
-  number(limit = 0xffffffff, factor = 1): number {
-    const x = (0x100000000 / limit) >>> 0
-    const y = (x * limit) >>> 0
-    let r
-    do {
-      r = this.prng.random_int()
-    } while (y && r >= y) // eslint-disable-line no-unmodified-loop-condition
-
-    if (--factor) {
-      const v = (r / x) >>> 0
-      return this.number(v, factor)
-    }
-
-    return (r / x) >>> 0
-  }
-
-  /** Returns a float in [0, 1) (uniform distribution). */
-  float(): number {
-    return this.prng.random_long()
-  }
-
-  /**
-   * Returns an integer in [start, limit) (uniform distribution).
-   * @param start - Minimum value.
-   * @param limit - Maximum value.
-   * @param factor - Reduce possibility of maximum by factor.
-   */
-  range(start: number, limit: number, factor = 1): number {
-    return this.number(limit - start + 1, factor) + start
-  }
-
-  /**
-   * Returns a float in [1, limit). The logarithm has uniform distribution.
-   * @param limit - Maximum value.
-   */
-  ludOneTo(limit: number): number {
-    return Math.exp(this.float() * Math.log(limit))
-  }
-
-  /**
-   * Returns a random index from a list.
-   * @param list - List to choose from.
-   */
-  item<T>(list: T[]): T {
-    if (!list.length) {
-      throw new Error("Cannot return random item from an empty list!")
-    }
-    return list[this.number(list.length)]
-  }
-
-  /**
-   * Returns a random key of a provided object.
-   * @param obj - Source object.
-   */
-  key(obj: Record<string, any>): string {
-    const keys = Object.keys(obj)
-    if (!keys.length) {
-      throw new Error("Cannot return a random key from an empty object!")
-    }
-
-    return this.item(Object.keys(obj))
-  }
-
   /** Return a random Boolean value. */
   bool(): boolean {
     return this.item([true, false])
-  }
-
-  /**
-   * Recursively iterate over array until non-array item identified. If item is a function, evaluate
-   * it with no args.
-   * @param obj - Source object.
-   */
-  pick(obj: any): any {
-    if (typeof obj === "function") {
-      return obj()
-    } else if (Array.isArray(obj)) {
-      return this.pick(this.item(obj))
-    }
-
-    return obj
   }
 
   /**
@@ -154,27 +59,120 @@ export class Random {
     return this.pick(expanded)
   }
 
-  /**
-   * Return a flattened list of weighted values.
-   * @param list - List of weighted values.
-   */
-  weighted(list: { w: number; v: any }[]): any[] {
-    const expanded: any[] = []
-    list.forEach((item) => {
-      for (let i = 0; i < item.w; i++) {
-        expanded.push(item.v)
-      }
-    })
-
-    return expanded
+  /** Returns a float in [0, 1) (uniform distribution). */
+  float(): number {
+    return this.prng.random_long()
   }
 
   /**
-   * Returns either the supplied object or an empty string.
-   * @param obj - The object to consider.
+   * Return a random hex string.
+   * @param len - Length of string to generate.
    */
-  use(obj: any): typeof obj | string {
-    return this.bool() ? obj : ""
+  hex(len: number): string {
+    const val = this.number(Math.pow(2, len * 4)).toString(16)
+    return "0".repeat(len - val.length) + val
+  }
+
+  /**
+   * Returns a random index from a list.
+   * @param list - List to choose from.
+   */
+  item<T>(list: T[]): T {
+    if (!list.length) {
+      throw new Error("Cannot return random item from an empty list!")
+    }
+    return list[this.number(list.length)]
+  }
+
+  /**
+   * Returns a random key of a provided object.
+   * @param obj - Source object.
+   */
+  key(obj: Record<string, any>): string {
+    const keys = Object.keys(obj)
+    if (!keys.length) {
+      throw new Error("Cannot return a random key from an empty object!")
+    }
+
+    return this.item(Object.keys(obj))
+  }
+
+  /**
+   * Returns a float in [1, limit). The logarithm has uniform distribution.
+   * @param limit - Maximum value.
+   */
+  ludOneTo(limit: number): number {
+    return Math.exp(this.float() * Math.log(limit))
+  }
+
+  /**
+   * Returns an integer in [0, limit) (uniform distribution).
+   * @param limit - Maximum number.
+   * @param factor - Number of iterations to perform (reduces max).
+   */
+  number(limit = 0xffffffff, factor = 1): number {
+    const x = (0x100000000 / limit) >>> 0
+    const y = (x * limit) >>> 0
+    let r
+    do {
+      r = this.prng.random_int()
+    } while (y && r >= y) // eslint-disable-line no-unmodified-loop-condition
+
+    if (--factor) {
+      const v = (r / x) >>> 0
+      return this.number(v, factor)
+    }
+
+    return (r / x) >>> 0
+  }
+
+  /**
+   * Recursively iterate over array until non-array item identified. If item is a function, evaluate
+   * it with no args.
+   * @param obj - Source object.
+   */
+  pick(obj: any): any {
+    if (typeof obj === "function") {
+      return obj()
+    } else if (Array.isArray(obj)) {
+      return this.pick(this.item(obj))
+    }
+
+    return obj
+  }
+
+  /**
+   * Removes and returns a random item from an array.
+   * @param arr - Source array to pop from.
+   */
+  pop<T>(arr: T[]): T {
+    const i = this.number(arr.length)
+    const obj = arr[i]
+    arr.splice(i, 1)
+
+    return obj
+  }
+
+  /**
+   * Returns an integer in [start, limit) (uniform distribution).
+   * @param start - Minimum value.
+   * @param limit - Maximum value.
+   * @param factor - Reduce possibility of maximum by factor.
+   */
+  range(start: number, limit: number, factor = 1): number {
+    return this.number(limit - start + 1, factor) + start
+  }
+
+  /**
+   * Seed the PRNG.
+   * @param seed - The seed to use.
+   */
+  seed(seed: PRNGSeedType): void {
+    if (typeof seed === "number" || Array.isArray(seed)) {
+      this.prng = new MersenneTwister(seed)
+    } else {
+      this.prng = seed
+    }
   }
 
   /**
@@ -220,24 +218,26 @@ export class Random {
   }
 
   /**
-   * Removes and returns a random item from an array.
-   * @param arr - Source array to pop from.
+   * Returns either the supplied object or an empty string.
+   * @param obj - The object to consider.
    */
-  pop<T>(arr: T[]): T {
-    const i = this.number(arr.length)
-    const obj = arr[i]
-    arr.splice(i, 1)
-
-    return obj
+  use(obj: any): typeof obj | string {
+    return this.bool() ? obj : ""
   }
 
   /**
-   * Return a random hex string.
-   * @param len - Length of string to generate.
+   * Return a flattened list of weighted values.
+   * @param list - List of weighted values.
    */
-  hex(len: number): string {
-    const val = this.number(Math.pow(2, len * 4)).toString(16)
-    return "0".repeat(len - val.length) + val
+  weighted(list: { w: number; v: any }[]): any[] {
+    const expanded: any[] = []
+    list.forEach((item) => {
+      for (let i = 0; i < item.w; i++) {
+        expanded.push(item.v)
+      }
+    })
+
+    return expanded
   }
 }
 
