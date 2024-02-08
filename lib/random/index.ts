@@ -206,12 +206,11 @@ export class Random {
    * @param limit - Number of elements to be returned.
    */
   subset<T>(list: T[], limit?: number): T[] {
+    const start = Math.min(1, list.length)
     limit =
-      typeof limit === "number"
-        ? this.number(Math.min(limit, list.length))
-        : this.number(list.length)
+      typeof limit !== "number" ? this.range(start, list.length) : Math.min(limit, list.length)
 
-    const temp = list.slice(0)
+    const temp = list.slice()
     const result: T[] = []
     for (let i = 0; i < limit; i++) {
       result.push(this.pop(temp))
