@@ -1,3 +1,12 @@
+# [3.0.0-next.36](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.35...v3.0.0-next.36) (2024-02-08)
+
+
+### Bug Fixes
+
+* ensure subset returns at least one entry ([8ab98b4](https://github.com/MozillaSecurity/octo/commit/8ab98b4e8ba23ab0c2540bff54d3a6e57ba877f8))
+* remove unnecessary check for prng property ([e88d45a](https://github.com/MozillaSecurity/octo/commit/e88d45a8227c5c93152d840d851deb2eaa734f9e))
+* use arrow functions to retain reference to 'this' ([c3c0986](https://github.com/MozillaSecurity/octo/commit/c3c098678a4d1fe9c21ac4f62c59d1a8dbc602ad))
+
 # [3.0.0-next.35](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.34...v3.0.0-next.35) (2024-02-07)
 
 
