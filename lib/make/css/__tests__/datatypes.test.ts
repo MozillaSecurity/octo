@@ -72,6 +72,10 @@ describe("splitUnit()", () => {
   ])("%s", (name: string, value: string, prefix: number, suffix: string) => {
     expect(splitUnit(value)).toEqual([prefix, suffix])
   })
+
+  test("mixed case", () => {
+    expect(splitUnit("44000Hz")).toEqual([44000, "Hz"])
+  })
 })
 
 describe("ranged datatypes", () => {
