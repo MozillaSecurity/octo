@@ -1,3 +1,10 @@
+# [3.0.0-next.37](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.36...v3.0.0-next.37) (2024-10-16)
+
+
+### Bug Fixes
+
+* dimension suffixes may be both upper and lowercase ([2fdbf85](https://github.com/MozillaSecurity/octo/commit/2fdbf850fc3b4b6f37432978f2eff147413db11e))
+
 # [3.0.0-next.36](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.35...v3.0.0-next.36) (2024-02-08)
 
 
