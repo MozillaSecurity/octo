@@ -126,18 +126,21 @@ export class script {
     cmds = Array.isArray(cmds) ? cmds : [cmds]
     const cleaned = cmds.filter(<T>(t: T | undefined): t is T => t !== undefined)
     const safe = script.safely(cleaned)
-    switch (random.number(50)) {
-      case 0:
-        return [
-          `setInterval(${async ? "async" : ""} () => { ${safe} }, ${random.range(1000, 2000)} )`,
-        ]
-      case 1:
-        return [`setTimeout(${async ? "async" : ""} () => { ${safe} }, ${random.range(100, 400)} )`]
-      case 2:
-        return [`for (let i = 0; i < ${random.range(1, random.range(1, 30))}; i++) { ${safe} }`]
-      default:
-        return cleaned
+    if (random.chance(125)) {
+      return [
+        `setInterval(${async ? "async" : ""} () => { ${safe} }, ${random.range(1000, 2000)} )`,
+      ]
     }
+
+    if (random.chance(75)) {
+      return [`for (let i = 0; i < ${random.range(1, random.range(1, 30))}; i++) { ${safe} }`]
+    }
+
+    if (random.chance(50)) {
+      return [`setTimeout(${async ? "async" : ""} () => { ${safe} }, ${random.range(100, 400)} )`]
+    }
+
+    return [safe]
   }
 
   /**
