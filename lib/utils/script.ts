@@ -140,7 +140,7 @@ export class script {
       return [`setTimeout(${async ? "async" : ""} () => { ${safe} }, ${random.range(100, 400)} )`]
     }
 
-    return [safe]
+    return cleaned
   }
 
   /**
