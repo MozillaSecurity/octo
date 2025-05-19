@@ -1,3 +1,10 @@
+# [3.0.0-next.38](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.37...v3.0.0-next.38) (2025-05-19)
+
+
+### Features
+
+* significantly reduce the liklihood of using setInterval ([cbf195c](https://github.com/MozillaSecurity/octo/commit/cbf195c688252d804bd09d562aff7bfac8cbd3be))
+
 # [3.0.0-next.37](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.36...v3.0.0-next.37) (2024-10-16)
 
 
