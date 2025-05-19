@@ -1,3 +1,10 @@
+# [3.0.0-next.39](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.38...v3.0.0-next.39) (2025-05-19)
+
+
+### Bug Fixes
+
+* return top-level commands without try/catch ([31ce03f](https://github.com/MozillaSecurity/octo/commit/31ce03f073b4434ef72b9dc82e83b6a424739b87))
+
 # [3.0.0-next.38](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.37...v3.0.0-next.38) (2025-05-19)
 
 
