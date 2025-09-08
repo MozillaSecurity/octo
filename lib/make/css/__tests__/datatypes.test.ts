@@ -85,7 +85,6 @@ describe("ranged datatypes", () => {
     "frequency",
     "flex",
     "integer",
-    "length",
     "number",
     "percentage",
     "resolution",
@@ -103,6 +102,19 @@ describe("ranged datatypes", () => {
         expect(value).toBeLessThanOrEqual(0)
       }
     })
+  })
+
+  test.each([
+    ["positive", 0, null],
+    ["negative", null, 0],
+  ])("ranges (%s)", (type, min, max) => {
+    const raw = datatypes.length({ range: { min, max } })
+    const value = parseInt(raw)
+    if (type === "positive") {
+      expect(value).toBeGreaterThanOrEqual(0)
+    } else {
+      expect(value).toBeLessThanOrEqual(0)
+    }
   })
 })
 
