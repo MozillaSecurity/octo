@@ -1,3 +1,12 @@
+# [3.0.0-next.41](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.40...v3.0.0-next.41) (2025-09-08)
+
+
+### Bug Fixes
+
+* allow null range values for dimensions ([0bfbb06](https://github.com/MozillaSecurity/octo/commit/0bfbb0611d9a0fc1f6889996dd47d3287456a538))
+* make options required by nullable ([8f4abe1](https://github.com/MozillaSecurity/octo/commit/8f4abe1651ce3bba5a3176f578b206f52c6c5a19))
+* set expected range parameters when calling length ([e00e066](https://github.com/MozillaSecurity/octo/commit/e00e06642ac43b3048f7a3379c4ae557e3c0ba48))
+
 # [3.0.0-next.40](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.39...v3.0.0-next.40) (2025-09-08)
 
 
