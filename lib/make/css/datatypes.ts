@@ -173,7 +173,7 @@ export class datatypes {
       case 2:
         return datatypes.resolution(opts)
       default:
-        return datatypes.length({ ...opts, unit: { allowRelative: true } })
+        return datatypes.length({ ...(opts && { range: opts }), unit: { allowRelative: true } })
     }
   }
 
