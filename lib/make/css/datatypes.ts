@@ -164,7 +164,7 @@ export class datatypes {
    * Generate a random <dimension> data type.
    * @param opts - Options.
    */
-  static dimension(opts?: RangedTypeOptions): string {
+  static dimension(opts?: RangedTypeOptions | null): string {
     switch (random.number(4)) {
       case 0:
         return datatypes.frequency(opts)
