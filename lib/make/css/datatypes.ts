@@ -29,7 +29,7 @@ interface UnitOptions {
 /** Length value options. */
 interface LengthOptions {
   /** Ranged datatype options. */
-  range?: RangedTypeOptions
+  range: RangedTypeOptions | null
   /** Unit options. */
   unit?: UnitOptions
 }
@@ -124,7 +124,7 @@ export class datatypes {
    * Generate a random <angle> data type.
    * @param opts - Options.
    */
-  static angle(opts?: RangedTypeOptions | null): string {
+  static angle(opts: RangedTypeOptions | null): string {
     const unit = random.item(["deg", "grad", "rad", "turn"])
 
     if (opts) {
@@ -164,7 +164,7 @@ export class datatypes {
    * Generate a random <dimension> data type.
    * @param opts - Options.
    */
-  static dimension(opts?: RangedTypeOptions | null): string {
+  static dimension(opts: RangedTypeOptions | null): string {
     switch (random.number(4)) {
       case 0:
         return datatypes.frequency(opts)
@@ -173,21 +173,21 @@ export class datatypes {
       case 2:
         return datatypes.resolution(opts)
       default:
-        return datatypes.length({ ...(opts && { range: opts }), unit: { allowRelative: true } })
+        return datatypes.length({ range: opts, unit: { allowRelative: true } })
     }
   }
 
   /** Generate a random <expression> data type. */
   static expression(): string {
     // ToDo: Deprecated MS only feature - not complete
-    return `expression(body.scrollTop + ${datatypes.length()});`
+    return `expression(body.scrollTop + ${datatypes.length(null)});`
   }
 
   /**
    * Generate a random <flex> data type.
    * @param opts - Options.
    */
-  static flex(opts?: RangedTypeOptions | null): string {
+  static flex(opts: RangedTypeOptions | null): string {
     if (opts) {
       const [_min, _max] = normalizeSuffix(opts.min, opts.max)
       const min = typeof _min !== "string" ? _min : splitUnit(_min)[0]
@@ -202,7 +202,7 @@ export class datatypes {
    * Generate a random <frequency> data type.
    * @param opts - Options.
    */
-  static frequency(opts?: RangedTypeOptions | null): string {
+  static frequency(opts: RangedTypeOptions | null): string {
     const unit = random.item(["Hz", "kHz"])
     if (opts) {
       const [_min, _max] = normalizeSuffix(opts.min, opts.max)
@@ -228,13 +228,13 @@ export class datatypes {
    * Generate a random <integer> data type.
    * @param opts - Options.
    */
-  static integer(opts?: RangedTypeOptions | null): string {
+  static integer(opts: RangedTypeOptions | null): string {
     // Integer options should never be strings
     if (opts && typeof opts.min !== "string" && typeof opts.max !== "string") {
       const [min, max] = expandRange(opts.min, opts.max)
       return String(random.range(min, max))
     } else if (random.chance(75)) {
-      return calc(datatypes.integer)
+      return calc(() => datatypes.integer(null))
     }
 
     return String(make.numbers.any(false))
@@ -242,29 +242,34 @@ export class datatypes {
 
   /**
    * Generate a random <length> data type.
-   * @param options - Length options.
+   * @param opts - Length options.
    */
   // @ts-ignore
-  static length(options?: LengthOptions): string {
+  static length(opts: LengthOptions | null): string {
     const units = ["cm", "mm", "Q", "in", "pc", "pt", "px"]
-    if (options?.unit?.allowRelative) {
+    if (opts?.unit?.allowRelative) {
       units.push("em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax")
     }
 
-    if (options?.unit?.allowContainer) {
+    if (opts?.unit?.allowContainer) {
       units.push("cqw", "cqh", "cqi", "cqb", "cqmin", "cqmax")
     }
 
     const unit = random.item(units)
-    if (options?.range) {
-      const [_min, _max] = normalizeSuffix(options?.range.min, options?.range.max)
+    if (opts?.range) {
+      const [_min, _max] = normalizeSuffix(opts?.range.min, opts?.range.max)
       // Convert both to a singular base type (degrees)
       const min = typeof _min !== "string" ? _min : Length.toPx(...splitUnit(_min))
       const max = typeof _max !== "string" ? _max : Length.toPx(...splitUnit(_max))
       const value = make.numbers.frange(...expandRange(min, max))
       return `${Length.fromPx(value, unit)}${unit}`
     } else if (random.chance(75)) {
-      return calc(() => datatypes.length({ ...options?.range, unit: { allowRelative: true } }))
+      return calc(() =>
+        datatypes.length({
+          range: opts?.range || null,
+          unit: { allowRelative: true },
+        }),
+      )
     }
 
     return `${make.numbers.any()}${unit}`
@@ -274,7 +279,7 @@ export class datatypes {
    * Generate a random <number> data type.
    * @param opts - Options.
    */
-  static number(opts?: RangedTypeOptions | null): string {
+  static number(opts: RangedTypeOptions | null): string {
     // Number options should never be strings
     if (opts && typeof opts.min !== "string" && typeof opts.max !== "string") {
       const [min, max] = expandRange(opts.min, opts.max)
@@ -300,13 +305,13 @@ export class datatypes {
    * Generate a random <percentage> data type.
    * @param opts - Options.
    */
-  static percentage(opts?: RangedTypeOptions | null): string {
+  static percentage(opts: RangedTypeOptions | null): string {
     // Percentage options should never be strings
     if (opts && typeof opts.min !== "string" && typeof opts.max !== "string") {
       const [min, max] = expandRange(opts.min, opts.max)
       return `${random.range(min, max)}%`
     } else if (random.chance(75)) {
-      return calc(datatypes.percentage)
+      return calc(() => datatypes.percentage(null))
     }
 
     return make.unit.percent()
@@ -345,7 +350,7 @@ export class datatypes {
    * Generate a random <resolution> data type.
    * @param opts - Options.
    */
-  static resolution(opts?: RangedTypeOptions | null): string {
+  static resolution(opts: RangedTypeOptions | null): string {
     const unit = random.item(["dpi", "dpcm", "dppx"])
     if (opts) {
       const [_min, _max] = normalizeSuffix(opts.min, opts.max)
@@ -373,7 +378,7 @@ export class datatypes {
    * Generate a random <time> data type.
    * @param opts - Options.
    */
-  static time(opts?: RangedTypeOptions | null): string {
+  static time(opts: RangedTypeOptions | null): string {
     const unit = random.item(["s", "ms"])
     if (opts) {
       const [_min, _max] = normalizeSuffix(opts.min, opts.max)
