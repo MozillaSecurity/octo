@@ -1,3 +1,10 @@
+# [3.0.0-next.40](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.39...v3.0.0-next.40) (2025-09-08)
+
+
+### Features
+
+* add support for container units ([d2b93f5](https://github.com/MozillaSecurity/octo/commit/d2b93f5b92291b46ab971a5b7a70bff272b6ea36))
+
 # [3.0.0-next.39](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.38...v3.0.0-next.39) (2025-05-19)
 
 
