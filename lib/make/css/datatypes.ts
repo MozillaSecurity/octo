@@ -10,12 +10,28 @@ import { random } from "../../random"
 
 type RangedTypeOption = string | number | null
 
-/** Interface representing options for ranged datatypes. */
-export interface RangedTypeOptions {
+/** Ranged datatype options. */
+interface RangedTypeOptions {
   /** Minimum value. */
   min: RangedTypeOption
   /** Maximum value. */
   max: RangedTypeOption
+}
+
+/** Unit options. */
+interface UnitOptions {
+  /** Allow relative values value. */
+  allowRelative?: boolean
+  /** Allow container units. */
+  allowContainer?: boolean
+}
+
+/** Length value options. */
+interface LengthOptions {
+  /** Ranged datatype options. */
+  range?: RangedTypeOptions
+  /** Unit options. */
+  unit?: UnitOptions
 }
 
 /**
@@ -148,7 +164,7 @@ export class datatypes {
    * Generate a random <dimension> data type.
    * @param opts - Options.
    */
-  static dimension(opts?: RangedTypeOptions | null): string {
+  static dimension(opts?: RangedTypeOptions): string {
     switch (random.number(4)) {
       case 0:
         return datatypes.frequency(opts)
@@ -157,7 +173,7 @@ export class datatypes {
       case 2:
         return datatypes.resolution(opts)
       default:
-        return datatypes.length(opts)
+        return datatypes.length({ ...opts, unit: { allowRelative: true } })
     }
   }
 
@@ -226,26 +242,29 @@ export class datatypes {
 
   /**
    * Generate a random <length> data type.
-   * @param opts - Options.
-   * @param allowRelative - Allow relative units.
+   * @param options - Length options.
    */
   // @ts-ignore
-  static length(opts?: RangedTypeOptions | null, allowRelative = true): string {
+  static length(options?: LengthOptions): string {
     const units = ["cm", "mm", "Q", "in", "pc", "pt", "px"]
-    if (!allowRelative) {
+    if (options?.unit?.allowRelative) {
       units.push("em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax")
     }
 
+    if (options?.unit?.allowContainer) {
+      units.push("cqw", "cqh", "cqi", "cqb", "cqmin", "cqmax")
+    }
+
     const unit = random.item(units)
-    if (opts) {
-      const [_min, _max] = normalizeSuffix(opts.min, opts.max)
+    if (options?.range) {
+      const [_min, _max] = normalizeSuffix(options?.range.min, options?.range.max)
       // Convert both to a singular base type (degrees)
       const min = typeof _min !== "string" ? _min : Length.toPx(...splitUnit(_min))
       const max = typeof _max !== "string" ? _max : Length.toPx(...splitUnit(_max))
       const value = make.numbers.frange(...expandRange(min, max))
       return `${Length.fromPx(value, unit)}${unit}`
     } else if (random.chance(75)) {
-      return calc(() => datatypes.length(opts))
+      return calc(() => datatypes.length({ ...options?.range, unit: { allowRelative: true } }))
     }
 
     return `${make.numbers.any()}${unit}`
