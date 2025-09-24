@@ -1,3 +1,10 @@
+# [3.0.0-next.42](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.41...v3.0.0-next.42) (2025-09-24)
+
+
+### Bug Fixes
+
+* **script:** fallback to 0 if modulus is NaN ([1ce444f](https://github.com/MozillaSecurity/octo/commit/1ce444f7240706fef77b5052bde518c4de9d5540))
+
 # [3.0.0-next.41](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.40...v3.0.0-next.41) (2025-09-08)
 
 
