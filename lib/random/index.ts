@@ -44,7 +44,7 @@ export class Random {
    * @param list - Array of arrays.
    * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
-  choose(list: any[], flat = false): any {
+  choose(list: readonly any[], flat = false): any {
     const expanded: any[] = []
     list.forEach(([weight, value]) => {
       for (let w = 0; w < weight; w++) {
@@ -77,7 +77,7 @@ export class Random {
    * Returns a random index from a list.
    * @param list - List to choose from.
    */
-  item<T>(list: T[]): T {
+  item<T>(list: readonly T[]): T {
     if (!list.length) {
       throw new Error("Cannot return random item from an empty list!")
     }
@@ -192,7 +192,7 @@ export class Random {
    * Return a shuffled copy of an array.
    * @param arr - Source Array to shuffle.
    */
-  shuffled<T>(arr: T[]): T[] {
+  shuffled<T>(arr: readonly T[]): T[] {
     const newArray = arr.slice()
     this.shuffle(newArray)
     return newArray
@@ -203,7 +203,7 @@ export class Random {
    * @param list - List to be parsed.
    * @param limit - Number of elements to be returned.
    */
-  subset<T>(list: T[], limit?: number): T[] {
+  subset<T>(list: readonly T[], limit?: number): T[] {
     const start = Math.min(1, list.length)
     limit =
       typeof limit !== "number" ? this.range(start, list.length) : Math.min(limit, list.length)
