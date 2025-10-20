@@ -1,3 +1,10 @@
+# [3.0.0-next.44](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.43...v3.0.0-next.44) (2025-10-20)
+
+
+### Bug Fixes
+
+* explicitly mark return type as readonly ([7c414ff](https://github.com/MozillaSecurity/octo/commit/7c414ff39985007401c70489524425e4e2cffb53))
+
 # [3.0.0-next.43](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.42...v3.0.0-next.43) (2025-10-20)
 
 
