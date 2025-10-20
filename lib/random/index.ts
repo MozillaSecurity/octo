@@ -192,7 +192,7 @@ export class Random {
    * Return a shuffled copy of an array.
    * @param arr - Source Array to shuffle.
    */
-  shuffled<T>(arr: readonly T[]): T[] {
+  shuffled<T>(arr: readonly T[]): readonly T[] {
     const newArray = arr.slice()
     this.shuffle(newArray)
     return newArray
