@@ -1,3 +1,10 @@
+# [3.0.0-next.43](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.42...v3.0.0-next.43) (2025-10-20)
+
+
+### Bug Fixes
+
+* explicitly params for non-modifying functions as readonly ([b99ea0c](https://github.com/MozillaSecurity/octo/commit/b99ea0c955ef2eed0d04a50b0cdc30c8042914bb))
+
 # [3.0.0-next.42](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.41...v3.0.0-next.42) (2025-09-24)
 
 
