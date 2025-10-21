@@ -1,3 +1,11 @@
+# [3.0.0-next.45](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.44...v3.0.0-next.45) (2025-10-21)
+
+
+### Bug Fixes
+
+* apply eslint fixes ([7c14651](https://github.com/MozillaSecurity/octo/commit/7c146510afd2a9f85457c6ae2323641ca50ccb45))
+* shuffled returns a new mutable array ([1867cd4](https://github.com/MozillaSecurity/octo/commit/1867cd415ea5b5da6ed44f90f015352db641caf5))
+
 # [3.0.0-next.44](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.43...v3.0.0-next.44) (2025-10-20)
 
 
