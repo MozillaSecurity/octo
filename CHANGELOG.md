@@ -1,3 +1,10 @@
+# [3.0.0-next.47](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.46...v3.0.0-next.47) (2025-10-21)
+
+
+### Bug Fixes
+
+* **random:** allow immutable types in choose ([1ab2cdc](https://github.com/MozillaSecurity/octo/commit/1ab2cdceeae42a3cb67787a5b2aeaf6c7dc85c9c))
+
 # [3.0.0-next.46](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.45...v3.0.0-next.46) (2025-10-21)
 
 
