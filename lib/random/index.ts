@@ -46,7 +46,7 @@ export class Random {
    * @param list - Array of arrays.
    * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
-  choose(list: [number, unknown][], flat = false): any {
+  choose(list: readonly (readonly [number, unknown])[], flat = false): any {
     const expanded: any[] = []
     list.forEach(([weight, value]) => {
       for (let w = 0; w < weight; w++) {
