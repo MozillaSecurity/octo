@@ -1,3 +1,10 @@
+# [3.0.0-next.46](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.45...v3.0.0-next.46) (2025-10-21)
+
+
+### Bug Fixes
+
+* recurse into number choices ([efa7c19](https://github.com/MozillaSecurity/octo/commit/efa7c19f6b9a15d170bb25fb4e226985dcee7398))
+
 # [3.0.0-next.45](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.44...v3.0.0-next.45) (2025-10-21)
 
 
