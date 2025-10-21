@@ -10,9 +10,7 @@ interface FormatEntry {
   type: string[]
 }
 
-interface InternalFormatTypes {
-  [key: string]: FormatEntry
-}
+type InternalFormatTypes = Record<string, FormatEntry>
 
 /** Class for generating WebGL related values. */
 export class webgl {
@@ -98,7 +96,7 @@ export class webgl {
    */
   static parseUniforms(shader: string, group = 1): string[] {
     /* Todo: Parse their individual data types into categories. */
-    return webgl.match(shader, /uniform .+? (\w+)(?=[\[;])/gm, group) // eslint-disable-line no-useless-escape
+    return webgl.match(shader, /uniform .+? (\w+)(?=[\[;])/gm, group)
   }
 
   /**
@@ -136,7 +134,7 @@ export class webgl {
    */
   static parseFragDatav3(shader: string, group = 1): string[] {
     // #version 300
-    return webgl.match(shader, /out .+? (\w+)(?=[\[;])/gm, group) // eslint-disable-line no-useless-escape
+    return webgl.match(shader, /out .+? (\w+)(?=[\[;])/gm, group)
   }
 
   /**

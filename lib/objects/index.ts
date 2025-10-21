@@ -15,7 +15,7 @@ export class objects {
   /** Counter used for tracking number of created objects. */
   private counter: number
   /** Container for storing created objects. */
-  private readonly container: { [id: string]: ContainerEntry[] }
+  private readonly container: Record<string, ContainerEntry[]>
   /** Create a new instance. */
   constructor() {
     this.counter = 0
@@ -64,7 +64,7 @@ export class objects {
   pick(category: string, last: boolean): string {
     try {
       return this.get(category, last).name
-    } catch (e) {
+    } catch (_e) {
       logger.traceback()
       throw logger.JSError(`Error: pick('${category}') is undefined.`)
     }
@@ -97,7 +97,7 @@ export class objects {
    * Return a list of objects matching the supplied category.
    * @param category - Type of object to filter on.
    */
-  show(category: string): ContainerEntry[] | { [p: string]: ContainerEntry[] } {
+  show(category: string): ContainerEntry[] | Record<string, ContainerEntry[]> {
     return category in this.container ? this.container[category] : this.container
   }
 
@@ -128,8 +128,8 @@ export class objects {
       this.check(category)
     })
     Object.keys(this.container).forEach((category) => {
-      for (let i = 0; i < this.container[category].length; i++) {
-        items.push(this.container[category][i].name)
+      for (const obj of this.container[category]) {
+        items.push(obj.name)
       }
     })
     return items
@@ -142,11 +142,11 @@ export class objects {
   check(category: string): void {
     this.container[category].forEach((object) => {
       try {
-        const x = /* frame.contentWindow. */ eval(object.name) // eslint-disable-line no-eval
+        const x = /* frame.contentWindow. */ eval(object.name)
         if (x === undefined || x === null) {
           this.pop(object.name)
         }
-      } catch (e) {
+      } catch (_e) {
         this.pop(object.name)
       }
     })

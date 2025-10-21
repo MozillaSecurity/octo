@@ -25,18 +25,17 @@ export class logger {
   static console(msg: string): void {
     if (typeof window === "undefined") {
       try {
-        // @ts-ignore
+        // @ts-expect-error: Using SpiderMonkey's global print function.
         print(msg)
-      } catch (e) {
+      } catch (_e) {
         console.log(msg)
       }
     } else {
-      // @ts-ignore
+      // @ts-expect-error: Using browser's dump function if available.
       if (window.dump) {
-        // @ts-ignore
+        // @ts-expect-error: Using browser's dump function.
         dump(msg)
       } else if (window.console) {
-        // @ts-ignore
         console.log(msg)
       } else {
         throw new Error("Unable to run console logger.")
@@ -89,7 +88,6 @@ export class logger {
    * @param msg - Message to log.
    */
   static ok(msg: string): void {
-    // eslint-disable-line no-unused-vars
     this.dumpln(color.green + msg + color.green)
   }
 
@@ -118,7 +116,7 @@ export class logger {
   static traceback(): void {
     this.error("===[ Traceback ] ===")
     const e = new Error()
-    // @ts-ignore
+    // @ts-expect-error: Error.stacktrace is a non-standard property.
     this.dump(e.stack || e.stacktrace || "")
   }
 }

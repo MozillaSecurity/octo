@@ -39,10 +39,13 @@ export class numbers {
       return numbers._exceed(random.item([-128, 127]))
     }
 
-    return random.choose([
-      [4, () => random.range(-128, 127)],
-      [1, [-128, -1, 0, 1, 16, 32, 64, 100, 127]],
-    ])
+    return random.choose(
+      [
+        [4, () => random.range(-128, 127)],
+        [1, () => random.item([-128, -1, 0, 1, 16, 32, 64, 100, 127])],
+      ],
+      true,
+    )
   }
 
   /**
@@ -54,10 +57,13 @@ export class numbers {
       return numbers._exceed(255)
     }
 
-    return random.choose([
-      [4, () => random.range(0, 255)],
-      [1, [0, 1, 16, 32, 64, 100, 127, 255]],
-    ])
+    return random.choose(
+      [
+        [4, () => random.range(0, 255)],
+        [1, () => random.item([0, 1, 16, 32, 64, 100, 127, 255])],
+      ],
+      true,
+    )
   }
 
   /**

@@ -13,7 +13,7 @@ export class unit {
   }
 
   /** Generate a random length value. */
-  // @ts-ignore
+  // @ts-expect-error: Overrides the builtin Function.length property.
   static length(): string {
     return make.numbers.any() + make.unit.unit()
   }

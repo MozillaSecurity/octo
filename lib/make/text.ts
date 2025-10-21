@@ -60,18 +60,7 @@ export class text {
 
   /** Generate a random control character. */
   static controlChar(): string {
-    return random.item([
-      "\b",
-      "\t",
-      "\n",
-      "\v",
-      "\f",
-      "\r",
-      "\0",
-      "c",
-      "a",
-      "e", // eslint-disable-line no-useless-escape
-    ])
+    return random.item(["\b", "\t", "\n", "\v", "\f", "\r", "\0", "c", "a", "e"])
   }
 
   /** Generate a random digit. */
@@ -357,7 +346,7 @@ export class text {
    * @param set - Array of values and generators.
    * @param maxlen - Maximum number of iterations to perform.
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static fromBlocks(set: any, maxlen?: number): string {
     let s = ""
 

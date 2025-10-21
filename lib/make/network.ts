@@ -200,7 +200,7 @@ export class network {
   /** Generate a random hostname. */
   static hostname(): string {
     return random.choose([
-      [10, network.goodHostnames],
+      [10, [network.goodHostnames]],
       [1, [network.randomIPv4, network.randomIPv6, network.badHostnames]],
     ])
   }

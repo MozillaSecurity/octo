@@ -39,7 +39,6 @@ interface LengthOptions {
  * @param generator - The value generation function.
  */
 export function calc(generator: () => string): string {
-  /* eslint-disable @typescript-eslint/no-use-before-define */
   const values: string[] = []
 
   const op = random.item(["+", "-", "*", "/"])
@@ -54,7 +53,7 @@ export function calc(generator: () => string): string {
       break
     default:
       for (let i = 0; i < 2; i++) {
-        values.push(random.pick([datatypes.number, generator]))
+        values.push(random.pick([() => datatypes.number(null), generator]))
       }
       break
   }
@@ -244,7 +243,7 @@ export class datatypes {
    * Generate a random <length> data type.
    * @param opts - Length options.
    */
-  // @ts-ignore
+  // @ts-expect-error: Overrides the builtin Function.length property.
   static length(opts: LengthOptions | null): string {
     const units = ["cm", "mm", "Q", "in", "pc", "pt", "px"]
     if (opts?.unit?.allowRelative) {

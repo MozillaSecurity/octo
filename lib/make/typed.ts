@@ -77,6 +77,7 @@ export class typed {
    * Generate a random unrestricted float.
    * @param limit - Maximum possible value.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static unrestrictedFloat(limit?: number): any {
     if (random.chance(100)) {
       return random.pick([NaN, +Infinity, -Infinity])
@@ -100,6 +101,7 @@ export class typed {
    * Generate a random unrestricted double.
    * @param limit - Maximum possible value.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static unrestrictedDouble(limit?: number): any {
     if (random.chance(100)) {
       return random.pick([NaN, +Infinity, -Infinity])

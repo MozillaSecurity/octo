@@ -11,14 +11,10 @@ import { uri } from "./uri"
 
 type CommandValue = (() => string | boolean) | string[] | null
 
-interface CommandPair {
-  [key: string]: CommandValue
-}
-
 /** Class for generating designMode commands. */
 export class command {
   /** Returns an object containing all designMode commands and their arguments. */
-  static get data(): CommandPair {
+  static get data(): Record<string, CommandValue> {
     return {
       backColor: () => colors.any(),
       bold: null,
@@ -88,7 +84,7 @@ export class command {
   }
 
   /** Generate a random command name. */
-  // @ts-ignore
+  // @ts-expect-error: Overrides the builtin Function.name property.
   static name(): string {
     return random.item(Object.keys(command.data))
   }
@@ -98,7 +94,6 @@ export class command {
    * @param name - Command name.
    */
   static value(name: keyof typeof command.data): string | boolean | null {
-    // @ts-ignore
     return random.pick(command.data[name])
   }
 }

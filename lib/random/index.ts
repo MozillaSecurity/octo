@@ -1,8 +1,10 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import MersenneTwister from "mersenne-twister"
 
+/** The PRNG seed type. */
 export type PRNGSeedType = number | number[] | MersenneTwister
 
 /** A MersenneTwister based PRNG with a number of useful utility functions. */
@@ -34,7 +36,7 @@ export class Random {
    * Returns a boolean result based on limit.
    * @param limit - Maximum value.
    */
-  chance(limit: number = 2): boolean {
+  chance(limit = 2): boolean {
     return this.number(limit) === 1
   }
 
@@ -44,7 +46,7 @@ export class Random {
    * @param list - Array of arrays.
    * @param flat - Indicates whether we should iterate over the arrays recursively.
    */
-  choose(list: readonly any[], flat = false): any {
+  choose(list: [number, unknown][], flat = false): any {
     const expanded: any[] = []
     list.forEach(([weight, value]) => {
       for (let w = 0; w < weight; w++) {
@@ -116,7 +118,7 @@ export class Random {
     let r
     do {
       r = this.prng.random_int()
-    } while (y && r >= y) // eslint-disable-line no-unmodified-loop-condition
+    } while (y && r >= y)
 
     if (--factor) {
       const v = (r / x) >>> 0

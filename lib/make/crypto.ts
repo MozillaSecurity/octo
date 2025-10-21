@@ -1,6 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { random } from "../random"
 import { utils } from "../utils"
 
@@ -165,7 +166,7 @@ export class crypto {
    *
    * TODO: This method MUST be refactored into individual classes that share a single base class.
    */
-  static get algorithms(): any {
+  static get algorithms(): Record<string, any> {
     return {
       "RSASSA-PKCS1-v1_5": {
         // RSASA-PKCS1_v1_5 algorithm, using a SHA hash function.
@@ -1065,8 +1066,8 @@ export class crypto {
   }
 
   /** Return the name of all supported algorithms. */
-  static supportedAlgorithms(): Array<keyof typeof crypto.algorithms> {
-    return Object.keys(crypto.algorithms) as Array<keyof typeof crypto.algorithms>
+  static supportedAlgorithms(): (keyof typeof crypto.algorithms)[] {
+    return Object.keys(crypto.algorithms) as (keyof typeof crypto.algorithms)[]
   }
 
   /** Returns a random algorithm generator. */

@@ -14,12 +14,12 @@ export class block {
    * @param list - An array of values and value generators.
    * @param optional - Boolean indicating if the values are optional.
    */
-  static block(list: any[], optional?: boolean): string {
+  static block(list: unknown[], optional?: boolean): string {
     /**
      * Recursively pick through list.
      * @param item - Item to pick.
      */
-    function deeper(item: any) {
+    function deeper(item: unknown) {
       if (item === null || item === undefined) {
         return ""
       }
@@ -31,9 +31,9 @@ export class block {
       }
       if (Array.isArray(item)) {
         let s = ""
-        for (let i = 0; i < item.length; i++) {
-          s += deeper(item[i])
-        }
+        item.forEach((item1) => {
+          s += deeper(item1)
+        })
         return s
       }
       return item
@@ -46,9 +46,9 @@ export class block {
     }
 
     let asString = ""
-    for (let i = 0; i < list.length; i++) {
-      asString += deeper(list[i])
-    }
+    list.forEach((item) => {
+      asString += deeper(item)
+    })
 
     return asString
   }

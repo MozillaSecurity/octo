@@ -11,8 +11,7 @@ export class common {
    * @param str - Object to be quoted.
    * @param html - Identifies whether the string must be HTML safe.
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static quote(str: any, html = false): string {
+  static quote(str: unknown, html = false): string {
     const options = {
       isScriptContext: html,
       minimal: true,
@@ -73,15 +72,27 @@ export class common {
    * @param obj1 - Object to merge into.
    * @param obj2 - Object to merge from.
    */
-  static mergeHash(obj1: Record<string, any>, obj2: Record<string, any>): Record<string, any> {
+  static mergeHash(
+    obj1: Record<string, unknown>,
+    obj2: Record<string, unknown>,
+  ): Record<string, unknown> {
     for (const p in obj2) {
       try {
-        if (obj2[p].constructor.name === "Object") {
-          obj1[p] = common.mergeHash(obj1[p], obj2[p])
+        const value = obj2[p]
+        if (
+          value !== null &&
+          value !== undefined &&
+          typeof value === "object" &&
+          value.constructor === Object
+        ) {
+          obj1[p] = common.mergeHash(
+            (obj1[p] ?? {}) as Record<string, unknown>,
+            value as Record<string, unknown>,
+          )
         } else {
-          obj1[p] = obj2[p]
+          obj1[p] = value
         }
-      } catch (e) {
+      } catch (_) {
         obj1[p] = obj2[p]
       }
     }

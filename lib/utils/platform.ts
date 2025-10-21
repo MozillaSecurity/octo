@@ -5,8 +5,10 @@
 /** Class for enumerating platform metadata. */
 export class platform {
   /** Enumerate the current platform's capabilities. */
-  // @ts-ignore
+  // @ts-expect-error: Platform object has dynamic properties.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static get name(): Record<string, any> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const platform: Record<string, any> = {}
 
     /* In case we are running in Node. */
@@ -79,12 +81,12 @@ export class platform {
      * @param candidates - Array of features to check.
      */
     function platformName(candidates: string[]): string | undefined {
-      for (let i = 0; i < candidates.length; i++) {
-        if (candidates[i] in window) {
-          return `window.${candidates[i]}`
+      for (const candidate of candidates) {
+        if (candidate in window) {
+          return `window.${candidate}`
         }
-        if (candidates[i] in navigator) {
-          return `navigator.${candidates[i]}`
+        if (candidate in navigator) {
+          return `navigator.${candidate}`
         }
       }
       return undefined

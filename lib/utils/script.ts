@@ -22,6 +22,7 @@ export class script {
    * @param arrayLength - The array length.
    * @param cb - A callback that will fill the array.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static makeArray(type: string, arrayLength: number, cb: () => any): string {
     switch (random.number(8)) {
       case 0: {
@@ -42,8 +43,9 @@ export class script {
    * @param keys - Array of keys.
    * @param values - Array of values.
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static makeConstraint(keys: string[], values: any): Record<string, any> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dict: Record<string, any> = {}
     for (const key of random.subset(keys)) {
       dict[key] = random.pick(values)
@@ -64,11 +66,13 @@ export class script {
    * Shuffles dictionary keys and values.
    * @param baseObject - The base object to modify.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static makeRandomOptions(baseObject: Record<string, any>): string {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dict: Record<string, any> = {}
     const unique = random.subset(Object.keys(baseObject))
-    for (let i = 0; i < unique.length; i++) {
-      dict[unique[i]] = random.pick(baseObject[unique[i]])
+    for (const key of unique) {
+      dict[key] = random.pick(baseObject[key])
     }
     return JSON.stringify(dict)
   }
@@ -78,6 +82,7 @@ export class script {
    * @param objectName - The object variable name.
    * @param methodHash - The object method to target.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static methodCall(objectName: string, methodHash: Record<string, any>): any {
     if (!Object.keys(methodHash).length || !objectName) {
       return ""
@@ -96,6 +101,7 @@ export class script {
    * @param list - Array of values.
    * @param numOptional - Number of values that are optional.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static methodHead(list: any[], numOptional?: number): string {
     if (numOptional === undefined) {
       numOptional = 0
@@ -160,7 +166,7 @@ export class script {
    * @param objectName - The object variable name.
    * @param attributeHash - An object containing attribute names and values.
    */
-  static setAttribute(objectName: string, attributeHash: Record<string, any>): string {
+  static setAttribute(objectName: string, attributeHash: Record<string, unknown>): string {
     if (!Object.keys(attributeHash).length || !objectName) {
       return ""
     }

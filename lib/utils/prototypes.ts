@@ -8,6 +8,7 @@
  * Determine if an object is a vanilla object.
  * @param obj - The object to evaluate.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isObject(obj: any) {
   return (
     obj !== null &&
@@ -21,6 +22,7 @@ export class prototypes {
   /** Polyfills Object.isObject and String.insert. */
   static enable(): void {
     if (!("isObject" in Object)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ;(Object as any).prototype.isObject = isObject
     }
 
