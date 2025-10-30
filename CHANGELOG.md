@@ -1,3 +1,10 @@
+# [3.0.0-next.48](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.47...v3.0.0-next.48) (2025-10-30)
+
+
+### Features
+
+* **crypto:** add test data for X25519 ([330c7d6](https://github.com/MozillaSecurity/octo/commit/330c7d65d918547563a7f53534dad3abcabd800b))
+
 # [3.0.0-next.47](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.46...v3.0.0-next.47) (2025-10-21)
 
 
