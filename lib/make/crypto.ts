@@ -111,6 +111,7 @@ export class crypto {
         "AES-GCM",
         "AES-KW",
         "HMAC",
+        "X25519",
       ],
       importKey: [
         "RSASSA-PKCS1-v1_5",
@@ -125,6 +126,7 @@ export class crypto {
         "HMAC",
         "HKDF",
         "PBKDF2",
+        "X25519",
       ],
       exportKey: [
         "RSASSA-PKCS1-v1_5",
@@ -137,11 +139,12 @@ export class crypto {
         "AES-GCM",
         "AES-KW",
         "HMAC",
+        "X25519",
       ],
       encrypt: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM"],
       decrypt: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM"],
-      deriveBits: ["ECDH", "HKDF", "PBKDF2"],
-      deriveKey: ["ECDH", "HKDF", "PBKDF2"],
+      deriveBits: ["ECDH", "HKDF", "PBKDF2", "X25519"],
+      deriveKey: ["ECDH", "HKDF", "PBKDF2", "X25519"],
       wrapKey: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW"],
       unwrapKey: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW"],
       digest: ["SHA-1", "SHA-256", "SHA-384", "SHA-512"],
@@ -1060,6 +1063,57 @@ export class crypto {
           jwk: {},
           spki: {},
           pkcs8: {},
+        },
+      },
+      X25519: {
+        keyUsages: ["deriveBits", "generateKey", "importKey", "exportKey"],
+
+        /** Return the algorithm object. */
+        alg: function () {
+          return utils.common.mockup(`{ name: 'X25519' }`)
+        },
+        /**
+         * Return the algorithm to be used for crypto.subtle.deriveBits().
+         * @param key - The public key to use.
+         */
+        deriveBits: function (key: string) {
+          return utils.common.mockup(`{ name: 'X25519', public: ${key} }`)
+        },
+
+        /** Return the algorithm to be used for crypto.subtle.generateKey(). */
+        generateKey: function () {
+          return utils.common.mockup(`{ name: "X25519", namedCurve: "X25519" }`)
+        },
+
+        /** Return the algorithm to be used for crypto.subtle.importKey(). */
+        importKey: function () {
+          return this.generateKey()
+        },
+
+        /** Return the JSON Web Key (JWK). */
+        jwk: function () {
+          return utils.common.mockup(`{ kty: "OKP", crv: "X25519" }`)
+        },
+
+        presets: {
+          raw: {
+            public:
+              "new Uint8Array([146, 224, 94, 65, 127, 247, 231, 50, 94, 50, 166, 204, 83, 6, 45, 5, 161, 89, 148, 33, 147, 139, 27, 105, 201, 236, 2, 240, 13, 5, 66, 11])",
+          },
+
+          jwk: [
+            {
+              kty: "OKP",
+              crv: "X25519",
+              x: "kuBeQX_35zJeMqbMUwYtBaFZlCGTixtpyewC8A0FQgs",
+              ext: true,
+            },
+          ],
+
+          spki: "new Uint8Array([48, 42, 48, 5, 6, 3, 43, 101, 110, 3, 33, 0, 146, 224, 94, 65, 127, 247, 231, 50, 94, 50, 166, 204, 83, 6, 45, 5, 161, 89, 148, 33, 147, 139, 27, 105, 201, 236, 2, 240, 13, 5, 66, 11])",
+
+          pkcs8:
+            "new Uint8Array([48, 46, 2, 1, 0, 48, 5, 6, 3, 43, 101, 110, 4, 34, 4, 32, 248, 121, 89, 61, 77, 148, 182, 166, 226, 222, 193, 58, 60, 225, 107, 46, 125, 212, 101, 201, 45, 18, 185, 197, 60, 105, 107, 28, 219, 118, 33, 69])",
         },
       },
     }
