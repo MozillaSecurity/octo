@@ -1066,7 +1066,7 @@ export class crypto {
         },
       },
       X25519: {
-        keyUsages: ["deriveBits", "generateKey", "importKey", "exportKey"],
+        keyUsages: ["deriveBits", "deriveKey"],
 
         /** Return the algorithm object. */
         alg: function () {
