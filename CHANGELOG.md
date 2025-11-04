@@ -1,3 +1,10 @@
+# [3.0.0-next.49](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.48...v3.0.0-next.49) (2025-11-04)
+
+
+### Bug Fixes
+
+* x25519 does not support derive key ([36b3feb](https://github.com/MozillaSecurity/octo/commit/36b3febca243939193c4197a3f2dbad6d9fe6509))
+
 # [3.0.0-next.48](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.47...v3.0.0-next.48) (2025-10-30)
 
 
