@@ -144,7 +144,7 @@ export class crypto {
       encrypt: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM"],
       decrypt: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM"],
       deriveBits: ["ECDH", "HKDF", "PBKDF2", "X25519"],
-      deriveKey: ["ECDH", "HKDF", "PBKDF2", "X25519"],
+      deriveKey: ["ECDH", "HKDF", "PBKDF2"],
       wrapKey: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW"],
       unwrapKey: ["RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW"],
       digest: ["SHA-1", "SHA-256", "SHA-384", "SHA-512"],
