@@ -1,3 +1,10 @@
+# [3.0.0-next.50](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.49...v3.0.0-next.50) (2025-11-04)
+
+
+### Bug Fixes
+
+* update x25519 key usages ([18418ca](https://github.com/MozillaSecurity/octo/commit/18418caab19735c88a6bc78c0379e03cf0269b1c))
+
 # [3.0.0-next.49](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.48...v3.0.0-next.49) (2025-11-04)
 
 
