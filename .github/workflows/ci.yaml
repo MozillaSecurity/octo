@@ -38,7 +38,7 @@ jobs:
 
   release:
     # Only run on push to main, not on PRs
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/v3')
     needs: [ lint, test ]
     runs-on: ubuntu-latest
     
