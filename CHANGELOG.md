@@ -1,3 +1,10 @@
+# [3.0.0-next.51](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.50...v3.0.0-next.51) (2025-12-18)
+
+
+### Features
+
+* export abstract type that defines PRNG shape ([8ed148f](https://github.com/MozillaSecurity/octo/commit/8ed148f964b021ac945abad9d0a23f763efe917f))
+
 # [3.0.0-next.50](https://github.com/MozillaSecurity/octo/compare/v3.0.0-next.49...v3.0.0-next.50) (2025-11-04)
 
 
