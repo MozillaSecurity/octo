@@ -1,4 +1,4 @@
-export { random, Random } from "./random"
+export { random, Random, AbstractPRNG } from "./random"
 export { logger } from "./logging"
 export { make } from "./make"
 export { objects } from "./objects"

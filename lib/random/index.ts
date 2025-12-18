@@ -5,14 +5,22 @@
 import MersenneTwister from "mersenne-twister"
 
 /** The PRNG seed type. */
-export type PRNGSeedType = number | number[] | MersenneTwister
+export type PRNGSeedType = number | number[] | AbstractPRNG
+
+/** Interface representing PRNGs for use with Octo. */
+export interface AbstractPRNG {
+  /** Generates a random number on [0,0xffffffff]-interval. */
+  random_int: () => number
+  /** Generates a random number on [0,1). */
+  random_long: () => number
+}
 
 /** A MersenneTwister based PRNG with a number of useful utility functions. */
 export class Random {
   /** Singleton instance. */
   protected static instance: Random
   /** The mersenne twister instance. */
-  protected prng: MersenneTwister
+  public prng: AbstractPRNG
 
   /** Reference to the MersenneTwister instance. */
   protected constructor() {
