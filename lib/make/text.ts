@@ -388,6 +388,24 @@ export class text {
     return text.random().charAt(0)
   }
 
+  /** Generate a random USVString. */
+  static usvString(): string {
+    const length = random.range(1, 128)
+    let result = ""
+
+    while (result.length < length) {
+      while (true) {
+        const cp = random.range(0x0000, 0x10ffff)
+        if (cp < 0xd800 || cp > 0xdfff) {
+          result += String.fromCodePoint(cp)
+          break
+        }
+      }
+    }
+
+    return result
+  }
+
   /** Generate a string comprised of random generators. */
   static any(): string {
     let s = ""
