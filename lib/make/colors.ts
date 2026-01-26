@@ -30,7 +30,7 @@ export class colors {
           values = [random.number(255), random.number(255), random.number(255)]
         } else {
           // Percents
-          values = [`%${random.number(255)}`, `%${random.number(255)}`, `%${random.number(255)}`]
+          values = [`${random.number(255)}%`, `${random.number(255)}%`, `${random.number(255)}%`]
         }
         return `rgba(${values.join(",")})`
       case 1:
@@ -52,30 +52,30 @@ export class colors {
 
     switch (random.number(4)) {
       case 0:
-        values = [random.number(255), `%${random.number(255)}`, `%${random.number(255)}`]
+        values = [random.number(255), `${random.number(255)}%`, `%${random.number(255)}%`]
         return `hsl(${values.join(",")})`
       case 1:
         values = [
           random.number(255),
-          `%${random.number(255)}`,
-          `%${random.number(255)}`,
-          `%${random.number(255)}`,
+          `${random.number(255)}%`,
+          `${random.number(255)}%`,
+          `${random.number(255)}%`,
         ]
         return `hsl(${values.join(",")})`
       case 2:
         opt = random.item(["deg", "rad", "grad", "turn"])
         values = [
           random.number(255) + opt,
-          `%${random.number(255)}`,
-          `%${random.number(255)}`,
-          `%${random.number(255)}`,
+          `${random.number(255)}%`,
+          `${random.number(255)}%`,
+          `${random.number(255)}%`,
         ]
         return `hsl(${values.join(",")})`
       default:
         values = [
           random.number(255),
-          `%${random.number(255)}`,
-          `%${random.number(255)}`,
+          `${random.number(255)}%`,
+          `${random.number(255)}%`,
           random.float(),
         ]
         return `hsl(${values.join(",")})`
