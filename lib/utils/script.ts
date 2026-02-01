@@ -181,7 +181,7 @@ export class script {
    */
   static promiseTimeout(time: number): string {
     return [
-      `async function (cmd, ms=${time}}) {`,
+      `async function(cmd, ms=${time}) {`,
       `  const timer = new Promise((resolve, reject) => {`,
       `    const id = setTimeout(() => {`,
       `      clearTimeout(id)`,
