@@ -181,12 +181,12 @@ export class script {
    */
   static promiseTimeout(time: number): string {
     return [
-      `async function (cmd) {`,
+      `async function (cmd, ms=${time}}) {`,
       `  const timer = new Promise((resolve, reject) => {`,
       `    const id = setTimeout(() => {`,
       `      clearTimeout(id)`,
       `      reject(new Error('Promise timed out!'))`,
-      `  }, ${time})`,
+      `    }, ms)`,
       `  })`,
       `  return Promise.race([cmd, timer])`,
       `}`,
