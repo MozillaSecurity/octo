@@ -127,6 +127,27 @@ export class numbers {
   }
 
   /**
+   * Returns an int64 [-9223372036854775808, 9223372036854775807].
+   * @param bypass - Determines if the range should be exceeded.
+   */
+  static int64(bypass = false): number {
+    const min = Number.MIN_SAFE_INTEGER // -9007199254740991
+    const max = Number.MAX_SAFE_INTEGER // 9007199254740991
+
+    if (bypass && random.chance(50)) {
+      return numbers._exceed(random.item([min, max]))
+    }
+
+    return random.choose([
+      [8, numbers.int8],
+      [6, numbers.int16],
+      [4, numbers.int32],
+      [2, () => random.range(min, max)],
+      [1, [min, -2147483649, 2147483648, max]],
+    ])
+  }
+
+  /**
    * Returns a random floating point number.
    * @param bypass - Determines if the range should be exceeded.
    */
