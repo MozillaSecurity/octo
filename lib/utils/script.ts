@@ -117,10 +117,13 @@ export class script {
   /**
    * Returns a command that generates the modulo of a value. Useful for identifying lengths in
    * dynamic entries.
+   *
+   * The value is used as the modulus as a whole, so expressions such as `a.length + 1` may be
+   * used to include the upper bound.
    * @param s - The variable to generate a modulo for.
    */
   static offset(s: string): string {
-    return `(${random.number()} % ${s} || 0)`
+    return `(${random.number()} % (${s}) || 0)`
   }
 
   /**
