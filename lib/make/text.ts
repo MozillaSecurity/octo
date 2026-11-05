@@ -5,6 +5,20 @@ import { make } from "../make"
 import { random } from "../random"
 import { utils } from "../utils"
 
+/**
+ * Generate a string of code points from the inclusive range [start, end].
+ * @param start - First code point.
+ * @param end - Last code point.
+ * @param length - Number of code points.
+ */
+function codePointRun(start: number, end: number, length: number): string {
+  let result = ""
+  for (let i = 0; i < length; i++) {
+    result += String.fromCodePoint(random.range(start, end))
+  }
+  return result
+}
+
 /** Class for generating generic text values. */
 export class text {
   /** Generate a random alphabetic character. */
@@ -196,6 +210,10 @@ export class text {
         0x202d, // left-to-right override
         0x202e, // right-to-left override
         0x202f, // narrow no-break space
+        0x2066, // left-to-right isolate
+        0x2067, // right-to-left isolate
+        0x2068, // first strong isolate
+        0x2069, // pop directional isolate
         0x2060, // word joiner
         0x2061, // function application (one of several invisible mathematical operators)
         // http://unicode.org/charts/PDF/U3000.pdf
@@ -403,6 +421,56 @@ export class text {
       }
     }
 
+    return result
+  }
+
+  /** Generate a word of 1-12 ASCII letters. */
+  static word(): string {
+    return codePointRun(0x61, 0x7a, random.range(1, 12))
+  }
+
+  /** Generate a run of 1-3 spaces or tabs. */
+  static whitespace(): string {
+    return (random.chance(4) ? "\t" : " ").repeat(random.range(1, 3))
+  }
+
+  /** Generate a run of 1-8 strong right-to-left letters (Hebrew or Arabic). */
+  static rtl(): string {
+    const [start, end] = random.bool() ? [0x05d0, 0x05ea] : [0x0627, 0x064a]
+    return codePointRun(start, end, random.range(1, 8))
+  }
+
+  /** Generate a run of 1-6 CJK ideographs. */
+  static cjk(): string {
+    return codePointRun(0x4e00, 0x9fff, random.range(1, 6))
+  }
+
+  /**
+   * Generate text intended to stress text layout (whitespace processing, line breaking and bidi).
+   *
+   * Combines words, whitespace runs, line breaks, RTL and CJK runs, which text.random()
+   * rarely or never produces, with runs of text.layoutCharCodes() and text.random().
+   * Layout characters are also interleaved between segments, so they appear at least as often as
+   * in text.any().
+   */
+  static layout(): string {
+    const run = (fn: () => string) => () => Array.from({ length: random.range(1, 6) }, fn).join("")
+    const segments: [number, () => string][] = [
+      [10, text.word],
+      [6, text.whitespace],
+      [5, text.lineEnd],
+      [6, text.rtl],
+      [2, text.cjk],
+      [6, run(text.layoutCharCodes)],
+      [6, run(text.random)],
+    ]
+    let result = ""
+    for (let i = random.range(1, 16); i > 0; i--) {
+      result += random.choose(segments, true)()
+      if (random.bool()) {
+        result += text.layoutCharCodes()
+      }
+    }
     return result
   }
 
