@@ -270,12 +270,15 @@ export class numbers {
    * @param floats - Allow floats.
    */
   static any(floats = true): number {
-    const num = random.choose([
+    const generators: [number, unknown][] = [
       [50, [numbers.int8, numbers.uint8]],
       [30, [numbers.int16, numbers.uint16]],
       [10, [numbers.int32, numbers.uint32]],
-      [1, numbers.double],
-    ])
+    ]
+    if (floats) {
+      generators.push([1, numbers.double])
+    }
+    const num = random.choose(generators)
 
     if (floats && random.chance(10)) {
       return numbers.frange(num, num + 1)
